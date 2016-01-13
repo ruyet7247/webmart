@@ -20,7 +20,7 @@
             <td class="style1">
                 Kod No</td>
             <td class="style2">
-                <asp:TextBox ID="txt_kurulus_tarihi0" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:Label ID="lbl_kod_no" runat="server" Text="0"></asp:Label>
             </td>
            <td class="style1">
                 &nbsp;</td>
@@ -31,8 +31,14 @@
             <td class="style1">
                 Kullanıcı Departman</td>
             <td class="style2">
-                <asp:DropDownList ID="DropDownList1" runat="server">
+                <asp:DropDownList ID="dd_list_kullanici" runat="server" 
+                    DataSourceID="SqlDataSource1" DataTextField="adi" DataValueField="personel_id" 
+                    ondatabound="dd_list_kullanici_DataBound">
                 </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                    SelectCommand="SELECT [personel_id], [adi] FROM [personel]">
+                </asp:SqlDataSource>
             </td>
            <td class="style1">
                 &nbsp;</td>
@@ -43,18 +49,7 @@
             <td class="style1">
                 Kullanıcı Adı</td>
             <td class="style2">
-                <asp:TextBox ID="txt_kurulus_tarihi" runat="server" ReadOnly="True"></asp:TextBox>
-            </td>
-           <td class="style1">
-                &nbsp;</td>
-            <td class="style2">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Kullanıcı Soyadı</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_firma_tipi" runat="server" ReadOnly="True" Width="70%"></asp:TextBox>
+                <asp:TextBox ID="txt_kullanici_adi" runat="server"></asp:TextBox>
             </td>
            <td class="style1">
                 &nbsp;</td>
@@ -65,7 +60,7 @@
             <td class="style1">
                 Kullanıcı Şifre</td>
             <td class="style2">
-                <asp:TextBox ID="txt_kisa_unvani" runat="server" ReadOnly="True" Width="70%"></asp:TextBox>
+                <asp:TextBox ID="txt_kullanici_sifre" runat="server" Width="70%"></asp:TextBox>
             </td>
             <td class="style1">
                 &nbsp;</td>
@@ -76,7 +71,10 @@
             <td class="style1">
                 Aktif Pasif</td>
             <td class="style2">
-                <asp:TextBox ID="txt_tam_unvani" runat="server" ReadOnly="True" Width="90%"></asp:TextBox>
+                <asp:DropDownList ID="dd_list_aktif_or_pasif" runat="server">
+                    <asp:ListItem Value="1">Aktif</asp:ListItem>
+                    <asp:ListItem Value="0">Pasif</asp:ListItem>
+                </asp:DropDownList>
             </td>
             <td class="style1">
                 &nbsp;</td>
@@ -99,8 +97,8 @@
             <td width="20%">
                 &nbsp;</td>
             <td width="20%">
-                <asp:ImageButton ID="ibtn_guncelle" runat="server" Height="30px" 
-                    onclick="ibtn_guncelle_Click" Width="120px" />
+                <asp:ImageButton ID="ibtn_ekle" runat="server" Height="30px" Width="120px" 
+                    onclick="ibtn_ekle_Click" />
             </td>
             <td width="20%">
                 &nbsp;</td>
