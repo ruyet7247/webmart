@@ -8,7 +8,7 @@
         }
         .style2
         {
-            width: 40%;
+            width: 30%;
         }
     </style>
 </asp:Content>
@@ -20,7 +20,7 @@
             <td class="style1">
                 Kuruluş Tarihi</td>
             <td class="style2">
-                <asp:TextBox ID="txt_kurulus_tarihi" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_kurulus_tarihi" runat="server" ReadOnly="True"></asp:TextBox>
             </td>
            <td class="style1">
                 &nbsp;</td>
@@ -31,7 +31,7 @@
             <td class="style1">
                 Firma Tipi</td>
             <td class="style2">
-                <asp:TextBox ID="txt_firma_tipi" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="txt_firma_tipi" runat="server" ReadOnly="True" Width="70%"></asp:TextBox>
             </td>
            <td class="style1">
                 &nbsp;</td>
@@ -42,7 +42,7 @@
             <td class="style1">
                 Kısa Unvanı</td>
             <td class="style2">
-                <asp:TextBox ID="txt_kisa_unvani" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="txt_kisa_unvani" runat="server" ReadOnly="True" Width="70%"></asp:TextBox>
             </td>
             <td class="style1">
                 &nbsp;</td>
@@ -53,7 +53,7 @@
             <td class="style1">
                 Tam Unvanı</td>
             <td class="style2">
-                <asp:TextBox ID="txt_tam_unvani" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="txt_tam_unvani" runat="server" ReadOnly="True" Width="90%"></asp:TextBox>
             </td>
             <td class="style1">
                 &nbsp;</td>
@@ -64,7 +64,7 @@
             <td class="style1">
                 Yetkili</td>
             <td class="style2">
-                <asp:TextBox ID="txt_yetkili" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="txt_yetkili" runat="server" ReadOnly="True" Width="70%"></asp:TextBox>
             </td>
             <td class="style1">
                 &nbsp;</td>
