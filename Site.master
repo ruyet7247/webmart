@@ -1,0 +1,127 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title>WebMart Application</title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form runat="server">
+    <div class="page">
+        <div class="header">
+            <div class="title">
+                <h1>
+                    WebMart Application
+                </h1>
+            </div>
+            <div class="loginDisplay"> 
+                <asp:Label ID="lbl_KullaniciBilgileri" runat="server" 
+                    Text="Kullanıcı Bilgileri "></asp:Label>
+                <asp:ImageButton ID="ibtn_exit" runat="server" onclick="ibtn_exit_Click" />
+              <!--
+                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+
+                    <AnonymousTemplate>
+                        [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">Log In</a> ]
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
+                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/"/> ]
+                    </LoggedInTemplate>
+                </asp:LoginView>
+                -->
+            </div>
+            <div class="clear hideSkiplink">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" 
+                    EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="Genel Tanımlamalar" 
+                            Value="Genel Tanımlamalar">
+                            <asp:MenuItem Text=" Firma Bilgileri" Value="Firma Bilgileri" 
+                                NavigateUrl="~/GenelTanimlamar/GFirmaTanimlama.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text=" Kullanıcı Tanımlama" Value="Kullanıcı Tanımlama">
+                            </asp:MenuItem>
+                            <asp:MenuItem Text=" Kasa Tanımlama" Value="Kasa Tanımlama"></asp:MenuItem>
+                            <asp:MenuItem Text=" Gelir-Gider Tanimlama" Value="Gelir-Gider Tanimlama">
+                            </asp:MenuItem>
+                            <asp:MenuItem Text=" Banka Tanımlama" Value="Banka Tanımlama"></asp:MenuItem>
+                            <asp:MenuItem Text=" Cari Grubu Tanımlama" Value="Cari Grubu Tanımlama">
+                            </asp:MenuItem>
+                            <asp:MenuItem Text=" Cari İşlem Tipi Tanımlama" 
+                                Value="Cari İşlem Tipi Tanımlama"></asp:MenuItem>
+                            <asp:MenuItem Text=" Stok Grubu Tanımlama" Value="Stok Grubu Tanımlama">
+                            </asp:MenuItem>
+                            <asp:MenuItem Text=" Stok İşlem Tipi Tanımlama" 
+                                Value="Stok İşlem Tipi Tanımlama"></asp:MenuItem>
+                            <asp:MenuItem Text=" Personel Departman Tanımlama" 
+                                Value="Personel Departman Tanımlama"></asp:MenuItem>
+                            <asp:MenuItem Text=" Personel İşlem Tipi Tanımlama" 
+                                Value="Personel İşlem Tipi Tanımlama"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text=" Cari Modülü" Value="FirmaIslemleri">
+                            <asp:MenuItem Text=" Yeni Cari Kartı" Value="Yeni Cari Kartı"></asp:MenuItem>
+                            <asp:MenuItem Text=" Cari Hareketleri" Value="Cari Hareketleri"></asp:MenuItem>
+                            <asp:MenuItem Text=" Alış-Satış Fişi &gt;" Value="Alış-Satış Fişi &gt;">
+                                <asp:MenuItem Text=" Alış Fişi" Value="Alış Fişi"></asp:MenuItem>
+                                <asp:MenuItem Text=" Satış Fişi" Value="Satış Fişi"></asp:MenuItem>
+                            </asp:MenuItem>
+                            <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar">
+                                <asp:MenuItem Text=" Cari Hesap Raporu" Value="Cari Hesap Raporu"></asp:MenuItem>
+                                <asp:MenuItem Text=" Cari Hareketler Raporu" Value="Cari Hareketler Raporu">
+                                </asp:MenuItem>
+                                <asp:MenuItem Text=" Borç/Alacak Durum Raporu" Value="Borç/Alacak Durum Raporu">
+                                </asp:MenuItem>
+                            </asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text=" Stok Modülü" Value="Stok Modülü">
+                            <asp:MenuItem Text=" Stok Kartı" Value="Stok Kartı"></asp:MenuItem>
+                            <asp:MenuItem Text=" Stok Hareketleri" Value="Stok Hareketleri"></asp:MenuItem>
+                            <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar &gt;">
+                                <asp:MenuItem Text=" Stok Kartı Raporu" Value="Stok Kartı Raporu"></asp:MenuItem>
+                                <asp:MenuItem Text=" Stok Hareketleri Raporu" Value="Stok Hareketleri Raporu">
+                                </asp:MenuItem>
+                                <asp:MenuItem Text=" Stok Durum Raporu" Value="Stok Durum Raporu"></asp:MenuItem>
+                            </asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text=" Personel-Maaş Modülü" Value="Personel-Maaş Modülü">
+                            <asp:MenuItem Text=" Personel Karti" Value="Maaş Tahkk"></asp:MenuItem>
+                            <asp:MenuItem Text=" Personel İşlem Hareketleri" 
+                                Value="Personel İşlem Hareketleri"></asp:MenuItem>
+                            <asp:MenuItem Text=" Maaş Dönemi ve Tahakkuk" Value="Maaş Dönemi Ekle">
+                            </asp:MenuItem>
+                            <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar &gt;">
+                                <asp:MenuItem Text=" Personel Listesi" Value="Personel Listesi"></asp:MenuItem>
+                                <asp:MenuItem Text=" Personel Bordro Al" Value="Personel Bordro Al">
+                                </asp:MenuItem>
+                            </asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text=" Kasa Modülü" Value="Kasa Modülü">
+                            <asp:MenuItem Text=" Kasa Girişi" 
+                                Value="Kasa Girişi"></asp:MenuItem>
+                            <asp:MenuItem Text=" Kasa Çıkış" 
+                                Value="Kasa Çıkış"></asp:MenuItem>
+                            <asp:MenuItem Text=" Kasa Hareketleri" Value="Kasa Hareketleri"></asp:MenuItem>
+                            <asp:MenuItem Text=" Kasa Bakiye Listele" Value="Kasa Bakiye Listele">
+                            </asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text=" Randevu Modülü" Value="Randevu Modülü"></asp:MenuItem>
+                        <asp:MenuItem Text=" Dashboard" Value="Dashboard"></asp:MenuItem>
+                    </Items>
+                </asp:Menu>
+            </div>
+        </div>
+        <div class="main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="footer">
+        
+    </div>
+    </form>
+</body>
+</html>
