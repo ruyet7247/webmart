@@ -13,8 +13,11 @@
     <div class="page">
         <div class="header">
             <div class="title">
+                
                 <h1>
-                    WebMart Application
+                <asp:Image ID="Image1" runat="server" Height="32px" ImageUrl="~/Images/logo1.png" 
+                        Width="32px" />
+                     &nbsp;Web Otomasyon
                 </h1>
             </div>
             <div class="loginDisplay"> 
