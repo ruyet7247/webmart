@@ -1,1 +1,29 @@
 1-AJAX KONTROL--Projeye ADD ITEM ajaxToolkit Ekle.
+2-Kullanýrken sayfaya ToolkitScriptManager componenti en üste at
+<table style="width:100%;">
+        <tr>
+            <td class="style1">
+                Kuruluþ Tarihi</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_kurulus_tarihi" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
+           <td class="style1">
+                &nbsp;</td>
+            <td class="style2">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Firma Tipi</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_firma_tipi" runat="server" ReadOnly="True" Width="70%"></asp:TextBox>
+            </td>
+           <td class="style1">
+                &nbsp;</td>
+            <td class="style2">
+                &nbsp;</td>
+        </tr>
+</table>
+    <p>
+        <asp:Label ID="lbl_mesaj" runat="server"></asp:Label>
+    </p>

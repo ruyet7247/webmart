@@ -295,3 +295,9 @@ div.accountInfo
     text-align: right;
     padding-right: 10px;
 }
+/* benim ruyet*/
+.popupPanel {
+         background-color: black;
+         filter: alpha(opacity=60);
+         opacity: 0.8;
+     }

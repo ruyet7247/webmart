@@ -45,27 +45,35 @@
                             Value="Genel Tanımlamalar">
                             <asp:MenuItem Text=" Firma Bilgileri" Value="Firma Bilgileri" 
                                 NavigateUrl="~/GenelTanimlamar/GFirmaTanimlama.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text=" Kullanıcı Tanımlama" Value="Kullanıcı Tanımlama">
+                            <asp:MenuItem Text=" Kasa Tanımlama" Value="Kasa Tanımlama" 
+                                NavigateUrl="~/GenelTanimlamar/KasaTanimlama.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text=" Gelir-Gider Tanimlama" Value="Gelir-Gider Tanimlama" 
+                                NavigateUrl="~/GenelTanimlamar/GGelirGiderTanimlama.aspx">
                             </asp:MenuItem>
-                            <asp:MenuItem Text=" Kasa Tanımlama" Value="Kasa Tanımlama"></asp:MenuItem>
-                            <asp:MenuItem Text=" Gelir-Gider Tanimlama" Value="Gelir-Gider Tanimlama">
-                            </asp:MenuItem>
-                            <asp:MenuItem Text=" Banka Tanımlama" Value="Banka Tanımlama"></asp:MenuItem>
-                            <asp:MenuItem Text=" Cari Grubu Tanımlama" Value="Cari Grubu Tanımlama">
+                            <asp:MenuItem Text=" Banka Tanımlama" Value="Banka Tanımlama" 
+                                NavigateUrl="~/GenelTanimlamar/BankaTanimlama.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text=" Cari Grubu Tanımlama" Value="Cari Grubu Tanımlama" 
+                                NavigateUrl="~/GenelTanimlamar/CariGrubuTanimlama.aspx">
                             </asp:MenuItem>
                             <asp:MenuItem Text=" Cari İşlem Tipi Tanımlama" 
-                                Value="Cari İşlem Tipi Tanımlama"></asp:MenuItem>
-                            <asp:MenuItem Text=" Stok Grubu Tanımlama" Value="Stok Grubu Tanımlama">
+                                Value="Cari İşlem Tipi Tanımlama" 
+                                NavigateUrl="~/GenelTanimlamar/CariIslemTipiTanimlama.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text=" Stok Grubu Tanımlama" Value="Stok Grubu Tanımlama" 
+                                NavigateUrl="~/GenelTanimlamar/StokGrubuTanimlama.aspx">
                             </asp:MenuItem>
                             <asp:MenuItem Text=" Stok İşlem Tipi Tanımlama" 
-                                Value="Stok İşlem Tipi Tanımlama"></asp:MenuItem>
+                                Value="Stok İşlem Tipi Tanımlama" 
+                                NavigateUrl="~/GenelTanimlamar/StokIslemTipiTanimlama.aspx"></asp:MenuItem>
                             <asp:MenuItem Text=" Personel Departman Tanımlama" 
-                                Value="Personel Departman Tanımlama"></asp:MenuItem>
+                                Value="Personel Departman Tanımlama" 
+                                NavigateUrl="~/GenelTanimlamar/PersonelDepartmanTanimlama.aspx"></asp:MenuItem>
                             <asp:MenuItem Text=" Personel İşlem Tipi Tanımlama" 
-                                Value="Personel İşlem Tipi Tanımlama"></asp:MenuItem>
+                                Value="Personel İşlem Tipi Tanımlama" 
+                                NavigateUrl="~/GenelTanimlamar/PersonelIslemTipiTanimlama.aspx"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Cari Modülü" Value="FirmaIslemleri">
-                            <asp:MenuItem Text=" Yeni Cari Kartı" Value="Yeni Cari Kartı"></asp:MenuItem>
+                            <asp:MenuItem Text=" Yeni Cari Kartı" Value="Yeni Cari Kartı" 
+                                NavigateUrl="~/Cari/CariKarti.aspx"></asp:MenuItem>
                             <asp:MenuItem Text=" Cari Hareketleri" Value="Cari Hareketleri"></asp:MenuItem>
                             <asp:MenuItem Text=" Alış-Satış Fişi &gt;" Value="Alış-Satış Fişi &gt;">
                                 <asp:MenuItem Text=" Alış Fişi" Value="Alış Fişi"></asp:MenuItem>

@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="GFirmaTanimlama.aspx.cs" Inherits="GFirmaTanimlama" %>
 
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
     <style type="text/css">
         .style1
@@ -13,14 +15,17 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
+    <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+    </asp:ToolkitScriptManager>
     <table style="width:100%;">
         <tr>
             <td class="style1">
                 Kuruluş Tarihi</td>
             <td class="style2">
-                <asp:TextBox ID="txt_kurulus_tarihi" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="txt_kurulus_tarihi" placeholder="MM/DD/YYYY"  runat="server"></asp:TextBox>
+                <asp:CalendarExtender ID="txt_kurulus_tarihi_CalendarExtender" runat="server" Format="MM/dd/yyyy" 
+                    Enabled="True" TargetControlID="txt_kurulus_tarihi">
+                </asp:CalendarExtender>
             </td>
            <td class="style1">
                 &nbsp;</td>
@@ -31,7 +36,7 @@
             <td class="style1">
                 Firma Tipi</td>
             <td class="style2">
-                <asp:TextBox ID="txt_firma_tipi" runat="server" ReadOnly="True" Width="70%"></asp:TextBox>
+                <asp:TextBox ID="txt_firma_tipi" runat="server" Width="70%"></asp:TextBox>
             </td>
            <td class="style1">
                 &nbsp;</td>
@@ -42,7 +47,7 @@
             <td class="style1">
                 Kısa Unvanı</td>
             <td class="style2">
-                <asp:TextBox ID="txt_kisa_unvani" runat="server" ReadOnly="True" Width="70%"></asp:TextBox>
+                <asp:TextBox ID="txt_kisa_unvani" runat="server" Width="70%"></asp:TextBox>
             </td>
             <td class="style1">
                 &nbsp;</td>
@@ -53,7 +58,7 @@
             <td class="style1">
                 Tam Unvanı</td>
             <td class="style2">
-                <asp:TextBox ID="txt_tam_unvani" runat="server" ReadOnly="True" Width="90%"></asp:TextBox>
+                <asp:TextBox ID="txt_tam_unvani" runat="server" Width="90%"></asp:TextBox>
             </td>
             <td class="style1">
                 &nbsp;</td>
@@ -64,7 +69,7 @@
             <td class="style1">
                 Yetkili</td>
             <td class="style2">
-                <asp:TextBox ID="txt_yetkili" runat="server" ReadOnly="True" Width="70%"></asp:TextBox>
+                <asp:TextBox ID="txt_yetkili" runat="server" Width="70%"></asp:TextBox>
             </td>
             <td class="style1">
                 &nbsp;</td>

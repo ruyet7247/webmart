@@ -17,8 +17,10 @@ public partial class GFirmaTanimlama : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {
-      
-        FirmaBilgileriniGetir();
+        if (!IsPostBack)  // tıklama ile sayfa gelmemiş ise
+        {
+            FirmaBilgileriniGetir();
+        }
     }
 
     protected void ibtn_guncelle_Click(object sender, ImageClickEventArgs e)
@@ -87,11 +89,12 @@ public partial class GFirmaTanimlama : System.Web.UI.Page
     protected void FirmaBilgileriniGuncelle()
     {
         SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "UPDATE firma_kayit SET kurulus_tarihi=@kurulus_tarihi,firma_tipi=@firma_tipi,kisa_unvani=@kisa_unvani,tam_unvani=@tam_unvani,yetkili=@yetkili,vergi_dairesi=@vergi_dairesi,vergi_no=@vergi_no,adres1=@adres1,adres2=@adres2,semt=@semt, ilce=@ilce,il=@il,posta_kodu=@posta_kodu,tel1=@tel1,tel2=@tel2, fax=@fax,gsm1=@gsm1,gsm2=@gsm2,mail=@mail,web_adresi=@web_adresi, aciklama1=@aciklama1 WHERE firma_id=" + aktif_firma_id + " and aktif_or_pasif=1";
+        string queryString = "UPDATE firma_kayit SET kurulus_tarihi=@kurulus_tarihi,firma_tipi=@firma_tipi,kisa_unvani=@kisa_unvani,tam_unvani=@tam_unvani, yetkili=@yetkili,vergi_dairesi=@vergi_dairesi,vergi_no=@vergi_no,adres1=@adres1,adres2=@adres2,semt=@semt, ilce=@ilce,il=@il,posta_kodu=@posta_kodu,tel1=@tel1,tel2=@tel2, fax=@fax,gsm1=@gsm1,gsm2=@gsm2,mail=@mail,web_adresi=@web_adresi, aciklama1=@aciklama1 WHERE aktif_or_pasif=1";
+      
         SqlCommand cmd = new SqlCommand(queryString, connection);
 
-       
 
+        int updated = 0;
         try
         {
 
@@ -121,7 +124,7 @@ public partial class GFirmaTanimlama : System.Web.UI.Page
             //Response.Write(cmd.CommandText);
 
             connection.Open();
-            cmd.ExecuteNonQuery();
+            updated = cmd.ExecuteNonQuery();
         }
         catch (Exception err)
         {
@@ -131,7 +134,8 @@ public partial class GFirmaTanimlama : System.Web.UI.Page
         finally
         {
             connection.Close();
-            Response.Write(cmd.UpdatedRowSource.ToString());
+            lbl_mesaj.Text = updated.ToString();
+           
         }
     }
 

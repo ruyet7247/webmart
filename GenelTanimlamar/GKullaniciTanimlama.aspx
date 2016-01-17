@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="GKullaniciTanimlama.aspx.cs" Inherits="GenelTanimlamar_GKullaniciTanimlama" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
- <style type="text/css">
+    <style type="text/css">
         .style1
         {
             width: 10%;
