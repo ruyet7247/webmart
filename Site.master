@@ -7,6 +7,7 @@
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
+
 </head>
 <body>
     <form runat="server">
@@ -74,7 +75,8 @@
                         <asp:MenuItem Text=" Cari Modülü" Value="FirmaIslemleri">
                             <asp:MenuItem Text=" Yeni Cari Kartı" Value="Yeni Cari Kartı" 
                                 NavigateUrl="~/Cari/CariKarti.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text=" Cari Hareketleri" Value="Cari Hareketleri"></asp:MenuItem>
+                            <asp:MenuItem Text=" Cari Hareketleri" Value="Cari Hareketleri" 
+                                NavigateUrl="~/Cari/CariHareket.aspx"></asp:MenuItem>
                             <asp:MenuItem Text=" Alış-Satış Fişi &gt;" Value="Alış-Satış Fişi &gt;">
                                 <asp:MenuItem Text=" Alış Fişi" Value="Alış Fişi"></asp:MenuItem>
                                 <asp:MenuItem Text=" Satış Fişi" Value="Satış Fişi"></asp:MenuItem>

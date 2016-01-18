@@ -26,17 +26,19 @@ public partial class Cari_CariKarti : System.Web.UI.Page
                 // deal with it
             }
         }
-        
+
 
         if (!IsPostBack)  // tıklama ile sayfa gelmemiş ise
         {
+         
+            if (lbl_cari_id.Text != "0")
+            {
+                CariBilgileriniGetir(Convert.ToInt32(lbl_cari_id.Text));
+            }
            
         }
 
-        if (lbl_cari_id.Text != "0")
-        {
-            CariBilgileriniGetir(Convert.ToInt32(lbl_cari_id.Text));
-        }
+       
 
     }
 
@@ -113,17 +115,18 @@ public partial class Cari_CariKarti : System.Web.UI.Page
         SqlCommand cmd = new SqlCommand(queryString, connection);
 
 
+        int update_flag=0;
 
         try
         {
             DateTime kayit_tarihi = Convert.ToDateTime(txt_kayit_tarihi.Text);
-            Response.Write(kayit_tarihi.ToShortDateString());
+
 
             cmd.Parameters.Add("@unvan", SqlDbType.NVarChar).Value = txt_unvan.Text;
             cmd.Parameters.Add("@adi", SqlDbType.NVarChar).Value = txt_adi.Text;
-            cmd.Parameters.Add("@soyadi", SqlDbType.NVarChar).Value = txt_soyadi.Text;
-            cmd.Parameters.Add("@kayit_tarihi", SqlDbType.NVarChar).Value = String.Format("{0:yyyy/MM/dd}", kayit_tarihi);
-            cmd.Parameters.Add("@grup_id", SqlDbType.NVarChar).Value = dd_grup_id.SelectedValue;
+            cmd.Parameters.Add("@soyadi", SqlDbType.NVarChar).Value =txt_soyadi.Text;
+            cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = kayit_tarihi;
+            cmd.Parameters.Add("@grup_id", SqlDbType.Int).Value =Convert.ToInt32(dd_grup_id.SelectedValue);
             cmd.Parameters.Add("@cari_kod_no", SqlDbType.NVarChar).Value = txt_cari_kod_no.Text;
             cmd.Parameters.Add("@tc_no", SqlDbType.NVarChar).Value = txt_tc_no.Text;
             cmd.Parameters.Add("@meslek", SqlDbType.NVarChar).Value = txt_meslek.Text;
@@ -146,10 +149,8 @@ public partial class Cari_CariKarti : System.Web.UI.Page
             cmd.Parameters.Add("@adres2", SqlDbType.NVarChar).Value = txt_adres2.Text;
 
 
-            //Response.Write(cmd.CommandText);
-
             connection.Open();
-            cmd.ExecuteNonQuery();
+            update_flag=cmd.ExecuteNonQuery();
         }
         catch (Exception err)
         {
@@ -159,8 +160,10 @@ public partial class Cari_CariKarti : System.Web.UI.Page
         finally
         {
             connection.Close();
-
+            
         }
+       
+        
     }
 
     protected void ibtn_arama_Click(object sender, ImageClickEventArgs e) // cari arama modal popup
@@ -231,13 +234,14 @@ public partial class Cari_CariKarti : System.Web.UI.Page
             {
                 while (reader.Read())
                 {
-
+                 
                   lbl_cari_id.Text = reader["cari_id"].ToString();
 
                   txt_unvan.Text = reader["unvan"].ToString();
                   txt_adi.Text = reader["adi"].ToString();
                   txt_soyadi.Text = reader["soyadi"].ToString();
-                  txt_kayit_tarihi.Text = reader["kayit_tarihi"].ToString();
+                  DateTime kayit_tarihi=Convert.ToDateTime(reader["kayit_tarihi"].ToString());
+                  txt_kayit_tarihi.Text = kayit_tarihi.ToString("dd.MM.yyyy");
                   dd_grup_id.SelectedValue = reader["grup_id"].ToString();
                   txt_cari_kod_no.Text = reader["cari_kod_no"].ToString();
                   txt_tc_no.Text = reader["tc_no"].ToString();

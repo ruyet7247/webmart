@@ -43,7 +43,7 @@
                 <asp:ImageButton ID="ibtn_yeni_cari" runat="server" 
                     onclick="ibtn_yeni_cari_Click" />
                 <asp:ImageButton ID="ibtn_cari_sil" runat="server"
-                    onclick="ibtn_cari_sil_Click" />
+                    onclick="ibtn_cari_sil_Click"  OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');" />
             </td>
             
         </tr>
@@ -108,7 +108,7 @@
                 Kayıt Tarihi</td>
             <td class="style2">
                 <asp:TextBox ID="txt_kayit_tarihi" runat="server"></asp:TextBox>
-                <asp:CalendarExtender ID="txt_kayit_tarihi_CalendarExtender" runat="server"  Format="dd/MM/yyyy" 
+                <asp:CalendarExtender ID="txt_kayit_tarihi_CalendarExtender" runat="server"  Format="dd.MM.yyyy" 
                     Enabled="True" TargetControlID="txt_kayit_tarihi">
                 </asp:CalendarExtender>
             </td>
@@ -323,7 +323,7 @@
                         <asp:TextBox ID="txt_arama" runat="server"></asp:TextBox>
                     </td>
                     <td width="20%">
-                        <asp:ImageButton ID="ibtn_arama" runat="server" onclick="ibtn_arama_Click" />
+                        <asp:ImageButton ID="ibtn_arama" runat="server" onclick="ibtn_arama_Click"/>
                     </td>
                     <td width="20%">
                         &nbsp;</td>
@@ -332,7 +332,7 @@
                 </tr>
       
     </table>    
-
+    
        <!-- <iframe style=" width: 99%; height: 90%;" id="ifrm" src="CariBul.aspx" runat="server"></iframe> -->
 
          <asp:UpdatePanel ID="UpdatePanel1" runat="server">

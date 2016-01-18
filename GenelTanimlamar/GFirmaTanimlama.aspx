@@ -22,8 +22,8 @@
             <td class="style1">
                 Kuruluş Tarihi</td>
             <td class="style2">
-                <asp:TextBox ID="txt_kurulus_tarihi" placeholder="MM/DD/YYYY"  runat="server"></asp:TextBox>
-                <asp:CalendarExtender ID="txt_kurulus_tarihi_CalendarExtender" runat="server" Format="MM/dd/yyyy" 
+                <asp:TextBox ID="txt_kurulus_tarihi" placeholder="DD/MM/YYYY"  runat="server"></asp:TextBox>
+                <asp:CalendarExtender ID="txt_kurulus_tarihi_CalendarExtender" runat="server" Format="dd/MM/yyyy" 
                     Enabled="True" TargetControlID="txt_kurulus_tarihi">
                 </asp:CalendarExtender>
             </td>
