@@ -6,11 +6,15 @@
     <style type="text/css">
         .style1
         {
-            width: 10%;
+            width: 15%;
         }
         .style2
         {
             width: 30%;
+        }
+        .style3
+        {
+            width: 11%;
         }
         </style>
 </asp:Content>
@@ -34,11 +38,21 @@
                 &nbsp;</td>
         </tr>
               
+        <tr>
+            <td colspan="5" width="20%">
+                <asp:ImageButton ID="ibtn_yeni_cari" runat="server" 
+                    onclick="ibtn_yeni_cari_Click" />
+                <asp:ImageButton ID="ibtn_cari_sil" runat="server"
+                    onclick="ibtn_cari_sil_Click" />
+            </td>
+            
+        </tr>
+              
     </table>
     <table style="width:100%;">
         <tr>
             <td class="style1">
-                <asp:Label ID="lbl_cari_id" runat="server"></asp:Label>
+                <asp:Label ID="lbl_cari_id" runat="server">0</asp:Label>
             </td>
             <td class="style2">
                 &nbsp;</td>
@@ -49,9 +63,9 @@
         </tr>
         <tr>
             <td class="style1">
-                Kuruluş Tarihi</td>
+                Unvan</td>
             <td class="style2">
-                <asp:TextBox ID="txt_kurulus_tarihi" placeholder="MM/DD/YYYY"  runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_unvan" runat="server" Width="70%"></asp:TextBox>
                 <asp:ImageButton ID="ibtn_cari_bul" runat="server" Height="30px" Width="50px" />
                 <asp:ModalPopupExtender ID="ibtn_cari_bul_ModalPopupExtender" runat="server" 
                     DynamicServicePath="" Enabled="True" 
@@ -60,85 +74,6 @@
                 </asp:ModalPopupExtender>
             </td>
            <td class="style1">
-                &nbsp;</td>
-            <td class="style2">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Firma Tipi</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_firma_tipi" runat="server" Width="70%"></asp:TextBox>
-            </td>
-           <td class="style1">
-                &nbsp;</td>
-            <td class="style2">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Kısa Unvanı</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_kisa_unvani" runat="server" Width="70%"></asp:TextBox>
-            </td>
-            <td class="style1">
-                &nbsp;</td>
-            <td class="style2">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Tam Unvanı</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_tam_unvani" runat="server" Width="90%"></asp:TextBox>
-            </td>
-            <td class="style1">
-                &nbsp;</td>
-            <td class="style2">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Yetkili</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_yetkili" runat="server" Width="70%"></asp:TextBox>
-            </td>
-            <td class="style1">
-                &nbsp;</td>
-            <td class="style2">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Vergi Dairesi</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_vergi_dairesi" runat="server"></asp:TextBox>
-            </td>
-            <td class="style1">
-                Telefon 1</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_tel1" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Vergi No</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_vergi_no" runat="server"></asp:TextBox>
-            </td>
-            <td class="style1">
-                Telefon 2</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_tel2" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Adres 1</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_adres1" runat="server"></asp:TextBox>
-            </td>
-            <td class="style1">
                 Faks</td>
             <td class="style2">
                 <asp:TextBox ID="txt_fax" runat="server"></asp:TextBox>
@@ -146,73 +81,177 @@
         </tr>
         <tr>
             <td class="style1">
-                Adres 2</td>
+                Adı</td>
             <td class="style2">
-                <asp:TextBox ID="txt_adres2" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_adi" runat="server" Width="70%"></asp:TextBox>
             </td>
-            <td class="style1">
-                Gsm 1</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_gsm1" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Semt</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_semt" runat="server"></asp:TextBox>
-            </td>
-            <td class="style1">
-                Gsm 2</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_gsm2" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style1">
-                İlçe</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_ilce" runat="server"></asp:TextBox>
-            </td>
-            <td class="style1">
-                Mail Adresi</td>
+           <td class="style1">
+                Mail Adres</td>
             <td class="style2">
                 <asp:TextBox ID="txt_mail" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td class="style1">
-                İl</td>
+                Soyadı</td>
             <td class="style2">
-                <asp:TextBox ID="txt_il" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_soyadi" runat="server" Width="70%"></asp:TextBox>
             </td>
             <td class="style1">
-                Web Adresi</td>
+                Vergi Dairesi</td>
             <td class="style2">
-                <asp:TextBox ID="txt_web_adresi" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_vergi_dairesi" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
+            <td class="style1">
+                Kayıt Tarihi</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_kayit_tarihi" runat="server"></asp:TextBox>
+                <asp:CalendarExtender ID="txt_kayit_tarihi_CalendarExtender" runat="server"  Format="dd/MM/yyyy" 
+                    Enabled="True" TargetControlID="txt_kayit_tarihi">
+                </asp:CalendarExtender>
+            </td>
+            <td class="style1">
+                Vergi No</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_vergi_no" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Grup Adı</td>
+            <td class="style2">
+                <asp:DropDownList ID="dd_grup_id" runat="server" DataSourceID="SqlDataSource2" 
+                    DataTextField="cari_grubu_adi" DataValueField="cari_grubu_id">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                    SelectCommand="SELECT * FROM [cari_grubu_tanimlama]"></asp:SqlDataSource>
+            </td>
+            <td class="style1">
+                Adres1.Satır</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_adres1" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Cari Kod</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_cari_kod_no" runat="server"></asp:TextBox>
+            </td>
+            <td class="style1">
+                Adres2.Satır</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_adres2" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="style1">
+                &nbsp;Tc No</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_tc_no" runat="server"></asp:TextBox>
+            </td>
             <td class="style1">
                 Posta Kodu</td>
             <td class="style2">
                 <asp:TextBox ID="txt_posta_kodu" runat="server"></asp:TextBox>
             </td>
+        </tr>
+        <tr>
             <td class="style1">
-                Açıklama</td>
+                Meslek</td>
             <td class="style2">
-                <asp:TextBox ID="txt_aciklama1" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_meslek" runat="server"></asp:TextBox>
+            </td>
+            <td class="style1">
+                İlçe</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_ilce" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td class="style1">
-                &nbsp;</td>
+                Banka Adı</td>
             <td class="style2">
-                &nbsp;</td>
+                <asp:TextBox ID="txt_banka_adi" runat="server"></asp:TextBox>
+            </td>
+            <td class="style1">
+                Şehir</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_sehir" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Baka Hesap No</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_banka_hesap_no" runat="server"></asp:TextBox>
+            </td>
+            <td class="style1">
+                Ülke</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_ulke" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Banka IBAN No</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_banka_iban_no" runat="server"></asp:TextBox>
+            </td>
             <td class="style1">
                 &nbsp;</td>
             <td class="style2">
                 &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Telefon-1</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_tel1" runat="server"></asp:TextBox>
+            </td>
+            <td class="style1">
+                &nbsp;</td>
+            <td class="style2">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Telefon-2</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_tel2" runat="server"></asp:TextBox>
+            </td>
+            <td class="style1">
+                Borç Bakiye</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_borc_bakiye" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Cep Tel-1</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_gsm1" runat="server"></asp:TextBox>
+            </td>
+            <td class="style1">
+                Alacak Bakiye</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_alacak_bakiye" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Cep Tel-2</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_gsm2" runat="server"></asp:TextBox>
+            </td>
+            <td class="style1">
+                Bakiye</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_bakiye" runat="server"></asp:TextBox>
+            </td>
         </tr>
         <tr>
             <td class="style1">
@@ -230,8 +269,8 @@
             <td width="20%">
                 &nbsp;</td>
             <td width="20%">
-                <asp:ImageButton ID="ibtn_guncelle" runat="server" Height="30px" 
-                    onclick="ibtn_guncelle_Click" Width="120px" />
+                <asp:ImageButton ID="ibtn_post" runat="server" Height="30px" 
+                    onclick="ibtn_post_Click" Width="120px" />
             </td>
             <td width="20%">
                 &nbsp;</td>
@@ -260,16 +299,13 @@
      </asp:Panel>
     <!-- ARAMA PANELİ-->
     <asp:Panel ID="pnl_cari_arama" runat="server" BackColor="#B6B7BC" Width="60%" Height="500px" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
-     <table> 
+     <table width="100%"> 
             <tr>
-            <td width="20%">
+            <td class="style3">
                 <asp:Label ID="lbl_baslik" runat="server" Font-Bold="True">Cari Kartı Bul</asp:Label>
                     </td>
             <td width="20%">
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
-                    SelectCommand="SELECT * FROM [cari_grubu_tanimlama]"></asp:SqlDataSource>
-                    </td>
+                &nbsp;</td>
             <td width="20%">
                 &nbsp;</td>
             <td width="20%">
@@ -281,12 +317,8 @@
         </tr>
       
                 <tr>
-                    <td width="20%">
-                        <asp:DropDownList ID="dd_arama_secimi" runat="server" 
-                            DataSourceID="SqlDataSource1" DataTextField="cari_grubu_adi" 
-                            DataValueField="cari_grubu_id">
-                        </asp:DropDownList>
-                    </td>
+                    <td class="style3">
+                        Unvan Adı</td>
                     <td width="20%">
                         <asp:TextBox ID="txt_arama" runat="server"></asp:TextBox>
                     </td>

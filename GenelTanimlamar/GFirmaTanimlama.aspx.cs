@@ -27,6 +27,7 @@ public partial class GFirmaTanimlama : System.Web.UI.Page
     {
         FirmaBilgileriniGuncelle();
         FirmaBilgileriniGetir();
+
     }
 
     protected void FirmaBilgileriniGetir()
@@ -98,7 +99,9 @@ public partial class GFirmaTanimlama : System.Web.UI.Page
         try
         {
 
-            cmd.Parameters.Add("@kurulus_tarihi", SqlDbType.DateTime).Value = txt_kurulus_tarihi.Text;
+            DateTime kurulus_tarihi = Convert.ToDateTime(txt_kurulus_tarihi.Text);
+
+            cmd.Parameters.Add("@kurulus_tarihi", SqlDbType.DateTime).Value = kurulus_tarihi;
             cmd.Parameters.Add("@firma_tipi", SqlDbType.NVarChar).Value = txt_firma_tipi.Text;
             cmd.Parameters.Add("@kisa_unvani", SqlDbType.NVarChar).Value = txt_kisa_unvani.Text;
             cmd.Parameters.Add("@tam_unvani", SqlDbType.NVarChar).Value = txt_tam_unvani.Text;
