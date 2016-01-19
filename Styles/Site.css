@@ -300,4 +300,11 @@ div.accountInfo
          background-color: black;
          filter: alpha(opacity=60);
          opacity: 0.8;
-     }
+     } 
+ .ajax__tab_xp 
+ {
+     
+    float: left;
+    text-align: left;
+    
+ }

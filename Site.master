@@ -42,7 +42,7 @@
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" 
                     EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="Genel Tanımlamalar" 
+                        <asp:MenuItem Text="Genel Tanımlamalar" 
                             Value="Genel Tanımlamalar">
                             <asp:MenuItem Text=" Firma Bilgileri" Value="Firma Bilgileri" 
                                 NavigateUrl="~/GenelTanimlamar/GFirmaTanimlama.aspx"></asp:MenuItem>
@@ -53,6 +53,8 @@
                             </asp:MenuItem>
                             <asp:MenuItem Text=" Banka Tanımlama" Value="Banka Tanımlama" 
                                 NavigateUrl="~/GenelTanimlamar/BankaTanimlama.aspx"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/GenelTanimlamar/BankaPosTanimlama.aspx" 
+                                Text="Banka POS Tanımlama" Value="Banka POS Tanımlama"></asp:MenuItem>
                             <asp:MenuItem Text=" Cari Grubu Tanımlama" Value="Cari Grubu Tanımlama" 
                                 NavigateUrl="~/GenelTanimlamar/CariGrubuTanimlama.aspx">
                             </asp:MenuItem>
