@@ -3,11 +3,11 @@
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
-<style type="text/css">
+    <style type="text/css">
         
         .style3
         {
-            width: 15%;
+            width: 20%;
         }
      
         .style4
@@ -17,14 +17,9 @@
         }
         .style5
         {
-            width: 55%;
+            width: 50%;
             
         }
-
-    .style6
-    {
-        width: 460px;
-    }
 
     </style>
 </asp:Content>
@@ -42,77 +37,26 @@
             <td class="style5" align="left" rowspan="6" valign="top">
                 <asp:TabContainer ID="pnl_tab1" runat="server" ActiveTabIndex="0" 
                     Height="100%" Width="100%">
-                    <asp:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1"  style="float:left;">
-                        <ContentTemplate>
-                            <asp:Panel ID="Panel1" runat="server">
-                                <table style="width:100%;">
-                                    <tr>
-                                        <td class="style3">
-                                            Tarih</td>
-                                        <td>
-                                            &nbsp;</td>
-                                        <td>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="style3">
-                                            Belge No</td>
-                                        <td>
-                                            &nbsp;</td>
-                                        <td>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="style3">
-                                            Ödeme Şekli</td>
-                                        <td>
-                                            &nbsp;</td>
-                                        <td>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="style3">
-                                            &nbsp;</td>
-                                        <td>
-                                            &nbsp;</td>
-                                        <td>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="style3">
-                                            Tutar</td>
-                                        <td>
-                                            &nbsp;</td>
-                                        <td>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="style3">
-                                            &nbsp;</td>
-                                        <td>
-                                            <asp:ImageButton ID="ImageButton1" runat="server" />
-                                        </td>
-                                        <td>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="style3">
-                                            &nbsp;</td>
-                                        <td>
-                                            &nbsp;</td>
-                                        <td>
-                                            &nbsp;</td>
-                                    </tr>
-                                </table>
-                            </asp:Panel>
-                        </ContentTemplate>
-                    </asp:TabPanel>
-                    <asp:TabPanel ID="TabPanel2" runat="server" HeaderText="TabPanel2"  style="float:left;">
-                        <ContentTemplate>
-                            <asp:Panel ID="pnl_tab2" runat="server">
-                                b</asp:Panel>
-                        </ContentTemplate>
-                    </asp:TabPanel>
+                    <asp:TabPanel ID="TabPanel1" runat="server" HeaderText="CARİYİ BORÇLANDIR / ALACAKLANDIR"  style="float:left;"><ContentTemplate><asp:Panel ID="Panel1" runat="server"><table style="width:100%;"><tr><td class="style3"><asp:Label ID="lbl_cari_hareket_id" runat="server" Text="Label"></asp:Label></td><td>&#160;</td><td>&#160;</td></tr><tr><td class="style3">BORÇ/ALACAK</td><td><asp:DropDownList ID="DropDownList3" runat="server"><asp:ListItem Selected="True" Value="borc">BORÇLANDIR</asp:ListItem><asp:ListItem Value="alacak">ALACAKLANDIR</asp:ListItem></asp:DropDownList></td><td>&#160;</td></tr><tr><td class="style3">Tarih</td><td><asp:TextBox ID="txt_kayit_tarihi" placeholder="DD/MM/YYYY"  runat="server"></asp:TextBox><asp:CalendarExtender ID="txt_kayit_tarihi_CalendarExtender" runat="server" Format="dd/MM/yyyy" 
+                                                Enabled="True" TargetControlID="txt_kayit_tarihi"></asp:CalendarExtender></td><td><asp:ImageButton ID="ibtn_yeni_cariborclandır" runat="server" 
+                                                AlternateText="Yeni" /></td></tr><tr><td class="style3">Belge No</td><td><asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox></td><td><asp:ImageButton ID="ImageButton3" runat="server" AlternateText="Kaydet" /></td></tr><tr><td class="style3">Ödeme Şekli</td><td>
+                        <asp:DropDownList ID="dd_odeme_sekli" runat="server" 
+                            DataSourceID="SqlDataSource_odeme_sekli" DataTextField="odeme_sekli_adi" 
+                            DataValueField="odeme_sekli" 
+                            OnSelectedIndexChanged="dd_odeme_sekli_SelectedIndexChanged" 
+                            ontextchanged="dd_odeme_sekli_TextChanged">
+                        </asp:DropDownList>
+                        <asp:SqlDataSource ID="SqlDataSource_odeme_sekli" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                            SelectCommand="SELECT [odeme_sekli], [odeme_sekli_adi] FROM [cari_odeme_sekli_tanimlama]">
+                        </asp:SqlDataSource>
+                        </td><td>&#160;</td></tr><tr><td class="style3">İslem Tipi</td><td>
+                                <asp:DropDownList ID="dd_islem_tipi" runat="server">
+                                </asp:DropDownList>
+                            </td><td>&#160;</td></tr><tr><td class="style3">Açıklama</td><td><asp:TextBox 
+                            ID="txt_aciklama" runat="server" Width="200px"></asp:TextBox></td><td>&#160;</td></tr><tr><td class="style3">&#160;</td><td>
+                        &nbsp;</td><td>&#160;</td></tr><tr><td class="style3">Tutar</td><td><asp:TextBox 
+                            ID="txt_tutar" runat="server"></asp:TextBox></td><td>&#160;</td></tr><tr><td class="style3">&#160;</td><td>&#160;</td><td>&#160;</td></tr></table></asp:Panel></ContentTemplate></asp:TabPanel>
                 </asp:TabContainer>
             </td>
         </tr>

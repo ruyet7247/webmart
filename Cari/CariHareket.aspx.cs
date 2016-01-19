@@ -134,4 +134,45 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         }
 
     }
+
+    protected void dd_odeme_sekli_SelectedIndexChanged(object sender, EventArgs e)
+    {
+       
+        /*
+        SqlConnection connection = new SqlConnection(dataconnect);
+        string queryString = "SELECT islem_tipi,islem_tipi_adi FROM cari_islem_tipi_tanimlama";
+        SqlCommand cmd = new SqlCommand(queryString, connection);
+        try
+        {
+          
+            connection.Open();
+            DataTable table = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            adapter.Fill(table);
+            
+        dd_islem_tipi.DataSource = table;
+        dd_islem_tipi.DataValueField = "islem_tipi";
+        dd_islem_tipi.DataTextField = "islem_tipi_adi";
+        dd_islem_tipi.DataBind();
+        }
+
+        catch (Exception err)
+        {
+            lbl_mesaj.Text = "Error Login. ";
+            lbl_mesaj.Text += err.Message;
+        }
+        finally
+        {
+            connection.Close();
+        }
+         * */
+    }
+
+
+
+    protected void dd_odeme_sekli_TextChanged(object sender, EventArgs e)
+    {
+        txt_tutar.Text = dd_odeme_sekli.SelectedValue;
+    }
+   
 }

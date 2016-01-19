@@ -58,21 +58,12 @@
                             <asp:MenuItem Text=" Cari Grubu Tanımlama" Value="Cari Grubu Tanımlama" 
                                 NavigateUrl="~/GenelTanimlamar/CariGrubuTanimlama.aspx">
                             </asp:MenuItem>
-                            <asp:MenuItem Text=" Cari İşlem Tipi Tanımlama" 
-                                Value="Cari İşlem Tipi Tanımlama" 
-                                NavigateUrl="~/GenelTanimlamar/CariIslemTipiTanimlama.aspx"></asp:MenuItem>
                             <asp:MenuItem Text=" Stok Grubu Tanımlama" Value="Stok Grubu Tanımlama" 
                                 NavigateUrl="~/GenelTanimlamar/StokGrubuTanimlama.aspx">
                             </asp:MenuItem>
-                            <asp:MenuItem Text=" Stok İşlem Tipi Tanımlama" 
-                                Value="Stok İşlem Tipi Tanımlama" 
-                                NavigateUrl="~/GenelTanimlamar/StokIslemTipiTanimlama.aspx"></asp:MenuItem>
                             <asp:MenuItem Text=" Personel Departman Tanımlama" 
                                 Value="Personel Departman Tanımlama" 
                                 NavigateUrl="~/GenelTanimlamar/PersonelDepartmanTanimlama.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text=" Personel İşlem Tipi Tanımlama" 
-                                Value="Personel İşlem Tipi Tanımlama" 
-                                NavigateUrl="~/GenelTanimlamar/PersonelIslemTipiTanimlama.aspx"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Cari Modülü" Value="FirmaIslemleri">
                             <asp:MenuItem Text=" Yeni Cari Kartı" Value="Yeni Cari Kartı" 
