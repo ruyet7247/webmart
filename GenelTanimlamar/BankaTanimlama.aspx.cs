@@ -182,7 +182,7 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
                     txt_hesap_no.Text = reader["hesap_no"].ToString();
                     txt_iban_no.Text = reader["iban"].ToString();
                     dd_aktif_or_pasif.SelectedValue = reader["aktif_or_pasif"].ToString();
-                    dd_para_birimi.SelectedValue = reader["para_birimi"].ToString();
+                    dd_para_birimi.SelectedValue = reader["para_birimi_id"].ToString();
 
                 }
             }
@@ -229,4 +229,29 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
             BankaListele();
         }
     }
+
+    protected void gv_listele_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            TableCell statusCell = e.Row.Cells[7];
+            if (e.Row.Cells[4].Text=="2261")
+            {
+                e.Row.Cells[7].Text = "Aktif";
+            }
+            else
+                if (e.Row.Cells[3].Text== "22")
+                {
+                    e.Row.Cells[7].Text = "Pasif";
+                }
+
+         
+
+        }
+      
+
+    }
+
+
+   
 }

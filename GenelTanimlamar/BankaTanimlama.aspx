@@ -111,7 +111,8 @@
         <asp:GridView ID="gv_listele" runat="server" AutoGenerateColumns="False" 
             DataKeyNames="banka_hesap_id" Width="100%" 
             onselectedindexchanged="gv_listele_SelectedIndexChanged"
-            onrowdeleting="gv_listele_RowDeleting">
+            onrowdeleting="gv_listele_RowDeleting" 
+            onrowdatabound="gv_listele_RowDataBound">
             <Columns>
                
                 <asp:TemplateField HeaderText="B id" SortExpression="banka_hesap_id">
@@ -180,10 +181,10 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Aktif/Pasif" SortExpression="aktif_or_pasif">
                     <EditItemTemplate>
-                        <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("aktif_or_pasif") %>'></asp:TextBox>
+                        <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("aktif_or_pasif")  %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label7" runat="server" Text='<%# Bind("aktif_or_pasif") %>'></asp:Label>
+                        <asp:Label ID="Label7" runat="server" Text='<%# Bind("aktif_or_pasif")  %>'></asp:Label>
                     </ItemTemplate>
                     <ItemStyle Width="5%" />
                 </asp:TemplateField>

@@ -31,6 +31,8 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         if (!IsPostBack)  // tıklama ile sayfa gelmemiş ise
         {
 
+            dd_odeme_sekli.SelectedValue = "acikhesap";
+            
             if (lbl_cari_id.Text != "0")
             {
                 CariBilgileriniGetir(Convert.ToInt32(lbl_cari_id.Text));
@@ -135,44 +137,60 @@ public partial class Cari_CariHareket : System.Web.UI.Page
 
     }
 
-    protected void dd_odeme_sekli_SelectedIndexChanged(object sender, EventArgs e)
+    protected void dd_odeme_sekli_SelectedIndexChanged(object sender, EventArgs e)  // ödeme şekline göre bağlı hesap tabloları
     {
-       
-        /*
-        SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "SELECT islem_tipi,islem_tipi_adi FROM cari_islem_tipi_tanimlama";
-        SqlCommand cmd = new SqlCommand(queryString, connection);
-        try
-        {
-          
-            connection.Open();
-            DataTable table = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-            adapter.Fill(table);
-            
-        dd_islem_tipi.DataSource = table;
-        dd_islem_tipi.DataValueField = "islem_tipi";
-        dd_islem_tipi.DataTextField = "islem_tipi_adi";
-        dd_islem_tipi.DataBind();
-        }
 
-        catch (Exception err)
+        // ödeme şekli 4 farklı durumda seçilir ve Ödeme tipi belirlenir.
+        string secilen_odeme_sekli = dd_odeme_sekli.Text;
+        string queryString = "";
+        string data_value = "";
+        string data_text = "";
+        if (dd_odeme_sekli.SelectedValue == "nakit") { queryString = "SELECT kasa_id,kasa_adi FROM kasa_kayit ORDER BY  kasa_adi";data_value="kasa_id";data_text="kasa_adi"; }
+        if (dd_odeme_sekli.SelectedValue == "acikhesap") { queryString = ""; data_value = ""; data_text = ""; }
+        if (dd_odeme_sekli.SelectedValue == "banka") { queryString = "SELECT banka_hesap_id,banka_adi FROM banka_kayit ORDER BY banka_adi"; data_value = "banka_hesap_id"; data_text = "banka_adi"; }
+        if (dd_odeme_sekli.SelectedValue == "pos") { queryString = "SELECT pos_id,pos_banka_adi FROM banka_pos_kayit ORDER BY pos_banka_adi"; data_value = "pos_id"; data_text = "pos_banka_adi"; }
+
+        if (queryString == "")
         {
-            lbl_mesaj.Text = "Error Login. ";
-            lbl_mesaj.Text += err.Message;
-        }
-        finally
+            dd_islem_tipi.Items.Clear();
+            dd_islem_tipi.Items.Insert(0, "");
+        } else
         {
-            connection.Close();
-        }
-         * */
+            SqlConnection connection = new SqlConnection(dataconnect);
+
+            SqlCommand cmd = new SqlCommand(queryString, connection);
+            try
+            {
+
+                connection.Open();
+                DataTable table = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(table);
+
+                dd_islem_tipi.DataSource = table;
+                dd_islem_tipi.DataValueField = data_value;
+                dd_islem_tipi.DataTextField = data_text;
+                dd_islem_tipi.DataBind();
+            }
+
+            catch (Exception err)
+            {
+                lbl_mesaj.Text = "Error İŞLEM TİPİ FILLING ";
+                lbl_mesaj.Text += err.Message;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        } // if queryString
+         
     }
 
 
 
-    protected void dd_odeme_sekli_TextChanged(object sender, EventArgs e)
+
+    protected void dd_islem_tipi_SelectedIndexChanged(object sender, EventArgs e)
     {
-        txt_tutar.Text = dd_odeme_sekli.SelectedValue;
+
     }
-   
 }
