@@ -38,6 +38,27 @@
         </tr>
         <tr>
             <td class="style3">
+                Bağlı Hesap Adı</td>
+            <td class="style4">
+                <asp:DropDownList ID="dd_bagli_olan_banka_hesap_id" runat="server" 
+                    DataSourceID="SqlDataSource_banka_hesap_listesi" DataTextField="banka_hesap_adi" 
+                    DataValueField="banka_hesap_id">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSource_banka_hesap_listesi" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                    SelectCommand="SELECT  dbo.banka_kayit.banka_hesap_id, dbo.firma_para_birimi_tanimlama.para_birimi + ' -  ' + dbo.banka_kayit.banka_adi AS banka_hesap_adi FROM dbo.banka_kayit INNER JOIN dbo.firma_para_birimi_tanimlama ON dbo.banka_kayit.para_birimi_id = dbo.firma_para_birimi_tanimlama.para_birimi_id">
+                </asp:SqlDataSource>
+            </td>
+        </tr>
+        <tr>
+            <td class="style3">
+                Tahakkuk Gün Sayısı</td>
+            <td class="style4">
+                <asp:TextBox ID="txt_tahakkuk_gun_sayisi" runat="server" Width="120px"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="style3">
                 &nbsp;</td>
             <td class="style4">
                 &nbsp;</td>
@@ -79,7 +100,15 @@
                     <ItemTemplate>
                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("pos_banka_adi") %>'></asp:Label>
                     </ItemTemplate>
-                    <ItemStyle Width="60%" />
+                    <ItemStyle Width="40%" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Kaç Gün Sonra Tahakkuk Edecek">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("tahakkuk_gun_sayisi") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("tahakkuk_gun_sayisi") %>'></asp:Label>
+                    </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField ShowHeader="False">
                     <ItemTemplate>

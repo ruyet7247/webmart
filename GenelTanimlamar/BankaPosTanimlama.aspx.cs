@@ -46,13 +46,15 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
     protected void VeriEkle()
     {
         SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "INSERT INTO banka_pos_kayit (pos_banka_adi) VALUES \n" +
-                              "(@pos_banka_adi)";
+        string queryString = "INSERT INTO banka_pos_kayit (pos_banka_adi,bagli_olan_banka_hesap_id,tahakkuk_gun_sayisi) VALUES \n" +
+                              "(@pos_banka_adi,@bagli_olan_banka_hesap_id,@tahakkuk_gun_sayisi)";
         SqlCommand cmd = new SqlCommand(queryString, connection);
 
         try
         {
             cmd.Parameters.Add("@pos_banka_adi", SqlDbType.NVarChar).Value = txt_pos_banka_adi.Text;
+            cmd.Parameters.Add("@bagli_olan_banka_hesap_id", SqlDbType.Int).Value = dd_bagli_olan_banka_hesap_id.SelectedValue;
+            cmd.Parameters.Add("@tahakkuk_gun_sayisi", SqlDbType.Int).Value = txt_tahakkuk_gun_sayisi.Text;
 
             connection.Open();
             cmd.ExecuteNonQuery();
@@ -73,7 +75,7 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
     protected void VeriGuncelle(int numarator_id)
     {
         SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "UPDATE banka_pos_kayit SET pos_banka_adi=@pos_banka_adi WHERE pos_id=" + numarator_id;
+        string queryString = "UPDATE banka_pos_kayit SET pos_banka_adi=@pos_banka_adi,bagli_olan_banka_hesap_id=@bagli_olan_banka_hesap_id,tahakkuk_gun_sayisi=@tahakkuk_gun_sayisi WHERE pos_id=" + numarator_id;
         SqlCommand cmd = new SqlCommand(queryString, connection);
 
 
@@ -82,6 +84,8 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
         {
 
             cmd.Parameters.Add("@pos_banka_adi", SqlDbType.NVarChar).Value = txt_pos_banka_adi.Text;
+            cmd.Parameters.Add("@bagli_olan_banka_hesap_id", SqlDbType.Int).Value = dd_bagli_olan_banka_hesap_id.SelectedValue;
+            cmd.Parameters.Add("@tahakkuk_gun_sayisi", SqlDbType.Int).Value = txt_tahakkuk_gun_sayisi.Text;
 
 
             //Response.Write(cmd.CommandText);
@@ -170,7 +174,8 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
 
                     lbl_pos_id.Text = reader["pos_id"].ToString();
                     txt_pos_banka_adi.Text= reader["pos_banka_adi"].ToString();
-
+                    dd_bagli_olan_banka_hesap_id.SelectedValue= reader["bagli_olan_banka_hesap_id"].ToString();
+                    txt_tahakkuk_gun_sayisi.Text = reader["tahakkuk_gun_sayisi"].ToString();
 
 
 

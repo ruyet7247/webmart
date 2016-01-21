@@ -12,6 +12,8 @@ using System.Threading;
 public partial class Cari_CariHareket : System.Web.UI.Page
 {
     String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -147,13 +149,14 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         string data_text = "";
         if (dd_odeme_sekli.SelectedValue == "nakit") { queryString = "SELECT kasa_id,kasa_adi FROM kasa_kayit ORDER BY  kasa_adi";data_value="kasa_id";data_text="kasa_adi"; }
         if (dd_odeme_sekli.SelectedValue == "acikhesap") { queryString = ""; data_value = ""; data_text = ""; }
-        if (dd_odeme_sekli.SelectedValue == "banka") { queryString = "SELECT banka_hesap_id,banka_adi FROM banka_kayit ORDER BY banka_adi"; data_value = "banka_hesap_id"; data_text = "banka_adi"; }
+        if (dd_odeme_sekli.SelectedValue == "banka") { queryString = "SELECT  dbo.banka_kayit.banka_hesap_id, dbo.firma_para_birimi_tanimlama.para_birimi + ' -  ' + dbo.banka_kayit.banka_adi AS banka_hesap_adi FROM dbo.banka_kayit INNER JOIN dbo.firma_para_birimi_tanimlama ON dbo.banka_kayit.para_birimi_id = dbo.firma_para_birimi_tanimlama.para_birimi_id"; data_value = "banka_hesap_id"; data_text = "banka_hesap_adi"; }
         if (dd_odeme_sekli.SelectedValue == "pos") { queryString = "SELECT pos_id,pos_banka_adi FROM banka_pos_kayit ORDER BY pos_banka_adi"; data_value = "pos_id"; data_text = "pos_banka_adi"; }
+        // 
 
         if (queryString == "")
         {
-            dd_islem_tipi.Items.Clear();
-            dd_islem_tipi.Items.Insert(0, "");
+            dd_bagli_hesap.Items.Clear();
+            dd_bagli_hesap.Items.Insert(0, "");
         } else
         {
             SqlConnection connection = new SqlConnection(dataconnect);
@@ -167,10 +170,10 @@ public partial class Cari_CariHareket : System.Web.UI.Page
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(table);
 
-                dd_islem_tipi.DataSource = table;
-                dd_islem_tipi.DataValueField = data_value;
-                dd_islem_tipi.DataTextField = data_text;
-                dd_islem_tipi.DataBind();
+                dd_bagli_hesap.DataSource = table;
+                dd_bagli_hesap.DataValueField = data_value;
+                dd_bagli_hesap.DataTextField = data_text;
+                dd_bagli_hesap.DataBind();
             }
 
             catch (Exception err)
@@ -185,12 +188,127 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         } // if queryString
          
     }
-
-
-
-
     protected void dd_islem_tipi_SelectedIndexChanged(object sender, EventArgs e)
     {
 
     }
+
+    protected void ibtn_kaydet_Click(object sender, ImageClickEventArgs e)
+    {
+        if (Kontroller())
+        {
+
+            // SABİT TANIMLAMALAR
+            Session["personel"] = "hamza";
+            string queryString = "";
+            string islem_tipi = "";
+            string borc = "";
+            string alacak = "";
+            string fis_id = ""; string kasa_id = ""; string pos_id = ""; string banka_hesap_id = "";
+
+            if (dd_borc_or_alacak.SelectedValue == "borc") { borc = txt_tutar.Text; alacak = ""; }
+            if (dd_borc_or_alacak.SelectedValue == "alacak") { borc = ""; alacak = ""; }
+
+            //  1. DURUM
+            if (dd_odeme_sekli.SelectedValue == "nakit")
+            {
+                if (dd_borc_or_alacak.SelectedValue == "borc") { islem_tipi = "tahsilat"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
+                if (dd_borc_or_alacak.SelectedValue == "alacak") { islem_tipi = "tediye"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
+                fis_id = "";
+                kasa_id = dd_bagli_hesap.SelectedValue;
+                pos_id = "";
+                banka_hesap_id = "";
+                CariHareketBorcAlacakKaydet(txt_kayit_tarihi.Text, lbl_cari_id.Text, dd_borc_or_alacak.SelectedValue.ToString(), islem_tipi, "nakit", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
+
+            }
+            //  2. DURUM
+            if (dd_odeme_sekli.SelectedValue == "acikhesap")
+            {
+
+                if (dd_borc_or_alacak.SelectedValue == "borc") { islem_tipi = "borcdekontu"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
+                if (dd_borc_or_alacak.SelectedValue == "alacak") { islem_tipi = "alacakdekontu"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
+                fis_id = "";
+                kasa_id = "";
+                pos_id = "";
+                banka_hesap_id = "";
+                CariHareketBorcAlacakKaydet(txt_kayit_tarihi.Text, lbl_cari_id.Text, dd_borc_or_alacak.SelectedValue.ToString(), islem_tipi, "acikhesap", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
+
+            }
+            //  3. DURUM
+            if (dd_odeme_sekli.SelectedValue == "banka")
+            {
+                if (dd_borc_or_alacak.SelectedValue == "borc") { islem_tipi = "banka"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
+                if (dd_borc_or_alacak.SelectedValue == "alacak") { islem_tipi = "banka"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
+                fis_id = "";
+                kasa_id = "";
+                pos_id = "";
+                banka_hesap_id = dd_bagli_hesap.SelectedValue;
+                CariHareketBorcAlacakKaydet(txt_kayit_tarihi.Text, lbl_cari_id.Text, dd_borc_or_alacak.SelectedValue.ToString(), islem_tipi, "banka", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
+
+            }
+            //  4. DURUM
+            if (dd_odeme_sekli.SelectedValue == "pos")
+            {
+                if (dd_borc_or_alacak.SelectedValue == "borc") { islem_tipi = "pos"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
+                if (dd_borc_or_alacak.SelectedValue == "alacak") { islem_tipi = "pos"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
+                fis_id = "";
+                kasa_id = "";
+                pos_id = dd_bagli_hesap.SelectedValue;
+                banka_hesap_id = "";
+                CariHareketBorcAlacakKaydet(txt_kayit_tarihi.Text, lbl_cari_id.Text, dd_borc_or_alacak.SelectedValue.ToString(), islem_tipi, "pos", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
+
+            }
+            // 
+
+        } // if kontroller
+    }
+
+
+    private bool Kontroller()
+    {
+        
+        return true;
+    }
+
+    protected void CariHareketBorcAlacakKaydet(string kayit_tarihi, string cari_id,string borc_or_alacak,string islem_tipi,string odeme_sekli,string belge_no,string aciklama1,string personel, string borc, string alacak,string fis_id, string kasa_id, string pos_id,string banka_hesap_id)
+    {
+        SqlConnection connection = new SqlConnection(dataconnect);
+        string queryString = "INSERT INTO cari_hareket (kayit_tarihi, cari_id, borc_or_alacak, islem_tipi, odeme_sekli, belge_no, aciklama1, personel, borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id)  VALUES (@kayit_tarihi,@cari_id,@borc_or_alacak,@islem_tipi,@odeme_sekli,@belge_no,@aciklama1,@personel,@borc,@alacak,@fis_id,@kasa_id,@pos_id,@banka_hesap_id)";
+        SqlCommand cmd = new SqlCommand(queryString, connection);
+
+        int insert_sql = 0;
+        try
+        {
+            cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = Convert.ToDateTime(kayit_tarihi);
+            cmd.Parameters.Add("@cari_id", SqlDbType.NVarChar).Value = cari_id;
+            cmd.Parameters.Add("@borc_or_alacak", SqlDbType.NVarChar).Value = borc_or_alacak;
+            cmd.Parameters.Add("@islem_tipi", SqlDbType.NVarChar).Value = islem_tipi;
+            cmd.Parameters.Add("@odeme_sekli", SqlDbType.NVarChar).Value = odeme_sekli;
+            cmd.Parameters.Add("@belge_no", SqlDbType.NVarChar).Value = belge_no;
+            cmd.Parameters.Add("@aciklama1", SqlDbType.NVarChar).Value = aciklama1;
+            cmd.Parameters.Add("@personel", SqlDbType.NVarChar).Value = personel;
+            cmd.Parameters.Add("@borc", SqlDbType.NVarChar).Value = borc;
+            cmd.Parameters.Add("@alacak", SqlDbType.NVarChar).Value = alacak;
+            cmd.Parameters.Add("@fis_id", SqlDbType.NVarChar).Value = fis_id;
+            cmd.Parameters.Add("@kasa_id", SqlDbType.NVarChar).Value = kasa_id;
+            cmd.Parameters.Add("@pos_id", SqlDbType.NVarChar).Value = pos_id;
+            cmd.Parameters.Add("@banka_hesap_id", SqlDbType.NVarChar).Value = banka_hesap_id;
+
+            connection.Open();
+            insert_sql=cmd.ExecuteNonQuery();
+            Response.Write(insert_sql.ToString());
+        }
+        catch (Exception err)
+        {
+            lbl_mesaj.Text = "Error INSERT. ";
+            lbl_mesaj.Text += err.Message;
+        }
+        finally
+        {
+            connection.Close();
+            Response.Write(insert_sql.ToString());
+
+        }
+    }
+
 }

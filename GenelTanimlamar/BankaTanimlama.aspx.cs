@@ -160,6 +160,7 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
 
     protected void BilgileriGetir(int anahtar_id)
     {
+        int deger=0;
 
         SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "SELECT * FROM banka_kayit WHERE banka_hesap_id=" + anahtar_id;
@@ -180,9 +181,15 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
                     txt_hesap_sahibi.Text = reader["hesap_sahibi"].ToString();
                     txt_sube_kodu.Text = reader["sube_kodu"].ToString();
                     txt_hesap_no.Text = reader["hesap_no"].ToString();
-                    txt_iban_no.Text = reader["iban"].ToString();
-                    dd_aktif_or_pasif.SelectedValue = reader["aktif_or_pasif"].ToString();
+                    txt_iban_no.Text = reader["iban"].ToString();                   
                     dd_para_birimi.SelectedValue = reader["para_birimi_id"].ToString();
+                    string  aktif_or_pasif= reader["aktif_or_pasif"].ToString();
+                    if (aktif_or_pasif == "False") { deger = 0; }
+                    if (aktif_or_pasif == "True") { deger = 1; }
+                    dd_aktif_or_pasif.SelectedValue = deger.ToString();
+                   
+                   
+
 
                 }
             }
