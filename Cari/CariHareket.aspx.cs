@@ -202,12 +202,12 @@ public partial class Cari_CariHareket : System.Web.UI.Page
             Session["personel"] = "hamza";
             string queryString = "";
             string islem_tipi = "";
-            string borc = "";
-            string alacak = "";
+            decimal borc = 0;
+            decimal alacak = 0;
             string fis_id = ""; string kasa_id = ""; string pos_id = ""; string banka_hesap_id = "";
 
-            if (dd_borc_or_alacak.SelectedValue == "borc") { borc = txt_tutar.Text; alacak = ""; }
-            if (dd_borc_or_alacak.SelectedValue == "alacak") { borc = ""; alacak = ""; }
+            if (dd_borc_or_alacak.SelectedValue == "borc") { borc = Convert.ToDecimal(txt_tutar.Text); alacak = 0; }
+            if (dd_borc_or_alacak.SelectedValue == "alacak") { borc = 0; alacak = Convert.ToDecimal(txt_tutar.Text); }
 
             //  1. DURUM
             if (dd_odeme_sekli.SelectedValue == "nakit")
@@ -270,15 +270,23 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         return true;
     }
 
-    protected void CariHareketBorcAlacakKaydet(string kayit_tarihi, string cari_id,string borc_or_alacak,string islem_tipi,string odeme_sekli,string belge_no,string aciklama1,string personel, string borc, string alacak,string fis_id, string kasa_id, string pos_id,string banka_hesap_id)
+    protected void CariHareketBorcAlacakKaydet(string kayit_tarihi, string cari_id,string borc_or_alacak,string islem_tipi,string odeme_sekli,string belge_no,string aciklama1,string personel, decimal borc, decimal alacak,string fis_id, string kasa_id, string pos_id,string banka_hesap_id)
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "INSERT INTO cari_hareket (kayit_tarihi, cari_id, borc_or_alacak, islem_tipi, odeme_sekli, belge_no, aciklama1, personel, borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id)  VALUES (@kayit_tarihi,@cari_id,@borc_or_alacak,@islem_tipi,@odeme_sekli,@belge_no,@aciklama1,@personel,@borc,@alacak,@fis_id,@kasa_id,@pos_id,@banka_hesap_id)";
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        Response.Write(kayit_tarihi.ToString() + cari_id.ToString() + borc_or_alacak.ToString()+ islem_tipi.ToString()+ odeme_sekli.ToString()+ belge_no.ToString()+ aciklama1.ToString()+ personel.ToString()+ borc.ToString()+ alacak.ToString()+ fis_id.ToString()+ kasa_id.ToString()+ pos_id.ToString()+ banka_hesap_id.ToString());
 
+        SqlConnection connection = new SqlConnection(dataconnect);
+        string queryString = "INSERT INTO cari_hareket (kayit_tarihi,cari_id, borc_or_alacak, islem_tipi, odeme_sekli, belge_no, aciklama1, personel,borc,alacak fis_id, kasa_id, pos_id, banka_hesap_id)  VALUES \n" +
+                                                   "(@kayit_tarihi,@cari_id,@borc_or_alacak,@islem_tipi,@odeme_sekli,@belge_no,@aciklama1,@personel,@borc,@alacak,@fis_id,@kasa_id,@pos_id,@banka_hesap_id)";
+
+        //string queryString = "INSERT INTO cari_hareket (kayit_tarihi, cari_id, borc_or_alacak, islem_tipi, odeme_sekli, belge_no, aciklama1, personel, borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id)  VALUES \n" +
+        //                                             "('" + kayit_tarihi + "','" + cari_id + "','" + borc_or_alacak + "','" + islem_tipi + "','" + odeme_sekli + "','" + belge_no + "','" + aciklama1 + "','" + personel + "'," + borc + "," + alacak + ",'" + fis_id + "','" + kasa_id + "','" + pos_id + "','" + banka_hesap_id + "')";
+       
+        SqlCommand cmd = new SqlCommand(queryString, connection);
+        
         int insert_sql = 0;
         try
         {
+            
             cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = Convert.ToDateTime(kayit_tarihi);
             cmd.Parameters.Add("@cari_id", SqlDbType.NVarChar).Value = cari_id;
             cmd.Parameters.Add("@borc_or_alacak", SqlDbType.NVarChar).Value = borc_or_alacak;
@@ -287,16 +295,16 @@ public partial class Cari_CariHareket : System.Web.UI.Page
             cmd.Parameters.Add("@belge_no", SqlDbType.NVarChar).Value = belge_no;
             cmd.Parameters.Add("@aciklama1", SqlDbType.NVarChar).Value = aciklama1;
             cmd.Parameters.Add("@personel", SqlDbType.NVarChar).Value = personel;
-            cmd.Parameters.Add("@borc", SqlDbType.NVarChar).Value = borc;
-            cmd.Parameters.Add("@alacak", SqlDbType.NVarChar).Value = alacak;
+            cmd.Parameters.Add("@borc", SqlDbType.Decimal).Value = Convert.ToDecimal(txt_tutar.Text);
+            cmd.Parameters.Add("@alacak", SqlDbType.Decimal).Value = Convert.ToDecimal(txt_tutar.Text);
             cmd.Parameters.Add("@fis_id", SqlDbType.NVarChar).Value = fis_id;
             cmd.Parameters.Add("@kasa_id", SqlDbType.NVarChar).Value = kasa_id;
             cmd.Parameters.Add("@pos_id", SqlDbType.NVarChar).Value = pos_id;
             cmd.Parameters.Add("@banka_hesap_id", SqlDbType.NVarChar).Value = banka_hesap_id;
-
+            
             connection.Open();
             insert_sql=cmd.ExecuteNonQuery();
-            Response.Write(insert_sql.ToString());
+          
         }
         catch (Exception err)
         {
