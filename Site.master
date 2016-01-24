@@ -70,9 +70,7 @@
                                 NavigateUrl="~/Cari/CariKarti.aspx"></asp:MenuItem>
                             <asp:MenuItem Text=" Cari Hareketleri" Value="Cari Hareketleri" 
                                 NavigateUrl="~/Cari/CariHareket.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text=" Alış-Satış Fişi &gt;" Value="Alış-Satış Fişi &gt;">
-                                <asp:MenuItem Text=" Alış Fişi" Value="Alış Fişi"></asp:MenuItem>
-                                <asp:MenuItem Text=" Satış Fişi" Value="Satış Fişi"></asp:MenuItem>
+                            <asp:MenuItem Text=" Alış-Satış Fişi" Value="Alış-Satış Fişi">
                             </asp:MenuItem>
                             <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar">
                                 <asp:MenuItem Text=" Cari Hesap Raporu" Value="Cari Hesap Raporu"></asp:MenuItem>
@@ -110,8 +108,6 @@
                             <asp:MenuItem Text=" Kasa Çıkış" 
                                 Value="Kasa Çıkış"></asp:MenuItem>
                             <asp:MenuItem Text=" Kasa Hareketleri" Value="Kasa Hareketleri"></asp:MenuItem>
-                            <asp:MenuItem Text=" Kasa Bakiye Listele" Value="Kasa Bakiye Listele">
-                            </asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Randevu Modülü" Value="Randevu Modülü"></asp:MenuItem>
                         <asp:MenuItem Text=" Dashboard" Value="Dashboard"></asp:MenuItem>

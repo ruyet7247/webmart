@@ -79,8 +79,10 @@
             <td class="style3">
                 Cari Ünvanı</td>
             <td class="style4">
-                <asp:TextBox ID="txt_unvan" runat="server" Width="200px"></asp:TextBox>
-                <asp:ImageButton ID="ibtn_cari_bul" runat="server" Height="30px" Width="50px" />
+                <asp:TextBox ID="txt_unvan" runat="server" Width="250px" ReadOnly="True" 
+                    Font-Size="16pt" Height="30px"></asp:TextBox>
+                <asp:ImageButton ID="ibtn_cari_bul" runat="server" Height="30px" Width="50px" 
+                    AlternateText="CariBul" />
                 <asp:ModalPopupExtender ID="ibtn_cari_bul_ModalPopupExtender" runat="server" 
                     DynamicServicePath="" Enabled="True" 
                     PopupControlID="pnl_cari_arama" TargetControlID="ibtn_cari_bul" 
@@ -93,7 +95,8 @@
                 Grubu</td>
             <td class="style4">
                  <asp:DropDownList ID="dd_grup_id" runat="server" DataSourceID="SqlDataSource2" 
-                    DataTextField="cari_grubu_adi" DataValueField="cari_grubu_id" Width="150px">
+                    DataTextField="cari_grubu_adi" DataValueField="cari_grubu_id" Width="150px" 
+                     Enabled="False">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                     ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
@@ -104,22 +107,24 @@
             <td class="style3">
                 Borç Bakiye</td>
             <td class="style4">
-                <asp:TextBox ID="txt_borc_bakiye" runat="server" Width="120px" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="txt_borc_bakiye" runat="server" Width="180px" ReadOnly="True" 
+                    CssClass="sagaDayaliFormat" Font-Size="16pt" Height="30px"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td class="style3">
                 Alacak Bakiye</td>
             <td class="style4">
-                <asp:TextBox ID="txt_alacak_bakiye" runat="server" Width="120px" 
-                    ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="txt_alacak_bakiye" runat="server" Width="180px" 
+                    ReadOnly="True" CssClass="sagaDayaliFormat" Font-Size="16pt" Height="30px"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td class="style3">
                 Bakiye</td>
             <td class="style4">
-                <asp:TextBox ID="txt_bakiye" runat="server" Width="120px" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="txt_bakiye" runat="server" Width="180px" ReadOnly="True" 
+                    CssClass="sagaDayaliFormat" Font-Size="16pt" Height="30px"></asp:TextBox>
             </td>
         </tr>
 </table>
@@ -128,9 +133,152 @@
     </asp:Panel>
     <asp:Panel ID="pnl_cari_hareket" runat="server" BorderStyle="Solid" 
         BorderWidth="1px">
-        <asp:GridView ID="gv_listele" runat="server" Width="100%">
+        <asp:GridView ID="gv_listele" runat="server" Width="100%" 
+            AutoGenerateColumns="False" DataKeyNames="cari_hareket_id" 
+            onrowdeleting="gv_listele_RowDeleting">
+
+            <Columns>
+                <asp:TemplateField HeaderText="cari_hareket_id" InsertVisible="False" 
+                    SortExpression="cari_hareket_id">
+                    <EditItemTemplate>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("cari_hareket_id") %>'></asp:Label>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("cari_hareket_id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="cari_id" SortExpression="cari_id">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("cari_id") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("cari_id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="kayit_tarihi" SortExpression="kayit_tarihi">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("kayit_tarihi") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("kayit_tarihi") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="borc_or_alacak" SortExpression="borc_or_alacak">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("borc_or_alacak") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("borc_or_alacak") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="islem_tipi" SortExpression="islem_tipi">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("islem_tipi") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("islem_tipi") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="odeme_sekli" SortExpression="odeme_sekli">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("odeme_sekli") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("odeme_sekli") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="vade_tarihi" SortExpression="vade_tarihi">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("vade_tarihi") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label7" runat="server" Text='<%# Bind("vade_tarihi") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="belge_no" SortExpression="belge_no">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("belge_no") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label8" runat="server" Text='<%# Bind("belge_no") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="aciklama1" SortExpression="aciklama1">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("aciklama1") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label9" runat="server" Text='<%# Bind("aciklama1") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="personel" SortExpression="personel">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox9" runat="server" Text='<%# Bind("personel") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label10" runat="server" Text='<%# Bind("personel") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="borc" SortExpression="borc">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox10" runat="server" Text='<%# Bind("borc") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label11" runat="server" Text='<%# Bind("borc") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="alacak" SortExpression="alacak">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox11" runat="server" Text='<%# Bind("alacak") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label12" runat="server" Text='<%# Bind("alacak") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="fis_id" SortExpression="fis_id">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox12" runat="server" Text='<%# Bind("fis_id") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label13" runat="server" Text='<%# Bind("fis_id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="kasa_id" SortExpression="kasa_id">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox13" runat="server" Text='<%# Bind("kasa_id") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label14" runat="server" Text='<%# Bind("kasa_id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="pos_id" SortExpression="pos_id">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox14" runat="server" Text='<%# Bind("pos_id") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label15" runat="server" Text='<%# Bind("pos_id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="banka_hesap_id" SortExpression="banka_hesap_id">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox15" runat="server" Text='<%# Bind("banka_hesap_id") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label16" runat="server" Text='<%# Bind("banka_hesap_id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField ShowHeader="False">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
+                            CommandName="Delete" Text="Delete"  OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');"></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
 
         </asp:GridView>
+         <p>
+        <asp:Label ID="lbl_mesaj" runat="server"></asp:Label>
+    </p>   
     </asp:Panel>
         <!-- ARAMA PANELİ-->
     <asp:Panel ID="pnl_cari_arama" runat="server" BackColor="#B6B7BC" Width="60%" Height="500px" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
@@ -167,9 +315,7 @@
                 </tr>
       
     </table> 
-     <p>
-        <asp:Label ID="lbl_mesaj" runat="server"></asp:Label>
-    </p>   
+    
     
        <!-- <iframe style=" width: 99%; height: 90%;" id="ifrm" src="CariBul.aspx" runat="server"></iframe> -->
 

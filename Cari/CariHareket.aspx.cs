@@ -34,13 +34,18 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         {
 
             dd_odeme_sekli.SelectedValue = "acikhesap";
-            
             if (lbl_cari_id.Text != "0")
             {
                 CariBilgileriniGetir(Convert.ToInt32(lbl_cari_id.Text));
+                CariHareketListesiniGetir(Convert.ToInt32(lbl_cari_id.Text));
+                CariBorcAlacakBilgisiniGetir(Convert.ToInt32(lbl_cari_id.Text)); 
             }
 
         }
+     
+
+      
+
     }
 
     protected void ibtn_arama_Click(object sender, ImageClickEventArgs e) // cari arama modal popup
@@ -139,6 +144,79 @@ public partial class Cari_CariHareket : System.Web.UI.Page
 
     }
 
+    protected void CariHareketListesiniGetir(int cari_id)
+    {
+        string hareketSQL = "SELECT * FROM cari_hareket WHERE cari_id=" + cari_id+ " ORDER BY kayit_tarihi DESC,cari_hareket_id DESC";
+        SqlConnection con = new SqlConnection(dataconnect);
+        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+
+        int updated = 0;
+        try
+        {
+            con.Open();
+            updated = cmd.ExecuteNonQuery();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds_hareket = new DataSet();
+            da.Fill(ds_hareket);
+
+            gv_listele.DataSource = ds_hareket;
+            gv_listele.DataBind();
+
+            //lblResults.Text = updated.ToString() + " record updated.";
+        }
+        catch (Exception err)
+        {
+            lbl_mesaj.Text = "Error Cari Bulma ";
+            lbl_mesaj.Text += err.Message;
+        }
+        finally
+        {
+            con.Close();
+        }
+
+        if (updated > 0)
+        {
+            //
+        }
+    }
+
+    protected void CariBorcAlacakBilgisiniGetir(int cari_id)
+    {
+        string hareketSQL = "SELECT sum(borc) AS borc,sum(alacak) AS alacak,sum(borc)-sum(alacak) AS bakiye FROM cari_hareket WHERE cari_id=" + cari_id;
+        SqlConnection connection = new SqlConnection(dataconnect);
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
+
+      
+        try
+        {
+            connection.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+
+                    txt_borc_bakiye.Text = reader["borc"].ToString();
+                    txt_alacak_bakiye.Text = reader["alacak"].ToString();
+                    txt_bakiye.Text = reader["bakiye"].ToString();
+
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            lbl_mesaj.Text = "Error Cari Bulma ";
+            lbl_mesaj.Text += err.Message;
+        }
+        finally
+        {
+            connection.Close();
+        }
+
+       
+    }
+
     protected void dd_odeme_sekli_SelectedIndexChanged(object sender, EventArgs e)  // ödeme şekline göre bağlı hesap tabloları
     {
 
@@ -188,12 +266,13 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         } // if queryString
          
     }
+   
     protected void dd_islem_tipi_SelectedIndexChanged(object sender, EventArgs e)
     {
 
     }
 
-    protected void ibtn_kaydet_Click(object sender, ImageClickEventArgs e)
+    protected void ibtn_kaydet_Click(object sender, ImageClickEventArgs e)  //İŞLEM KAYDET 
     {
         if (Kontroller())
         {
@@ -261,10 +340,13 @@ public partial class Cari_CariHareket : System.Web.UI.Page
             // 
 
         } // if kontroller
+
+        CariHareketListesiniGetir(Convert.ToInt32(lbl_cari_id.Text));
+        CariBorcAlacakBilgisiniGetir(Convert.ToInt32(lbl_cari_id.Text));
+        
     }
 
-
-    private bool Kontroller()
+    protected bool Kontroller()
     {
         
         return true;
@@ -272,21 +354,17 @@ public partial class Cari_CariHareket : System.Web.UI.Page
 
     protected void CariHareketBorcAlacakKaydet(string kayit_tarihi, string cari_id,string borc_or_alacak,string islem_tipi,string odeme_sekli,string belge_no,string aciklama1,string personel, decimal borc, decimal alacak,string fis_id, string kasa_id, string pos_id,string banka_hesap_id)
     {
-        Response.Write(kayit_tarihi.ToString() + cari_id.ToString() + borc_or_alacak.ToString()+ islem_tipi.ToString()+ odeme_sekli.ToString()+ belge_no.ToString()+ aciklama1.ToString()+ personel.ToString()+ borc.ToString()+ alacak.ToString()+ fis_id.ToString()+ kasa_id.ToString()+ pos_id.ToString()+ banka_hesap_id.ToString());
-
+      
         SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "INSERT INTO cari_hareket (kayit_tarihi,cari_id, borc_or_alacak, islem_tipi, odeme_sekli, belge_no, aciklama1, personel,borc,alacak fis_id, kasa_id, pos_id, banka_hesap_id)  VALUES \n" +
                                                    "(@kayit_tarihi,@cari_id,@borc_or_alacak,@islem_tipi,@odeme_sekli,@belge_no,@aciklama1,@personel,@borc,@alacak,@fis_id,@kasa_id,@pos_id,@banka_hesap_id)";
 
-        //string queryString = "INSERT INTO cari_hareket (kayit_tarihi, cari_id, borc_or_alacak, islem_tipi, odeme_sekli, belge_no, aciklama1, personel, borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id)  VALUES \n" +
-        //                                             "('" + kayit_tarihi + "','" + cari_id + "','" + borc_or_alacak + "','" + islem_tipi + "','" + odeme_sekli + "','" + belge_no + "','" + aciklama1 + "','" + personel + "'," + borc + "," + alacak + ",'" + fis_id + "','" + kasa_id + "','" + pos_id + "','" + banka_hesap_id + "')";
-       
-        SqlCommand cmd = new SqlCommand(queryString, connection);
-        
+        SqlCommand cmd = new SqlCommand("CariHareketEkle", connection);
+
         int insert_sql = 0;
         try
         {
-            
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = Convert.ToDateTime(kayit_tarihi);
             cmd.Parameters.Add("@cari_id", SqlDbType.NVarChar).Value = cari_id;
             cmd.Parameters.Add("@borc_or_alacak", SqlDbType.NVarChar).Value = borc_or_alacak;
@@ -295,8 +373,8 @@ public partial class Cari_CariHareket : System.Web.UI.Page
             cmd.Parameters.Add("@belge_no", SqlDbType.NVarChar).Value = belge_no;
             cmd.Parameters.Add("@aciklama1", SqlDbType.NVarChar).Value = aciklama1;
             cmd.Parameters.Add("@personel", SqlDbType.NVarChar).Value = personel;
-            cmd.Parameters.Add("@borc", SqlDbType.Decimal).Value = Convert.ToDecimal(txt_tutar.Text);
-            cmd.Parameters.Add("@alacak", SqlDbType.Decimal).Value = Convert.ToDecimal(txt_tutar.Text);
+            cmd.Parameters.Add("@borc", SqlDbType.Decimal).Value = borc;
+            cmd.Parameters.Add("@alacak", SqlDbType.Decimal).Value = alacak;
             cmd.Parameters.Add("@fis_id", SqlDbType.NVarChar).Value = fis_id;
             cmd.Parameters.Add("@kasa_id", SqlDbType.NVarChar).Value = kasa_id;
             cmd.Parameters.Add("@pos_id", SqlDbType.NVarChar).Value = pos_id;
@@ -313,10 +391,43 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         }
         finally
         {
+            cmd.Parameters.Clear();
             connection.Close();
-            Response.Write(insert_sql.ToString());
+          
 
         }
     }
+
+    protected void gv_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        int cari_hareket_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
+        SqlConnection connection = new SqlConnection(dataconnect);
+        SqlCommand cmd = new SqlCommand("CariHareketSil", connection);
+
+        int sql_query = 0;
+        try
+        {
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@cari_hareket_id", SqlDbType.Int).Value = cari_hareket_id;
+            connection.Open();
+            sql_query = cmd.ExecuteNonQuery();
+
+        }
+        catch (Exception err)
+        {
+            lbl_mesaj.Text = "Error INSERT. ";
+            lbl_mesaj.Text += err.Message;
+        }
+        finally
+        {
+            cmd.Parameters.Clear();
+            connection.Close();
+            CariHareketListesiniGetir(Convert.ToInt32(Request.QueryString["CariID"]));
+            CariBorcAlacakBilgisiniGetir(Convert.ToInt32(Request.QueryString["CariID"]));
+        }
+
+    }
+
+
 
 }

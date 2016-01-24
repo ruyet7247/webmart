@@ -41,9 +41,11 @@
         <tr>
             <td colspan="5" width="20%">
                 <asp:ImageButton ID="ibtn_yeni_cari" runat="server" 
-                    onclick="ibtn_yeni_cari_Click" />
+                    onclick="ibtn_yeni_cari_Click" AlternateText="Yeni Kayıt" />
                 <asp:ImageButton ID="ibtn_cari_sil" runat="server"
-                    onclick="ibtn_cari_sil_Click"  OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');" />
+                    onclick="ibtn_cari_sil_Click"  
+                    OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');" 
+                    AlternateText="Cari Sil" />
             </td>
             
         </tr>
@@ -66,7 +68,8 @@
                 Unvan</td>
             <td class="style2">
                 <asp:TextBox ID="txt_unvan" runat="server" Width="70%"></asp:TextBox>
-                <asp:ImageButton ID="ibtn_cari_bul" runat="server" Height="30px" Width="50px" />
+                <asp:ImageButton ID="ibtn_cari_bul" runat="server" Height="30px" Width="50px" 
+                    AlternateText="CariBul" />
                 <asp:ModalPopupExtender ID="ibtn_cari_bul_ModalPopupExtender" runat="server" 
                     DynamicServicePath="" Enabled="True" 
                     PopupControlID="pnl_cari_arama" TargetControlID="ibtn_cari_bul" 
