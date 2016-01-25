@@ -15,11 +15,11 @@ public partial class Stok_StokKarti : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.QueryString["stokID"] != null)
+        if (Request.QueryString["StokID"] != null)
         {
             try
             {
-                lbl_stok_id.Text = Request.QueryString["stokID"];
+                lbl_stok_id.Text = Request.QueryString["StokID"];
             }
             catch
             {
@@ -59,37 +59,23 @@ public partial class Stok_StokKarti : System.Web.UI.Page
     protected void stokEkle()
     {
         SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "INSERT INTO stok_karti (unvan,adi,soyadi,kayit_tarihi,grup_id,stok_kod_no,tc_no,meslek,ilce,sehir,posta_kodu,ulke,vergi_dairesi,vergi_no,banka_adi,banka_hesap_no,banka_iban_no,tel1,tel2,fax,gsm1,gsm2,mail,adres1,adres2) VALUES \n" +
-                              "(@unvan,@adi,@soyadi,@kayit_tarihi,@grup_id,@stok_kod_no,@tc_no,@meslek,@ilce,@sehir,@posta_kodu,@ulke,@vergi_dairesi,@vergi_no,@banka_adi,@banka_hesap_no,@banka_iban_no,@tel1,@tel2,@fax,@gsm1,@gsm2,@mail,@adres1,@adres2)";
+        string queryString = "INSERT INTO stok_kayit (kayit_tarihi,stok_kod_no,stok_barkod_no,stok_uretici_no,stok_adi,birimi,grubu_id,kdv,alis_fiyati,satis_fiyati) VALUES \n" +
+                              "(@kayit_tarihi,@stok_kod_no,@stok_barkod_no,@stok_uretici_no,@stok_adi,@birimi,@grubu_id,@kdv,@alis_fiyati,@satis_fiyati)";
         SqlCommand cmd = new SqlCommand(queryString, connection);
 
         try
         {
-            cmd.Parameters.Add("@unvan", SqlDbType.NVarChar).Value = txt_unvan.Text;
-            cmd.Parameters.Add("@adi", SqlDbType.NVarChar).Value = txt_adi.Text;
-            cmd.Parameters.Add("@soyadi", SqlDbType.NVarChar).Value = txt_soyadi.Text;
             cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = Convert.ToDateTime(txt_kayit_tarihi.Text);
-            cmd.Parameters.Add("@grup_id", SqlDbType.NVarChar).Value = dd_grup_id.SelectedValue;
-            cmd.Parameters.Add("@stok_kod_no", SqlDbType.NVarChar).Value = txt_stok_kod_no.Text;
-            cmd.Parameters.Add("@tc_no", SqlDbType.NVarChar).Value = txt_tc_no.Text;
-            cmd.Parameters.Add("@meslek", SqlDbType.NVarChar).Value = txt_meslek.Text;
-            cmd.Parameters.Add("@ilce", SqlDbType.NVarChar).Value = txt_ilce.Text;
-            cmd.Parameters.Add("@sehir", SqlDbType.NVarChar).Value = txt_sehir.Text;
-            cmd.Parameters.Add("@posta_kodu", SqlDbType.NVarChar).Value = txt_posta_kodu.Text;
-            cmd.Parameters.Add("@ulke", SqlDbType.NVarChar).Value = txt_ulke.Text;
-            cmd.Parameters.Add("@vergi_dairesi", SqlDbType.NVarChar).Value = txt_vergi_dairesi.Text;
-            cmd.Parameters.Add("@vergi_no", SqlDbType.NVarChar).Value = txt_vergi_no.Text;
-            cmd.Parameters.Add("@banka_adi", SqlDbType.NVarChar).Value = txt_banka_adi.Text;
-            cmd.Parameters.Add("@banka_hesap_no", SqlDbType.NVarChar).Value = txt_banka_hesap_no.Text;
-            cmd.Parameters.Add("@banka_iban_no", SqlDbType.NVarChar).Value = txt_banka_iban_no.Text;
-            cmd.Parameters.Add("@tel1", SqlDbType.NVarChar).Value = txt_tel1.Text;
-            cmd.Parameters.Add("@tel2", SqlDbType.NVarChar).Value = txt_tel2.Text;
-            cmd.Parameters.Add("@fax", SqlDbType.NVarChar).Value = txt_fax.Text;
-            cmd.Parameters.Add("@gsm1", SqlDbType.NVarChar).Value = txt_gsm1.Text;
-            cmd.Parameters.Add("@gsm2", SqlDbType.NVarChar).Value = txt_gsm2.Text;
-            cmd.Parameters.Add("@mail", SqlDbType.NVarChar).Value = txt_mail.Text;
-            cmd.Parameters.Add("@adres1", SqlDbType.NVarChar).Value = txt_adres1.Text;
-            cmd.Parameters.Add("@adres2", SqlDbType.NVarChar).Value = txt_adres2.Text;
+            cmd.Parameters.Add("@stok_kod_no", SqlDbType.NVarChar).Value = txt_kod_no.Text;
+            cmd.Parameters.Add("@stok_barkod_no", SqlDbType.NVarChar).Value = txt_barkod_no.Text;
+            cmd.Parameters.Add("@stok_uretici_no", SqlDbType.NVarChar).Value = txt_uretici_no.Text;
+            cmd.Parameters.Add("@stok_adi", SqlDbType.NVarChar).Value = txt_stok_adi.Text;
+            cmd.Parameters.Add("@birimi", SqlDbType.NVarChar).Value = dd_birimi.SelectedValue;
+            cmd.Parameters.Add("@grubu_id", SqlDbType.NVarChar).Value = dd_grup_id.SelectedValue;
+            cmd.Parameters.Add("@kdv", SqlDbType.NVarChar).Value = txt_kdv.Text;
+            cmd.Parameters.Add("@alis_fiyati", SqlDbType.NVarChar).Value = txt_alis_fiyati.Text;
+            cmd.Parameters.Add("@satis_fiyati", SqlDbType.NVarChar).Value = txt_satis_fiyati.Text;
+           
 
 
             connection.Open();
@@ -111,7 +97,7 @@ public partial class Stok_StokKarti : System.Web.UI.Page
     protected void stokGuncelle(int stok_id)
     {
         SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "UPDATE stok_karti SET unvan=@unvan,adi=@adi,soyadi=@soyadi,kayit_tarihi=@kayit_tarihi,grup_id=@grup_id,stok_kod_no=@stok_kod_no,tc_no=@tc_no,meslek=@meslek,ilce=@ilce,sehir=@sehir,posta_kodu=@posta_kodu,ulke=@ulke,vergi_dairesi=@vergi_dairesi,vergi_no=@vergi_no,banka_adi=@banka_adi,banka_hesap_no=@banka_hesap_no, banka_iban_no=@banka_iban_no,tel1=@tel1,tel2=@tel2,fax=@fax,gsm1=@gsm1,gsm2=@gsm2,mail=@mail,adres1=@adres1,adres2=@adres2 WHERE stok_id=" + stok_id;
+        string queryString = "UPDATE stok_kayit SET kayit_tarihi=@kayit_tarihi,stok_kod_no=@stok_kod_no,stok_barkod_no=@stok_barkod_no,stok_uretici_no=@stok_uretici_no,stok_adi=@stok_adi,birimi=@birimi,grubu_id=@grubu_id,kdv=@kdv,alis_fiyati=@alis_fiyati,satis_fiyati=@satis_fiyati WHERE stok_id=" + stok_id;
         SqlCommand cmd = new SqlCommand(queryString, connection);
 
 
@@ -122,31 +108,16 @@ public partial class Stok_StokKarti : System.Web.UI.Page
             DateTime kayit_tarihi = Convert.ToDateTime(txt_kayit_tarihi.Text);
 
 
-            cmd.Parameters.Add("@unvan", SqlDbType.NVarChar).Value = txt_unvan.Text;
-            cmd.Parameters.Add("@adi", SqlDbType.NVarChar).Value = txt_adi.Text;
-            cmd.Parameters.Add("@soyadi", SqlDbType.NVarChar).Value = txt_soyadi.Text;
-            cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = kayit_tarihi;
-            cmd.Parameters.Add("@grup_id", SqlDbType.Int).Value = Convert.ToInt32(dd_grup_id.SelectedValue);
-            cmd.Parameters.Add("@stok_kod_no", SqlDbType.NVarChar).Value = txt_stok_kod_no.Text;
-            cmd.Parameters.Add("@tc_no", SqlDbType.NVarChar).Value = txt_tc_no.Text;
-            cmd.Parameters.Add("@meslek", SqlDbType.NVarChar).Value = txt_meslek.Text;
-            cmd.Parameters.Add("@ilce", SqlDbType.NVarChar).Value = txt_ilce.Text;
-            cmd.Parameters.Add("@sehir", SqlDbType.NVarChar).Value = txt_sehir.Text;
-            cmd.Parameters.Add("@posta_kodu", SqlDbType.NVarChar).Value = txt_posta_kodu.Text;
-            cmd.Parameters.Add("@ulke", SqlDbType.NVarChar).Value = txt_ulke.Text;
-            cmd.Parameters.Add("@vergi_dairesi", SqlDbType.NVarChar).Value = txt_vergi_dairesi.Text;
-            cmd.Parameters.Add("@vergi_no", SqlDbType.NVarChar).Value = txt_vergi_no.Text;
-            cmd.Parameters.Add("@banka_adi", SqlDbType.NVarChar).Value = txt_banka_adi.Text;
-            cmd.Parameters.Add("@banka_hesap_no", SqlDbType.NVarChar).Value = txt_banka_hesap_no.Text;
-            cmd.Parameters.Add("@banka_iban_no", SqlDbType.NVarChar).Value = txt_banka_iban_no.Text;
-            cmd.Parameters.Add("@tel1", SqlDbType.NVarChar).Value = txt_tel1.Text;
-            cmd.Parameters.Add("@tel2", SqlDbType.NVarChar).Value = txt_tel2.Text;
-            cmd.Parameters.Add("@fax", SqlDbType.NVarChar).Value = txt_fax.Text;
-            cmd.Parameters.Add("@gsm1", SqlDbType.NVarChar).Value = txt_gsm1.Text;
-            cmd.Parameters.Add("@gsm2", SqlDbType.NVarChar).Value = txt_gsm2.Text;
-            cmd.Parameters.Add("@mail", SqlDbType.NVarChar).Value = txt_mail.Text;
-            cmd.Parameters.Add("@adres1", SqlDbType.NVarChar).Value = txt_adres1.Text;
-            cmd.Parameters.Add("@adres2", SqlDbType.NVarChar).Value = txt_adres2.Text;
+            cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = Convert.ToDateTime(txt_kayit_tarihi.Text);
+            cmd.Parameters.Add("@stok_kod_no", SqlDbType.NVarChar).Value = txt_kod_no.Text;
+            cmd.Parameters.Add("@stok_barkod_no", SqlDbType.NVarChar).Value = txt_barkod_no.Text;
+            cmd.Parameters.Add("@stok_uretici_no", SqlDbType.NVarChar).Value = txt_uretici_no.Text;
+            cmd.Parameters.Add("@stok_adi", SqlDbType.NVarChar).Value = txt_stok_adi.Text;
+            cmd.Parameters.Add("@birimi", SqlDbType.NVarChar).Value = dd_birimi.SelectedValue;
+            cmd.Parameters.Add("@grubu_id", SqlDbType.NVarChar).Value = dd_grup_id.SelectedValue;
+            cmd.Parameters.Add("@kdv", SqlDbType.NVarChar).Value = txt_kdv.Text;
+            cmd.Parameters.Add("@alis_fiyati", SqlDbType.NVarChar).Value = txt_alis_fiyati.Text;
+            cmd.Parameters.Add("@satis_fiyati", SqlDbType.NVarChar).Value = txt_satis_fiyati.Text;
 
 
             connection.Open();
@@ -171,9 +142,9 @@ public partial class Stok_StokKarti : System.Web.UI.Page
         stokArama(txt_arama.Text);
     }
 
-    protected void stokArama(string unvan) //stok arama modal popup
+    protected void stokArama(string stok_adi) //stok arama modal popup
     {
-        string hareketSQL = "SELECT stok_id,unvan,gsm1,borc_bakiye,alacak_bakiye,bakiye FROM stok_karti WHERE unvan LIKE '%" + unvan + "%'";
+        string hareketSQL = "SELECT stok_id,stok_adi,birimi,kdv,alis_fiyati,satis_fiyati FROM stok_kayit WHERE stok_adi LIKE '%" + stok_adi + "%'";
         SqlConnection con = new SqlConnection(dataconnect);
         SqlCommand cmd = new SqlCommand(hareketSQL, con);
 
@@ -212,7 +183,7 @@ public partial class Stok_StokKarti : System.Web.UI.Page
         GridViewRow row = this.gv_arama_listele.SelectedRow;
         Label lbl_stok_id = (Label)row.FindControl("lbl_stok_id");
         ibtn_stok_bul_ModalPopupExtender.Hide();
-        Response.Redirect("stokKarti.aspx?stokID=" + lbl_stok_id.Text);
+        Response.Redirect("StokKarti.aspx?StokID=" + lbl_stok_id.Text);
 
 
     }
@@ -222,7 +193,7 @@ public partial class Stok_StokKarti : System.Web.UI.Page
 
 
         SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "SELECT * FROM stok_karti WHERE stok_id=" + stok_id;
+        string queryString = "SELECT * FROM stok_kayit WHERE stok_id=" + stok_id;
         SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
@@ -237,35 +208,17 @@ public partial class Stok_StokKarti : System.Web.UI.Page
 
                     lbl_stok_id.Text = reader["stok_id"].ToString();
 
-                    txt_unvan.Text = reader["unvan"].ToString();
-                    txt_adi.Text = reader["adi"].ToString();
-                    txt_soyadi.Text = reader["soyadi"].ToString();
                     DateTime kayit_tarihi = Convert.ToDateTime(reader["kayit_tarihi"].ToString());
                     txt_kayit_tarihi.Text = kayit_tarihi.ToString("dd.MM.yyyy");
-                    dd_grup_id.SelectedValue = reader["grup_id"].ToString();
-                    txt_stok_kod_no.Text = reader["stok_kod_no"].ToString();
-                    txt_tc_no.Text = reader["tc_no"].ToString();
-                    txt_meslek.Text = reader["meslek"].ToString();
-                    txt_ilce.Text = reader["ilce"].ToString();
-                    txt_sehir.Text = reader["sehir"].ToString();
-                    txt_posta_kodu.Text = reader["posta_kodu"].ToString();
-                    txt_ulke.Text = reader["ulke"].ToString();
-                    txt_vergi_dairesi.Text = reader["vergi_dairesi"].ToString();
-                    txt_vergi_no.Text = reader["vergi_no"].ToString();
-                    txt_banka_adi.Text = reader["banka_adi"].ToString();
-                    txt_banka_hesap_no.Text = reader["banka_hesap_no"].ToString();
-                    txt_banka_iban_no.Text = reader["banka_iban_no"].ToString();
-                    txt_tel1.Text = reader["tel1"].ToString();
-                    txt_tel2.Text = reader["tel2"].ToString();
-                    txt_fax.Text = reader["fax"].ToString();
-                    txt_gsm1.Text = reader["gsm1"].ToString();
-                    txt_gsm2.Text = reader["gsm2"].ToString();
-                    txt_mail.Text = reader["mail"].ToString();
-                    txt_adres1.Text = reader["adres1"].ToString();
-                    txt_adres2.Text = reader["adres2"].ToString();
-
-
-
+                    txt_kod_no.Text = reader["stok_kod_no"].ToString();
+                    txt_barkod_no.Text = reader["stok_barkod_no"].ToString();
+                    txt_uretici_no.Text = reader["stok_uretici_no"].ToString();
+                    txt_stok_adi.Text = reader["stok_adi"].ToString();
+                    dd_birimi.SelectedValue = reader["birimi"].ToString();
+                    dd_grup_id.SelectedValue= reader["grubu_id"].ToString();
+                    txt_kdv.Text = reader["kdv"].ToString();
+                    txt_alis_fiyati.Text = reader["alis_fiyati"].ToString();
+                    txt_satis_fiyati.Text = reader["satis_fiyati"].ToString();
 
                 }
             }
@@ -287,21 +240,21 @@ public partial class Stok_StokKarti : System.Web.UI.Page
 
     protected void ibtn_yeni_stok_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("stokKarti.aspx");
+        Response.Redirect("StokKarti.aspx");
     }
 
     protected void ibtn_stok_sil_Click(object sender, ImageClickEventArgs e)
     {
         int stok_id = Convert.ToInt32(lbl_stok_id.Text);
-        stokSil(stok_id);
-        Response.Redirect("stokKarti.aspx");
+        StokSil(stok_id);
+        Response.Redirect("StokKarti.aspx");
 
     }
 
-    protected void stokSil(int silinecek_stok_id)
+    protected void StokSil(int silinecek_stok_id)
     {
         SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "DELETE FROM stok_karti WHERE stok_id=" + silinecek_stok_id;
+        string queryString = "DELETE FROM stok_kayit WHERE stok_id=" + silinecek_stok_id;
         SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {

@@ -229,7 +229,7 @@
             <td class="style1">
                 Borç Bakiye</td>
             <td class="style2">
-                <asp:TextBox ID="txt_borc_bakiye" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_borc_bakiye" runat="server" ReadOnly="True" CssClass="sagaDayaliFormat" ></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -241,7 +241,7 @@
             <td class="style1">
                 Alacak Bakiye</td>
             <td class="style2">
-                <asp:TextBox ID="txt_alacak_bakiye" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_alacak_bakiye" runat="server" ReadOnly="True" CssClass="sagaDayaliFormat" ></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -253,7 +253,7 @@
             <td class="style1">
                 Bakiye</td>
             <td class="style2">
-                <asp:TextBox ID="txt_bakiye" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_bakiye" runat="server" ReadOnly="True" CssClass="sagaDayaliFormat" ></asp:TextBox>
             </td>
         </tr>
         <tr>

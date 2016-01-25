@@ -66,9 +66,12 @@
         </tr>
         <tr>
             <td class="style1">
-                Unvan</td>
+                Kayıt Tarihi</td>
             <td class="style2">
-                <asp:TextBox ID="txt_unvan" runat="server" Width="70%"></asp:TextBox>
+                <asp:TextBox ID="txt_kayit_tarihi" runat="server"></asp:TextBox>
+                <asp:CalendarExtender ID="txt_kayit_tarihi_CalendarExtender" runat="server" 
+                    Enabled="True" Format="dd.MM.yyyy" TargetControlID="txt_kayit_tarihi">
+                </asp:CalendarExtender>
                 <asp:ImageButton ID="ibtn_stok_bul" runat="server" Height="30px" Width="50px" 
                     AlternateText="stokBul" />
                 <asp:ModalPopupExtender ID="ibtn_stok_bul_ModalPopupExtender" runat="server" 
@@ -78,53 +81,76 @@
                 </asp:ModalPopupExtender>
             </td>
            <td class="style1">
-                Faks</td>
+                &nbsp;</td>
             <td class="style2">
-                <asp:TextBox ID="txt_fax" runat="server"></asp:TextBox>
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
-                Adı</td>
+                Stok Kodu</td>
             <td class="style2">
-                <asp:TextBox ID="txt_adi" runat="server" Width="70%"></asp:TextBox>
+                <asp:TextBox ID="txt_kod_no" runat="server" Width="70%"></asp:TextBox>
             </td>
            <td class="style1">
-                Mail Adres</td>
+                &nbsp;</td>
             <td class="style2">
-                <asp:TextBox ID="txt_mail" runat="server"></asp:TextBox>
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
-                Soyadı</td>
+                Barkod No</td>
             <td class="style2">
-                <asp:TextBox ID="txt_soyadi" runat="server" Width="70%"></asp:TextBox>
+                <asp:TextBox ID="txt_barkod_no" runat="server" Width="70%"></asp:TextBox>
             </td>
             <td class="style1">
-                Vergi Dairesi</td>
+                &nbsp;</td>
             <td class="style2">
-                <asp:TextBox ID="txt_vergi_dairesi" runat="server"></asp:TextBox>
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
-                Kayıt Tarihi</td>
+                Üretici No</td>
             <td class="style2">
-                <asp:TextBox ID="txt_kayit_tarihi" runat="server"></asp:TextBox>
-                <asp:CalendarExtender ID="txt_kayit_tarihi_CalendarExtender" runat="server"  Format="dd.MM.yyyy" 
-                    Enabled="True" TargetControlID="txt_kayit_tarihi">
-                </asp:CalendarExtender>
+                <asp:TextBox ID="txt_uretici_no" runat="server" Width="70%"></asp:TextBox>
             </td>
             <td class="style1">
-                Vergi No</td>
+                &nbsp;</td>
             <td class="style2">
-                <asp:TextBox ID="txt_vergi_no" runat="server"></asp:TextBox>
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
-                Grup Adı</td>
+                Stok Adı</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_stok_adi" runat="server"></asp:TextBox>
+            </td>
+            <td class="style1">
+                &nbsp;</td>
+            <td class="style2">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Birimi</td>
+            <td class="style2">
+                <asp:DropDownList ID="dd_birimi" runat="server">
+                    <asp:ListItem>Adet</asp:ListItem>
+                    <asp:ListItem>Paket</asp:ListItem>
+                    <asp:ListItem>Dz</asp:ListItem>
+                    <asp:ListItem>Kg</asp:ListItem>
+                    <asp:ListItem>Top</asp:ListItem>
+                    <asp:ListItem>Balya</asp:ListItem>
+                    <asp:ListItem>Gram</asp:ListItem>
+                </asp:DropDownList>
+            </td>
+            <td class="style1">
+                &nbsp;</td>
+            <td class="style2">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Stok Grubu</td>
             <td class="style2">
                 <asp:DropDownList ID="dd_grup_id" runat="server" DataSourceID="SqlDataSource2" 
                     DataTextField="stok_grubu_adi" DataValueField="stok_grubu_id">
@@ -134,76 +160,15 @@
                     SelectCommand="SELECT * FROM [stok_grubu_tanimlama]"></asp:SqlDataSource>
             </td>
             <td class="style1">
-                Adres1.Satır</td>
+                &nbsp;</td>
             <td class="style2">
-                <asp:TextBox ID="txt_adres1" runat="server"></asp:TextBox>
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
-                stok Kod</td>
+                Kdv</td>
             <td class="style2">
-                <asp:TextBox ID="txt_stok_kod_no" runat="server"></asp:TextBox>
-            </td>
-            <td class="style1">
-                Adres2.Satır</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_adres2" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style1">
-                &nbsp;Tc No</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_tc_no" runat="server"></asp:TextBox>
-            </td>
-            <td class="style1">
-                Posta Kodu</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_posta_kodu" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Meslek</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_meslek" runat="server"></asp:TextBox>
-            </td>
-            <td class="style1">
-                İlçe</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_ilce" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Banka Adı</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_banka_adi" runat="server"></asp:TextBox>
-            </td>
-            <td class="style1">
-                Şehir</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_sehir" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Baka Hesap No</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_banka_hesap_no" runat="server"></asp:TextBox>
-            </td>
-            <td class="style1">
-                Ülke</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_ulke" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Banka IBAN No</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_banka_iban_no" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_kdv" runat="server"></asp:TextBox>
             </td>
             <td class="style1">
                 &nbsp;</td>
@@ -212,9 +177,9 @@
         </tr>
         <tr>
             <td class="style1">
-                Telefon-1</td>
+                Alış Fiyatı</td>
             <td class="style2">
-                <asp:TextBox ID="txt_tel1" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_alis_fiyati" runat="server"></asp:TextBox>
             </td>
             <td class="style1">
                 &nbsp;</td>
@@ -223,39 +188,46 @@
         </tr>
         <tr>
             <td class="style1">
-                Telefon-2</td>
+                Satış Fiyatı</td>
             <td class="style2">
-                <asp:TextBox ID="txt_tel2" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_satis_fiyati" runat="server"></asp:TextBox>
             </td>
             <td class="style1">
-                Borç Bakiye</td>
+                &nbsp;</td>
             <td class="style2">
-                <asp:TextBox ID="txt_borc_bakiye" runat="server"></asp:TextBox>
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
-                Cep Tel-1</td>
+                &nbsp;</td>
             <td class="style2">
-                <asp:TextBox ID="txt_gsm1" runat="server"></asp:TextBox>
-            </td>
+                &nbsp;</td>
             <td class="style1">
-                Alacak Bakiye</td>
+                &nbsp;</td>
             <td class="style2">
-                <asp:TextBox ID="txt_alacak_bakiye" runat="server"></asp:TextBox>
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
-                Cep Tel-2</td>
+                Giren Miktar</td>
             <td class="style2">
-                <asp:TextBox ID="txt_gsm2" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_giren" runat="server" ReadOnly="True"></asp:TextBox>
             </td>
             <td class="style1">
-                Bakiye</td>
+                &nbsp;</td>
             <td class="style2">
-                <asp:TextBox ID="txt_bakiye" runat="server"></asp:TextBox>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Çıkan Miktar</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_cikan" runat="server" ReadOnly="True"></asp:TextBox>
             </td>
+            <td class="style1">
+                &nbsp;</td>
+            <td class="style2">
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
@@ -297,16 +269,14 @@
         </tr>
       
     </table>
-     <p>
-        <asp:Label ID="lbl_mesaj" runat="server"></asp:Label>
-    </p>
+    
      </asp:Panel>
     <!-- ARAMA PANELİ-->
     <asp:Panel ID="pnl_stok_arama" runat="server" BackColor="#B6B7BC" Width="60%" Height="500px" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
      <table width="100%"> 
             <tr>
-            <td class="style3">
-                <asp:Label ID="lbl_baslik" runat="server" Font-Bold="True">stok Kartı Bul</asp:Label>
+            <td width="20%">
+                <asp:Label ID="lbl_baslik" runat="server" Font-Bold="True">Stok Kartı Bul</asp:Label>
                     </td>
             <td width="20%">
                 &nbsp;</td>
@@ -322,7 +292,7 @@
       
                 <tr>
                     <td class="style3">
-                        Unvan Adı</td>
+                        Stok Adı</td>
                     <td width="20%">
                         <asp:TextBox ID="txt_arama" runat="server"></asp:TextBox>
                     </td>
@@ -346,53 +316,53 @@
                      DataKeyNames="stok_id" Width="100%" BackColor="#CCFFFF" 
                      onselectedindexchanged="gv_arama_listele_SelectedIndexChanged">
                      <Columns>
-                         <asp:TemplateField HeaderText="stok id" InsertVisible="False" 
+                         <asp:TemplateField HeaderText="stok_id" InsertVisible="False" 
                              SortExpression="stok_id">
                              <EditItemTemplate>
-                                 <asp:Label ID="Label1" runat="server" Text='<%# Eval("stok_id") %>'></asp:Label>
+                                 <asp:Label ID="lbl_stok_id" runat="server" Text='<%# Eval("stok_id") %>'></asp:Label>
                              </EditItemTemplate>
                              <ItemTemplate>
                                  <asp:Label ID="lbl_stok_id" runat="server" Text='<%# Bind("stok_id") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Unvan" SortExpression="unvan">
+                         <asp:TemplateField HeaderText="stok_adi" SortExpression="stok_adi">
                              <EditItemTemplate>
-                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("unvan") %>'></asp:TextBox>
+                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("stok_adi") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
-                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("unvan") %>'></asp:Label>
+                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("stok_adi") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Gsm" SortExpression="adi">
+                         <asp:TemplateField HeaderText="birimi" SortExpression="birimi">
                              <EditItemTemplate>
-                                 <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("gsm1") %>'></asp:TextBox>
+                                 <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("birimi") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
-                                 <asp:Label ID="Label3" runat="server" Text='<%# Bind("gsm1") %>'></asp:Label>
+                                 <asp:Label ID="Label3" runat="server" Text='<%# Bind("birimi") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Borç Bakiye" SortExpression="borc_bakiye">
+                         <asp:TemplateField HeaderText="kdv" SortExpression="kdv">
                              <EditItemTemplate>
-                                 <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("borc_bakiye") %>'></asp:TextBox>
+                                 <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("kdv") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
-                                 <asp:Label ID="Label5" runat="server" Text='<%# Bind("borc_bakiye") %>'></asp:Label>
+                                 <asp:Label ID="Label4" runat="server" Text='<%# Bind("kdv") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Alacak Bakiye" SortExpression="alacak_bakiye">
+                         <asp:TemplateField HeaderText="alis_fiyati" SortExpression="alis_fiyati">
                              <EditItemTemplate>
-                                 <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("alacak_bakiye") %>'></asp:TextBox>
+                                 <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("alis_fiyati") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
-                                 <asp:Label ID="Label6" runat="server" Text='<%# Bind("alacak_bakiye") %>'></asp:Label>
+                                 <asp:Label ID="Label6" runat="server" Text='<%# Bind("alis_fiyati") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Bakiye" SortExpression="bakiye">
+                         <asp:TemplateField HeaderText="satis_fiyati" SortExpression="satis_fiyati">
                              <EditItemTemplate>
-                                 <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("bakiye") %>'></asp:TextBox>
+                                 <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("satis_fiyati") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
-                                 <asp:Label ID="Label7" runat="server" Text='<%# Bind("bakiye") %>'></asp:Label>
+                                 <asp:Label ID="Label5" runat="server" Text='<%# Bind("satis_fiyati") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
                          <asp:TemplateField ShowHeader="False">
@@ -411,7 +381,9 @@
     </asp:Panel>
 
     <!-- ARAMA PANELİ son-->
-
+     <p>
+        <asp:Label ID="lbl_mesaj" runat="server"></asp:Label>
+    </p>
 </asp:Content>
 
 

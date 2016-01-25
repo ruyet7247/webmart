@@ -263,6 +263,9 @@ public partial class Cari_CariKarti : System.Web.UI.Page
                   txt_mail.Text = reader["mail"].ToString();
                   txt_adres1.Text = reader["adres1"].ToString();
                   txt_adres2.Text = reader["adres2"].ToString();
+                  txt_borc_bakiye.Text = reader["borc_bakiye"].ToString();
+                  txt_alacak_bakiye.Text = reader["alacak_bakiye"].ToString();
+                  txt_bakiye.Text = reader["bakiye"].ToString();
 
                   
 

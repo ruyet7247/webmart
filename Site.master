@@ -81,7 +81,8 @@
                             </asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Stok Modülü" Value="Stok Modülü">
-                            <asp:MenuItem Text=" Stok Kartı" Value="Stok Kartı"></asp:MenuItem>
+                            <asp:MenuItem Text=" Stok Kartı" Value="Stok Kartı" 
+                                NavigateUrl="~/Stok/StokKarti.aspx"></asp:MenuItem>
                             <asp:MenuItem Text=" Stok Hareketleri" Value="Stok Hareketleri"></asp:MenuItem>
                             <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar &gt;">
                                 <asp:MenuItem Text=" Stok Kartı Raporu" Value="Stok Kartı Raporu"></asp:MenuItem>
