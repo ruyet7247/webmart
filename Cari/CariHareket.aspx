@@ -276,9 +276,7 @@
             </Columns>
 
         </asp:GridView>
-         <p>
-        <asp:Label ID="lbl_mesaj" runat="server"></asp:Label>
-    </p>   
+        
     </asp:Panel>
         <!-- ARAMA PANELİ-->
     <asp:Panel ID="pnl_cari_arama" runat="server" BackColor="#B6B7BC" Width="60%" Height="500px" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
@@ -391,5 +389,8 @@
     </asp:Panel>
 
     <!-- ARAMA PANELİ son-->
+     <p>
+        <asp:Label ID="lbl_mesaj" runat="server"></asp:Label>
+    </p>   
 </asp:Content>
 

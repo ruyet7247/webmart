@@ -122,7 +122,7 @@
             <td class="style1">
                 Stok Adı</td>
             <td class="style2">
-                <asp:TextBox ID="txt_stok_adi" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_stok_adi" runat="server" Width="250px"></asp:TextBox>
             </td>
             <td class="style1">
                 &nbsp;</td>
@@ -168,7 +168,7 @@
             <td class="style1">
                 Kdv</td>
             <td class="style2">
-                <asp:TextBox ID="txt_kdv" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_kdv" runat="server" Width="50px"></asp:TextBox>
             </td>
             <td class="style1">
                 &nbsp;</td>
