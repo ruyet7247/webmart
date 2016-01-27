@@ -40,8 +40,10 @@
                 <asp:TabContainer ID="pnl_tab1" runat="server" ActiveTabIndex="0" 
                     Height="100%" Width="100%">
                     <asp:TabPanel ID="TabPanel1" runat="server" HeaderText="CARİYİ BORÇLANDIR / ALACAKLANDIR"  style="float:left;"><HeaderTemplate>STOK GİRİŞ / ÇIKIŞ</HeaderTemplate><ContentTemplate><asp:Panel ID="Panel1" runat="server"><table style="width:100%;"><tr><td class="style3"><asp:Label 
-                        ID="lbl_stok_hareket_id" runat="server" Text="0"></asp:Label></td><td>&#160;</td><td>&#160;</td></tr><tr><td class="style3">GİRİŞ/ÇIKIŞ</td><td><asp:DropDownList 
-                        ID="dd_giris_or_alacak" runat="server"><asp:ListItem Selected="True" Value="borc">Stok Giriş</asp:ListItem><asp:ListItem Value="alacak">Stok Çıkış</asp:ListItem></asp:DropDownList></td><td>&#160;</td></tr><tr><td class="style3">Tarih</td><td><asp:TextBox ID="txt_kayit_tarihi" placeholder="DD/MM/YYYY"  runat="server"></asp:TextBox><asp:CalendarExtender ID="txt_kayit_tarihi_CalendarExtender" runat="server" Format="dd/MM/yyyy" 
+                        ID="lbl_stok_hareket_id" runat="server" Text="0"></asp:Label></td><td>&#160;</td><td>&#160;</td></tr><tr><td class="style3">GİRİŞ/ÇIKIŞ</td><td>
+                        <asp:DropDownList 
+                        ID="dd_giris_or_cikis" runat="server"><asp:ListItem Selected="True" Value="giris">Stok Giriş</asp:ListItem>
+                            <asp:ListItem Value="cikis">Stok Çıkış</asp:ListItem></asp:DropDownList></td><td>&#160;</td></tr><tr><td class="style3">Tarih</td><td><asp:TextBox ID="txt_kayit_tarihi" placeholder="DD/MM/YYYY"  runat="server"></asp:TextBox><asp:CalendarExtender ID="txt_kayit_tarihi_CalendarExtender" runat="server" Format="dd/MM/yyyy" 
                                                 Enabled="True" TargetControlID="txt_kayit_tarihi"></asp:CalendarExtender></td><td><asp:ImageButton 
                             ID="ibtn_yeni_giris_cikis" runat="server" 
                                                 AlternateText="Yeni" /></td></tr><tr><td class="style3">Belge No</td><td><asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox></td><td><asp:ImageButton ID="ibtn_kaydet" runat="server" AlternateText="Kaydet" 
@@ -119,8 +121,8 @@
                     InsertVisible="False" ReadOnly="True" SortExpression="stok_hareket_id" />
                 <asp:BoundField DataField="stok_id" HeaderText="stok_id" 
                     SortExpression="stok_id" />
-                <asp:BoundField DataField="islem_tarihi" HeaderText="islem_tarihi" 
-                    SortExpression="islem_tarihi" />
+                <asp:BoundField DataField="kayit_tarihi" HeaderText="kayit_tarihi" 
+                    SortExpression="kayit_tarihi" />
                 <asp:BoundField DataField="islem_tipi" HeaderText="islem_tipi" 
                     SortExpression="islem_tipi" />
                 <asp:BoundField DataField="giris_or_cikis" HeaderText="giris_or_cikis" 

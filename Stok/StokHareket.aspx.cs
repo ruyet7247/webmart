@@ -140,9 +140,9 @@ public partial class Stok_StokHareket : System.Web.UI.Page
 
     }
 
-    protected void StokHareketListesiniGetir(int Stok_id)
+    protected void StokHareketListesiniGetir(int stok_id)
     {
-        string hareketSQL = "SELECT * FROM Stok_hareket WHERE Stok_id=" + Stok_id + " ORDER BY kayit_tarihi DESC,Stok_hareket_id DESC";
+        string hareketSQL = "SELECT * FROM stok_hareket WHERE stok_id=" + stok_id + " ORDER BY kayit_tarihi DESC,stok_hareket_id DESC";
         SqlConnection con = new SqlConnection(dataconnect);
         SqlCommand cmd = new SqlCommand(hareketSQL, con);
 
@@ -176,9 +176,40 @@ public partial class Stok_StokHareket : System.Web.UI.Page
         }
     }
 
-    protected void StokBorcAlacakBilgisiniGetir(int Stok_id)
+    protected void ibtn_kaydet_Click(object sender, ImageClickEventArgs e)  //İŞLEM KAYDET 
     {
-        string hareketSQL = "SELECT sum(borc) AS borc,sum(alacak) AS alacak,sum(borc)-sum(alacak) AS bakiye FROM Stok_hareket WHERE Stok_id=" + Stok_id;
+        if (Kontroller())
+        {
+
+            // SABİT TANIMLAMALAR
+            Session["personel"] = "hamza";
+            string queryString = "";
+            string islem_tipi = "";
+            decimal giris = 0;
+            decimal cikis = 0;
+            string fis_id = ""; string cari_id = ""; string fatura_id = "";
+
+           
+            StokHareketGirisCikisKaydet(txt_kayit_tarihi.Text, lbl_stok_id.Text, dd_giris_or_cikis.SelectedValue.ToString(), islem_tipi, "nakit", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
+
+           
+
+        } // if kontroller
+
+        StokHareketListesiniGetir(Convert.ToInt32(lbl_stok_id.Text));
+        StokGirisCikisGetir(Convert.ToInt32(lbl_stok_id.Text));
+
+    }
+
+    protected bool Kontroller()
+    {
+
+        return true;
+    }
+
+    protected void StokGirisCikisGetir(int Stok_id)
+    {
+        string hareketSQL = "SELECT (SELECT sum(miktar) FROM stok_hareket WHERE giris_or_cikis='giris') AS girenmiktar,(SELECT sum(miktar) FROM stok_hareket WHERE giris_or_cikis='cikis') AS cikannmiktar FROM stok_hareket";
         SqlConnection connection = new SqlConnection(dataconnect);
         SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
@@ -193,9 +224,10 @@ public partial class Stok_StokHareket : System.Web.UI.Page
                 while (reader.Read())
                 {
 
-                    txt_giren.Text = reader["borc"].ToString();
-                    txt_cikan.Text = reader["alacak"].ToString();
-                    txt_stok_miktari.Text = reader["bakiye"].ToString();
+                    txt_giren.Text = reader["girenmiktar"].ToString();
+                    txt_cikan.Text = reader["cikannmiktar"].ToString();
+                    int stok_adeti = Convert.ToInt32(reader["girenmiktar"].ToString()) - Convert.ToInt32(reader["cikannmiktar"].ToString());
+                    txt_stok_miktari.Text = stok_adeti.ToString();
 
                 }
             }
@@ -213,143 +245,8 @@ public partial class Stok_StokHareket : System.Web.UI.Page
 
     }
 
-    protected void dd_odeme_sekli_SelectedIndexChanged(object sender, EventArgs e)  // ödeme şekline göre bağlı hesap tabloları
-    {
 
-        // ödeme şekli 4 farklı durumda seçilir ve Ödeme tipi belirlenir.
-        string secilen_odeme_sekli = dd_odeme_sekli.Text;
-        string queryString = "";
-        string data_value = "";
-        string data_text = "";
-        if (dd_odeme_sekli.SelectedValue == "nakit") { queryString = "SELECT kasa_id,kasa_adi FROM kasa_kayit ORDER BY  kasa_adi"; data_value = "kasa_id"; data_text = "kasa_adi"; }
-        if (dd_odeme_sekli.SelectedValue == "acikhesap") { queryString = ""; data_value = ""; data_text = ""; }
-        if (dd_odeme_sekli.SelectedValue == "banka") { queryString = "SELECT  dbo.banka_kayit.banka_hesap_id, dbo.firma_para_birimi_tanimlama.para_birimi + ' -  ' + dbo.banka_kayit.banka_adi AS banka_hesap_adi FROM dbo.banka_kayit INNER JOIN dbo.firma_para_birimi_tanimlama ON dbo.banka_kayit.para_birimi_id = dbo.firma_para_birimi_tanimlama.para_birimi_id"; data_value = "banka_hesap_id"; data_text = "banka_hesap_adi"; }
-        if (dd_odeme_sekli.SelectedValue == "pos") { queryString = "SELECT pos_id,pos_banka_adi FROM banka_pos_kayit ORDER BY pos_banka_adi"; data_value = "pos_id"; data_text = "pos_banka_adi"; }
-        // 
-
-        if (queryString == "")
-        {
-            dd_bagli_hesap.Items.Clear();
-            dd_bagli_hesap.Items.Insert(0, "");
-        }
-        else
-        {
-            SqlConnection connection = new SqlConnection(dataconnect);
-
-            SqlCommand cmd = new SqlCommand(queryString, connection);
-            try
-            {
-
-                connection.Open();
-                DataTable table = new DataTable();
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(table);
-
-                dd_bagli_hesap.DataSource = table;
-                dd_bagli_hesap.DataValueField = data_value;
-                dd_bagli_hesap.DataTextField = data_text;
-                dd_bagli_hesap.DataBind();
-            }
-
-            catch (Exception err)
-            {
-                lbl_mesaj.Text = "Error İŞLEM TİPİ FILLING ";
-                lbl_mesaj.Text += err.Message;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        } // if queryString
-
-    }
-
-    protected void dd_islem_tipi_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    protected void ibtn_kaydet_Click(object sender, ImageClickEventArgs e)  //İŞLEM KAYDET 
-    {
-        if (Kontroller())
-        {
-
-            // SABİT TANIMLAMALAR
-            Session["personel"] = "hamza";
-            string queryString = "";
-            string islem_tipi = "";
-            decimal borc = 0;
-            decimal alacak = 0;
-            string fis_id = ""; string kasa_id = ""; string pos_id = ""; string banka_hesap_id = "";
-
-            if (dd_giris_or_alacak.SelectedValue == "borc") { borc = Convert.ToDecimal(txt_tutar.Text); alacak = 0; }
-            if (dd_giris_or_alacak.SelectedValue == "alacak") { borc = 0; alacak = Convert.ToDecimal(txt_tutar.Text); }
-
-            //  1. DURUM
-            if (dd_odeme_sekli.SelectedValue == "nakit")
-            {
-                if (dd_giris_or_alacak.SelectedValue == "borc") { islem_tipi = "tahsilat"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
-                if (dd_giris_or_alacak.SelectedValue == "alacak") { islem_tipi = "tediye"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
-                fis_id = "";
-                kasa_id = dd_bagli_hesap.SelectedValue;
-                pos_id = "";
-                banka_hesap_id = "";
-                StokHareketBorcAlacakKaydet(txt_kayit_tarihi.Text, lbl_stok_id.Text, dd_giris_or_alacak.SelectedValue.ToString(), islem_tipi, "nakit", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
-
-            }
-            //  2. DURUM
-            if (dd_odeme_sekli.SelectedValue == "acikhesap")
-            {
-
-                if (dd_giris_or_alacak.SelectedValue == "borc") { islem_tipi = "borcdekontu"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
-                if (dd_giris_or_alacak.SelectedValue == "alacak") { islem_tipi = "alacakdekontu"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
-                fis_id = "";
-                kasa_id = "";
-                pos_id = "";
-                banka_hesap_id = "";
-                StokHareketBorcAlacakKaydet(txt_kayit_tarihi.Text, lbl_stok_id.Text, dd_giris_or_alacak.SelectedValue.ToString(), islem_tipi, "acikhesap", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
-
-            }
-            //  3. DURUM
-            if (dd_odeme_sekli.SelectedValue == "banka")
-            {
-                if (dd_giris_or_alacak.SelectedValue == "borc") { islem_tipi = "banka"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
-                if (dd_giris_or_alacak.SelectedValue == "alacak") { islem_tipi = "banka"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
-                fis_id = "";
-                kasa_id = "";
-                pos_id = "";
-                banka_hesap_id = dd_bagli_hesap.SelectedValue;
-                StokHareketBorcAlacakKaydet(txt_kayit_tarihi.Text, lbl_stok_id.Text, dd_giris_or_alacak.SelectedValue.ToString(), islem_tipi, "banka", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
-
-            }
-            //  4. DURUM
-            if (dd_odeme_sekli.SelectedValue == "pos")
-            {
-                if (dd_giris_or_alacak.SelectedValue == "borc") { islem_tipi = "pos"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
-                if (dd_giris_or_alacak.SelectedValue == "alacak") { islem_tipi = "pos"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
-                fis_id = "";
-                kasa_id = "";
-                pos_id = dd_bagli_hesap.SelectedValue;
-                banka_hesap_id = "";
-                StokHareketBorcAlacakKaydet(txt_kayit_tarihi.Text, lbl_stok_id.Text, dd_giris_or_alacak.SelectedValue.ToString(), islem_tipi, "pos", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
-
-            }
-            // 
-
-        } // if kontroller
-
-        StokHareketListesiniGetir(Convert.ToInt32(lbl_stok_id.Text));
-        StokBorcAlacakBilgisiniGetir(Convert.ToInt32(lbl_stok_id.Text));
-
-    }
-
-    protected bool Kontroller()
-    {
-
-        return true;
-    }
-
-    protected void StokHareketBorcAlacakKaydet(string kayit_tarihi, string Stok_id, string borc_or_alacak, string islem_tipi, string odeme_sekli, string belge_no, string aciklama1, string personel, decimal borc, decimal alacak, string fis_id, string kasa_id, string pos_id, string banka_hesap_id)
+    protected void StokHareketGirisCikisKaydet(string kayit_tarihi, string Stok_id, string borc_or_alacak, string islem_tipi, string odeme_sekli, string belge_no, string aciklama1, string personel, decimal borc, decimal alacak, string fis_id, string kasa_id, string pos_id, string banka_hesap_id)
     {
 
         SqlConnection connection = new SqlConnection(dataconnect);
