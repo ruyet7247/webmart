@@ -35,9 +35,9 @@ public partial class Stok_StokHareket : System.Web.UI.Page
            
             if (lbl_stok_id.Text != "0")
             {
-                StokBilgileriniGetir(Convert.ToInt32(lbl_stok_id.Text));
+                StokBilgileriniGetir(Convert.ToInt32(lbl_stok_id.Text));  // aramadan gelen
                 StokHareketListesiniGetir(Convert.ToInt32(lbl_stok_id.Text));
-                StokBorcAlacakBilgisiniGetir(Convert.ToInt32(lbl_stok_id.Text));
+                StokGirisCikisGetir (Convert.ToInt32(lbl_stok_id.Text));  // miktar bilgilerini getir
             }
 
         }
@@ -49,9 +49,18 @@ public partial class Stok_StokHareket : System.Web.UI.Page
         StokArama(txt_arama.Text);
     }
 
+    protected void gv_arama_listele_SelectedIndexChanged1(object sender, EventArgs e)
+    {
+        GridViewRow row = this.gv_arama_listele.SelectedRow;
+        Label Lbl_Stok_id = (Label)row.FindControl("lbl_Stok_id");
+        ibtn_stok_bul_ModalPopupExtender.Hide();
+        Response.Redirect("StokHareket.aspx?StokID=" + Lbl_Stok_id.Text);
+
+    }
+
     protected void StokArama(string stok_adi) //Stok arama modal popup
     {
-        string hareketSQL = "SELECT stok_id,stok_adi,birimi,giren,cikan,alis_fiyati,satis_fiyati FROM stok_karti WHERE stok_adi LIKE '%" + stok_adi + "%'";
+        string hareketSQL = "SELECT stok_id,stok_adi,birimi,giren,cikan,alis_fiyati,satis_fiyati FROM stok_kayit WHERE stok_adi LIKE '%" + stok_adi + "%'";
         SqlConnection con = new SqlConnection(dataconnect);
         SqlCommand cmd = new SqlCommand(hareketSQL, con);
 
@@ -85,22 +94,12 @@ public partial class Stok_StokHareket : System.Web.UI.Page
         }
     }
 
-    protected void gv_arama_listele_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        GridViewRow row = this.gv_arama_listele.SelectedRow;
-        Label lbl_Stok_id = (Label)row.FindControl("lbl_Stok_id");
-        ibtn_stok_bul_ModalPopupExtender.Hide();
-        Response.Redirect("StokHareket.aspx?StokID=" + lbl_Stok_id.Text);
-
-
-    }
-
     protected void StokBilgileriniGetir(int stok_id)
     {
 
 
         SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "SELECT * FROM stok_karti WHERE stok_id=" + stok_id;
+        string queryString = "SELECT * FROM stok_kayit WHERE stok_id=" + stok_id;
         SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
@@ -115,13 +114,13 @@ public partial class Stok_StokHareket : System.Web.UI.Page
 
                     lbl_stok_id.Text = reader["stok_id"].ToString();
 
-                    txt_stok_adi.Text = reader["unvan"].ToString();
-                    dd_grup_id.SelectedValue = reader["grup_id"].ToString();
+                    txt_stok_adi.Text = reader["stok_adi"].ToString();
+                    dd_grup_id.SelectedValue = reader["grubu_id"].ToString();
                     txt_giren.Text = reader["giren"].ToString();
                     txt_cikan.Text = reader["cikan"].ToString();
-                    int stok_miktari = Convert.ToInt32(reader["giren"].ToString()) - Convert.ToInt32(reader["cikan"].ToString());
-                    txt_stok_miktari.Text = stok_miktari.ToString();
-
+                    //int stok_miktari = Convert.ToInt32(reader["giren"].ToString()) - Convert.ToInt32(reader["cikan"].ToString());
+                   // txt_stok_miktari.Text = stok_miktari.ToString();
+       
                 }
             }
 
@@ -187,10 +186,8 @@ public partial class Stok_StokHareket : System.Web.UI.Page
             string islem_tipi = "";
             decimal giris = 0;
             decimal cikis = 0;
-            string fis_id = ""; string cari_id = ""; string fatura_id = "";
 
-           
-            StokHareketGirisCikisKaydet(txt_kayit_tarihi.Text, lbl_stok_id.Text, dd_giris_or_cikis.SelectedValue.ToString(), islem_tipi, "nakit", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
+            StokHareketGirisCikisKaydet(lbl_stok_id.Text, txt_kayit_tarihi.Text,dd_giris_or_cikis.SelectedValue,dd_giris_or_cikis.SelectedValue,txt_miktar.Text,"",txt_aciklama.Text,"","","","","",txt_belge_no.Text,"","");
 
            
 
@@ -234,7 +231,7 @@ public partial class Stok_StokHareket : System.Web.UI.Page
         }
         catch (Exception err)
         {
-            lbl_mesaj.Text = "Error Stok Bulma ";
+            lbl_mesaj.Text = "Error Stok Giriş Çıkış Getir ";
             lbl_mesaj.Text += err.Message;
         }
         finally
@@ -245,13 +242,11 @@ public partial class Stok_StokHareket : System.Web.UI.Page
 
     }
 
-
-    protected void StokHareketGirisCikisKaydet(string kayit_tarihi, string Stok_id, string borc_or_alacak, string islem_tipi, string odeme_sekli, string belge_no, string aciklama1, string personel, decimal borc, decimal alacak, string fis_id, string kasa_id, string pos_id, string banka_hesap_id)
+    protected void StokHareketGirisCikisKaydet(string stok_id, string kayit_tarihi, string giris_or_cikis, string islem_tipi, string miktar,string birim,string aciklama1,string birim_fiyat,string iskonto,string kdv,string tutar,string cari_id,string evrak_no,string fis,string fatura)
     {
 
         SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "INSERT INTO Stok_hareket (kayit_tarihi,Stok_id, borc_or_alacak, islem_tipi, odeme_sekli, belge_no, aciklama1, personel,borc,alacak fis_id, kasa_id, pos_id, banka_hesap_id)  VALUES \n" +
-                                                   "(@kayit_tarihi,@Stok_id,@borc_or_alacak,@islem_tipi,@odeme_sekli,@belge_no,@aciklama1,@personel,@borc,@alacak,@fis_id,@kasa_id,@pos_id,@banka_hesap_id)";
+        //string queryString = "INSERT INTO [dbo].[stok_hareket]  ([stok_id],[kayit_tarihi],[giris_or_cikis],[islem_tipi] ,[miktar] ,[evrak_no] ,[aciklama1]) VALUES (@stok_id,@kayit_tarihi,@giris_or_cikis,@islem_tipi,@miktar,@evrak_no,@aciklama1)";
 
         SqlCommand cmd = new SqlCommand("StokHareketEkle", connection);
 
@@ -259,20 +254,14 @@ public partial class Stok_StokHareket : System.Web.UI.Page
         try
         {
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@stok_id", SqlDbType.Int).Value = stok_id;
             cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = Convert.ToDateTime(kayit_tarihi);
-            cmd.Parameters.Add("@Stok_id", SqlDbType.NVarChar).Value = Stok_id;
-            cmd.Parameters.Add("@borc_or_alacak", SqlDbType.NVarChar).Value = borc_or_alacak;
+            cmd.Parameters.Add("@giris_or_cikis", SqlDbType.NVarChar).Value = giris_or_cikis;
             cmd.Parameters.Add("@islem_tipi", SqlDbType.NVarChar).Value = islem_tipi;
-            cmd.Parameters.Add("@odeme_sekli", SqlDbType.NVarChar).Value = odeme_sekli;
-            cmd.Parameters.Add("@belge_no", SqlDbType.NVarChar).Value = belge_no;
+            cmd.Parameters.Add("@miktar", SqlDbType.Int).Value = Convert.ToInt32(miktar);
+            cmd.Parameters.Add("@evrak_no", SqlDbType.NVarChar).Value = evrak_no;
             cmd.Parameters.Add("@aciklama1", SqlDbType.NVarChar).Value = aciklama1;
-            cmd.Parameters.Add("@personel", SqlDbType.NVarChar).Value = personel;
-            cmd.Parameters.Add("@borc", SqlDbType.Decimal).Value = borc;
-            cmd.Parameters.Add("@alacak", SqlDbType.Decimal).Value = alacak;
-            cmd.Parameters.Add("@fis_id", SqlDbType.NVarChar).Value = fis_id;
-            cmd.Parameters.Add("@kasa_id", SqlDbType.NVarChar).Value = kasa_id;
-            cmd.Parameters.Add("@pos_id", SqlDbType.NVarChar).Value = pos_id;
-            cmd.Parameters.Add("@banka_hesap_id", SqlDbType.NVarChar).Value = banka_hesap_id;
+            
 
             connection.Open();
             insert_sql = cmd.ExecuteNonQuery();
@@ -294,7 +283,7 @@ public partial class Stok_StokHareket : System.Web.UI.Page
 
     protected void gv_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        int Stok_hareket_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
+        int stok_hareket_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
         SqlConnection connection = new SqlConnection(dataconnect);
         SqlCommand cmd = new SqlCommand("StokHareketSil", connection);
 
@@ -302,14 +291,14 @@ public partial class Stok_StokHareket : System.Web.UI.Page
         try
         {
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@Stok_hareket_id", SqlDbType.Int).Value = Stok_hareket_id;
+            cmd.Parameters.Add("@stok_hareket_id", SqlDbType.Int).Value = stok_hareket_id;
             connection.Open();
             sql_query = cmd.ExecuteNonQuery();
 
         }
         catch (Exception err)
         {
-            lbl_mesaj.Text = "Error INSERT. ";
+            lbl_mesaj.Text = "Error STOK HAREKET SİLME. ";
             lbl_mesaj.Text += err.Message;
         }
         finally
@@ -317,10 +306,11 @@ public partial class Stok_StokHareket : System.Web.UI.Page
             cmd.Parameters.Clear();
             connection.Close();
             StokHareketListesiniGetir(Convert.ToInt32(Request.QueryString["StokID"]));
-            StokBorcAlacakBilgisiniGetir(Convert.ToInt32(Request.QueryString["StokID"]));
+            StokGirisCikisGetir(Convert.ToInt32(Request.QueryString["StokID"]));
         }
 
     }
+
 
    
 }

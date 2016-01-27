@@ -97,8 +97,8 @@ public partial class Stok_StokKarti : System.Web.UI.Page
     protected void stokGuncelle(int stok_id)
     {
         SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "UPDATE stok_kayit SET kayit_tarihi=@kayit_tarihi,stok_kod_no=@stok_kod_no,stok_barkod_no=@stok_barkod_no,stok_uretici_no=@stok_uretici_no,stok_adi=@stok_adi,birimi=@birimi,grubu_id=@grubu_id,kdv=@kdv,alis_fiyati=@alis_fiyati,satis_fiyati=@satis_fiyati WHERE stok_id=" + stok_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ///string queryString = "UPDATE stok_kayit SET kayit_tarihi=@kayit_tarihi,stok_kod_no=@stok_kod_no,stok_barkod_no=@stok_barkod_no,stok_uretici_no=@stok_uretici_no,stok_adi=@stok_adi,birimi=@birimi,grubu_id=@grubu_id,kdv=@kdv,alis_fiyati=@alis_fiyati,satis_fiyati=@satis_fiyati WHERE stok_id=" + stok_id;
+        SqlCommand cmd = new SqlCommand("StokKartiGuncelle", connection);
 
 
         int update_flag = 0;
@@ -106,8 +106,9 @@ public partial class Stok_StokKarti : System.Web.UI.Page
         try
         {
             DateTime kayit_tarihi = Convert.ToDateTime(txt_kayit_tarihi.Text);
-
-
+            
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@stok_id", SqlDbType.Int).Value = stok_id;
             cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = Convert.ToDateTime(txt_kayit_tarihi.Text);
             cmd.Parameters.Add("@stok_kod_no", SqlDbType.NVarChar).Value = txt_kod_no.Text;
             cmd.Parameters.Add("@stok_barkod_no", SqlDbType.NVarChar).Value = txt_barkod_no.Text;
@@ -115,9 +116,9 @@ public partial class Stok_StokKarti : System.Web.UI.Page
             cmd.Parameters.Add("@stok_adi", SqlDbType.NVarChar).Value = txt_stok_adi.Text;
             cmd.Parameters.Add("@birimi", SqlDbType.NVarChar).Value = dd_birimi.SelectedValue;
             cmd.Parameters.Add("@grubu_id", SqlDbType.NVarChar).Value = dd_grup_id.SelectedValue;
-            cmd.Parameters.Add("@kdv", SqlDbType.NVarChar).Value = txt_kdv.Text;
-            cmd.Parameters.Add("@alis_fiyati", SqlDbType.NVarChar).Value = txt_alis_fiyati.Text;
-            cmd.Parameters.Add("@satis_fiyati", SqlDbType.NVarChar).Value = txt_satis_fiyati.Text;
+            cmd.Parameters.Add("@kdv", SqlDbType.Int).Value = txt_kdv.Text;
+            cmd.Parameters.Add("@alis_fiyati", SqlDbType.Decimal).Value =txt_alis_fiyati.Text;
+            cmd.Parameters.Add("@satis_fiyati", SqlDbType.Decimal).Value = txt_satis_fiyati.Text;
 
 
             connection.Open();
