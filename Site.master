@@ -105,11 +105,10 @@
                             </asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Kasa Modülü" Value="Kasa Modülü">
-                            <asp:MenuItem Text=" Kasa Girişi" 
-                                Value="Kasa Girişi"></asp:MenuItem>
-                            <asp:MenuItem Text=" Kasa Çıkış" 
-                                Value="Kasa Çıkış"></asp:MenuItem>
-                            <asp:MenuItem Text=" Kasa Hareketleri" Value="Kasa Hareketleri"></asp:MenuItem>
+                            <asp:MenuItem Text=" Kasa Giriş / Çıkış" Value="kasa_giris_cikis" 
+                                NavigateUrl="~/Kasa/KasaHareket.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Kasa Raporlar" 
+                                Value="kasa_raporlar"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Randevu Modülü" Value="Randevu Modülü"></asp:MenuItem>
                         <asp:MenuItem Text=" Dashboard" Value="Dashboard"></asp:MenuItem>
