@@ -37,7 +37,7 @@ public partial class Stok_StokHareket : System.Web.UI.Page
             {
                 StokBilgileriniGetir(Convert.ToInt32(lbl_stok_id.Text));  // aramadan gelen
                 StokHareketListesiniGetir(Convert.ToInt32(lbl_stok_id.Text));
-                StokGirisCikisGetir (Convert.ToInt32(lbl_stok_id.Text));  // miktar bilgilerini getir
+                //StokGirisCikisGetir (Convert.ToInt32(lbl_stok_id.Text));  // miktar bilgilerini getir
             }
 
         }
@@ -99,7 +99,7 @@ public partial class Stok_StokHareket : System.Web.UI.Page
 
 
         SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "SELECT * FROM stok_kayit WHERE stok_id=" + stok_id;
+        string queryString = "SELECT stok_id,stok_adi,grubu_id,giren,cikan FROM stok_kayit WHERE stok_id=" + stok_id;
         SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
@@ -118,8 +118,8 @@ public partial class Stok_StokHareket : System.Web.UI.Page
                     dd_grup_id.SelectedValue = reader["grubu_id"].ToString();
                     txt_giren.Text = reader["giren"].ToString();
                     txt_cikan.Text = reader["cikan"].ToString();
-                    //int stok_miktari = Convert.ToInt32(reader["giren"].ToString()) - Convert.ToInt32(reader["cikan"].ToString());
-                   // txt_stok_miktari.Text = stok_miktari.ToString();
+                    int stok_miktari = Convert.ToInt32(reader["giren"].ToString()) - Convert.ToInt32(reader["cikan"].ToString());
+                    txt_stok_miktari.Text = stok_miktari.ToString();
        
                 }
             }
@@ -129,7 +129,7 @@ public partial class Stok_StokHareket : System.Web.UI.Page
 
         catch (Exception err)
         {
-            lbl_mesaj.Text = "Error Login. ";
+            lbl_mesaj.Text = "Error StokBilgileriniGetir. ";
             lbl_mesaj.Text += err.Message;
         }
         finally
@@ -183,10 +183,7 @@ public partial class Stok_StokHareket : System.Web.UI.Page
             // SABİT TANIMLAMALAR
             Session["personel"] = "hamza";
             string queryString = "";
-            string islem_tipi = "";
-            decimal giris = 0;
-            decimal cikis = 0;
-
+          
             StokHareketGirisCikisKaydet(lbl_stok_id.Text, txt_kayit_tarihi.Text,dd_giris_or_cikis.SelectedValue,dd_giris_or_cikis.SelectedValue,txt_miktar.Text,"",txt_aciklama.Text,"","","","","",txt_belge_no.Text,"","");
 
            
@@ -194,7 +191,7 @@ public partial class Stok_StokHareket : System.Web.UI.Page
         } // if kontroller
 
         StokHareketListesiniGetir(Convert.ToInt32(lbl_stok_id.Text));
-        StokGirisCikisGetir(Convert.ToInt32(lbl_stok_id.Text));
+        StokBilgileriniGetir(Convert.ToInt32(lbl_stok_id.Text));
 
     }
 
@@ -204,9 +201,10 @@ public partial class Stok_StokHareket : System.Web.UI.Page
         return true;
     }
 
-    protected void StokGirisCikisGetir(int Stok_id)
+    protected void StokGirisCikisGetirXXX(int stok_id)
     {
-        string hareketSQL = "SELECT (SELECT sum(miktar) FROM stok_hareket WHERE giris_or_cikis='giris') AS girenmiktar,(SELECT sum(miktar) FROM stok_hareket WHERE giris_or_cikis='cikis') AS cikannmiktar FROM stok_hareket";
+       /*
+        string hareketSQL = "SELECT (SELECT sum(miktar) FROM stok_hareket WHERE giris_or_cikis='giris') AS girenmiktar,(SELECT sum(miktar) FROM stok_hareket WHERE giris_or_cikis='cikis') AS cikannmiktar FROM stok_hareket WHERE stok_id=" + stok_id; ;
         SqlConnection connection = new SqlConnection(dataconnect);
         SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
@@ -238,6 +236,7 @@ public partial class Stok_StokHareket : System.Web.UI.Page
         {
             connection.Close();
         }
+        * */
 
 
     }
@@ -306,7 +305,7 @@ public partial class Stok_StokHareket : System.Web.UI.Page
             cmd.Parameters.Clear();
             connection.Close();
             StokHareketListesiniGetir(Convert.ToInt32(Request.QueryString["StokID"]));
-            StokGirisCikisGetir(Convert.ToInt32(Request.QueryString["StokID"]));
+            StokBilgileriniGetir(Convert.ToInt32(Request.QueryString["StokID"]));
         }
 
     }
