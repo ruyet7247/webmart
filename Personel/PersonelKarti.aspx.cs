@@ -65,7 +65,7 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
 
         try
         {
-            cmd.Parameters.Add("@unvan", SqlDbType.NVarChar).Value = txt_unvan.Text;
+            cmd.Parameters.Add("@unvan", SqlDbType.NVarChar).Value = txt_kullanici_adi.Text;
             cmd.Parameters.Add("@adi", SqlDbType.NVarChar).Value = txt_adi.Text;
             cmd.Parameters.Add("@soyadi", SqlDbType.NVarChar).Value = txt_soyadi.Text;
             cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = Convert.ToDateTime(txt_kayit_tarihi.Text);
@@ -122,7 +122,7 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
             DateTime kayit_tarihi = Convert.ToDateTime(txt_kayit_tarihi.Text);
 
 
-            cmd.Parameters.Add("@unvan", SqlDbType.NVarChar).Value = txt_unvan.Text;
+            cmd.Parameters.Add("@unvan", SqlDbType.NVarChar).Value = txt_kullanici_adi.Text;
             cmd.Parameters.Add("@adi", SqlDbType.NVarChar).Value = txt_adi.Text;
             cmd.Parameters.Add("@soyadi", SqlDbType.NVarChar).Value = txt_soyadi.Text;
             cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = kayit_tarihi;
@@ -211,7 +211,7 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
     {
         GridViewRow row = this.gv_arama_listele.SelectedRow;
         Label lbl_cari_id = (Label)row.FindControl("lbl_cari_id");
-        ibtn_cari_bul_ModalPopupExtender.Hide();
+        ibtn_personel_bul_ModalPopupExtender.Hide();
         Response.Redirect("CariKarti.aspx?CariID=" + lbl_cari_id.Text);
 
 
@@ -237,7 +237,7 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
 
                     lbl_cari_id.Text = reader["cari_id"].ToString();
 
-                    txt_unvan.Text = reader["unvan"].ToString();
+                    txt_kullanici_adi.Text = reader["unvan"].ToString();
                     txt_adi.Text = reader["adi"].ToString();
                     txt_soyadi.Text = reader["soyadi"].ToString();
                     DateTime kayit_tarihi = Convert.ToDateTime(reader["kayit_tarihi"].ToString());

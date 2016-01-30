@@ -41,9 +41,9 @@
               
         <tr>
             <td colspan="5" width="20%">
-                <asp:ImageButton ID="ibtn_yeni_cari" runat="server" 
+                <asp:ImageButton ID="ibtn_yeni_personel" runat="server" 
                     onclick="ibtn_yeni_cari_Click" AlternateText="Yeni Kayıt" />
-                <asp:ImageButton ID="ibtn_cari_sil" runat="server"
+                <asp:ImageButton ID="ibtn_personel_sil" runat="server"
                     onclick="ibtn_cari_sil_Click"  
                     OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');" 
                     AlternateText="Cari Sil" />
@@ -66,19 +66,19 @@
         </tr>
         <tr>
             <td class="style1">
-                Unvan</td>
+                TC NO</td>
             <td class="style2">
-                <asp:TextBox ID="txt_unvan" runat="server" Width="70%"></asp:TextBox>
-                <asp:ImageButton ID="ibtn_cari_bul" runat="server" Height="30px" Width="50px" 
+                <asp:TextBox ID="txt_tel2" runat="server" Width="150px"></asp:TextBox>
+                <asp:ImageButton ID="ibtn_personel_bul" runat="server" Height="30px" Width="50px" 
                     AlternateText="CariBul" />
-                <asp:ModalPopupExtender ID="ibtn_cari_bul_ModalPopupExtender" runat="server" 
+                <asp:ModalPopupExtender ID="ibtn_personel_bul_ModalPopupExtender" runat="server" 
                     DynamicServicePath="" Enabled="True" 
-                    PopupControlID="pnl_cari_arama" TargetControlID="ibtn_cari_bul" 
+                    PopupControlID="pnl_cari_arama" TargetControlID="ibtn_personel_bul" 
                     BackgroundCssClass="popupPanel" CancelControlID="btn_cari_bul_kapat">
                 </asp:ModalPopupExtender>
             </td>
            <td class="style1">
-                Faks</td>
+                Giriş Tarihi</td>
             <td class="style2">
                 <asp:TextBox ID="txt_fax" runat="server"></asp:TextBox>
             </td>
@@ -109,11 +109,44 @@
         </tr>
         <tr>
             <td class="style1">
-                Kayıt Tarihi</td>
+                Kullanıcı Adı</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_kullanici_adi" runat="server" Width="200px"></asp:TextBox>
+                &nbsp;</td>
+            <td class="style1">
+                &nbsp;</td>
+            <td class="style2">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Kullanıcı Şifre</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_kullanici_adi0" runat="server" Width="200px"></asp:TextBox>
+            </td>
+            <td class="style1">
+                &nbsp;</td>
+            <td class="style2">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Sicil No</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_kullanici_adi1" runat="server" Width="200px"></asp:TextBox>
+            </td>
+            <td class="style1">
+                &nbsp;</td>
+            <td class="style2">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Başvuru Tarihi</td>
             <td class="style2">
                 <asp:TextBox ID="txt_kayit_tarihi" runat="server"></asp:TextBox>
-                <asp:CalendarExtender ID="txt_kayit_tarihi_CalendarExtender" runat="server"  Format="dd.MM.yyyy" 
-                    Enabled="True" TargetControlID="txt_kayit_tarihi">
+                <asp:CalendarExtender ID="txt_kayit_tarihi_CalendarExtender" runat="server" 
+                    Enabled="True" Format="dd.MM.yyyy" TargetControlID="txt_kayit_tarihi">
                 </asp:CalendarExtender>
             </td>
             <td class="style1">
@@ -124,15 +157,9 @@
         </tr>
         <tr>
             <td class="style1">
-                Grup Adı</td>
+                Departman</td>
             <td class="style2">
-                <asp:DropDownList ID="dd_grup_id" runat="server" DataSourceID="SqlDataSource2" 
-                    DataTextField="cari_grubu_adi" DataValueField="cari_grubu_id">
-                </asp:DropDownList>
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
-                    SelectCommand="SELECT * FROM [cari_grubu_tanimlama]"></asp:SqlDataSource>
-            </td>
+                &nbsp;</td>
             <td class="style1">
                 Adres1.Satır</td>
             <td class="style2">
@@ -141,7 +168,7 @@
         </tr>
         <tr>
             <td class="style1">
-                Cari Kod</td>
+                Açıklama</td>
             <td class="style2">
                 <asp:TextBox ID="txt_cari_kod_no" runat="server"></asp:TextBox>
             </td>
@@ -153,7 +180,7 @@
         </tr>
         <tr>
             <td class="style1">
-                &nbsp;Tc No</td>
+                Ev Telefonu</td>
             <td class="style2">
                 <asp:TextBox ID="txt_tc_no" runat="server"></asp:TextBox>
             </td>
@@ -165,7 +192,7 @@
         </tr>
         <tr>
             <td class="style1">
-                Meslek</td>
+                Cep Telefonu</td>
             <td class="style2">
                 <asp:TextBox ID="txt_meslek" runat="server"></asp:TextBox>
             </td>
@@ -177,7 +204,7 @@
         </tr>
         <tr>
             <td class="style1">
-                Banka Adı</td>
+                Adres 1</td>
             <td class="style2">
                 <asp:TextBox ID="txt_banka_adi" runat="server"></asp:TextBox>
             </td>
@@ -189,7 +216,7 @@
         </tr>
         <tr>
             <td class="style1">
-                Baka Hesap No</td>
+                Adres 2</td>
             <td class="style2">
                 <asp:TextBox ID="txt_banka_hesap_no" runat="server"></asp:TextBox>
             </td>
@@ -201,7 +228,7 @@
         </tr>
         <tr>
             <td class="style1">
-                Banka IBAN No</td>
+                İlçe</td>
             <td class="style2">
                 <asp:TextBox ID="txt_banka_iban_no" runat="server"></asp:TextBox>
             </td>
@@ -212,7 +239,7 @@
         </tr>
         <tr>
             <td class="style1">
-                Telefon-1</td>
+                İl</td>
             <td class="style2">
                 <asp:TextBox ID="txt_tel1" runat="server"></asp:TextBox>
             </td>
@@ -223,39 +250,33 @@
         </tr>
         <tr>
             <td class="style1">
-                Telefon-2</td>
+                &nbsp;</td>
             <td class="style2">
-                <asp:TextBox ID="txt_tel2" runat="server"></asp:TextBox>
-            </td>
+                &nbsp;</td>
             <td class="style1">
-                Borç Bakiye</td>
+                &nbsp;</td>
             <td class="style2">
-                <asp:TextBox ID="txt_borc_bakiye" runat="server" ReadOnly="True" CssClass="sagaDayaliFormat" ></asp:TextBox>
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
                 Cep Tel-1</td>
             <td class="style2">
-                <asp:TextBox ID="txt_gsm1" runat="server"></asp:TextBox>
-            </td>
+                &nbsp;</td>
             <td class="style1">
-                Alacak Bakiye</td>
+                &nbsp;</td>
             <td class="style2">
-                <asp:TextBox ID="txt_alacak_bakiye" runat="server" ReadOnly="True" CssClass="sagaDayaliFormat" ></asp:TextBox>
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
                 Cep Tel-2</td>
             <td class="style2">
-                <asp:TextBox ID="txt_gsm2" runat="server"></asp:TextBox>
-            </td>
+                &nbsp;</td>
             <td class="style1">
-                Bakiye</td>
+                &nbsp;</td>
             <td class="style2">
-                <asp:TextBox ID="txt_bakiye" runat="server" ReadOnly="True" CssClass="sagaDayaliFormat" ></asp:TextBox>
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
