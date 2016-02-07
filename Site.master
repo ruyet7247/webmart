@@ -5,9 +5,12 @@
 <head runat="server">
     <title>WebMart Application</title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <!-- <script src="js/jquery-2.2.0.min.js"></script> -->
+
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 
+      
 </head>
 <body>
     <form runat="server">
@@ -64,13 +67,17 @@
                             <asp:MenuItem Text=" Personel Departman Tanımlama" 
                                 Value="Personel Departman Tanımlama" 
                                 NavigateUrl="~/GenelTanimlamar/PersonelDepartmanTanimlama.aspx"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/GenelTanimlamar/ParaBirimiTanimlama.aspx" 
+                                Text="Para Birimi Tanımlama" Value="Para Birimi Tanımlama"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Cari Modülü" Value="FirmaIslemleri">
-                            <asp:MenuItem Text=" Yeni Cari Kartı" Value="Yeni Cari Kartı" 
+                            <asp:MenuItem Text="Cari Kartı" Value="Cari Kartı" 
                                 NavigateUrl="~/Cari/CariKarti.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text=" Cari Hareketleri" Value="Cari Hareketleri" 
+<asp:MenuItem Text="Hasta Kartı" Value="Hasta Kartı" NavigateUrl="~/Cari/HastaKarti.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text=" Cari/Hasta Hareketleri" Value="Cari Hareketleri" 
                                 NavigateUrl="~/Cari/CariHareket.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text=" Alış-Satış Fişi" Value="Alış-Satış Fişi">
+                            <asp:MenuItem Text=" Alış / Satış İşlemleri" Value="Alış-Satış Fişi" 
+                                NavigateUrl="~/Cari/AlisSatisIslemleri.aspx">
                             </asp:MenuItem>
                             <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar">
                                 <asp:MenuItem Text=" Cari Hesap Raporu" Value="Cari Hesap Raporu"></asp:MenuItem>
@@ -93,24 +100,33 @@
                             </asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Personel-Maaş Modülü" Value="Personel-Maaş Modülü">
-                            <asp:MenuItem Text=" Personel Karti" Value="Maaş Tahkk"></asp:MenuItem>
+                            <asp:MenuItem Text=" Personel Karti" Value="Maaş Tahkk" 
+                                NavigateUrl="~/Personel/PersonelKarti.aspx"></asp:MenuItem>
                             <asp:MenuItem Text=" Personel İşlem Hareketleri" 
-                                Value="Personel İşlem Hareketleri"></asp:MenuItem>
-                            <asp:MenuItem Text=" Maaş Dönemi ve Tahakkuk" Value="Maaş Dönemi Ekle">
-                            </asp:MenuItem>
+                                Value="Personel İşlem Hareketleri" 
+                                NavigateUrl="~/Personel/PersonelHareket.aspx"></asp:MenuItem>
                             <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar &gt;">
                                 <asp:MenuItem Text=" Personel Listesi" Value="Personel Listesi"></asp:MenuItem>
                                 <asp:MenuItem Text=" Personel Bordro Al" Value="Personel Bordro Al">
                                 </asp:MenuItem>
                             </asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem Text=" Kasa Modülü" Value="Kasa Modülü">
+                        <asp:MenuItem Text=" Kasa / Banka" Value="KasaBanka">
                             <asp:MenuItem Text=" Kasa Giriş / Çıkış" Value="kasa_giris_cikis" 
                                 NavigateUrl="~/Kasa/KasaHareket.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Kasa Raporlar" 
-                                Value="kasa_raporlar"></asp:MenuItem>
+                            <asp:MenuItem Text="Banka Giriş / Çıkış" Value="Banka Giriş / Çıkış" 
+                                NavigateUrl="~/Kasa/BankaHareket.aspx">
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="Pos Giriş / Çıkış" Value="Pos Giriş / Çıkış" 
+                                NavigateUrl="~/Kasa/PosHareket.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Raporlar" Value="Raporlar">
+                                <asp:MenuItem Text="Kasa Raporlar" Value="kasa_raporlar"></asp:MenuItem>
+                                <asp:MenuItem Text="Banka Raporlar" Value="Banka Raporlar"></asp:MenuItem>
+                                <asp:MenuItem Text="Pos Raporlar" Value="Pos Raporlar"></asp:MenuItem>
+                            </asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem Text=" Randevu Modülü" Value="Randevu Modülü"></asp:MenuItem>
+                        <asp:MenuItem Text=" Randevu Modülü" Value="Randevu Modülü" 
+                            NavigateUrl="~/Randevu/RandevuKarti.aspx"></asp:MenuItem>
                         <asp:MenuItem Text=" Dashboard" Value="Dashboard"></asp:MenuItem>
                     </Items>
                 </asp:Menu>

@@ -52,11 +52,11 @@
         <tr>
             <td colspan="5" width="20%">
                 <asp:ImageButton ID="ibtn_yeni_personel" runat="server" 
-                    onclick="ibtn_yeni_cari_Click" AlternateText="Yeni Kayıt" />
+                    onclick="ibtn_yeni_personel_Click" AlternateText="Yeni Kayıt" />
                 <asp:ImageButton ID="ibtn_personel_sil" runat="server"
-                    onclick="ibtn_cari_sil_Click"  
+                    onclick="ibtn_personel_sil_Click"  
                     OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');" 
-                    AlternateText="Cari Sil" />
+                    AlternateText="Personel Sil" />
             </td>
             
         </tr>
@@ -65,7 +65,7 @@
     <table style="width:100%;">
         <tr>
             <td class="style1">
-                <asp:Label ID="lbl_cari_id" runat="server">0</asp:Label>
+                <asp:Label ID="lbl_personel_id" runat="server">0</asp:Label>
             </td>
             <td class="style2">
                 &nbsp;</td>
@@ -80,17 +80,20 @@
             <td class="style2">
                 <asp:TextBox ID="txt_tc" runat="server" Width="150px"></asp:TextBox>
                 <asp:ImageButton ID="ibtn_personel_bul" runat="server" Height="30px" Width="50px" 
-                    AlternateText="CariBul" />
+                    AlternateText="PersonelBul" />
                 <asp:ModalPopupExtender ID="ibtn_personel_bul_ModalPopupExtender" runat="server" 
                     DynamicServicePath="" Enabled="True" 
-                    PopupControlID="pnl_cari_arama" TargetControlID="ibtn_personel_bul" 
-                    BackgroundCssClass="popupPanel" CancelControlID="btn_cari_bul_kapat">
+                    PopupControlID="pnl_personel_arama" TargetControlID="ibtn_personel_bul" 
+                    BackgroundCssClass="popupPanel" CancelControlID="btn_personel_bul_kapat">
                 </asp:ModalPopupExtender>
             </td>
            <td class="style1">
                 Cinsiyet</td>
             <td class="style2">
-                <asp:TextBox ID="txt_cinsiyet" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="dd_cinsiyet" runat="server">
+                    <asp:ListItem Value="bay">Bay</asp:ListItem>
+                    <asp:ListItem Value="bayan">Bayan</asp:ListItem>
+                </asp:DropDownList>
             </td>
         </tr>
         <tr>
@@ -114,7 +117,7 @@
             <td class="style1">
                 Ehliyet Sınıfı</td>
             <td class="style2">
-                <asp:TextBox ID="txt_ehliyet_belge_no" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_ehliyet_sinifi" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -127,8 +130,8 @@
                 Aktif / Pasif</td>
             <td class="style2">
                 <asp:DropDownList ID="dd_aktif_or_pasif" runat="server">
-                    <asp:ListItem Value="1">Aktif</asp:ListItem>
-                    <asp:ListItem Value="0">Pasif</asp:ListItem>
+                    <asp:ListItem Value="True">Aktif</asp:ListItem>
+                    <asp:ListItem Value="False">Pasif</asp:ListItem>
                 </asp:DropDownList>
             </td>
         </tr>
@@ -154,6 +157,12 @@
                 Ev Telefonu</td>
             <td class="style2">
                 <asp:TextBox ID="txt_tel" runat="server"></asp:TextBox>
+                <asp:MaskedEditExtender ID="txt_tel_MaskedEditExtender" runat="server" 
+                    Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
+                    CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
+                    CultureThousandsPlaceholder="" CultureTimePlaceholder="" Enabled="True" 
+                    Mask="#(###) ###-####" TargetControlID="txt_tel">
+                </asp:MaskedEditExtender>
             </td>
         </tr>
         <tr>
@@ -196,7 +205,7 @@
             <td class="style2">
                 <asp:TextBox ID="txt_giris_tarihi" runat="server"></asp:TextBox>
                 <asp:CalendarExtender ID="txt_giris_tarihi_CalendarExtender" runat="server" 
-                    Enabled="True" TargetControlID="txt_giris_tarihi">
+                    Enabled="True" Format="dd.MM.yyyy" TargetControlID="txt_giris_tarihi">
                 </asp:CalendarExtender>
             </td>
             <td class="style1">
@@ -296,7 +305,8 @@
     </p>
      </asp:Panel>
     <!-- ARAMA PANELİ-->
-    <asp:Panel ID="pnl_cari_arama" runat="server" BackColor="#B6B7BC" Width="60%" Height="500px" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
+    <asp:Panel ID="pnl_personel_arama" runat="server" BackColor="#B6B7BC" 
+        Width="60%" Height="500px" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
      <table width="100%"> 
             <tr>
             <td class="style3">
@@ -309,14 +319,14 @@
             <td width="20%">
                 &nbsp;</td>
             <td width="20%" align="right" valign="middle">
-                <asp:Button ID="btn_cari_bul_kapat" runat="server" Height="20px"
+                <asp:Button ID="btn_personel_bul_kapat" runat="server" Height="20px"
                  Text="X" Width="20px" />
                     </td>
         </tr>
       
                 <tr>
                     <td class="style3">
-                        Unvan Adı</td>
+                        Personel Adı</td>
                     <td width="20%">
                         <asp:TextBox ID="txt_arama" runat="server"></asp:TextBox>
                     </td>
@@ -337,56 +347,57 @@
              <ContentTemplate>
      
                  <asp:GridView ID="gv_arama_listele" runat="server" AutoGenerateColumns="False" 
-                     DataKeyNames="cari_id" Width="100%" BackColor="#CCFFFF" 
+                     DataKeyNames="personel_id" Width="100%" BackColor="#CCFFFF" 
                      onselectedindexchanged="gv_arama_listele_SelectedIndexChanged">
                      <Columns>
-                         <asp:TemplateField HeaderText="Cari id" InsertVisible="False" 
-                             SortExpression="cari_id">
+                         <asp:TemplateField HeaderText="personel_id" InsertVisible="False" 
+                             SortExpression="personel_id">
                              <EditItemTemplate>
-                                 <asp:Label ID="Label1" runat="server" Text='<%# Eval("cari_id") %>'></asp:Label>
+                                 <asp:Label ID="lbl_personel_id" runat="server" Text='<%# Eval("personel_id") %>'></asp:Label>
                              </EditItemTemplate>
                              <ItemTemplate>
-                                 <asp:Label ID="lbl_cari_id" runat="server" Text='<%# Bind("cari_id") %>'></asp:Label>
+                                 <asp:Label ID="lbl_personel_id" runat="server" Text='<%# Bind("personel_id") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Unvan" SortExpression="unvan">
+                         <asp:TemplateField HeaderText="tc" SortExpression="tc">
                              <EditItemTemplate>
-                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("unvan") %>'></asp:TextBox>
+                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("tc") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
-                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("unvan") %>'></asp:Label>
+                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("tc") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Gsm" SortExpression="adi">
+                         <asp:TemplateField HeaderText="adi" SortExpression="adi">
                              <EditItemTemplate>
-                                 <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("gsm1") %>'></asp:TextBox>
+                                 <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("adi") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
-                                 <asp:Label ID="Label3" runat="server" Text='<%# Bind("gsm1") %>'></asp:Label>
+                                 <asp:Label ID="Label3" runat="server" Text='<%# Bind("adi") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Borç Bakiye" SortExpression="borc_bakiye">
+                         <asp:TemplateField HeaderText="soyadi" SortExpression="soyadi">
                              <EditItemTemplate>
-                                 <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("borc_bakiye") %>'></asp:TextBox>
+                                 <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("soyadi") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
-                                 <asp:Label ID="Label5" runat="server" Text='<%# Bind("borc_bakiye") %>'></asp:Label>
+                                 <asp:Label ID="Label4" runat="server" Text='<%# Bind("soyadi") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Alacak Bakiye" SortExpression="alacak_bakiye">
+                         <asp:TemplateField HeaderText="kullanici_adi" SortExpression="kullanici_adi">
                              <EditItemTemplate>
-                                 <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("alacak_bakiye") %>'></asp:TextBox>
+                                 <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("kullanici_adi") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
-                                 <asp:Label ID="Label6" runat="server" Text='<%# Bind("alacak_bakiye") %>'></asp:Label>
+                                 <asp:Label ID="Label5" runat="server" Text='<%# Bind("kullanici_adi") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Bakiye" SortExpression="bakiye">
+                         <asp:TemplateField HeaderText="gsm" 
+                             SortExpression="gsm">
                              <EditItemTemplate>
-                                 <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("bakiye") %>'></asp:TextBox>
+                                 <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("gsm") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
-                                 <asp:Label ID="Label7" runat="server" Text='<%# Bind("bakiye") %>'></asp:Label>
+                                 <asp:Label ID="Label6" runat="server" Text='<%# Bind("gsm") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
                          <asp:TemplateField ShowHeader="False">

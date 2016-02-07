@@ -122,31 +122,127 @@
             onrowdeleting="gv_listele_RowDeleting">
 
             <Columns>
-                <asp:BoundField DataField="kasa_hareket_id" HeaderText="kasa_hareket_id" 
-                    InsertVisible="False" ReadOnly="True" SortExpression="kasa_hareket_id" />
-                <asp:BoundField DataField="kasa_id" HeaderText="kasa_id" 
-                    SortExpression="kasa_id" />
-                <asp:BoundField DataField="kayit_tarihi" HeaderText="kayit_tarihi" 
-                    SortExpression="kayit_tarihi" />
-                <asp:BoundField DataField="evrak_no" HeaderText="evrak_no" 
-                    SortExpression="evrak_no" />
-                <asp:BoundField DataField="islem_tipi" HeaderText="islem_tipi" 
-                    SortExpression="islem_tipi" />
-                <asp:BoundField DataField="giris_or_cikis" HeaderText="giris_or_cikis" 
-                    SortExpression="giris_or_cikis" />
-                <asp:BoundField DataField="aciklama1" HeaderText="aciklama1" 
-                    SortExpression="aciklama1" />
-                <asp:BoundField DataField="tutar" HeaderText="tutar" SortExpression="tutar" />
-                <asp:BoundField DataField="cari_id" HeaderText="cari_id" 
-                    SortExpression="cari_id" />
-                <asp:BoundField DataField="fis_id" HeaderText="fis_id" 
-                    SortExpression="fis_id" />
-                <asp:BoundField DataField="banka_id" HeaderText="banka_id" 
-                    SortExpression="banka_id" />
-                <asp:BoundField DataField="personel" HeaderText="personel" 
-                    SortExpression="personel" />
-                <asp:BoundField DataField="cari_hareket_id" HeaderText="cari_hareket_id" 
-                    SortExpression="cari_hareket_id" />
+                <asp:TemplateField HeaderText="kasa_hareket_id" InsertVisible="False" 
+                    SortExpression="kasa_hareket_id">
+                    <EditItemTemplate>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("kasa_hareket_id") %>'></asp:Label>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("kasa_hareket_id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="kasa_id" SortExpression="kasa_id">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("kasa_id") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("kasa_id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="kayit_tarihi" SortExpression="kayit_tarihi">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("kayit_tarihi") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("kayit_tarihi") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="evrak_no" SortExpression="evrak_no">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("evrak_no") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("evrak_no") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="islem_tipi" SortExpression="islem_tipi">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("islem_tipi") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("islem_tipi") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="giris_or_cikis" SortExpression="giris_or_cikis">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("giris_or_cikis") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("giris_or_cikis") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="aciklama1" SortExpression="aciklama1">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("aciklama1") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label7" runat="server" Text='<%# Bind("aciklama1") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="tutar" SortExpression="tutar">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("tutar") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label8" runat="server" Text='<%# Bind("tutar") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="cari_id" SortExpression="cari_id">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("cari_id") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label9" runat="server" Text='<%# Bind("cari_id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="fis_id" SortExpression="fis_id">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox9" runat="server" Text='<%# Bind("fis_id") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label10" runat="server" Text='<%# Bind("fis_id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="banka_id" SortExpression="banka_id">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox10" runat="server" Text='<%# Bind("banka_id") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label11" runat="server" Text='<%# Bind("banka_id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="personel" SortExpression="personel">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox11" runat="server" Text='<%# Bind("personel") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label12" runat="server" Text='<%# Bind("personel") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="cari_hareket_id" 
+                    SortExpression="cari_hareket_id">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox12" runat="server" 
+                            Text='<%# Bind("cari_hareket_id") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label13" runat="server" Text='<%# Bind("cari_hareket_id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="personel_cari_maas_hareket_id">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox16" runat="server" Text='<%# Bind("personel_cari_maas_hareket_id") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label17" runat="server" Text='<%# Bind("personel_cari_maas_hareket_id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField ShowHeader="False">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
+                            CommandName="Delete" Text="Delete" OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');"></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
 
         </asp:GridView>

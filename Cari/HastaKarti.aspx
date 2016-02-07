@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="CariKarti.aspx.cs" Inherits="Cari_CariKarti" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="HastaKarti.aspx.cs" Inherits="Cari_HastaKarti" %>
+
 
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 
@@ -21,13 +22,25 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
+    <!--
+     <script>
+        $('#ibtn_cari_gorusme_ac').live("click", function () {
+            // your existing page
+            var url = "CariGorusmeleri.aspx";
+            // append value of textbox as querystring
+            var newUrl = url + "?HastaID=" + $('#lbl_cari_id').val();
+            // update the src attribute of your iframe with the newUrl
+            $('#ifrm_cari_gorusmeleri').attr("src", newUrl);
+        });
+        </script>
+    -->
     <asp:Panel ID="pnl_form" runat="server">
    
 
     <table ID="form" style="width:100%;">
         <tr>
             <td width="20%">
-                CARİ KARTI İŞLEMLERİ </td>
+                HASTA KARTI İŞLEMLERİ</td>
             <td width="20%">
                 &nbsp;</td>
             <td width="20%">
@@ -45,7 +58,15 @@
                 <asp:ImageButton ID="ibtn_cari_sil" runat="server"
                     onclick="ibtn_cari_sil_Click"  
                     OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');" 
-                    AlternateText="Cari Sil" />
+                    AlternateText="Hasta Sil" />
+                <asp:ImageButton ID="ibtn_cari_gorusme_ac" runat="server" 
+                    AlternateText="Hasta Cari Görüşmesi Aç" />
+                <asp:ModalPopupExtender ID="ibtn_cari_gorusme_ac_ModalPopupExtender" 
+                    runat="server" DynamicServicePath="" Enabled="True" 
+                    TargetControlID="ibtn_cari_gorusme_ac" BackgroundCssClass="popupPanel" 
+                    CancelControlID="ibtn_cari_gorusme_kapat" 
+                    PopupControlID="pnl_cari_gorusmeleri">
+                </asp:ModalPopupExtender>
             </td>
             
         </tr>
@@ -65,28 +86,16 @@
         </tr>
         <tr>
             <td class="style1">
-                Unvan</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_unvan" runat="server" Width="70%"></asp:TextBox>
-                <asp:ImageButton ID="ibtn_cari_bul" runat="server" Height="30px" Width="50px" 
-                    AlternateText="CariBul" />
-                <asp:ModalPopupExtender ID="ibtn_cari_bul_ModalPopupExtender" runat="server" 
-                    DynamicServicePath="" Enabled="True" 
-                    PopupControlID="pnl_cari_arama" TargetControlID="ibtn_cari_bul" 
-                    BackgroundCssClass="popupPanel" CancelControlID="btn_cari_bul_kapat">
-                </asp:ModalPopupExtender>
-            </td>
-           <td class="style1">
-                Faks</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_fax" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style1">
                 Adı</td>
             <td class="style2">
                 <asp:TextBox ID="txt_adi" runat="server" Width="70%"></asp:TextBox>
+                <asp:ImageButton ID="ibtn_cari_bul" runat="server" AlternateText="HastaBul" 
+                    Height="30px" Width="50px" />
+                <asp:ModalPopupExtender ID="ibtn_cari_bul_ModalPopupExtender" runat="server" 
+                    BackgroundCssClass="popupPanel" CancelControlID="btn_cari_bul_kapat" 
+                    DynamicServicePath="" Enabled="True"  TargetControlID="ibtn_cari_bul" 
+                    PopupControlID="pnl_cari_arama">
+                </asp:ModalPopupExtender>
             </td>
            <td class="style1">
                 Mail Adres</td>
@@ -101,9 +110,9 @@
                 <asp:TextBox ID="txt_soyadi" runat="server" Width="70%"></asp:TextBox>
             </td>
             <td class="style1">
-                Vergi Dairesi</td>
+                Kimlik Seri No</td>
             <td class="style2">
-                <asp:TextBox ID="txt_vergi_dairesi" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_kimlik_seri_no" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -116,21 +125,31 @@
                 </asp:CalendarExtender>
             </td>
             <td class="style1">
-                Vergi No</td>
+                Baba Adı</td>
             <td class="style2">
-                <asp:TextBox ID="txt_vergi_no" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_baba_adi" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td class="style1">
-                Grup Adı</td>
+                Cinsiyet</td>
             <td class="style2">
-                <asp:DropDownList ID="dd_grup_id" runat="server" DataSourceID="SqlDataSource2" 
-                    DataTextField="cari_grubu_adi" DataValueField="cari_grubu_id">
+                <asp:DropDownList ID="dd_cinsiyet" runat="server">
+                    <asp:ListItem>BAY</asp:ListItem>
+                    <asp:ListItem>BAYAN</asp:ListItem>
                 </asp:DropDownList>
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
-                    SelectCommand="SELECT * FROM [cari_grubu_tanimlama]"></asp:SqlDataSource>
+            </td>
+            <td class="style1">
+                Anne Adı</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_anne_adi" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Tc No</td>
+            <td class="style2">
+                <asp:TextBox ID="txt_tc_no" runat="server"></asp:TextBox>
             </td>
             <td class="style1">
                 Adres1.Satır</td>
@@ -140,9 +159,9 @@
         </tr>
         <tr>
             <td class="style1">
-                Cari Kod</td>
+                Meslek</td>
             <td class="style2">
-                <asp:TextBox ID="txt_cari_kod_no" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_meslek" runat="server"></asp:TextBox>
             </td>
             <td class="style1">
                 Adres2.Satır</td>
@@ -152,9 +171,9 @@
         </tr>
         <tr>
             <td class="style1">
-                &nbsp;Tc No</td>
+                Doğum Yeri</td>
             <td class="style2">
-                <asp:TextBox ID="txt_tc_no" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_dogum_yeri" runat="server"></asp:TextBox>
             </td>
             <td class="style1">
                 Posta Kodu</td>
@@ -164,9 +183,12 @@
         </tr>
         <tr>
             <td class="style1">
-                Meslek</td>
+                Doğum Tarihi</td>
             <td class="style2">
-                <asp:TextBox ID="txt_meslek" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_dogum_tarihi" runat="server"></asp:TextBox>
+                <asp:CalendarExtender ID="txt_dogum_tarihi_CalendarExtender" runat="server" 
+                    Enabled="True" Format="dd.MM.yyyy" TargetControlID="txt_dogum_tarihi">
+                </asp:CalendarExtender>
             </td>
             <td class="style1">
                 İlçe</td>
@@ -176,9 +198,9 @@
         </tr>
         <tr>
             <td class="style1">
-                Banka Adı</td>
+                Uyruk</td>
             <td class="style2">
-                <asp:TextBox ID="txt_banka_adi" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_uyruk" runat="server"></asp:TextBox>
             </td>
             <td class="style1">
                 Şehir</td>
@@ -188,37 +210,15 @@
         </tr>
         <tr>
             <td class="style1">
-                Baka Hesap No</td>
+                Telefon-1</td>
             <td class="style2">
-                <asp:TextBox ID="txt_banka_hesap_no" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txt_tel1" runat="server"></asp:TextBox>
             </td>
             <td class="style1">
                 Ülke</td>
             <td class="style2">
                 <asp:TextBox ID="txt_ulke" runat="server"></asp:TextBox>
             </td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Banka IBAN No</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_banka_iban_no" runat="server"></asp:TextBox>
-            </td>
-            <td class="style1">
-                &nbsp;</td>
-            <td class="style2">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Telefon-1</td>
-            <td class="style2">
-                <asp:TextBox ID="txt_tel1" runat="server"></asp:TextBox>
-            </td>
-            <td class="style1">
-                &nbsp;</td>
-            <td class="style2">
-                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
@@ -229,7 +229,8 @@
             <td class="style1">
                 Borç Bakiye</td>
             <td class="style2">
-                <asp:TextBox ID="txt_borc_bakiye" runat="server" ReadOnly="True" CssClass="sagaDayaliFormat" ></asp:TextBox>
+                <asp:TextBox ID="txt_borc_bakiye" runat="server" CssClass="sagaDayaliFormat" 
+                    ReadOnly="True"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -241,7 +242,8 @@
             <td class="style1">
                 Alacak Bakiye</td>
             <td class="style2">
-                <asp:TextBox ID="txt_alacak_bakiye" runat="server" ReadOnly="True" CssClass="sagaDayaliFormat" ></asp:TextBox>
+                <asp:TextBox ID="txt_alacak_bakiye" runat="server" CssClass="sagaDayaliFormat" 
+                    ReadOnly="True"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -305,7 +307,7 @@
      <table width="100%"> 
             <tr>
             <td class="style3">
-                <asp:Label ID="lbl_baslik" runat="server" Font-Bold="True">Cari Kartı Bul</asp:Label>
+                <asp:Label ID="lbl_baslik" runat="server" Font-Bold="True">Hasta Kartı Bul</asp:Label>
                     </td>
             <td width="20%">
                 &nbsp;</td>
@@ -337,7 +339,7 @@
     </table>    
     
        <!-- <iframe style=" width: 99%; height: 90%;" id="ifrm" src="CariBul.aspx" runat="server"></iframe> -->
-
+      
          <asp:UpdatePanel ID="UpdatePanel1" runat="server">
              <ContentTemplate>
      
@@ -345,7 +347,7 @@
                      DataKeyNames="cari_id" Width="100%" BackColor="#CCFFFF" 
                      onselectedindexchanged="gv_arama_listele_SelectedIndexChanged">
                      <Columns>
-                         <asp:TemplateField HeaderText="Cari id" InsertVisible="False" 
+                         <asp:TemplateField HeaderText="Hasta id" InsertVisible="False" 
                              SortExpression="cari_id">
                              <EditItemTemplate>
                                  <asp:Label ID="Label1" runat="server" Text='<%# Eval("cari_id") %>'></asp:Label>
@@ -354,12 +356,20 @@
                                  <asp:Label ID="lbl_cari_id" runat="server" Text='<%# Bind("cari_id") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Unvan" SortExpression="unvan">
+                         <asp:TemplateField HeaderText="Adı" SortExpression="adi">
                              <EditItemTemplate>
-                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("unvan") %>'></asp:TextBox>
+                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("adi") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
-                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("unvan") %>'></asp:Label>
+                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("adi") %>'></asp:Label>
+                             </ItemTemplate>
+                         </asp:TemplateField>
+                         <asp:TemplateField HeaderText="Soyadi" SortExpression="soyadi">
+                             <EditItemTemplate>
+                                 <asp:TextBox ID="TextBoxsoyadi" runat="server" Text='<%# Bind("soyadi") %>'></asp:TextBox>
+                             </EditItemTemplate>
+                             <ItemTemplate>
+                                 <asp:Label ID="Label_soyadi" runat="server" Text='<%# Bind("soyadi") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
                          <asp:TemplateField HeaderText="Gsm" SortExpression="adi">
@@ -408,8 +418,32 @@
              </Triggers>
       </asp:UpdatePanel> 
     </asp:Panel>
+    
+    <asp:Panel ID="pnl_cari_gorusmeleri" runat="server" BackColor="#B6B7BC" Width="60%" Height="500px" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
+      <table width="100%"> 
+            <tr>
+           <td width="20%">
+                &nbsp;</td>
+            <td width="20%">
+                &nbsp;</td>
+            <td width="20%">
+                &nbsp;</td>
+            <td width="20%">
+                &nbsp;</td>
+            <td width="20%" align="right" valign="middle">
+                <asp:Button ID="ibtn_cari_gorusme_kapat" runat="server" Height="20px"
+                 Text="X" Width="20px" />
+                    </td>
+        </tr> 
+       </table>     
+          <iframe style=" width: 99%; height: 90%;" id="ifrm_cari_gorusmeleri"  src="CariGorusmeleri.aspx" runat="server"></iframe>  
+   
+    </asp:Panel>
+       
 
     <!-- ARAMA PANELİ son-->
 
 </asp:Content>
+
+
 

@@ -9,17 +9,17 @@ using System.Web.Configuration;
 using System.Data.SqlClient;
 using System.Threading;
 
-public partial class Cari_CariHareket : System.Web.UI.Page
+public partial class Personel_PersonelHareket : System.Web.UI.Page
 {
     String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.QueryString["CariID"] != null)
+        if (Request.QueryString["PersonelID"] != null)
         {
             try
             {
-                lbl_cari_id.Text = Request.QueryString["CariID"];
+                lbl_personel_id.Text = Request.QueryString["PersonelID"];
             }
             catch
             {
@@ -32,29 +32,31 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         {
 
             dd_odeme_sekli.SelectedValue = "acikhesap";
-            if (lbl_cari_id.Text != "0")
+            string gecerli_ay = DateTime.Now.Month.ToString(); dd_ay.SelectedValue = gecerli_ay;
+            string gecerli_yil = DateTime.Now.Year.ToString(); dd_yil.SelectedValue = gecerli_yil;
+            if (lbl_personel_id.Text != "0")
             {
-                CariBilgileriniGetir(Convert.ToInt32(lbl_cari_id.Text));
-                CariHareketListesiniGetir(Convert.ToInt32(lbl_cari_id.Text));
-                CariBorcAlacakBilgisiniGetir(Convert.ToInt32(lbl_cari_id.Text)); 
+                PersonelBilgileriniGetir(Convert.ToInt32(lbl_personel_id.Text));
+                PersonelHareketListesiniGetir(Convert.ToInt32(lbl_personel_id.Text));
+                PersonelBorcAlacakBilgisiniGetir(Convert.ToInt32(lbl_personel_id.Text));
             }
 
         }
-     
 
-      
+
+
 
     }
 
-    protected void ibtn_arama_Click(object sender, ImageClickEventArgs e) // cari arama modal popup
+    protected void ibtn_arama_Click(object sender, ImageClickEventArgs e) // Personel arama modal popup
     {
-        cariArama(txt_arama.Text);
-    } 
+        PersonelArama(txt_arama.Text);
+    }
 
 
-    protected void cariArama(string unvan) //cari arama modal popup
+    protected void PersonelArama(string adi) //Personel arama modal popup
     {
-        string hareketSQL = "SELECT cari_id,unvan,gsm1,borc_bakiye,alacak_bakiye,bakiye FROM cari_karti WHERE unvan LIKE '%" + unvan + "%'";
+        string hareketSQL = "SELECT personel_id,tc,adi,soyadi,kullanici_adi,gsm FROM personel_karti WHERE adi LIKE '%" + adi + "%'";
         SqlConnection con = new SqlConnection(dataconnect);
         SqlCommand cmd = new SqlCommand(hareketSQL, con);
 
@@ -74,7 +76,7 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         }
         catch (Exception err)
         {
-            lbl_mesaj.Text = "Error Cari Bulma ";
+            lbl_mesaj.Text = "Error Personel Bulma ";
             lbl_mesaj.Text += err.Message;
         }
         finally
@@ -91,38 +93,32 @@ public partial class Cari_CariHareket : System.Web.UI.Page
     protected void gv_arama_listele_SelectedIndexChanged(object sender, EventArgs e)
     {
         GridViewRow row = this.gv_arama_listele.SelectedRow;
-        Label lbl_cari_id = (Label)row.FindControl("lbl_cari_id");
-        ibtn_cari_bul_ModalPopupExtender.Hide();
-        Response.Redirect("CariHareket.aspx?CariID=" + lbl_cari_id.Text);
+        Label lbl_Personel_id = (Label)row.FindControl("lbl_Personel_id");
+        ibtn_personel_bul_ModalPopupExtender.Hide();
+        Response.Redirect("PersonelHareket.aspx?PersonelID=" + lbl_Personel_id.Text);
 
 
     }
 
-    protected void CariBilgileriniGetir(int cari_id)
+    protected void PersonelBilgileriniGetir(int Personel_id)
     {
 
 
         SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "SELECT * FROM cari_karti WHERE cari_id=" + cari_id;
+        string queryString = "SELECT personel_id,adi,soyadi,departman_id,odenen_maas FROM personel_karti WHERE personel_id=" + Personel_id;
         SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
-
             connection.Open();
             SqlDataReader reader = cmd.ExecuteReader();
-
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-
-                    lbl_cari_id.Text = reader["cari_id"].ToString();
-
-                    txt_unvan.Text = reader["unvan"].ToString();
-                    dd_grup_id.SelectedValue = reader["grup_id"].ToString();
-                    txt_borc_bakiye.Text = reader["borc_bakiye"].ToString();
-                    txt_alacak_bakiye.Text= reader["alacak_bakiye"].ToString();
-                    txt_bakiye.Text = reader["bakiye"].ToString();
+                    lbl_personel_id.Text = reader["personel_id"].ToString();
+                    txt_adi.Text = reader["adi"].ToString() + " " + reader["soyadi"].ToString();
+                    dd_departman_id.SelectedValue = reader["departman_id"].ToString();
+                    txt_odenen_maas.Text = reader["odenen_maas"].ToString();
 
                 }
             }
@@ -132,7 +128,7 @@ public partial class Cari_CariHareket : System.Web.UI.Page
 
         catch (Exception err)
         {
-            lbl_mesaj.Text = "Error Login. ";
+            lbl_mesaj.Text = "Error Personel Bilgileri Getir. ";
             lbl_mesaj.Text += err.Message;
         }
         finally
@@ -142,9 +138,9 @@ public partial class Cari_CariHareket : System.Web.UI.Page
 
     }
 
-    protected void CariHareketListesiniGetir(int cari_id)
+    protected void PersonelHareketListesiniGetir(int Personel_id)
     {
-        string hareketSQL = "SELECT * FROM cari_hareket WHERE cari_id=" + cari_id+ " ORDER BY kayit_tarihi DESC,cari_hareket_id DESC";
+        string hareketSQL = "SELECT * FROM personel_cari_maas_hareket WHERE personel_id=" + Personel_id + " ORDER BY kayit_tarihi DESC,maas_hareket_id DESC";
         SqlConnection con = new SqlConnection(dataconnect);
         SqlCommand cmd = new SqlCommand(hareketSQL, con);
 
@@ -164,7 +160,7 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         }
         catch (Exception err)
         {
-            lbl_mesaj.Text = "Error Cari Bulma ";
+            lbl_mesaj.Text = "Error Personel Hareketleri Getir. ";
             lbl_mesaj.Text += err.Message;
         }
         finally
@@ -178,13 +174,13 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         }
     }
 
-    protected void CariBorcAlacakBilgisiniGetir(int cari_id)
+    protected void PersonelBorcAlacakBilgisiniGetir(int Personel_id)
     {
-        string hareketSQL = "SELECT sum(borc) AS borc,sum(alacak) AS alacak,sum(borc)-sum(alacak) AS bakiye FROM cari_hareket WHERE cari_id=" + cari_id;
+        string hareketSQL = "SELECT (SELECT sum(tutar) FROM personel_cari_maas_hareket WHERE borc_or_alacak='borc' and personel_id=" + Personel_id + ") AS borc,(SELECT sum(tutar) FROM personel_cari_maas_hareket WHERE borc_or_alacak='alacak' and  personel_id=" + Personel_id + ") AS alacak"; 
         SqlConnection connection = new SqlConnection(dataconnect);
         SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
-      
+
         try
         {
             connection.Open();
@@ -197,14 +193,19 @@ public partial class Cari_CariHareket : System.Web.UI.Page
 
                     txt_borc_bakiye.Text = reader["borc"].ToString();
                     txt_alacak_bakiye.Text = reader["alacak"].ToString();
-                    txt_bakiye.Text = reader["bakiye"].ToString();
+                    if (txt_borc_bakiye.Text != "" || txt_alacak_bakiye.Text != "")
+                    {
+                        decimal bakiye = Convert.ToDecimal(reader["borc"].ToString()) - Convert.ToDecimal(reader["alacak"].ToString());
+                        txt_bakiye.Text = bakiye.ToString();
+                    }
+                
 
                 }
             }
         }
         catch (Exception err)
         {
-            lbl_mesaj.Text = "Error Cari Bulma ";
+            lbl_mesaj.Text = "Error Personel Borç Alacak Hesaplama ";
             lbl_mesaj.Text += err.Message;
         }
         finally
@@ -212,7 +213,7 @@ public partial class Cari_CariHareket : System.Web.UI.Page
             connection.Close();
         }
 
-       
+
     }
 
     protected void dd_odeme_sekli_SelectedIndexChanged(object sender, EventArgs e)  // ödeme şekline göre bağlı hesap tabloları
@@ -223,7 +224,7 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         string queryString = "";
         string data_value = "";
         string data_text = "";
-        if (dd_odeme_sekli.SelectedValue == "nakit") { queryString = "SELECT kasa_id,kasa_adi FROM kasa_kayit ORDER BY  kasa_adi";data_value="kasa_id";data_text="kasa_adi"; }
+        if (dd_odeme_sekli.SelectedValue == "nakit") { queryString = "SELECT kasa_id,kasa_adi FROM kasa_kayit ORDER BY  kasa_adi"; data_value = "kasa_id"; data_text = "kasa_adi"; }
         if (dd_odeme_sekli.SelectedValue == "acikhesap") { queryString = ""; data_value = ""; data_text = ""; }
         if (dd_odeme_sekli.SelectedValue == "banka") { queryString = "SELECT  dbo.banka_kayit.banka_hesap_id, dbo.firma_para_birimi_tanimlama.para_birimi + ' -  ' + dbo.banka_kayit.banka_adi AS banka_hesap_adi FROM dbo.banka_kayit INNER JOIN dbo.firma_para_birimi_tanimlama ON dbo.banka_kayit.para_birimi_id = dbo.firma_para_birimi_tanimlama.para_birimi_id"; data_value = "banka_hesap_id"; data_text = "banka_hesap_adi"; }
         if (dd_odeme_sekli.SelectedValue == "pos") { queryString = "SELECT pos_id,pos_banka_adi FROM banka_pos_kayit ORDER BY pos_banka_adi"; data_value = "pos_id"; data_text = "pos_banka_adi"; }
@@ -233,7 +234,8 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         {
             dd_bagli_hesap.Items.Clear();
             dd_bagli_hesap.Items.Insert(0, "");
-        } else
+        }
+        else
         {
             SqlConnection connection = new SqlConnection(dataconnect);
 
@@ -262,9 +264,9 @@ public partial class Cari_CariHareket : System.Web.UI.Page
                 connection.Close();
             }
         } // if queryString
-         
+
     }
-   
+
     protected void dd_islem_tipi_SelectedIndexChanged(object sender, EventArgs e)
     {
 
@@ -277,108 +279,92 @@ public partial class Cari_CariHareket : System.Web.UI.Page
 
             // SABİT TANIMLAMALAR
             Session["personel"] = "hamza";
-            string queryString = "";
             string islem_tipi = "";
-            decimal borc = 0;
-            decimal alacak = 0;
+            decimal tutar = 0;
+
             string fis_id = ""; string kasa_id = ""; string pos_id = ""; string banka_hesap_id = "";
 
-            if (dd_borc_or_alacak.SelectedValue == "borc") { borc = Convert.ToDecimal(txt_tutar.Text); alacak = 0; }
-            if (dd_borc_or_alacak.SelectedValue == "alacak") { borc = 0; alacak = Convert.ToDecimal(txt_tutar.Text); }
-
+            tutar = Convert.ToDecimal(txt_tutar.Text);
             //  1. DURUM
             if (dd_odeme_sekli.SelectedValue == "nakit")
             {
-                if (dd_borc_or_alacak.SelectedValue == "borc") { islem_tipi = "tahsilat"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
-                if (dd_borc_or_alacak.SelectedValue == "alacak") { islem_tipi = "tediye"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
                 fis_id = "";
                 kasa_id = dd_bagli_hesap.SelectedValue;
                 pos_id = "";
                 banka_hesap_id = "";
-                CariHareketBorcAlacakKaydet(txt_kayit_tarihi.Text, lbl_cari_id.Text, dd_borc_or_alacak.SelectedValue.ToString(), islem_tipi, "nakit", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
+                
 
             }
             //  2. DURUM
             if (dd_odeme_sekli.SelectedValue == "acikhesap")
             {
-
-                if (dd_borc_or_alacak.SelectedValue == "borc") { islem_tipi = "borcdekontu"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
-                if (dd_borc_or_alacak.SelectedValue == "alacak") { islem_tipi = "alacakdekontu"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
                 fis_id = "";
                 kasa_id = "";
                 pos_id = "";
                 banka_hesap_id = "";
-                CariHareketBorcAlacakKaydet(txt_kayit_tarihi.Text, lbl_cari_id.Text, dd_borc_or_alacak.SelectedValue.ToString(), islem_tipi, "acikhesap", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
-
             }
             //  3. DURUM
             if (dd_odeme_sekli.SelectedValue == "banka")
             {
-                if (dd_borc_or_alacak.SelectedValue == "borc") { islem_tipi = "banka"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
-                if (dd_borc_or_alacak.SelectedValue == "alacak") { islem_tipi = "banka"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
                 fis_id = "";
                 kasa_id = "";
                 pos_id = "";
                 banka_hesap_id = dd_bagli_hesap.SelectedValue;
-                CariHareketBorcAlacakKaydet(txt_kayit_tarihi.Text, lbl_cari_id.Text, dd_borc_or_alacak.SelectedValue.ToString(), islem_tipi, "banka", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
-
             }
             //  4. DURUM
             if (dd_odeme_sekli.SelectedValue == "pos")
             {
-                if (dd_borc_or_alacak.SelectedValue == "borc") { islem_tipi = "pos"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
-                if (dd_borc_or_alacak.SelectedValue == "alacak") { islem_tipi = "pos"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
                 fis_id = "";
                 kasa_id = "";
                 pos_id = dd_bagli_hesap.SelectedValue;
-                banka_hesap_id = ""; // store procedure de id hesaplanıyor
-                CariHareketBorcAlacakKaydet(txt_kayit_tarihi.Text, lbl_cari_id.Text, dd_borc_or_alacak.SelectedValue.ToString(), islem_tipi, "pos", txt_belge_no.Text, txt_aciklama.Text, Session["personel"].ToString(), borc, alacak, fis_id, kasa_id, pos_id, banka_hesap_id);
-
+                banka_hesap_id = "";
             }
-            // 
+            //
+         
+
+            PersonelHareketBorcAlacakKaydet(lbl_personel_id.Text, txt_kayit_tarihi.Text, dd_borc_or_alacak.SelectedValue.ToString(),dd_odeme_sekli.SelectedValue, dd_islem_tipi.SelectedValue.ToString(), txt_belge_no.Text, dd_ay.SelectedValue.ToString(), dd_yil.SelectedValue.ToString(), txt_aciklama.Text, tutar, kasa_id, pos_id,banka_hesap_id);
 
         } // if kontroller
 
-        CariHareketListesiniGetir(Convert.ToInt32(lbl_cari_id.Text));
-        CariBorcAlacakBilgisiniGetir(Convert.ToInt32(lbl_cari_id.Text));
-        
+        PersonelHareketListesiniGetir(Convert.ToInt32(lbl_personel_id.Text));
+        PersonelBorcAlacakBilgisiniGetir(Convert.ToInt32(lbl_personel_id.Text));
+
     }
 
     protected bool Kontroller()
     {
-        
+
         return true;
     }
 
-    protected void CariHareketBorcAlacakKaydet(string kayit_tarihi, string cari_id,string borc_or_alacak,string islem_tipi,string odeme_sekli,string belge_no,string aciklama1,string personel, decimal borc, decimal alacak,string fis_id, string kasa_id, string pos_id,string banka_hesap_id)
+    protected void PersonelHareketBorcAlacakKaydet(string personel_id, string kayit_tarihi, string borc_or_alacak, string odeme_sekli, string islem_tipi, string belge_no, string ay, string yil, string aciklama, decimal tutar, string kasa_id, string pos_id, string banka_hesap_id)
     {
-      
+
         SqlConnection connection = new SqlConnection(dataconnect);
 
-        SqlCommand cmd = new SqlCommand("CariHareketEkle", connection);
+        SqlCommand cmd = new SqlCommand("PersonelHareketEkle", connection);
 
         int insert_sql = 0;
         try
         {
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = Convert.ToDateTime(kayit_tarihi);
-            cmd.Parameters.Add("@cari_id", SqlDbType.NVarChar).Value = cari_id;
+            cmd.Parameters.Add("@personel_id", SqlDbType.NVarChar).Value = personel_id;
             cmd.Parameters.Add("@borc_or_alacak", SqlDbType.NVarChar).Value = borc_or_alacak;
-            cmd.Parameters.Add("@islem_tipi", SqlDbType.NVarChar).Value = islem_tipi;
             cmd.Parameters.Add("@odeme_sekli", SqlDbType.NVarChar).Value = odeme_sekli;
+            cmd.Parameters.Add("@islem_tipi", SqlDbType.NVarChar).Value = islem_tipi;
             cmd.Parameters.Add("@belge_no", SqlDbType.NVarChar).Value = belge_no;
-            cmd.Parameters.Add("@aciklama1", SqlDbType.NVarChar).Value = aciklama1;
-            cmd.Parameters.Add("@personel", SqlDbType.NVarChar).Value = personel;
-            cmd.Parameters.Add("@borc", SqlDbType.Decimal).Value = borc;
-            cmd.Parameters.Add("@alacak", SqlDbType.Decimal).Value = alacak;
-            cmd.Parameters.Add("@fis_id", SqlDbType.NVarChar).Value = fis_id;
+            cmd.Parameters.Add("@aciklama1", SqlDbType.NVarChar).Value = aciklama;
+            cmd.Parameters.Add("@maas_donem_ay", SqlDbType.NVarChar).Value = ay;
+            cmd.Parameters.Add("@maas_donem_yil", SqlDbType.Decimal).Value = yil;
+            cmd.Parameters.Add("@tutar", SqlDbType.Decimal).Value = tutar;
             cmd.Parameters.Add("@kasa_id", SqlDbType.NVarChar).Value = kasa_id;
             cmd.Parameters.Add("@pos_id", SqlDbType.NVarChar).Value = pos_id;
             cmd.Parameters.Add("@banka_hesap_id", SqlDbType.NVarChar).Value = banka_hesap_id;
-            
+
             connection.Open();
-            insert_sql=cmd.ExecuteNonQuery();
-          
+            insert_sql = cmd.ExecuteNonQuery();
+
         }
         catch (Exception err)
         {
@@ -389,22 +375,22 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         {
             cmd.Parameters.Clear();
             connection.Close();
-          
+
 
         }
     }
 
     protected void gv_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        int cari_hareket_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
+        int maas_hareket_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
         SqlConnection connection = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand("CariHareketSil", connection);
+        SqlCommand cmd = new SqlCommand("PersonelHareketSil", connection);
 
         int sql_query = 0;
         try
         {
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@cari_hareket_id", SqlDbType.Int).Value = cari_hareket_id;
+            cmd.Parameters.Add("@maas_hareket_id", SqlDbType.Int).Value = maas_hareket_id;
             connection.Open();
             sql_query = cmd.ExecuteNonQuery();
 
@@ -418,8 +404,8 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         {
             cmd.Parameters.Clear();
             connection.Close();
-            CariHareketListesiniGetir(Convert.ToInt32(Request.QueryString["CariID"]));
-            CariBorcAlacakBilgisiniGetir(Convert.ToInt32(Request.QueryString["CariID"]));
+            PersonelHareketListesiniGetir(Convert.ToInt32(Request.QueryString["PersonelID"]));
+            PersonelBorcAlacakBilgisiniGetir(Convert.ToInt32(Request.QueryString["PersonelID"]));
         }
 
     }

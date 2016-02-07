@@ -137,7 +137,7 @@
                     SortExpression="birim_fiyat" />
                 <asp:BoundField DataField="iskonto" HeaderText="iskonto" 
                     SortExpression="iskonto" />
-                <asp:BoundField DataField="kdv" HeaderText="kdv" SortExpression="kdv" />
+                <asp:BoundField DataField="kdv_oran" HeaderText="kdv_oran" SortExpression="kdv_oran" />
                 <asp:BoundField DataField="tutar" HeaderText="tutar" SortExpression="tutar" />
                 <asp:BoundField DataField="cari_id" HeaderText="cari_id" 
                     SortExpression="cari_id" />
