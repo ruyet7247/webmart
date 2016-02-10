@@ -189,7 +189,6 @@
                     DataValueField="personel_departman_id">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource_departman" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
                     SelectCommand="SELECT [personel_departman_id], [personel_departman_adi] FROM [personel_departman_tanimlama]">
                 </asp:SqlDataSource>
             </td>

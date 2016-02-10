@@ -82,7 +82,7 @@
                      Enabled="False">
                 </asp:DropDownList>
                  <asp:SqlDataSource ID="SqlDataSource_para_birimi" runat="server" 
-                     ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                      
                      SelectCommand="SELECT * FROM [firma_para_birimi_tanimlama]">
                  </asp:SqlDataSource>
             </td>

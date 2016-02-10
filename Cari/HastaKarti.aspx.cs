@@ -11,7 +11,7 @@ using System.Threading;
 
 public partial class Cari_HastaKarti : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -60,10 +60,11 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
 
     protected void CariEkle()
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+
         string queryString = "INSERT INTO cari_karti (adi,soyadi,kayit_tarihi,cinsiyet,tc_no,meslek,dogum_yeri,dogum_tarihi,uyruk,tel1,tel2,gsm1,gsm2,mail,kimlik_seri_no,baba_adi,anne_adi,adres1,adres2,posta_kodu,ilce,sehir,ulke,hasta_mi) VALUES \n" +
                               "(@adi,@soyadi,@kayit_tarihi,@cinsiyet,@tc_no,@meslek,@dogum_yeri,@dogum_tarihi,@uyruk,@tel1,@tel2,@gsm1,@gsm2,@mail,@kimlik_seri_no,@baba_adi,@anne_adi,@adres1,@adres2,@posta_kodu,@ilce,@sehir,@ulke,@hasta_mi)";
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
         try
         {
@@ -94,7 +95,7 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
             cmd.Parameters.Add("@hasta_mi", SqlDbType.NVarChar).Value = "HASTA";
 
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -105,16 +106,17 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
     }
 
     protected void CariGuncelle(int cari_id)
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+
         string queryString = "UPDATE cari_karti SET adi=@adi,soyadi=@soyadi,kayit_tarihi=@kayit_tarihi,cinsiyet=@cinsiyet,tc_no=@tc_no,meslek=@meslek,dogum_yeri=@dogum_yeri,dogum_tarihi=@dogum_tarihi,uyruk=@uyruk,tel1=@tel1,tel2=@tel2,gsm1=@gsm1,gsm2=@gsm2,mail=@mail,kimlik_seri_no=@kimlik_seri_no,baba_adi=@baba_adi,anne_adi=@anne_adi,adres1=@adres1,adres2=@adres2,posta_kodu=@posta_kodu,ilce=@ilce,sehir=@sehir,ulke=@ulke WHERE cari_id=" + cari_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
 
         int update_flag = 0;
@@ -148,7 +150,7 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
             cmd.Parameters.Add("@ulke", SqlDbType.NVarChar).Value = txt_ulke.Text;
 
 
-            connection.Open();
+            
             update_flag = cmd.ExecuteNonQuery();
         }
         catch (Exception err)
@@ -158,7 +160,7 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
 
@@ -173,13 +175,14 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
     protected void cariArama(string adi) //cari arama modal popup
     {
         string hareketSQL = "SELECT cari_id,adi,soyadi,gsm1,borc_bakiye,alacak_bakiye,bakiye FROM cari_karti WHERE  hasta_mi='HASTA' and adi LIKE '%" + adi + "%'";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -197,7 +200,7 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -219,14 +222,14 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
     protected void CariBilgileriniGetir(int cari_id)
     {
 
-
-        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "SELECT * FROM cari_karti WHERE cari_id=" + cari_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
+
         try
         {
 
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -281,7 +284,7 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
     }
@@ -301,13 +304,14 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
 
     protected void CariSil(int silinecek_cari_id)
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "DELETE FROM cari_karti WHERE cari_id=" + silinecek_cari_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
+
         try
         {
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -319,7 +323,7 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
     }
 

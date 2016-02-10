@@ -11,10 +11,12 @@ using System.Threading;
 
 public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        SqlDataSource2.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+
         if (Request.QueryString["CariID"] != null)
         {
             try
@@ -66,13 +68,14 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
     protected void cariArama(string unvan) //cari arama modal popup
     {
         string hareketSQL = "SELECT cari_id,unvan,adi,soyadi,gsm1,borc_bakiye,alacak_bakiye,bakiye FROM cari_karti WHERE unvan LIKE '%" + unvan + "%' OR adi LIKE '%" + unvan + "%'";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -90,7 +93,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -112,14 +115,16 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
     protected void CariBilgileriniGetir(int cari_id)
     {
 
-
-        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "SELECT * FROM cari_karti WHERE cari_id=" + cari_id;
+
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(queryString, connection);
+
         try
         {
 
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -129,11 +134,17 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
 
                     lbl_cari_id.Text = reader["cari_id"].ToString();
                     txt_unvan.Text = reader["unvan"].ToString();
-                    dd_grup_id.SelectedValue = reader["grup_id"].ToString();
+                    if (reader["grup_id"].ToString() == "") { 
+                        dd_grup_id.ID = ""; dd_grup_id.Visible = false;
+                        txt_unvan.Text = reader["adi"].ToString() + " " + reader["soyadi"].ToString();
+                    }
+                    else { 
+                        dd_grup_id.SelectedValue = reader["grup_id"].ToString(); 
+                    }
                     txt_vergi_dairesi.Text = reader["vergi_dairesi"].ToString();
                     txt_vergi_no.Text = reader["vergi_no"].ToString();
                     txt_adres.Text = reader["adres1"].ToString() + " " + reader["adres2"].ToString();
-                    
+
 
                 }
             }
@@ -148,7 +159,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
     }
@@ -156,13 +167,14 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
     protected void CariFaturaHareketListesiniGetir(int cari_id)
     {
         string hareketSQL = "SELECT * FROM fatura_stok_hareket_temp WHERE cari_id=" + cari_id + " and onay_verildi_mi='False' ORDER BY fatura_stok_hareket_id DESC";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -180,7 +192,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -193,13 +205,13 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
     {
        /*
         string hareketSQL = "SELECT sum(borc) AS borc,sum(alacak) AS alacak,sum(borc)-sum(alacak) AS bakiye FROM fatura_stok_hareket_temp WHERE cari_id=" + cari_id;
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
 
         try
         {
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -221,7 +233,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         */    
@@ -256,8 +268,8 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
     protected void FaturaKaydet(string kayit_tarihi, string fatura_tarihi, string sira_no, string fatura_no, string unvan, string adres, string notu, string vergi_dairesi, string vergi_no, decimal ara_toplam, decimal kdv_tutar, decimal genel_toplam, string aciklama, string odeme_sekli, string personel, string stok_id, string cari_id, string islem_tipi, string giris_or_cikis, string onay_verildi_mi)
     {
 
-        SqlConnection connection = new SqlConnection(dataconnect);
-
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("FaturaKaydet", connection);
 
         int insert_sql = 0;
@@ -288,7 +300,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
             cmd.Parameters.Add("@onay_verildi_mi", SqlDbType.NVarChar).Value = onay_verildi_mi;
 
 
-            connection.Open();
+            
             insert_sql = cmd.ExecuteNonQuery();
 
         }
@@ -300,7 +312,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
 
         }
@@ -309,7 +321,8 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
     protected void gv_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int fatura_stok_hareket_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
-        SqlConnection connection = new SqlConnection(dataconnect);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("FaturaHareketSilTemp", connection);
 
         int sql_query = 0;
@@ -317,7 +330,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
         {
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@fatura_stok_hareket_id", SqlDbType.Int).Value = fatura_stok_hareket_id;
-            connection.Open();
+            
             sql_query = cmd.ExecuteNonQuery();
 
         }
@@ -329,7 +342,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
             FaturaTutarlariniHesapla(lbl_cari_id.Text);
             CariFaturaHareketListesiniGetir(Convert.ToInt32(lbl_cari_id.Text)); // fatura_stok_hareket_temp
         }
@@ -344,13 +357,14 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
     protected void StokArama(string stok_adi) //stok arama modal popup
     {
         string hareketSQL = "SELECT stok_id,stok_kod_no,stok_barkod_no,stok_uretici_no,stok_adi,giren,cikan,kdv,alis_fiyati,satis_fiyati FROM stok_kayit WHERE stok_adi LIKE '%" + stok_adi + "%'";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -368,7 +382,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -389,14 +403,14 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
     protected void StokBilgisiniGetir(int stok_id)
     {
 
-
-        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "SELECT stok_id,stok_kod_no,stok_adi,birimi,kdv,satis_fiyati FROM stok_kayit WHERE stok_id=" + stok_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
+
         try
         {
 
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -422,7 +436,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
     }
@@ -437,14 +451,14 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
     protected void FaturaTutarlariniHesapla(string cari_id)
     {
 
-
-        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "SELECT SUM(kdvsiz_tutar) AS kdvsiz_tutar,SUM(kdv_tutari) AS kdv_tutari,SUM(tutar) AS tutar FROM fatura_stok_hareket_temp WHERE onay_verildi_mi=0 and cari_id="+cari_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
+
         try
         {
 
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -469,7 +483,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
     }
@@ -477,7 +491,8 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
 
     protected void StokHareketKaydet()
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("FaturaStokHareketEkleTemp", connection);
 
         int insert_sql = 0;
@@ -500,7 +515,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
             cmd.Parameters.Add("@onay_verildi_mi", SqlDbType.Bit).Value = "False";
 
 
-            connection.Open();
+            
             insert_sql = cmd.ExecuteNonQuery();
 
         }
@@ -512,7 +527,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
 
         }

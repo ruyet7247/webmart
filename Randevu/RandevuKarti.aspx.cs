@@ -11,10 +11,12 @@ using System.Threading;
 
 public partial class Randevu_RandevuKarti : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        SqlDataSource_doktorlar.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+
         if (Request.QueryString["RandevuID"] != null)
         {
             try
@@ -62,14 +64,14 @@ public partial class Randevu_RandevuKarti : System.Web.UI.Page
         DateTime tarih = Convert.ToDateTime(txt_randevu_tarihi.Text);
         //string hareketSQL = "SELECT * FROM randevu_kayit  ORDER BY randevu_saati DESC,randevu_dakika DESC";
         string hareketSQL = "SELECT * FROM randevu_kayit WHERE  randevu_tarihi='" + tarih.ToString("yyyy-dd-MM") + "' ORDER BY randevu_saati ,randevu_dakika ";
-
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -86,7 +88,7 @@ public partial class Randevu_RandevuKarti : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -100,10 +102,10 @@ public partial class Randevu_RandevuKarti : System.Web.UI.Page
         if (txt_randevu_tarihi.Text != "")
         {
             DateTime kayit_tarihi = DateTime.Now;
-            SqlConnection connection = new SqlConnection(dataconnect);
+            
             string queryString = "INSERT INTO randevu_kayit (kayit_tarihi,randevu_tarihi,randevu_saati,randevu_dakika,adi_soyadi,gsm,tel,randevu_notu,geldi_mi,doktor_adi_soyadi) VALUES \n" +
                                   "(@kayit_tarihi,@randevu_tarihi,@randevu_saati,@randevu_dakika,@adi_soyadi,@gsm,@tel,@randevu_notu,@geldi_mi,@doktor_adi_soyadi)";
-            SqlCommand cmd = new SqlCommand(queryString, connection);
+            ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
             try
             {
@@ -119,7 +121,7 @@ public partial class Randevu_RandevuKarti : System.Web.UI.Page
                 cmd.Parameters.Add("@geldi_mi", SqlDbType.Bit).Value = "False";
                 cmd.Parameters.Add("@doktor_adi_soyadi", SqlDbType.NVarChar).Value = dd_doktor_adi_soyadi.SelectedValue;
 
-                connection.Open();
+                
                 cmd.ExecuteNonQuery();
 
             }
@@ -130,7 +132,7 @@ public partial class Randevu_RandevuKarti : System.Web.UI.Page
             }
             finally
             {
-                connection.Close();
+                baglan.VeritabaniBaglantiyiKapat(connection);
                 RandevulistesiGetir();
             }
         }
@@ -139,8 +141,10 @@ public partial class Randevu_RandevuKarti : System.Web.UI.Page
     protected void gv_arama_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int randevu_id = Convert.ToInt32(gv_arama_listele.DataKeys[e.RowIndex].Value);
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string query_string = "DELETE FROM randevu_kayit WHERE randevu_id=@randevu_id";
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(query_string, connection);
 
         int sql_query = 0;
@@ -148,7 +152,7 @@ public partial class Randevu_RandevuKarti : System.Web.UI.Page
         {
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.Add("@randevu_id", SqlDbType.Int).Value = randevu_id;
-            connection.Open();
+            
             sql_query = cmd.ExecuteNonQuery();
 
         }
@@ -160,7 +164,7 @@ public partial class Randevu_RandevuKarti : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
             RandevulistesiGetir();
         }
     }
@@ -169,14 +173,14 @@ public partial class Randevu_RandevuKarti : System.Web.UI.Page
     {
         
         string hareketSQL = "UPDATE randevu_kayit SET geldi_mi = @geldi_mi WHERE randevu_id=@randevu_id";
-
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             cmd.Parameters.Add("@geldi_mi", SqlDbType.Bit).Value = randevu_statusu;
             cmd.Parameters.Add("@randevu_id", SqlDbType.Int).Value = randevu_idsi;
             updated = cmd.ExecuteNonQuery();
@@ -189,7 +193,7 @@ public partial class Randevu_RandevuKarti : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)

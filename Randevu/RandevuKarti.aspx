@@ -87,7 +87,7 @@
                         DataValueField="adi">
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="SqlDataSource_doktorlar" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                         
                         SelectCommand="SELECT dbo.personel_karti.adi+' '+ dbo.personel_karti.soyadi AS adi, dbo.personel_departman_tanimlama.personel_departman_adi FROM dbo.personel_departman_tanimlama INNER JOIN dbo.personel_karti ON dbo.personel_departman_tanimlama.personel_departman_id = dbo.personel_karti.departman_id WHERE personel_departman_adi='DOKTOR'">
                     </asp:SqlDataSource>
                 </td>

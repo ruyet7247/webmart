@@ -11,10 +11,14 @@ using System.Threading;
 
 public partial class Personel_PersonelKarti : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        SqlDataSource_departman.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+
+
         if (Request.QueryString["PersonelID"] != null)
         {
             try
@@ -38,7 +42,7 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
 
         }
 
-
+   
 
     }
 
@@ -58,7 +62,8 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
 
     protected void PersonelEkle()
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("PersonelKartiEkle", connection);
 
         try
@@ -89,7 +94,7 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
             cmd.Parameters.Add("@ehliyet_sinifi", SqlDbType.NVarChar).Value = txt_ehliyet_sinifi.Text;
             cmd.Parameters.Add("@aktif_or_pasif", SqlDbType.NVarChar).Value = dd_aktif_or_pasif.SelectedValue;
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -100,14 +105,15 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
     }
 
     protected void PersonelGuncelle(int personel_id)
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("PersonelKartiGuncelle", connection);
 
         int update_flag = 0;
@@ -146,7 +152,7 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
             cmd.Parameters.Add("@aktif_or_pasif", SqlDbType.NVarChar).Value =dd_aktif_or_pasif.SelectedValue;
 
 
-            connection.Open();
+            
             update_flag = cmd.ExecuteNonQuery();
         }
         catch (Exception err)
@@ -156,7 +162,7 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
 
@@ -171,13 +177,14 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
     protected void PersonelArama(string adi) //personel arama modal popup
     {
         string hareketSQL = "SELECT personel_id,tc,adi,soyadi,kullanici_adi,gsm FROM personel_karti WHERE adi LIKE '%" + adi + "%'";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -195,7 +202,7 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -218,13 +225,13 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
     {
 
 
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "SELECT * FROM personel_karti WHERE personel_id=" + personel_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -274,7 +281,7 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
     }
@@ -294,13 +301,13 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
 
     protected void PersonelSil(int silinecek_personel_id)
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "DELETE FROM personel_karti WHERE personel_id=" + silinecek_personel_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -312,7 +319,7 @@ public partial class Personel_PersonelKarti : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
     }
 

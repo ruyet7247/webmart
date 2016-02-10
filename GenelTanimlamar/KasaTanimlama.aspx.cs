@@ -11,12 +11,13 @@ using System.Threading;
 
 public partial class GenelTanimlamar_KasaTanimi : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
     int kullanici_id = 0;
     
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        SqlDataSource1.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+
         if (!IsPostBack)  // tıklama ile sayfa gelmemiş ise
         {
             lbl_kasa_id.Text = "0";
@@ -49,10 +50,10 @@ public partial class GenelTanimlamar_KasaTanimi : System.Web.UI.Page
 
     protected void KasaEkle()
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "INSERT INTO kasa_kayit (kasa_adi,para_birimi_id,aciklama1) VALUES \n" +
                               "(@kasa_adi,@para_birimi_id,@aciklama1)";
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
         try
         {
@@ -60,7 +61,7 @@ public partial class GenelTanimlamar_KasaTanimi : System.Web.UI.Page
             cmd.Parameters.Add("@para_birimi_id", SqlDbType.Int).Value = Convert.ToInt32(dd_para_birimi.SelectedValue);
             cmd.Parameters.Add("@aciklama1", SqlDbType.NVarChar).Value = txt_aciklama.Text;
          
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -71,16 +72,16 @@ public partial class GenelTanimlamar_KasaTanimi : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
     }
 
     protected void KasaGuncelle(int kasa_id)
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "UPDATE kasa_kayit SET kasa_adi=@kasa_adi,para_birimi_id=@para_birimi_id,aciklama1=@aciklama1 WHERE kasa_id=" + kasa_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
 
 
@@ -95,7 +96,7 @@ public partial class GenelTanimlamar_KasaTanimi : System.Web.UI.Page
 
             //Response.Write(cmd.CommandText);
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
         }
         catch (Exception err)
@@ -105,7 +106,7 @@ public partial class GenelTanimlamar_KasaTanimi : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
            
         }
     }
@@ -113,13 +114,12 @@ public partial class GenelTanimlamar_KasaTanimi : System.Web.UI.Page
     protected void KasaListele()
     {
         string hareketSQL = "SELECT dbo.kasa_kayit.*, dbo.firma_para_birimi_tanimlama.para_birimi FROM dbo.kasa_kayit INNER JOIN dbo.firma_para_birimi_tanimlama ON dbo.kasa_kayit.para_birimi_id = dbo.firma_para_birimi_tanimlama.para_birimi_id ORDER BY dbo.kasa_kayit.kasa_adi";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt(); SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString()); SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -137,7 +137,7 @@ public partial class GenelTanimlamar_KasaTanimi : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -163,13 +163,13 @@ public partial class GenelTanimlamar_KasaTanimi : System.Web.UI.Page
     protected void KasaBilgileriniGetir(int kasa_id)
     {
 
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "SELECT * FROM kasa_kayit WHERE kasa_id="+kasa_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
            
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -196,7 +196,7 @@ public partial class GenelTanimlamar_KasaTanimi : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
  
@@ -206,13 +206,13 @@ public partial class GenelTanimlamar_KasaTanimi : System.Web.UI.Page
     protected void gv_kasa_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int kasa_id = Convert.ToInt32(gv_kasa_listele.DataKeys[e.RowIndex].Value);
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "DELETE FROM kasa_kayit WHERE kasa_id=" + kasa_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -224,7 +224,7 @@ public partial class GenelTanimlamar_KasaTanimi : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
             KasaListele();
         }
     }

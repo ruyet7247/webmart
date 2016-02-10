@@ -79,7 +79,7 @@
                      Enabled="False">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                     
                     SelectCommand="SELECT * FROM [stok_grubu_tanimlama]"></asp:SqlDataSource>
             </td>
         </tr>
@@ -147,6 +147,12 @@
                     SortExpression="fis_id" />
                 <asp:BoundField DataField="fatura_id" HeaderText="fatura_id" 
                     SortExpression="fatura_id" />
+                <asp:TemplateField ShowHeader="False">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
+                            CommandName="Delete" Text="Delete" OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');"></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
 
         </asp:GridView>

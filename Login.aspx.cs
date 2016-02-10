@@ -15,9 +15,8 @@ using System.Threading;
 public partial class Login : System.Web.UI.Page
 {
     TextBox dtext; //doğrulama text
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
-
-    protected void Page_Load(object sender, EventArgs e)
+    
+   protected void Page_Load(object sender, EventArgs e)
     {
         dtext = (TextBox)Pnl_login.FindControl("txt_dtext");
         //** doğrulama textbox ı üzerindeyken entere basılırsa Login butonunu clickle
@@ -78,7 +77,11 @@ public partial class Login : System.Web.UI.Page
                 bool yasak_kelime_kontrol = yasak_kontrol.YasakKelimeyiKontrolEt(txt_kullanici_adi.Text+" "+txt_sifre.Text);
                 if (yasak_kelime_kontrol)
                 {
-                    KullaniciGirisKontrol(txt_kullanici_adi.Text, txt_sifre.Text);
+                    if (KullaniciGirisKontrol(txt_kullanici_adi.Text, txt_sifre.Text))  // BAŞARILI MI???????
+                    {
+                        /* LOGİN başarılı ise DEfault yönlendirilir. Tüm sayfalarda SESSION MASTERPAGE de bir seferde kontrol edilir. */
+                        Response.Redirect("Default.aspx");
+                    }
                 }
             } 
             
@@ -88,49 +91,78 @@ public partial class Login : System.Web.UI.Page
             lbl_mesaj.Text = "Doğrulama Kodu Hatalı";
         }
 
+       
+
+
     }
 
 
-    protected void KullaniciGirisKontrol(string kullanici_adi,string sifre)
+    protected bool KullaniciGirisKontrol(string kullanici_adi,string sifre)
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString="SELECT * FROM firma_kullanici_tanimlama WHERE aktif_or_pasif=1 AND kullanici_adi=@kullanici_adi AND kullanici_sifre=@kullanici_sifre";
+
+        string queryString = "SELECT   dbo.firma_kullanici_kayit.*,dbo.firma_kayit.firma_adi, dbo.firma_kayit.veritabani_adi, dbo.firma_kayit.connection_string_adi FROM dbo.firma_kayit INNER JOIN dbo.firma_kullanici_kayit ON dbo.firma_kayit.firma_id = dbo.firma_kullanici_kayit.firma_id WHERE aktif_or_pasif=1 AND kullanici_adi=@kullanici_adi AND kullanici_sifre=@kullanici_sifre";
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan("WebMart_Master");
         SqlCommand cmd = new SqlCommand(queryString, connection);
-        DataTable dt = new DataTable();
         try
         {
-            connection.Open();
-            cmd.Parameters.Add("@kullanici_adi", kullanici_adi);
-            cmd.Parameters.Add("@kullanici_sifre", sifre);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
+            cmd.Parameters.Add("@kullanici_adi", SqlDbType.NVarChar).Value = txt_kullanici_adi.Text;
+            cmd.Parameters.Add("@kullanici_sifre", SqlDbType.NVarChar).Value = txt_sifre.Text;
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    Session["GirisVar"] = "True";
+                    Session["ConnectionString"] = reader["connection_string_adi"].ToString();
+                    Session["firma_id"] = reader["firma_id"].ToString();
+                    Session["firma_adi"] = reader["firma_adi"].ToString();
+                    Session["adi_soyadi"] = reader["adi_soyadi"].ToString();
+                    Session["gsm"] = reader["connection_string_adi"].ToString();
+                    Session["yetki"] = reader["yetki"].ToString();
+
+
+                    string firma_id = reader["firma_id"].ToString();
+                    string yetki = reader["yetki"].ToString();
+
+                    if (firma_id == "-1" && yetki == "master")
+                    {
+                        Session["Master"] = "True";
+                    }
+                    else
+                    {
+                        Session["Master"] = "False";
+                    }
+                    return true;
+
+                }
+            }
+            else
+            {
+                lbl_mesaj.Text = "Hatalı Kullanıcı Adı veya Şifre ";
+                Session["GirisVar"] = "False";
+                return false;
+            }
+
+
         }
+
         catch (Exception err)
         {
-            lbl_mesaj.Text = "Error Login. ";
+            lbl_mesaj.Text = "Error Login Kullanıcı Girişi. ";
             lbl_mesaj.Text += err.Message;
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
-        if (dt.Rows.Count == 1)
-        {
-            lbl_mesaj.Text = "Giriş Başarılı";
-            OturumBilgileriDoldur(kullanici_adi,sifre);
-            Response.Redirect("Default.aspx");
-        }
-        else
-        {
-            lbl_mesaj.Text = "Giriş Başarısız";
-        }
+
+
+        return false;
+
     }
-
-    protected void OturumBilgileriDoldur(string kullanici_adi,string sifre)
-    {
-        Session["GirisVar"] = "True";
-
-    }   
+  
 
 
 

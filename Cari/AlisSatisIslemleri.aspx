@@ -202,7 +202,7 @@
                         Width="150px">
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                         
                         SelectCommand="SELECT * FROM [cari_grubu_tanimlama]"></asp:SqlDataSource>
                 </td>
                 <td class="style5">

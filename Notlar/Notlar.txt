@@ -1,4 +1,4 @@
-1-AJAX KONTROL--Projeye ADD ITEM ajaxToolkit Ekle.
+1-AJAX KONTROL--Projeye ADD ITEM ajaxToolkit Ekle. add referance
 2-Kullanýrken sayfaya ToolkitScriptManager componenti en üste at
 							<table style="width:100%;">
 									<tr>

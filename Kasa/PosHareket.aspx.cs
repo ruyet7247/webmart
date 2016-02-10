@@ -11,11 +11,13 @@ using System.Threading;
 
 public partial class Kasa_PosHareket : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
 
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        SqlDataSource_banka_hesap_id.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+        
         if (Request.QueryString["PosID"] != null)
         {
             try
@@ -53,13 +55,14 @@ public partial class Kasa_PosHareket : System.Web.UI.Page
     {
 
         string hareketSQL = "SELECT  * FROM banka_pos_kayit WHERE pos_banka_adi LIKE '%" + pos_banka_adi + "%'";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -77,7 +80,7 @@ public partial class Kasa_PosHareket : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -91,7 +94,7 @@ public partial class Kasa_PosHareket : System.Web.UI.Page
 
         int deger = 0;
 
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
 
         string queryString = "SELECT     pos_id,pos_banka_adi, bagli_olan_banka_hesap_id, tahakkuk_gun_sayisi, \n" +
                           " (SELECT     SUM(tutar) AS giren1 \n" +
@@ -104,11 +107,11 @@ public partial class Kasa_PosHareket : System.Web.UI.Page
                           "   WHERE      (pos_id =   " + pos_id + " )";
 
 
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -139,7 +142,7 @@ public partial class Kasa_PosHareket : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
 
@@ -148,13 +151,14 @@ public partial class Kasa_PosHareket : System.Web.UI.Page
     protected void PosHareketListesiniGetir(int pos_id)
     {
         string hareketSQL = "SELECT * FROM banka_pos_hareket WHERE pos_id=" + pos_id + " ORDER BY kayit_tarihi DESC,odeme_tarihi DESC,pos_hareket_id DESC";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -172,7 +176,7 @@ public partial class Kasa_PosHareket : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -208,8 +212,9 @@ public partial class Kasa_PosHareket : System.Web.UI.Page
     protected void PosHareketGirisCikisKaydet(int pos_id, string kayit_tarihi, string giris_or_cikis, string aciklama1, decimal tutar, string personel_adi)
     {
 
-        SqlConnection connection = new SqlConnection(dataconnect);
 
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("PosHareketEkle", connection);
 
         int insert_sql = 0;
@@ -225,7 +230,7 @@ public partial class Kasa_PosHareket : System.Web.UI.Page
 
 
 
-            connection.Open();
+            
             insert_sql = cmd.ExecuteNonQuery();
 
         }
@@ -237,7 +242,7 @@ public partial class Kasa_PosHareket : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
 
         }
@@ -246,7 +251,8 @@ public partial class Kasa_PosHareket : System.Web.UI.Page
     protected void gv_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int banka_pos_hareket_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
-        SqlConnection connection = new SqlConnection(dataconnect);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("PosHareketSil", connection);
 
         int sql_query = 0;
@@ -254,7 +260,7 @@ public partial class Kasa_PosHareket : System.Web.UI.Page
         {
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@pos_hareket_id", SqlDbType.Int).Value = banka_pos_hareket_id;
-            connection.Open();
+            
             sql_query = cmd.ExecuteNonQuery();
 
         }
@@ -266,7 +272,7 @@ public partial class Kasa_PosHareket : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
             PosBilgileriniGetir(Convert.ToInt32(lbl_pos_id.Text));  // aramadan gelen
             PosHareketListesiniGetir(Convert.ToInt32(lbl_pos_id.Text));
         }

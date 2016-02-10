@@ -156,7 +156,7 @@
                     DataTextField="stok_grubu_adi" DataValueField="stok_grubu_id">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                     
                     SelectCommand="SELECT * FROM [stok_grubu_tanimlama]"></asp:SqlDataSource>
             </td>
             <td class="style1">

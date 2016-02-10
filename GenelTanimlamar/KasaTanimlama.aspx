@@ -45,7 +45,7 @@
                     ondatabound="dd_para_birimi_DataBound">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                     
                     
                     SelectCommand="SELECT [para_birimi_id], [para_birimi] FROM [firma_para_birimi_tanimlama]"></asp:SqlDataSource>
             </td>

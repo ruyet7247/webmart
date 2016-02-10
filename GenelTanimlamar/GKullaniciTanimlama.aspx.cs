@@ -11,11 +11,13 @@ using System.Threading;
 
 public partial class GenelTanimlamar_GKullaniciTanimlama : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
     int kullanici_id = 0;
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        SqlDataSource1.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+
         if (!IsPostBack)
         {
             lbl_kod_no.Text = "0";
@@ -35,10 +37,10 @@ public partial class GenelTanimlamar_GKullaniciTanimlama : System.Web.UI.Page
 
     protected void KullaniciEkle()
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "INSERT INTO firma_kullanici_tanimlama (kullanici_personel_id,kullanici_adi,kullanici_sifre,aktif_or_pasif) VALUES \n" +
                                                                     "(@kullanici_personel_id,@kullanici_adi,@kullanici_sifre,@aktif_or_pasif)";
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
         Response.Write(dd_list_aktif_or_pasif.SelectedValue);
 
@@ -49,7 +51,7 @@ public partial class GenelTanimlamar_GKullaniciTanimlama : System.Web.UI.Page
             cmd.Parameters.Add("@kullanici_sifre", SqlDbType.NVarChar).Value = txt_kullanici_sifre.Text;
             cmd.Parameters.Add("@aktif_or_pasif", SqlDbType.Char).Value =dd_list_aktif_or_pasif.SelectedValue;
           
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
         }
         catch (Exception err)
@@ -59,16 +61,16 @@ public partial class GenelTanimlamar_GKullaniciTanimlama : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
            
         }
     }
 
     protected void KullaniciGuncelle()
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "UPDATE firma_kayit SET kullanici_personel_id=@kullanici_personel_id,kullanici_adi=@kullanici_adi,kullanici_sifre=@kullanici_sifre,aktif_or_pasif=@aktif_or_pasif WHERE kullanici_id=" + kullanici_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
 
 
@@ -83,7 +85,7 @@ public partial class GenelTanimlamar_GKullaniciTanimlama : System.Web.UI.Page
 
             //Response.Write(cmd.CommandText);
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
         }
         catch (Exception err)
@@ -93,7 +95,7 @@ public partial class GenelTanimlamar_GKullaniciTanimlama : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
             Response.Write(cmd.UpdatedRowSource.ToString());
         }
     }

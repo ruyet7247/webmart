@@ -11,10 +11,12 @@ using System.Threading;
 
 public partial class Stok_StokKarti : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        SqlDataSource2.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+        
         if (Request.QueryString["StokID"] != null)
         {
             try
@@ -58,10 +60,10 @@ public partial class Stok_StokKarti : System.Web.UI.Page
 
     protected void stokEkle()
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "INSERT INTO stok_kayit (kayit_tarihi,stok_kod_no,stok_barkod_no,stok_uretici_no,stok_adi,birimi,grubu_id,kdv,alis_fiyati,satis_fiyati) VALUES \n" +
                               "(@kayit_tarihi,@stok_kod_no,@stok_barkod_no,@stok_uretici_no,@stok_adi,@birimi,@grubu_id,@kdv,@alis_fiyati,@satis_fiyati)";
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
         try
         {
@@ -78,7 +80,7 @@ public partial class Stok_StokKarti : System.Web.UI.Page
            
 
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -89,15 +91,17 @@ public partial class Stok_StokKarti : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
     }
 
     protected void stokGuncelle(int stok_id)
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         ///string queryString = "UPDATE stok_kayit SET kayit_tarihi=@kayit_tarihi,stok_kod_no=@stok_kod_no,stok_barkod_no=@stok_barkod_no,stok_uretici_no=@stok_uretici_no,stok_adi=@stok_adi,birimi=@birimi,grubu_id=@grubu_id,kdv=@kdv,alis_fiyati=@alis_fiyati,satis_fiyati=@satis_fiyati WHERE stok_id=" + stok_id;
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("StokKartiGuncelle", connection);
 
 
@@ -121,7 +125,7 @@ public partial class Stok_StokKarti : System.Web.UI.Page
             cmd.Parameters.Add("@satis_fiyati", SqlDbType.Decimal).Value = txt_satis_fiyati.Text;
 
 
-            connection.Open();
+            
             update_flag = cmd.ExecuteNonQuery();
         }
         catch (Exception err)
@@ -131,7 +135,7 @@ public partial class Stok_StokKarti : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
 
@@ -146,13 +150,14 @@ public partial class Stok_StokKarti : System.Web.UI.Page
     protected void stokArama(string stok_adi) //stok arama modal popup
     {
         string hareketSQL = "SELECT stok_id,stok_adi,birimi,kdv,alis_fiyati,satis_fiyati FROM stok_kayit WHERE stok_adi LIKE '%" + stok_adi + "%'";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -170,7 +175,7 @@ public partial class Stok_StokKarti : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -193,13 +198,13 @@ public partial class Stok_StokKarti : System.Web.UI.Page
     {
 
 
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "SELECT * FROM stok_kayit WHERE stok_id=" + stok_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -234,7 +239,7 @@ public partial class Stok_StokKarti : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
     }
@@ -254,13 +259,13 @@ public partial class Stok_StokKarti : System.Web.UI.Page
 
     protected void StokSil(int silinecek_stok_id)
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "DELETE FROM stok_kayit WHERE stok_id=" + silinecek_stok_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -272,7 +277,7 @@ public partial class Stok_StokKarti : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
     }
 

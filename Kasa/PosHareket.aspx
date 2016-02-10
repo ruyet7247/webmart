@@ -105,7 +105,7 @@
                      Enabled="False">
                 </asp:DropDownList>
                  <asp:SqlDataSource ID="SqlDataSource_banka_hesap_id" runat="server" 
-                     ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                      
                      SelectCommand="SELECT [banka_hesap_id], [banka_adi] FROM [banka_kayit]">
                  </asp:SqlDataSource>
             </td>

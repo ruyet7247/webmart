@@ -11,7 +11,7 @@ using System.Threading;
 
 public partial class GenelTanimlamar_PersonelDepartmanTanimlama : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
     int personel_departman_id = 0;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -45,17 +45,17 @@ public partial class GenelTanimlamar_PersonelDepartmanTanimlama : System.Web.UI.
 
     protected void VeriEkle()
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "INSERT INTO personel_departman_tanimlama (personel_departman_adi,personel_departman_aciklama1) VALUES \n" +
                               "(@personel_departman_adi,@personel_departman_aciklama1)";
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
         try
         {
             cmd.Parameters.Add("@personel_departman_adi", SqlDbType.NVarChar).Value = txt_personel_departman_adi.Text;
             cmd.Parameters.Add("@personel_departman_aciklama1", SqlDbType.NVarChar).Value = txt_personel_departman_aciklama1.Text;
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -66,18 +66,18 @@ public partial class GenelTanimlamar_PersonelDepartmanTanimlama : System.Web.UI.
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
     }
 
     protected void VeriGuncelle(int numarator_id)
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+
         string queryString = "UPDATE personel_departman_tanimlama SET personel_departman_adi=@personel_departman_adi,personel_departman_aciklama1=@personel_departman_aciklama1 WHERE personel_departman_id=" + numarator_id;
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(queryString, connection);
-
-
 
         try
         {
@@ -88,7 +88,7 @@ public partial class GenelTanimlamar_PersonelDepartmanTanimlama : System.Web.UI.
 
             //Response.Write(cmd.CommandText);
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
         }
         catch (Exception err)
@@ -98,7 +98,7 @@ public partial class GenelTanimlamar_PersonelDepartmanTanimlama : System.Web.UI.
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
     }
@@ -106,13 +106,14 @@ public partial class GenelTanimlamar_PersonelDepartmanTanimlama : System.Web.UI.
     protected void VeriListele()
     {
         string hareketSQL = "SELECT * FROM personel_departman_tanimlama";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection); ;
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -130,7 +131,7 @@ public partial class GenelTanimlamar_PersonelDepartmanTanimlama : System.Web.UI.
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -156,13 +157,15 @@ public partial class GenelTanimlamar_PersonelDepartmanTanimlama : System.Web.UI.
     protected void CariBilgileriniGetir(int numarator_id)
     {
 
-        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "SELECT * FROM personel_departman_tanimlama WHERE personel_departman_id=" + numarator_id;
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(queryString, connection);
+
         try
         {
 
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -189,7 +192,7 @@ public partial class GenelTanimlamar_PersonelDepartmanTanimlama : System.Web.UI.
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
 
@@ -199,13 +202,15 @@ public partial class GenelTanimlamar_PersonelDepartmanTanimlama : System.Web.UI.
     protected void gv_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int numarator_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
-        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "DELETE FROM personel_departman_tanimlama WHERE personel_departman_id=" + numarator_id;
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(queryString, connection);
+
         try
         {
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -217,7 +222,7 @@ public partial class GenelTanimlamar_PersonelDepartmanTanimlama : System.Web.UI.
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
             VeriListele();
         }
     }

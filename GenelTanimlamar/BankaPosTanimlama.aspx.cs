@@ -11,12 +11,14 @@ using System.Threading;
 
 public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
     int cari_gurubu_id = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
 
+        SqlDataSource_banka_hesap_listesi.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+        
         if (!IsPostBack)  // tıklama ile sayfa gelmemiş ise
         {
             lbl_pos_id.Text = "0";
@@ -45,10 +47,10 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
 
     protected void VeriEkle()
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "INSERT INTO banka_pos_kayit (pos_banka_adi,bagli_olan_banka_hesap_id,tahakkuk_gun_sayisi) VALUES \n" +
                               "(@pos_banka_adi,@bagli_olan_banka_hesap_id,@tahakkuk_gun_sayisi)";
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
         try
         {
@@ -56,7 +58,7 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
             cmd.Parameters.Add("@bagli_olan_banka_hesap_id", SqlDbType.Int).Value = dd_bagli_olan_banka_hesap_id.SelectedValue;
             cmd.Parameters.Add("@tahakkuk_gun_sayisi", SqlDbType.Int).Value = txt_tahakkuk_gun_sayisi.Text;
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -67,16 +69,16 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
     }
 
     protected void VeriGuncelle(int numarator_id)
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "UPDATE banka_pos_kayit SET pos_banka_adi=@pos_banka_adi,bagli_olan_banka_hesap_id=@bagli_olan_banka_hesap_id,tahakkuk_gun_sayisi=@tahakkuk_gun_sayisi WHERE pos_id=" + numarator_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
 
 
@@ -90,7 +92,7 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
 
             //Response.Write(cmd.CommandText);
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
         }
         catch (Exception err)
@@ -100,7 +102,7 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
     }
@@ -108,13 +110,12 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
     protected void VeriListele()
     {
         string hareketSQL = "SELECT * FROM banka_pos_kayit";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt(); SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString()); SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -132,7 +133,7 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -158,13 +159,13 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
     protected void CariBilgileriniGetir(int numarator_id)
     {
 
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "SELECT * FROM banka_pos_kayit WHERE pos_id=" + numarator_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -192,7 +193,7 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
 
@@ -202,13 +203,13 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
     protected void gv_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int numarator_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "DELETE FROM banka_pos_kayit WHERE pos_id=" + numarator_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -220,7 +221,7 @@ public partial class GenelTanimlamar_BankaPosTanimlama : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
             VeriListele();
         }
     }

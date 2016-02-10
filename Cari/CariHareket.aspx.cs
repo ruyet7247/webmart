@@ -11,10 +11,14 @@ using System.Threading;
 
 public partial class Cari_CariHareket : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        SqlDataSource_odeme_sekli.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+        SqlDataSource2.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+
+
         if (Request.QueryString["CariID"] != null)
         {
             try
@@ -40,10 +44,8 @@ public partial class Cari_CariHareket : System.Web.UI.Page
             }
 
         }
-     
 
       
-
     }
 
     protected void ibtn_arama_Click(object sender, ImageClickEventArgs e) // cari arama modal popup
@@ -54,14 +56,15 @@ public partial class Cari_CariHareket : System.Web.UI.Page
 
     protected void cariArama(string unvan) //cari arama modal popup
     {
-        string hareketSQL = "SELECT cari_id,unvan,gsm1,borc_bakiye,alacak_bakiye,bakiye FROM cari_karti WHERE unvan LIKE '%" + unvan + "%'";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        string hareketSQL = "SELECT cari_id,adi,soyadi,unvan,gsm1,borc_bakiye,alacak_bakiye,bakiye FROM cari_karti WHERE unvan LIKE '%" + unvan + "%' OR adi LIKE '%" + unvan + "%'";
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -79,7 +82,7 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -101,14 +104,13 @@ public partial class Cari_CariHareket : System.Web.UI.Page
     protected void CariBilgileriniGetir(int cari_id)
     {
 
-
-        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "SELECT * FROM cari_karti WHERE cari_id=" + cari_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
+
         try
         {
 
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -117,12 +119,20 @@ public partial class Cari_CariHareket : System.Web.UI.Page
                 {
 
                     lbl_cari_id.Text = reader["cari_id"].ToString();
-
                     txt_unvan.Text = reader["unvan"].ToString();
-                    dd_grup_id.SelectedValue = reader["grup_id"].ToString();
+                    if (reader["grup_id"].ToString() == "")
+                        {
+                            dd_grup_id.ID = ""; dd_grup_id.Visible = false;
+                            txt_unvan.Text = reader["adi"].ToString() + " " + reader["soyadi"].ToString();
+                        }
+                        else
+                        {
+                            dd_grup_id.SelectedValue = reader["grup_id"].ToString();
+                        }
                     txt_borc_bakiye.Text = reader["borc_bakiye"].ToString();
-                    txt_alacak_bakiye.Text= reader["alacak_bakiye"].ToString();
+                    txt_alacak_bakiye.Text = reader["alacak_bakiye"].ToString();
                     txt_bakiye.Text = reader["bakiye"].ToString();
+          
 
                 }
             }
@@ -137,21 +147,20 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
     }
 
     protected void CariHareketListesiniGetir(int cari_id)
     {
-        string hareketSQL = "SELECT * FROM cari_hareket WHERE cari_id=" + cari_id+ " ORDER BY kayit_tarihi DESC,cari_hareket_id DESC";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        string queryString = "SELECT * FROM cari_hareket WHERE cari_id=" + cari_id + " ORDER BY kayit_tarihi DESC,cari_hareket_id DESC";
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -169,7 +178,7 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -181,13 +190,14 @@ public partial class Cari_CariHareket : System.Web.UI.Page
     protected void CariBorcAlacakBilgisiniGetir(int cari_id)
     {
         string hareketSQL = "SELECT sum(borc) AS borc,sum(alacak) AS alacak,sum(borc)-sum(alacak) AS bakiye FROM cari_hareket WHERE cari_id=" + cari_id;
-        SqlConnection connection = new SqlConnection(dataconnect);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
       
         try
         {
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -209,7 +219,7 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
        
@@ -235,13 +245,12 @@ public partial class Cari_CariHareket : System.Web.UI.Page
             dd_bagli_hesap.Items.Insert(0, "");
         } else
         {
-            SqlConnection connection = new SqlConnection(dataconnect);
+            ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
-            SqlCommand cmd = new SqlCommand(queryString, connection);
             try
             {
 
-                connection.Open();
+                
                 DataTable table = new DataTable();
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(table);
@@ -259,7 +268,7 @@ public partial class Cari_CariHareket : System.Web.UI.Page
             }
             finally
             {
-                connection.Close();
+                baglan.VeritabaniBaglantiyiKapat(connection);
             }
         } // if queryString
          
@@ -352,9 +361,9 @@ public partial class Cari_CariHareket : System.Web.UI.Page
 
     protected void CariHareketBorcAlacakKaydet(string kayit_tarihi, string cari_id,string borc_or_alacak,string islem_tipi,string odeme_sekli,string belge_no,string aciklama1,string personel, decimal borc, decimal alacak,string fis_id, string kasa_id, string pos_id,string banka_hesap_id)
     {
-      
-        SqlConnection connection = new SqlConnection(dataconnect);
 
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("CariHareketEkle", connection);
 
         int insert_sql = 0;
@@ -376,7 +385,7 @@ public partial class Cari_CariHareket : System.Web.UI.Page
             cmd.Parameters.Add("@pos_id", SqlDbType.NVarChar).Value = pos_id;
             cmd.Parameters.Add("@banka_hesap_id", SqlDbType.NVarChar).Value = banka_hesap_id;
             
-            connection.Open();
+            
             insert_sql=cmd.ExecuteNonQuery();
           
         }
@@ -388,7 +397,7 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
           
 
         }
@@ -397,7 +406,8 @@ public partial class Cari_CariHareket : System.Web.UI.Page
     protected void gv_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int cari_hareket_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
-        SqlConnection connection = new SqlConnection(dataconnect);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("CariHareketSil", connection);
 
         int sql_query = 0;
@@ -405,7 +415,7 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         {
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@cari_hareket_id", SqlDbType.Int).Value = cari_hareket_id;
-            connection.Open();
+            
             sql_query = cmd.ExecuteNonQuery();
 
         }
@@ -417,7 +427,7 @@ public partial class Cari_CariHareket : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
             CariHareketListesiniGetir(Convert.ToInt32(Request.QueryString["CariID"]));
             CariBorcAlacakBilgisiniGetir(Convert.ToInt32(Request.QueryString["CariID"]));
         }

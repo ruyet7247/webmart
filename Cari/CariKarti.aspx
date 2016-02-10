@@ -129,7 +129,7 @@
                     DataTextField="cari_grubu_adi" DataValueField="cari_grubu_id">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                     
                     SelectCommand="SELECT * FROM [cari_grubu_tanimlama]"></asp:SqlDataSource>
             </td>
             <td class="style1">

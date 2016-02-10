@@ -11,11 +11,14 @@ using System.Threading;
 
 public partial class Kasa_BankaHareket : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
 
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        SqlDataSource_para_birimi.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+
+
         if (Request.QueryString["BankaID"] != null)
         {
             try
@@ -53,13 +56,14 @@ public partial class Kasa_BankaHareket : System.Web.UI.Page
     {
 
         string hareketSQL = "SELECT  * FROM banka_kayit WHERE banka_adi LIKE '%" + banka_adi + "%'";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -77,7 +81,7 @@ public partial class Kasa_BankaHareket : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -91,7 +95,7 @@ public partial class Kasa_BankaHareket : System.Web.UI.Page
 
         int deger = 0;
 
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "SELECT     banka_hesap_id,banka_adi, hesap_no, para_birimi_id,\n"+
                          " (SELECT     SUM(tutar) AS giren1 \n"+
                          "   FROM          dbo.banka_hareket \n"+
@@ -101,11 +105,11 @@ public partial class Kasa_BankaHareket : System.Web.UI.Page
                          "   WHERE      (banka_hesap_id = " + banka_id + ") AND (giris_or_cikis = 'cikis')) AS cikan \n" +
                          "   FROM         dbo.banka_kayit \n" +
                          "   WHERE      (banka_hesap_id = " + banka_id + ")";
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -136,7 +140,7 @@ public partial class Kasa_BankaHareket : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
 
@@ -145,13 +149,14 @@ public partial class Kasa_BankaHareket : System.Web.UI.Page
     protected void BankaHareketListesiniGetir(int banka_id)
     {
         string hareketSQL = "SELECT * FROM banka_hareket WHERE banka_hesap_id=" + banka_id + " ORDER BY kayit_tarihi DESC,odeme_tarihi DESC,banka_hareket_id DESC";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -169,7 +174,7 @@ public partial class Kasa_BankaHareket : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -205,8 +210,8 @@ public partial class Kasa_BankaHareket : System.Web.UI.Page
     protected void BankaHareketGirisCikisKaydet(int banka_hesap_id, string banka_hesap_adi, string kayit_tarihi, string odeme_tarihi, string giris_or_cikis, string aciklama1, decimal tutar,string personel_adi)
     {
 
-        SqlConnection connection = new SqlConnection(dataconnect);
-     
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());    
         SqlCommand cmd = new SqlCommand("BankaHareketEkle", connection);
 
         int insert_sql = 0;
@@ -224,7 +229,7 @@ public partial class Kasa_BankaHareket : System.Web.UI.Page
             cmd.Parameters.Add("@personel_adi", SqlDbType.NVarChar).Value = personel_adi;
 
 
-            connection.Open();
+            
             insert_sql = cmd.ExecuteNonQuery();
 
         }
@@ -236,7 +241,7 @@ public partial class Kasa_BankaHareket : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
 
         }
@@ -245,7 +250,8 @@ public partial class Kasa_BankaHareket : System.Web.UI.Page
     protected void gv_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int banka_hareket_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
-        SqlConnection connection = new SqlConnection(dataconnect);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("BankaHareketSil", connection);
 
         int sql_query = 0;
@@ -253,7 +259,7 @@ public partial class Kasa_BankaHareket : System.Web.UI.Page
         {
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@banka_hareket_id", SqlDbType.Int).Value = banka_hareket_id;
-            connection.Open();
+            
             sql_query = cmd.ExecuteNonQuery();
 
         }
@@ -265,7 +271,7 @@ public partial class Kasa_BankaHareket : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
             BankaBilgileriniGetir(Convert.ToInt32(lbl_banka_id.Text));  // aramadan gelen
             BankaHareketListesiniGetir(Convert.ToInt32(lbl_banka_id.Text));
         }

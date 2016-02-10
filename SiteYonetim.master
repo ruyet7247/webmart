@@ -1,0 +1,79 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="SiteYonetim.master.cs" Inherits="SiteYonetim" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title>WebMart Application</title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <!-- <script src="js/jquery-2.2.0.min.js"></script> -->
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+
+      
+</head>
+<body>
+    <form runat="server">
+    <div class="page">
+        <div class="header">
+            <div class="title">
+                
+                <h1>
+                <asp:Image ID="Image1" runat="server" Height="32px" ImageUrl="~/Images/logo1.png" 
+                        Width="32px" />
+                     &nbsp;Web Otomasyon
+                    admın
+                </h1>
+            </div>
+            <div class="loginDisplay"> 
+                <asp:Label ID="lbl_KullaniciBilgileri" runat="server" 
+                    Text="Kullanıcı Bilgileri "></asp:Label>
+                <asp:ImageButton ID="ibtn_exit" runat="server" onclick="ibtn_exit_Click" />
+              <!--
+                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+
+                    <AnonymousTemplate>
+                        [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">Log In</a> ]
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
+                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/"/> ]
+                    </LoggedInTemplate>
+                </asp:LoginView>
+                -->
+            </div>
+            <div class="clear hideSkiplink">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" 
+                    EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem Text="Firma Modülü" 
+                            Value="Firma Modülü">
+                            <asp:MenuItem Text="Firma Oluştur" Value="Firma Oluştur" 
+                                NavigateUrl="~/Yonetim/FirmaOlustur.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Firma Listesi" Value="Firma Listesi" 
+                                NavigateUrl="~/Yonetim/FirmaListesi.aspx"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Stok Modülü" Value="Stok Modülü">
+                            <asp:MenuItem Text="Stok Transfer" Value="Stok Transfer"></asp:MenuItem>
+<asp:MenuItem Text="Stok Listesi" Value="Stok Listesi"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Kasa Modülü" Value="Kasa Modülü">
+                            <asp:MenuItem Text="Kasa Listesi" Value="Kasa Listesi"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text=" Dashboard" Value="Dashboard"></asp:MenuItem>
+                    </Items>
+                </asp:Menu>
+            </div>
+        </div>
+        <div class="main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="footer">
+        
+    </div>
+    </form>
+</body>
+</html>

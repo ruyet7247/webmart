@@ -11,11 +11,13 @@ using System.Threading;
 
 public partial class Kasa_KasaHareket : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
 
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        SqlDataSource_para_birimi.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+
         if (Request.QueryString["KasaHareketID"] != null)
         {
             try
@@ -63,13 +65,14 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
         
         string hareketSQL = "SELECT  dbo.kasa_kayit.kasa_id, dbo.kasa_kayit.kasa_adi, dbo.firma_para_birimi_tanimlama.para_birimi, dbo.firma_para_birimi_tanimlama.para_birimi_adi, dbo.kasa_kayit.aciklama1 \n"
                            +"FROM  dbo.kasa_kayit INNER JOIN dbo.firma_para_birimi_tanimlama ON dbo.kasa_kayit.para_birimi_id = dbo.firma_para_birimi_tanimlama.para_birimi_id WHERE dbo.kasa_kayit.kasa_adi LIKE '%" + kasa_adi + "%'";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -87,7 +90,7 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -99,7 +102,8 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
     protected void KasaBilgileriniGetir(int kasa_id)
     {
 
-        SqlConnection connection = new SqlConnection(dataconnect);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("KasaBilgileriGetir", connection);
         try
         {
@@ -116,7 +120,7 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
 
           
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
             // 
             txt_kasa_adi.Text = cmd.Parameters["@kasa_adi"].Value.ToString();
@@ -125,7 +129,7 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
             txt_cikan.Text = cmd.Parameters["@cikan_miktar"].Value.ToString();
             txt_kasa_bakiyesi.Text = cmd.Parameters["@kasa_bakiye"].Value.ToString();
           
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
 
@@ -136,7 +140,7 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
     }
@@ -144,13 +148,14 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
     protected void KasaHareketListesiniGetir(int kasa_id)
     {
         string hareketSQL = "SELECT * FROM kasa_hareket WHERE kasa_id=" + kasa_id + " ORDER BY kayit_tarihi DESC,kasa_hareket_id DESC";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -168,7 +173,7 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -204,9 +209,10 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
     protected void KasaHareketGirisCikisKaydet(string kasa_id, string kayit_tarihi, string evrak_no, string islem_tipi, string giris_or_cikis, string aciklama1, string tutar, string personel)
     {
 
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         //string queryString = "INSERT INTO [dbo].[kasa_hareket]  ([kasa_id],[kayit_tarihi],[giris_or_cikis],[islem_tipi] ,[miktar] ,[evrak_no] ,[aciklama1]) VALUES (@kasa_id,@kayit_tarihi,@giris_or_cikis,@islem_tipi,@miktar,@evrak_no,@aciklama1)";
-
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("KasaHareketEkle", connection);
 
         int insert_sql = 0;
@@ -223,7 +229,7 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
             cmd.Parameters.Add("@personel", SqlDbType.NVarChar).Value = personel;
 
 
-            connection.Open();
+            
             insert_sql = cmd.ExecuteNonQuery();
 
         }
@@ -235,7 +241,7 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
 
         }
@@ -244,7 +250,8 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
     protected void gv_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int kasa_hareket_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
-        SqlConnection connection = new SqlConnection(dataconnect);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("KasaHareketSil", connection);
 
         int sql_query = 0;
@@ -252,7 +259,7 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
         {
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@kasa_hareket_id", SqlDbType.Int).Value = kasa_hareket_id;
-            connection.Open();
+            
             sql_query = cmd.ExecuteNonQuery();
 
         }
@@ -264,7 +271,7 @@ public partial class Kasa_KasaHareket : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
             KasaHareketListesiniGetir(Convert.ToInt32(Request.QueryString["KasaHareketID"]));
             KasaBilgileriniGetir(Convert.ToInt32(Request.QueryString["KasaHareketID"]));
         }

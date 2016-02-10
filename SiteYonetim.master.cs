@@ -5,17 +5,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class SiteMaster : System.Web.UI.MasterPage
+public partial class SiteYonetim : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //BURALAR EN SON AKTİF OLSUN
-        if (Session["GirisVar"] != "True")  // True değilse
+        /*  BURALAR EN SON AKTİF OLSUN
+        if (Session["GirisVar"] != "True")
         {
             NavigationMenu.Visible = false;
             lbl_KullaniciBilgileri.Visible = false;
             ibtn_exit.Visible = false;
-            Response.Redirect("Login.aspx");
         }
 
         if (Session["GirisVar"] == "True")
@@ -24,9 +23,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             lbl_KullaniciBilgileri.Visible = true;
             ibtn_exit.Visible = true;
         }
-      
-
-
+         * */
     }
     protected void ibtn_exit_Click(object sender, ImageClickEventArgs e)
     {
@@ -37,12 +34,6 @@ public partial class SiteMaster : System.Web.UI.MasterPage
     protected void OturumBilgileriniTemizle()
     {
         Session["GirisVar"] = "False";
-        Session["ConnectionString"] = "";
-        Session["firma_id"] = "";
-        Session["firma_adi"] = "";
-        Session["adi_soyadi"] = "";
-        Session["gsm"] = "";
-        Session["yetki"] = "";
 
     }   
 

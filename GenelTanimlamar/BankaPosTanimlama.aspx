@@ -45,7 +45,7 @@
                     DataValueField="banka_hesap_id">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource_banka_hesap_listesi" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                     
                     SelectCommand="SELECT  dbo.banka_kayit.banka_hesap_id, dbo.firma_para_birimi_tanimlama.para_birimi + ' -  ' + dbo.banka_kayit.banka_adi AS banka_hesap_adi FROM dbo.banka_kayit INNER JOIN dbo.firma_para_birimi_tanimlama ON dbo.banka_kayit.para_birimi_id = dbo.firma_para_birimi_tanimlama.para_birimi_id">
                 </asp:SqlDataSource>
             </td>

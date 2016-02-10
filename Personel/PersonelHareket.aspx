@@ -91,7 +91,7 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                                     
 
  <asp:SqlDataSource ID="SqlDataSource_odeme_tipi" runat="server" 
-                                        ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                                         
                                         SelectCommand="SELECT [islem_tipi_value], [islem_tipi_adi] FROM [personel_islem_tipi_tanimlama]">
                                     </asp:SqlDataSource>
                                     
@@ -113,7 +113,7 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
 
 
                         <asp:SqlDataSource ID="SqlDataSource_odeme_sekli" runat="server" 
-                                        ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                                         
                                         SelectCommand="SELECT [odeme_sekli], [odeme_sekli_adi] FROM [cari_odeme_sekli_tanimlama]">
                                     </asp:SqlDataSource>
                                     
@@ -296,7 +296,7 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                      Enabled="False">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource_departman" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                     
                     
                      
                      SelectCommand="SELECT [personel_departman_id], [personel_departman_adi] FROM [personel_departman_tanimlama]"></asp:SqlDataSource>

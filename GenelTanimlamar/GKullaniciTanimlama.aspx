@@ -36,7 +36,7 @@
                     ondatabound="dd_list_kullanici_DataBound">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                     
                     SelectCommand="SELECT [personel_id], [adi] FROM [personel]">
                 </asp:SqlDataSource>
             </td>

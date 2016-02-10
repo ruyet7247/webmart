@@ -11,7 +11,7 @@ using System.Threading;
 
 public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
     int banka_hesap_id = 0;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -40,10 +40,11 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
     }
     protected void BankaEkle()
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+
         string queryString = "INSERT INTO banka_kayit (banka_adi,hesap_sahibi,sube_kodu,hesap_no,iban,aktif_or_pasif,para_birimi_id) VALUES \n" +
                               "(@banka_adi,@hesap_sahibi,@sube_kodu,@hesap_no,@iban,@aktif_or_pasif,@para_birimi_id)";
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
         try
         {
@@ -56,7 +57,7 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
             cmd.Parameters.Add("@para_birimi_id", SqlDbType.Int).Value = Convert.ToInt32(dd_para_birimi.SelectedValue);
             
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -67,7 +68,7 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
     }
@@ -75,9 +76,10 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
     protected void BankaGuncelle(int anahtar_id)
     {
 
-        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "UPDATE banka_kayit SET banka_adi=@banka_adi,hesap_sahibi=@hesap_sahibi,sube_kodu=@sube_kodu,hesap_no=@hesap_no, \n" +
                              "iban=@iban,aktif_or_pasif=@aktif_or_pasif,para_birimi_id=@para_birimi_id WHERE banka_hesap_id=" + anahtar_id;
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(queryString, connection);
 
         try
@@ -93,7 +95,7 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
 
             //Response.Write(cmd.CommandText);
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
         }
         catch (Exception err)
@@ -103,7 +105,7 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
     }
@@ -111,13 +113,14 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
     protected void BankaListele()
     {
         string hareketSQL = "SELECT * FROM banka_kayit ORDER BY banka_adi";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -135,7 +138,7 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -162,13 +165,14 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
     {
         int deger=0;
 
-        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "SELECT * FROM banka_kayit WHERE banka_hesap_id=" + anahtar_id;
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -204,7 +208,7 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
 
@@ -214,13 +218,15 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
     protected void gv_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int numarator_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
-        SqlConnection connection = new SqlConnection(dataconnect);
+
         string queryString = "DELETE FROM banka_kayit WHERE banka_hesap_id=" + numarator_id;
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -232,7 +238,7 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
             BankaListele();
         }
     }

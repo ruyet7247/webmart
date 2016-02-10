@@ -9,20 +9,17 @@ using System.Web.Configuration;
 using System.Data.SqlClient;
 using System.Threading;
 
-
-public partial class GFirmaTanimlama : System.Web.UI.Page
+public partial class Firma_FirmaOlustur : System.Web.UI.Page
 {
-    
+    String dataconnect = WebConfigurationManager.ConnectionStrings["WebMart_Master"].ConnectionString;
     int aktif_firma_id = 0;
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        
         if (!IsPostBack)  // tıklama ile sayfa gelmemiş ise
         {
             FirmaBilgileriniGetir();
         }
-    
     }
 
     protected void ibtn_guncelle_Click(object sender, ImageClickEventArgs e)
@@ -34,15 +31,13 @@ public partial class GFirmaTanimlama : System.Web.UI.Page
 
     protected void FirmaBilgileriniGetir()
     {
-
+        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "SELECT * FROM firma_kayit WHERE aktif_or_pasif=1";
-        ConnVt baglan = new ConnVt();
-        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());      
         SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
-           
-            //
+
+            connection.Open();
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -50,8 +45,8 @@ public partial class GFirmaTanimlama : System.Web.UI.Page
                 while (reader.Read())
                 {
 
-                    aktif_firma_id = Convert.ToInt32(reader["firma_id"].ToString());                
-                    txt_kurulus_tarihi.Text= reader["kurulus_tarihi"].ToString();
+                    aktif_firma_id = Convert.ToInt32(reader["firma_id"].ToString());
+                    txt_kurulus_tarihi.Text = reader["kurulus_tarihi"].ToString();
                     txt_firma_tipi.Text = reader["firma_tipi"].ToString();
                     txt_kisa_unvani.Text = reader["kisa_unvani"].ToString();
                     txt_tam_unvani.Text = reader["tam_unvani"].ToString();
@@ -60,19 +55,19 @@ public partial class GFirmaTanimlama : System.Web.UI.Page
                     txt_vergi_no.Text = reader["vergi_no"].ToString();
                     txt_adres1.Text = reader["adres1"].ToString();
                     txt_adres2.Text = reader["adres2"].ToString();
-                    txt_semt.Text =reader["semt"].ToString();
-                    txt_ilce.Text =reader["ilce"].ToString();
-                    txt_il.Text =reader["il"].ToString();
-                    txt_posta_kodu.Text =reader["posta_kodu"].ToString();
-                    txt_tel1.Text=reader["tel1"].ToString();
-                    txt_tel2.Text=reader["tel2"].ToString();
-                    txt_fax.Text=reader["fax"].ToString();
-                    txt_gsm1.Text=reader["gsm1"].ToString();
+                    txt_semt.Text = reader["semt"].ToString();
+                    txt_ilce.Text = reader["ilce"].ToString();
+                    txt_il.Text = reader["il"].ToString();
+                    txt_posta_kodu.Text = reader["posta_kodu"].ToString();
+                    txt_tel1.Text = reader["tel1"].ToString();
+                    txt_tel2.Text = reader["tel2"].ToString();
+                    txt_fax.Text = reader["fax"].ToString();
+                    txt_gsm1.Text = reader["gsm1"].ToString();
                     txt_gsm2.Text = reader["gsm1"].ToString();
-                    txt_mail.Text=reader["mail"].ToString();
-                    txt_web_adresi.Text=reader["web_adresi"].ToString();
+                    txt_mail.Text = reader["mail"].ToString();
+                    txt_web_adresi.Text = reader["web_adresi"].ToString();
                     txt_aciklama1.Text = reader["aciklama1"].ToString();
-                   
+
                 }
             }
 
@@ -86,19 +81,17 @@ public partial class GFirmaTanimlama : System.Web.UI.Page
         }
         finally
         {
-            baglan.VeritabaniBaglantiyiKapat(connection);
-            
+            connection.Close();
         }
 
     }
 
     protected void FirmaBilgileriniGuncelle()
     {
-
-
+        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "UPDATE firma_kayit SET kurulus_tarihi=@kurulus_tarihi,firma_tipi=@firma_tipi,kisa_unvani=@kisa_unvani,tam_unvani=@tam_unvani, yetkili=@yetkili,vergi_dairesi=@vergi_dairesi,vergi_no=@vergi_no,adres1=@adres1,adres2=@adres2,semt=@semt, ilce=@ilce,il=@il,posta_kodu=@posta_kodu,tel1=@tel1,tel2=@tel2, fax=@fax,gsm1=@gsm1,gsm2=@gsm2,mail=@mail,web_adresi=@web_adresi, aciklama1=@aciklama1 WHERE aktif_or_pasif=1";
-      
-        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
+
+        SqlCommand cmd = new SqlCommand(queryString, connection);
 
 
         int updated = 0;
@@ -129,10 +122,10 @@ public partial class GFirmaTanimlama : System.Web.UI.Page
             cmd.Parameters.Add("@web_adresi", SqlDbType.NVarChar).Value = txt_web_adresi.Text;
             cmd.Parameters.Add("@aciklama1", SqlDbType.NVarChar).Value = txt_aciklama1.Text;
 
-         
+
             //Response.Write(cmd.CommandText);
 
-            
+            connection.Open();
             updated = cmd.ExecuteNonQuery();
         }
         catch (Exception err)
@@ -142,12 +135,11 @@ public partial class GFirmaTanimlama : System.Web.UI.Page
         }
         finally
         {
-            baglan.VeritabaniBaglantiyiKapat(connection);
+            connection.Close();
             lbl_mesaj.Text = updated.ToString();
-           
+
         }
     }
-
 
 
 }

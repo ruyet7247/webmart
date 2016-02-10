@@ -53,7 +53,7 @@
                             AutoPostBack="True">
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="SqlDataSource_odeme_sekli" runat="server" 
-                            ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                             
                             SelectCommand="SELECT [odeme_sekli], [odeme_sekli_adi] FROM [cari_odeme_sekli_tanimlama]">
                         </asp:SqlDataSource>
                         </td><td>&#160;</td></tr><tr><td class="style3">Bağlı Hesap</td><td>
@@ -99,7 +99,7 @@
                      Enabled="False">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:CnnStr %>" 
+                     
                     SelectCommand="SELECT * FROM [cari_grubu_tanimlama]"></asp:SqlDataSource>
             </td>
         </tr>
@@ -331,6 +331,22 @@
                              </EditItemTemplate>
                              <ItemTemplate>
                                  <asp:Label ID="lbl_cari_id" runat="server" Text='<%# Bind("cari_id") %>'></asp:Label>
+                             </ItemTemplate>
+                         </asp:TemplateField>
+                         <asp:TemplateField HeaderText="Adi" SortExpression="adi">
+                             <EditItemTemplate>
+                                 <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+                             </EditItemTemplate>
+                             <ItemTemplate>
+                                 <asp:Label ID="Label4" runat="server" Text='<%# Bind("adi") %>'></asp:Label>
+                             </ItemTemplate>
+                         </asp:TemplateField>
+                         <asp:TemplateField HeaderText="Soyadi" SortExpression="soyadi">
+                             <EditItemTemplate>
+                                 <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                             </EditItemTemplate>
+                             <ItemTemplate>
+                                 <asp:Label ID="Label1" runat="server" Text='<%# Bind("soyadi") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
                          <asp:TemplateField HeaderText="Unvan" SortExpression="unvan">

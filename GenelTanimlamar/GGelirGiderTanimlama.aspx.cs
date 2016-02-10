@@ -11,7 +11,7 @@ using System.Threading;
 
 public partial class GenelTanimlamar_KasaGelirGiderTanimlama : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
     int aktif_gelir_gider_id = 0;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -40,9 +40,11 @@ public partial class GenelTanimlamar_KasaGelirGiderTanimlama : System.Web.UI.Pag
     }
     protected void GelirGiderEkle()
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
+
         string queryString = "INSERT INTO kasa_gelir_gider_tanimlama (gelir_gider_adi,gelir_or_gider) VALUES \n" +
                               "(@gelir_gider_adi,@gelir_or_gider)";
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(queryString, connection);
 
         try
@@ -50,7 +52,7 @@ public partial class GenelTanimlamar_KasaGelirGiderTanimlama : System.Web.UI.Pag
             cmd.Parameters.Add("@gelir_gider_adi", SqlDbType.NVarChar).Value = txt_gelir_gider_adi.Text;
             cmd.Parameters.Add("@gelir_or_gider", SqlDbType.NVarChar).Value = dd_gelir_or_gider.SelectedValue;
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -61,15 +63,16 @@ public partial class GenelTanimlamar_KasaGelirGiderTanimlama : System.Web.UI.Pag
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
     }
 
     protected void GelirGiderGuncelle(int gelir_gider_id)
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "UPDATE kasa_gelir_gider_tanimlama SET gelir_gider_adi=@gelir_gider_adi,gelir_or_gider=@gelir_or_gider WHERE gelir_gider_id=" + gelir_gider_id;
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(queryString, connection);
 
         try
@@ -80,7 +83,7 @@ public partial class GenelTanimlamar_KasaGelirGiderTanimlama : System.Web.UI.Pag
 
             //Response.Write(cmd.CommandText);
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
         }
         catch (Exception err)
@@ -90,7 +93,7 @@ public partial class GenelTanimlamar_KasaGelirGiderTanimlama : System.Web.UI.Pag
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
         }
     }
@@ -98,13 +101,14 @@ public partial class GenelTanimlamar_KasaGelirGiderTanimlama : System.Web.UI.Pag
     protected void GelirGiderListele()
     {
         string hareketSQL = "SELECT * FROM kasa_gelir_gider_tanimlama ORDER BY gelir_or_gider";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -122,7 +126,7 @@ public partial class GenelTanimlamar_KasaGelirGiderTanimlama : System.Web.UI.Pag
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -147,14 +151,14 @@ public partial class GenelTanimlamar_KasaGelirGiderTanimlama : System.Web.UI.Pag
 
     protected void GelirGiderBilgileriniGetir(int gelir_gider_id)
     {
-
-        SqlConnection connection = new SqlConnection(dataconnect);
         string queryString = "SELECT * FROM kasa_gelir_gider_tanimlama WHERE gelir_gider_id=" + gelir_gider_id;
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -181,7 +185,7 @@ public partial class GenelTanimlamar_KasaGelirGiderTanimlama : System.Web.UI.Pag
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
 
@@ -191,13 +195,13 @@ public partial class GenelTanimlamar_KasaGelirGiderTanimlama : System.Web.UI.Pag
     protected void gv_gelir_gider_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int gelir_gider_id = Convert.ToInt32(gv_gelir_gider_listele.DataKeys[e.RowIndex].Value);
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "DELETE FROM kasa_gelir_gider_tanimlama WHERE gelir_gider_id=" + gelir_gider_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
-            connection.Open();
+            
             cmd.ExecuteNonQuery();
 
         }
@@ -209,7 +213,7 @@ public partial class GenelTanimlamar_KasaGelirGiderTanimlama : System.Web.UI.Pag
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
             GelirGiderListele();
         }
     }

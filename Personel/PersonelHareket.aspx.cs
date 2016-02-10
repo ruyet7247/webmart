@@ -11,10 +11,15 @@ using System.Threading;
 
 public partial class Personel_PersonelHareket : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["CnnStr"].ConnectionString;
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        SqlDataSource_departman.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+        SqlDataSource_odeme_sekli.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+        SqlDataSource_odeme_tipi.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+        
+        
         if (Request.QueryString["PersonelID"] != null)
         {
             try
@@ -57,13 +62,14 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
     protected void PersonelArama(string adi) //Personel arama modal popup
     {
         string hareketSQL = "SELECT personel_id,tc,adi,soyadi,kullanici_adi,gsm FROM personel_karti WHERE adi LIKE '%" + adi + "%'";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -81,7 +87,7 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -104,12 +110,12 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
     {
 
 
-        SqlConnection connection = new SqlConnection(dataconnect);
+        
         string queryString = "SELECT personel_id,adi,soyadi,departman_id,odenen_maas FROM personel_karti WHERE personel_id=" + Personel_id;
-        SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
@@ -133,7 +139,7 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
     }
@@ -141,13 +147,14 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
     protected void PersonelHareketListesiniGetir(int Personel_id)
     {
         string hareketSQL = "SELECT * FROM personel_cari_maas_hareket WHERE personel_id=" + Personel_id + " ORDER BY kayit_tarihi DESC,maas_hareket_id DESC";
-        SqlConnection con = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, con);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
         try
         {
-            con.Open();
+            
             updated = cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds_hareket = new DataSet();
@@ -165,7 +172,7 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
         }
         finally
         {
-            con.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
         if (updated > 0)
@@ -176,14 +183,15 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
 
     protected void PersonelBorcAlacakBilgisiniGetir(int Personel_id)
     {
-        string hareketSQL = "SELECT (SELECT sum(tutar) FROM personel_cari_maas_hareket WHERE borc_or_alacak='borc' and personel_id=" + Personel_id + ") AS borc,(SELECT sum(tutar) FROM personel_cari_maas_hareket WHERE borc_or_alacak='alacak' and  personel_id=" + Personel_id + ") AS alacak"; 
-        SqlConnection connection = new SqlConnection(dataconnect);
-        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
+        string hareketSQL = "SELECT (SELECT sum(tutar) FROM personel_cari_maas_hareket WHERE borc_or_alacak='borc' and personel_id=" + Personel_id + ") AS borc,(SELECT sum(tutar) FROM personel_cari_maas_hareket WHERE borc_or_alacak='alacak' and  personel_id=" + Personel_id + ") AS alacak";
 
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         try
         {
-            connection.Open();
+            
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -210,7 +218,7 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
 
@@ -237,13 +245,13 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
         }
         else
         {
-            SqlConnection connection = new SqlConnection(dataconnect);
+            
 
-            SqlCommand cmd = new SqlCommand(queryString, connection);
+            ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
             try
             {
 
-                connection.Open();
+                
                 DataTable table = new DataTable();
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(table);
@@ -261,7 +269,7 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
             }
             finally
             {
-                connection.Close();
+                baglan.VeritabaniBaglantiyiKapat(connection);
             }
         } // if queryString
 
@@ -340,8 +348,8 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
     protected void PersonelHareketBorcAlacakKaydet(string personel_id, string kayit_tarihi, string borc_or_alacak, string odeme_sekli, string islem_tipi, string belge_no, string ay, string yil, string aciklama, decimal tutar, string kasa_id, string pos_id, string banka_hesap_id)
     {
 
-        SqlConnection connection = new SqlConnection(dataconnect);
-
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("PersonelHareketEkle", connection);
 
         int insert_sql = 0;
@@ -362,7 +370,7 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
             cmd.Parameters.Add("@pos_id", SqlDbType.NVarChar).Value = pos_id;
             cmd.Parameters.Add("@banka_hesap_id", SqlDbType.NVarChar).Value = banka_hesap_id;
 
-            connection.Open();
+            
             insert_sql = cmd.ExecuteNonQuery();
 
         }
@@ -374,7 +382,7 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
 
 
         }
@@ -383,7 +391,8 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
     protected void gv_listele_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int maas_hareket_id = Convert.ToInt32(gv_listele.DataKeys[e.RowIndex].Value);
-        SqlConnection connection = new SqlConnection(dataconnect);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand("PersonelHareketSil", connection);
 
         int sql_query = 0;
@@ -391,7 +400,7 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
         {
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@maas_hareket_id", SqlDbType.Int).Value = maas_hareket_id;
-            connection.Open();
+            
             sql_query = cmd.ExecuteNonQuery();
 
         }
@@ -403,7 +412,7 @@ public partial class Personel_PersonelHareket : System.Web.UI.Page
         finally
         {
             cmd.Parameters.Clear();
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
             PersonelHareketListesiniGetir(Convert.ToInt32(Request.QueryString["PersonelID"]));
             PersonelBorcAlacakBilgisiniGetir(Convert.ToInt32(Request.QueryString["PersonelID"]));
         }
