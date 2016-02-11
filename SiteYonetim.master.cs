@@ -10,14 +10,16 @@ public partial class SiteYonetim : System.Web.UI.MasterPage
     protected void Page_Load(object sender, EventArgs e)
     {
         /*  BURALAR EN SON AKTİF OLSUN
-        if (Session["GirisVar"] != "True")
+      //BURALAR EN SON AKTİF OLSUN
+        if (Session["GirisVar"] != "True" && Session["Master"] != "True")  // True değilse ve MASTER değilse
         {
             NavigationMenu.Visible = false;
             lbl_KullaniciBilgileri.Visible = false;
             ibtn_exit.Visible = false;
+            Response.Redirect("Login.aspx");
         }
 
-        if (Session["GirisVar"] == "True")
+        if (Session["GirisVar"] == "True" && Session["Master"] == "True") // Giriş var ve MASTER ise
         {
             NavigationMenu.Visible = true;
             lbl_KullaniciBilgileri.Visible = true;

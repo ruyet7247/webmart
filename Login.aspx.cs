@@ -12,6 +12,12 @@ using System.Web.Configuration;
 using System.Data.SqlClient;
 using System.Threading;
 
+/*
+    Kullanıcı sorgulamada master durumu var ise Session["Master"] = "True"; olur.
+ *  Yönetim klasöründeki verilere erişebilir.
+ *  Sayfa Session Erişimleri Masterpage sayfalarında kontrol edilmektedir.
+ */
+
 public partial class Login : System.Web.UI.Page
 {
     TextBox dtext; //doğrulama text

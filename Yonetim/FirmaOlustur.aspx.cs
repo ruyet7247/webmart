@@ -11,33 +11,149 @@ using System.Threading;
 
 public partial class Firma_FirmaOlustur : System.Web.UI.Page
 {
-    String dataconnect = WebConfigurationManager.ConnectionStrings["WebMart_Master"].ConnectionString;
+
     int aktif_firma_id = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        Session["ConnectionString"] = "WebMart_Master";
         if (!IsPostBack)  // tıklama ile sayfa gelmemiş ise
         {
-            FirmaBilgileriniGetir();
+            lbl_firma_id.Text = "0";
+
         }
+
+        lbl_mesaj.Text = "";
+        VeriListele();
     }
 
     protected void ibtn_guncelle_Click(object sender, ImageClickEventArgs e)
     {
-        FirmaBilgileriniGuncelle();
-        FirmaBilgileriniGetir();
+        if (lbl_firma_id.Text == "0")
+        {
+            VeriEkle();
+            VeriListele();
+        }
+        else
+        {
+            VeriGuncelle(Convert.ToInt32(lbl_firma_id.Text));
+            VeriListele();
+        }
 
     }
 
-    protected void FirmaBilgileriniGetir()
+    protected void VeriEkle()
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "SELECT * FROM firma_kayit WHERE aktif_or_pasif=1";
+
+        string queryString = "INSERT INTO firma_kayit (kayit_tarihi,firma_adi,veritabani_adi,connection_string_adi) VALUES \n" +
+                              "(@kayit_tarihi,@firma_adi,@veritabani_adi,@connection_string_adi)";
+        ConnVt baglan = new ConnVt(); 
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString()); 
         SqlCommand cmd = new SqlCommand(queryString, connection);
+
+        try
+        {
+            cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = Convert.ToDateTime(txt_kurulus_tarihi.Text);
+            cmd.Parameters.Add("@firma_adi", SqlDbType.NVarChar).Value = txt_firma_adi.Text;
+            cmd.Parameters.Add("@veritabani_adi", SqlDbType.NVarChar).Value = txt_firma_adi.Text;
+            cmd.Parameters.Add("@connection_string_adi", SqlDbType.NVarChar).Value = txt_connection_string_adi.Text;
+            cmd.ExecuteNonQuery();
+
+        }
+        catch (Exception err)
+        {
+            lbl_mesaj.Text = "Error INSERT. ";
+            lbl_mesaj.Text += err.Message;
+        }
+        finally
+        {
+            baglan.VeritabaniBaglantiyiKapat(connection);
+
+        }
+    }
+
+    protected void VeriGuncelle(int numarator_id)
+    {
+
+        string queryString = "UPDATE firma_kayit SET kayit_tarihi=@kayit_tarihi,firma_adi=@firma_adi,veritabani_adi=@veritabani_adi,connection_string_adi=@connection_string_adi WHERE firma_id=" + numarator_id;
+        ConnVt baglan = new ConnVt(); SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString()); SqlCommand cmd = new SqlCommand(queryString, connection);
+
+
+
         try
         {
 
-            connection.Open();
+            cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = Convert.ToDateTime(txt_kurulus_tarihi.Text);
+            cmd.Parameters.Add("@firma_adi", SqlDbType.NVarChar).Value = txt_firma_adi.Text;
+            cmd.Parameters.Add("@veritabani_adi", SqlDbType.NVarChar).Value = txt_firma_adi.Text;
+            cmd.Parameters.Add("@connection_string_adi", SqlDbType.NVarChar).Value = txt_connection_string_adi.Text;
+            cmd.ExecuteNonQuery();
+
+            //Response.Write(cmd.CommandText);
+
+
+            cmd.ExecuteNonQuery();
+        }
+        catch (Exception err)
+        {
+            lbl_mesaj.Text = "Error UPDATE. ";
+            lbl_mesaj.Text += err.Message;
+        }
+        finally
+        {
+            baglan.VeritabaniBaglantiyiKapat(connection);
+
+        }
+    }
+
+    protected void VeriListele()
+    {
+        string hareketSQL = "SELECT * FROM firma_kayit";
+        ConnVt baglan = new ConnVt(); 
+        SqlConnection connection = baglan.VeritabaninaBaglan("WebMart_Master");
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
+
+        int updated = 0;
+        try
+        {
+
+            updated = cmd.ExecuteNonQuery();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds_hareket = new DataSet();
+            da.Fill(ds_hareket);
+
+            gv_listele.DataSource = ds_hareket;
+            gv_listele.DataBind();
+
+            //lblResults.Text = updated.ToString() + " record updated.";
+        }
+        catch (Exception err)
+        {
+            lbl_mesaj.Text = "Error Listele. ";
+            lbl_mesaj.Text += err.Message;
+        }
+        finally
+        {
+            baglan.VeritabaniBaglantiyiKapat(connection);
+        }
+
+        if (updated > 0)
+        {
+            //
+        }
+
+    }
+
+    protected void FirmaBilgileriniGetir(int numarator_id)
+    {
+
+
+        string queryString = "SELECT * FROM firma_kayit WHERE firma_id=" + numarator_id;
+        ConnVt baglan = new ConnVt(); SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString()); SqlCommand cmd = new SqlCommand(queryString, connection);
+        try
+        {
+
+
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -45,28 +161,12 @@ public partial class Firma_FirmaOlustur : System.Web.UI.Page
                 while (reader.Read())
                 {
 
-                    aktif_firma_id = Convert.ToInt32(reader["firma_id"].ToString());
-                    txt_kurulus_tarihi.Text = reader["kurulus_tarihi"].ToString();
-                    txt_firma_tipi.Text = reader["firma_tipi"].ToString();
-                    txt_kisa_unvani.Text = reader["kisa_unvani"].ToString();
-                    txt_tam_unvani.Text = reader["tam_unvani"].ToString();
-                    txt_yetkili.Text = reader["yetkili"].ToString();
-                    txt_vergi_dairesi.Text = reader["vergi_dairesi"].ToString();
-                    txt_vergi_no.Text = reader["vergi_no"].ToString();
-                    txt_adres1.Text = reader["adres1"].ToString();
-                    txt_adres2.Text = reader["adres2"].ToString();
-                    txt_semt.Text = reader["semt"].ToString();
-                    txt_ilce.Text = reader["ilce"].ToString();
-                    txt_il.Text = reader["il"].ToString();
-                    txt_posta_kodu.Text = reader["posta_kodu"].ToString();
-                    txt_tel1.Text = reader["tel1"].ToString();
-                    txt_tel2.Text = reader["tel2"].ToString();
-                    txt_fax.Text = reader["fax"].ToString();
-                    txt_gsm1.Text = reader["gsm1"].ToString();
-                    txt_gsm2.Text = reader["gsm1"].ToString();
-                    txt_mail.Text = reader["mail"].ToString();
-                    txt_web_adresi.Text = reader["web_adresi"].ToString();
-                    txt_aciklama1.Text = reader["aciklama1"].ToString();
+                    lbl_firma_id.Text = reader["firma_id"].ToString();
+                    DateTime kayit_tarihi = Convert.ToDateTime(reader["kayit_tarihi"].ToString());
+                    txt_kurulus_tarihi.Text = kayit_tarihi.ToString("dd.MM.yyyy");
+                    txt_firma_adi.Text= reader["firma_adi"].ToString();
+                    txt_veritabani_adi.Text = reader["veritabani_adi"].ToString();
+                    txt_connection_string_adi.Text = reader["connection_string_adi"].ToString();
 
                 }
             }
@@ -76,70 +176,23 @@ public partial class Firma_FirmaOlustur : System.Web.UI.Page
 
         catch (Exception err)
         {
-            lbl_mesaj.Text = "Error Login. ";
+            lbl_mesaj.Text = "Error VeriSorgula. ";
             lbl_mesaj.Text += err.Message;
         }
         finally
         {
-            connection.Close();
+            baglan.VeritabaniBaglantiyiKapat(connection);
         }
+
+
 
     }
 
-    protected void FirmaBilgileriniGuncelle()
+    protected void gv_listele_SelectedIndexChanged(object sender, EventArgs e)
     {
-        SqlConnection connection = new SqlConnection(dataconnect);
-        string queryString = "UPDATE firma_kayit SET kurulus_tarihi=@kurulus_tarihi,firma_tipi=@firma_tipi,kisa_unvani=@kisa_unvani,tam_unvani=@tam_unvani, yetkili=@yetkili,vergi_dairesi=@vergi_dairesi,vergi_no=@vergi_no,adres1=@adres1,adres2=@adres2,semt=@semt, ilce=@ilce,il=@il,posta_kodu=@posta_kodu,tel1=@tel1,tel2=@tel2, fax=@fax,gsm1=@gsm1,gsm2=@gsm2,mail=@mail,web_adresi=@web_adresi, aciklama1=@aciklama1 WHERE aktif_or_pasif=1";
+        GridViewRow row = this.gv_listele.SelectedRow;
+        Label lbl_firma_id = (Label)row.FindControl("lbl_firma_id"); // label kasa id numarasını alıyoruz detay için.
 
-        SqlCommand cmd = new SqlCommand(queryString, connection);
-
-
-        int updated = 0;
-        try
-        {
-
-            DateTime kurulus_tarihi = Convert.ToDateTime(txt_kurulus_tarihi.Text);
-
-            cmd.Parameters.Add("@kurulus_tarihi", SqlDbType.DateTime).Value = kurulus_tarihi;
-            cmd.Parameters.Add("@firma_tipi", SqlDbType.NVarChar).Value = txt_firma_tipi.Text;
-            cmd.Parameters.Add("@kisa_unvani", SqlDbType.NVarChar).Value = txt_kisa_unvani.Text;
-            cmd.Parameters.Add("@tam_unvani", SqlDbType.NVarChar).Value = txt_tam_unvani.Text;
-            cmd.Parameters.Add("@yetkili", SqlDbType.NVarChar).Value = txt_yetkili.Text;
-            cmd.Parameters.Add("@vergi_dairesi", SqlDbType.NVarChar).Value = txt_vergi_dairesi.Text;
-            cmd.Parameters.Add("@vergi_no", SqlDbType.NVarChar).Value = txt_vergi_no.Text;
-            cmd.Parameters.Add("@adres1", SqlDbType.NVarChar).Value = txt_adres1.Text;
-            cmd.Parameters.Add("@adres2", SqlDbType.NVarChar).Value = txt_adres2.Text;
-            cmd.Parameters.Add("@semt", SqlDbType.NVarChar).Value = txt_semt.Text;
-            cmd.Parameters.Add("@ilce", SqlDbType.NVarChar).Value = txt_ilce.Text;
-            cmd.Parameters.Add("@il", SqlDbType.NVarChar).Value = txt_il.Text;
-            cmd.Parameters.Add("@posta_kodu", SqlDbType.NVarChar).Value = txt_posta_kodu.Text;
-            cmd.Parameters.Add("@tel1", SqlDbType.NVarChar).Value = txt_tel1.Text;
-            cmd.Parameters.Add("@tel2", SqlDbType.NVarChar).Value = txt_tel2.Text;
-            cmd.Parameters.Add("@fax", SqlDbType.NVarChar).Value = txt_fax.Text;
-            cmd.Parameters.Add("@gsm1", SqlDbType.NVarChar).Value = txt_gsm1.Text;
-            cmd.Parameters.Add("@gsm2", SqlDbType.NVarChar).Value = txt_gsm2.Text;
-            cmd.Parameters.Add("@mail", SqlDbType.NVarChar).Value = txt_mail.Text;
-            cmd.Parameters.Add("@web_adresi", SqlDbType.NVarChar).Value = txt_web_adresi.Text;
-            cmd.Parameters.Add("@aciklama1", SqlDbType.NVarChar).Value = txt_aciklama1.Text;
-
-
-            //Response.Write(cmd.CommandText);
-
-            connection.Open();
-            updated = cmd.ExecuteNonQuery();
-        }
-        catch (Exception err)
-        {
-            lbl_mesaj.Text = "Error Login. ";
-            lbl_mesaj.Text += err.Message;
-        }
-        finally
-        {
-            connection.Close();
-            lbl_mesaj.Text = updated.ToString();
-
-        }
+        FirmaBilgileriniGetir(Convert.ToInt32(lbl_firma_id.Text));
     }
-
-
 }

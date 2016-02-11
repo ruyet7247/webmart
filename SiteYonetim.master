@@ -50,8 +50,6 @@
                             Value="Firma Modülü">
                             <asp:MenuItem Text="Firma Oluştur" Value="Firma Oluştur" 
                                 NavigateUrl="~/Yonetim/FirmaOlustur.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Firma Listesi" Value="Firma Listesi" 
-                                NavigateUrl="~/Yonetim/FirmaListesi.aspx"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text="Stok Modülü" Value="Stok Modülü">
                             <asp:MenuItem Text="Stok Transfer" Value="Stok Transfer"></asp:MenuItem>
