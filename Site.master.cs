@@ -20,9 +20,17 @@ public partial class SiteMaster : System.Web.UI.MasterPage
 
         if (Session["GirisVar"] == "True")
         {
-            NavigationMenu.Visible = true;
-            lbl_KullaniciBilgileri.Visible = true;
-            ibtn_exit.Visible = true;
+            if (Session["Master"] == "True")
+            {
+                Response.Redirect("~/Yonetim");
+               
+            }
+            else
+            {
+                NavigationMenu.Visible = true;
+                lbl_KullaniciBilgileri.Visible = true;
+                ibtn_exit.Visible = true;
+            }
         }
       
 

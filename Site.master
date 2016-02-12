@@ -127,7 +127,7 @@
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Randevu Modülü" Value="Randevu Modülü" 
                             NavigateUrl="~/Randevu/RandevuKarti.aspx"></asp:MenuItem>
-                        <asp:MenuItem Text=" Dashboard" Value="Dashboard"></asp:MenuItem>
+                        <asp:MenuItem Text=" Mesaj" Value="Mesaj"></asp:MenuItem>
                     </Items>
                 </asp:Menu>
             </div>

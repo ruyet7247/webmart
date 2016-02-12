@@ -106,7 +106,7 @@ public partial class Login : System.Web.UI.Page
     protected bool KullaniciGirisKontrol(string kullanici_adi,string sifre)
     {
 
-        string queryString = "SELECT   dbo.firma_kullanici_kayit.*,dbo.firma_kayit.firma_adi, dbo.firma_kayit.veritabani_adi, dbo.firma_kayit.connection_string_adi FROM dbo.firma_kayit INNER JOIN dbo.firma_kullanici_kayit ON dbo.firma_kayit.firma_id = dbo.firma_kullanici_kayit.firma_id WHERE aktif_or_pasif=1 AND kullanici_adi=@kullanici_adi AND kullanici_sifre=@kullanici_sifre";
+        string queryString = "SELECT   dbo.firma_kullanici_kayit.*,dbo.firma_kayit.firma_adi, dbo.firma_kayit.veritabani_adi, dbo.firma_kayit.connection_string_adi FROM dbo.firma_kayit RIGHT JOIN dbo.firma_kullanici_kayit ON dbo.firma_kayit.firma_id = dbo.firma_kullanici_kayit.firma_id WHERE aktif_or_pasif=1 AND kullanici_adi=@kullanici_adi AND kullanici_sifre=@kullanici_sifre";
         ConnVt baglan = new ConnVt();
         SqlConnection connection = baglan.VeritabaninaBaglan("WebMart_Master");
         SqlCommand cmd = new SqlCommand(queryString, connection);

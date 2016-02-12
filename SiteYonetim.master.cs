@@ -30,7 +30,7 @@ public partial class SiteYonetim : System.Web.UI.MasterPage
     protected void ibtn_exit_Click(object sender, ImageClickEventArgs e)
     {
         OturumBilgileriniTemizle();
-        Response.Redirect("Login.aspx");
+        Response.Redirect("../Login.aspx");
     }
 
     protected void OturumBilgileriniTemizle()

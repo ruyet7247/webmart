@@ -58,7 +58,7 @@
                         <asp:MenuItem Text="Kasa Modülü" Value="Kasa Modülü">
                             <asp:MenuItem Text="Kasa Listesi" Value="Kasa Listesi"></asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem Text=" Dashboard" Value="Dashboard"></asp:MenuItem>
+                        <asp:MenuItem Text=" Mesaj" Value="Mesaj"></asp:MenuItem>
                     </Items>
                 </asp:Menu>
             </div>
