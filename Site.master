@@ -49,6 +49,8 @@
                             Value="Genel Tanımlamalar">
                             <asp:MenuItem Text=" Firma Bilgileri" Value="Firma Bilgileri" 
                                 NavigateUrl="~/GenelTanimlamar/GFirmaTanimlama.aspx"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/GenelTanimlamar/Kullanici.aspx" 
+                                Text="Kullanıcı Tanımlama" Value="Kullanıcı Tanımlama"></asp:MenuItem>
                             <asp:MenuItem Text=" Kasa Tanımlama" Value="Kasa Tanımlama" 
                                 NavigateUrl="~/GenelTanimlamar/KasaTanimlama.aspx"></asp:MenuItem>
                             <asp:MenuItem Text=" Gelir-Gider Tanimlama" Value="Gelir-Gider Tanimlama" 
@@ -127,7 +129,7 @@
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Randevu Modülü" Value="Randevu Modülü" 
                             NavigateUrl="~/Randevu/RandevuKarti.aspx"></asp:MenuItem>
-                        <asp:MenuItem Text=" Mesaj" Value="Mesaj"></asp:MenuItem>
+                        <asp:MenuItem Text=" Mesaj" Value="Mesaj" NavigateUrl="~/Mesaj/Mesaj.aspx"></asp:MenuItem>
                     </Items>
                 </asp:Menu>
             </div>

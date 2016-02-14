@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteYonetim.master" AutoEventWireup="true" CodeFile="Kullanici.aspx.cs" Inherits="Yonetim_Kullanici" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Kullanici.aspx.cs" Inherits="GenelTanimlamar_Kullanici" %>
 
 
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
@@ -68,7 +68,7 @@
             <td class="style2">
                 <asp:DropDownList ID="dd_firma_listesi" runat="server" 
                     DataSourceID="SqlDataSource_firma" DataTextField="firma_adi" 
-                    DataValueField="firma_id">
+                    DataValueField="firma_id" Enabled="False">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource_firma" runat="server" 
                     SelectCommand="SELECT [firma_id], [firma_adi] FROM [firma_kayit]">
@@ -374,4 +374,5 @@
     <!-- ARAMA PANELİ son-->
 
 </asp:Content>
+
 

@@ -28,7 +28,7 @@ public partial class Login : System.Web.UI.Page
         //** doğrulama textbox ı üzerindeyken entere basılırsa Login butonunu clickle
         if (dtext != null)
         {
-            dtext.Attributes.Add("onkeydown", "if(event.which || event.keyCode){if ((event.which == 13) || (event.keyCode == 13)) {document.getElementById('btnLogin').click();return false;}} else {return true}; ");
+            dtext.Attributes.Add("onkeydown", "if(event.which || event.keyCode){if ((event.which == 13) || (event.keyCode == 13)) {document.getElementById('ibtn_login').click();return false;}} else {return true}; ");
         }
         // ** doğrulama resmini çiz
         if (!IsPostBack)
@@ -41,7 +41,8 @@ public partial class Login : System.Web.UI.Page
     private string createCode()
     {
         Random rnd = new Random();
-        string charecters = "123456789QWERTYUIPASDFGHJKLZXCVBNM";
+        //string charecters = "123456789QWERTYUIPASDFGHJKLZXCVBNM";
+        string charecters = "123456789";
         string code = null;
 
         for (int i = 0; i < 5; i++)
@@ -103,7 +104,7 @@ public partial class Login : System.Web.UI.Page
     }
 
 
-    protected bool KullaniciGirisKontrol(string kullanici_adi,string sifre)
+    protected bool KullaniciGirisKontrol(string kullanici_adi,string sifre) // SESSİONLAR
     {
 
         string queryString = "SELECT   dbo.firma_kullanici_kayit.*,dbo.firma_kayit.firma_adi, dbo.firma_kayit.veritabani_adi, dbo.firma_kayit.connection_string_adi FROM dbo.firma_kayit RIGHT JOIN dbo.firma_kullanici_kayit ON dbo.firma_kayit.firma_id = dbo.firma_kullanici_kayit.firma_id WHERE aktif_or_pasif=1 AND kullanici_adi=@kullanici_adi AND kullanici_sifre=@kullanici_sifre";
@@ -122,6 +123,7 @@ public partial class Login : System.Web.UI.Page
                 {
                     Session["GirisVar"] = "True";
                     Session["ConnectionString"] = reader["connection_string_adi"].ToString();
+                    Session["kullanici_id"] = reader["kullanici_id"].ToString();
                     Session["firma_id"] = reader["firma_id"].ToString();
                     Session["firma_adi"] = reader["firma_adi"].ToString();
                     Session["adi_soyadi"] = reader["adi_soyadi"].ToString();
@@ -135,6 +137,7 @@ public partial class Login : System.Web.UI.Page
                     if (firma_id == "-1" && yetki == "master")
                     {
                         Session["Master"] = "True";
+                        Session["ConnectionString"] = "WebMart_Master";
                     }
                     else
                     {

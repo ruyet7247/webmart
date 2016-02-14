@@ -9,17 +9,16 @@ using System.Web.Configuration;
 using System.Data.SqlClient;
 using System.Threading;
 
-public partial class Yonetim_Kullanici : System.Web.UI.Page
+public partial class GenelTanimlamar_Kullanici : System.Web.UI.Page
 {
-    /*
-     Sistem Üzerinde Mutlaka firma_id = '-1' ve yetkisi 'master'olan bir kayıt eklenmesi gerekir.
-     */
-
+    string database_master = "WebMart_Master"; // Bu sayfaya özel veriler Master Database e eklendiği için sabit yaptık
+    
     protected void Page_Load(object sender, EventArgs e)
     {
-        SqlDataSource_departman.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
-        SqlDataSource_firma.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
         
+        SqlDataSource_departman.ConnectionString = WebConfigurationManager.ConnectionStrings[database_master].ConnectionString;
+        SqlDataSource_firma.ConnectionString = WebConfigurationManager.ConnectionStrings[database_master].ConnectionString;
+
 
         if (Request.QueryString["KullaniciID"] != null)
         {
@@ -54,6 +53,7 @@ public partial class Yonetim_Kullanici : System.Web.UI.Page
         {
             KullaniciEkle();
             KullaniciBilgileriniGetir(Convert.ToInt32(lbl_kullanici_id.Text));
+            dd_firma_listesi.SelectedValue = Session["firma_id"].ToString();
         }
         else
         {
@@ -65,13 +65,13 @@ public partial class Yonetim_Kullanici : System.Web.UI.Page
     protected void KullaniciEkle()
     {
         ConnVt baglan = new ConnVt();
-        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlConnection connection = baglan.VeritabaninaBaglan(database_master);
         SqlCommand cmd = new SqlCommand("KullaniciEkle", connection);
 
         try
         {
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@firma_id", SqlDbType.Int).Value = dd_firma_listesi.SelectedValue;
+            cmd.Parameters.Add("@firma_id", SqlDbType.Int).Value = Convert.ToInt32(Session["firma_id"].ToString());
             cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = Convert.ToDateTime(txt_kayit_tarihi.Text);
             cmd.Parameters.Add("@yetki_grubu_id", SqlDbType.Int).Value = dd_yetki_grubu_id.SelectedValue;
             cmd.Parameters.Add("@tc", SqlDbType.NVarChar).Value = txt_tc.Text;
@@ -101,7 +101,7 @@ public partial class Yonetim_Kullanici : System.Web.UI.Page
     protected void KullaniciGuncelle(int kullanici_id)
     {
         ConnVt baglan = new ConnVt();
-        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlConnection connection = baglan.VeritabaninaBaglan(database_master);
         SqlCommand cmd = new SqlCommand("KullaniciGuncelle", connection);
 
         int update_flag = 0;
@@ -113,7 +113,7 @@ public partial class Yonetim_Kullanici : System.Web.UI.Page
             DateTime kayit_tarihi = Convert.ToDateTime(txt_kayit_tarihi.Text);
 
             cmd.Parameters.Add("@kullanici_id", SqlDbType.Int).Value = lbl_kullanici_id.Text;
-            cmd.Parameters.Add("@firma_id", SqlDbType.Int).Value = dd_firma_listesi.SelectedValue;
+            cmd.Parameters.Add("@firma_id", SqlDbType.Int).Value = Convert.ToInt32(Session["firma_id"].ToString());
             cmd.Parameters.Add("@kayit_tarihi", SqlDbType.DateTime).Value = kayit_tarihi;
             cmd.Parameters.Add("@yetki_grubu_id", SqlDbType.Int).Value = dd_yetki_grubu_id.SelectedValue;
             cmd.Parameters.Add("@tc", SqlDbType.NVarChar).Value = txt_tc.Text;
@@ -124,7 +124,7 @@ public partial class Yonetim_Kullanici : System.Web.UI.Page
             cmd.Parameters.Add("@aktif_or_pasif", SqlDbType.NVarChar).Value = dd_aktif_or_pasif.SelectedValue;
             cmd.Parameters.Add("@aciklama1", SqlDbType.NVarChar).Value = txt_aciklama1.Text;
 
-          
+
 
             update_flag = cmd.ExecuteNonQuery();
         }
@@ -149,9 +149,9 @@ public partial class Yonetim_Kullanici : System.Web.UI.Page
 
     protected void KullaniciArama(string adi_soyadi) //kullanici arama modal popup
     {
-        string hareketSQL = "SELECT * FROM firma_kullanici_kayit WHERE firma_id!='-1' and  adi_soyadi LIKE '%" + adi_soyadi + "%'";
+        string hareketSQL = "SELECT * FROM firma_kullanici_kayit WHERE firma_id!='-1' and  firma_id=" + Convert.ToInt32(Session["firma_id"].ToString()) + " and adi_soyadi LIKE '%" + adi_soyadi + "%'";
         ConnVt baglan = new ConnVt();
-        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlConnection connection = baglan.VeritabaninaBaglan(database_master);
         SqlCommand cmd = new SqlCommand(hareketSQL, connection);
 
         int updated = 0;
@@ -199,8 +199,8 @@ public partial class Yonetim_Kullanici : System.Web.UI.Page
 
 
 
-        string queryString = "SELECT * FROM firma_kullanici_kayit WHERE kullanici_id=" + kullanici_id;
-        ConnVt baglan = new ConnVt(); SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString()); SqlCommand cmd = new SqlCommand(queryString, connection);
+        string queryString = "SELECT * FROM firma_kullanici_kayit WHERE firma_id=" + Convert.ToInt32(Session["firma_id"].ToString())+ " and  kullanici_id=" + kullanici_id;
+        ConnVt baglan = new ConnVt(); SqlConnection connection = baglan.VeritabaninaBaglan(database_master); SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {
 
@@ -211,6 +211,7 @@ public partial class Yonetim_Kullanici : System.Web.UI.Page
             {
                 while (reader.Read())
                 {
+
                     dd_firma_listesi.SelectedValue = reader["firma_id"].ToString();
                     txt_tc.Text = reader["tc"].ToString();
                     DateTime kayit_tarihi = Convert.ToDateTime(reader["kayit_tarihi"].ToString());
@@ -222,8 +223,6 @@ public partial class Yonetim_Kullanici : System.Web.UI.Page
                     txt_gsm.Text = reader["gsm"].ToString();
                     dd_aktif_or_pasif.SelectedValue = reader["aktif_or_pasif"].ToString();
                     txt_aciklama1.Text = reader["aciklama1"].ToString();
-                    
-
 
 
                 }
@@ -252,17 +251,18 @@ public partial class Yonetim_Kullanici : System.Web.UI.Page
     protected void ibtn_kullanici_sil_Click(object sender, ImageClickEventArgs e)
     {
         int kullanici_id = Convert.ToInt32(lbl_kullanici_id.Text);
-        KullaniciSil(kullanici_id);
+        int firma_id = Convert.ToInt32(Session["firma_id"].ToString());
+        KullaniciSil(kullanici_id,firma_id);
         Response.Redirect("Kullanici.aspx");
 
     }
 
-    protected void KullaniciSil(int silinecek_kullanici_id)
+    protected void KullaniciSil(int silinecek_kullanici_id,int silinecek_firma_id)
     {
 
-        string queryString = "DELETE FROM firma_kullanici_kayit WHERE kullanici_id=" + silinecek_kullanici_id;
-        ConnVt baglan = new ConnVt(); 
-        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString()); 
+        string queryString = "DELETE FROM firma_kullanici_kayit WHERE firma_id=" + silinecek_firma_id + " and kullanici_id=" + silinecek_kullanici_id;
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(database_master);
         SqlCommand cmd = new SqlCommand(queryString, connection);
         try
         {

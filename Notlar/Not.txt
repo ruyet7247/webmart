@@ -1,0 +1,19 @@
+1-
+/*
+Sistem Üzerinde Mutlaka firma_id = '-1' ve yetkisi 'master'olan bir kayıt eklenmesi gerekir.
+*/
+
+2-
+/*
+Kullanıcı sorgulamada master durumu var ise Session["Master"] = "True"; olur.
+ *  Yönetim klasöründeki verilere erişebilir.
+ *  Sayfa Session Erişimleri Masterpage sayfalarında kontrol edilmektedir.
+ */
+ 
+ 3-
+ Genel Tanımlamalar altında olan Kullanici.aspx özel durum vardır.burdaki kullanıcı kaydı master databaes ni kullanıyor.
+ Yönetim altındaki kullanici.aspx kayıt ettiği kullanıcı için FİRMA seçebiliyory.
+ Fakat Genel altındaki ise firma_id belirlenemiyor sadece kendi firma_id kayıt edebiliyor.
+ string database_master = "WebMart_Master"; // Bu sayfaya özel veriler Master Database e eklendiği için sabit yaptık
+ 
+ 4- 3 nolu maddeden aynısından mesaj.aspx dede vardır.

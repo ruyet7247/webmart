@@ -48,8 +48,10 @@
                     <Items>
                         <asp:MenuItem Text="Firma Modülü" 
                             Value="Firma Modülü">
-                            <asp:MenuItem Text="Firma Oluştur" Value="Firma Oluştur" 
+                            <asp:MenuItem Text="Firma Yönetim" Value="Firma Yönetim" 
                                 NavigateUrl="~/Yonetim/FirmaOlustur.aspx"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Yonetim/Kullanici.aspx" Text="Kullanıcı Yönetim" 
+                                Value="Kullanıcı Yönetim"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text="Stok Modülü" Value="Stok Modülü">
                             <asp:MenuItem Text="Stok Transfer" Value="Stok Transfer"></asp:MenuItem>
@@ -58,7 +60,7 @@
                         <asp:MenuItem Text="Kasa Modülü" Value="Kasa Modülü">
                             <asp:MenuItem Text="Kasa Listesi" Value="Kasa Listesi"></asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem Text=" Mesaj" Value="Mesaj"></asp:MenuItem>
+                        <asp:MenuItem Text=" Mesaj" Value="Mesaj" NavigateUrl="~/Yonetim/Mesaj.aspx"></asp:MenuItem>
                     </Items>
                 </asp:Menu>
             </div>
