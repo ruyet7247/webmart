@@ -30,6 +30,7 @@ public partial class Randevu_RandevuKarti : System.Web.UI.Page
                 // deal with it
             }
         }
+       
 
         if (!IsPostBack)  // tıklama ile sayfa gelmemiş ise
         {
@@ -43,7 +44,7 @@ public partial class Randevu_RandevuKarti : System.Web.UI.Page
 
         }
 
-        RandevulistesiGetir(); 
+        RandevulistesiGetir();  
 
       
 

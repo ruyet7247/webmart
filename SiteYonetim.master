@@ -52,6 +52,8 @@
                                 NavigateUrl="~/Yonetim/FirmaOlustur.aspx"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="~/Yonetim/Kullanici.aspx" Text="Kullanıcı Yönetim" 
                                 Value="Kullanıcı Yönetim"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Yonetim/YetkiGruplari.aspx" 
+                                Text="Yetki Grubları Tanımla" Value="Yetki Grubları Tanımla"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text="Stok Modülü" Value="Stok Modülü">
                             <asp:MenuItem Text="Stok Transfer" Value="Stok Transfer"></asp:MenuItem>

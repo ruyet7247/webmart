@@ -147,10 +147,41 @@ public partial class Mesaj_Mesaj : System.Web.UI.Page
     {
         GridViewRow row = this.gv_okunmamis_mesajlar.SelectedRow;
         Label lbl_anahtar_id = (Label)row.FindControl("lbl_gonderici_id"); // label kasa id numarasını alıyoruz detay için.
-
+        Label lbl_mesaj_id = (Label)row.FindControl("lbl_id");
         dd_kullanici_listele.SelectedValue = lbl_anahtar_id.Text;
         dd_grup_listele.SelectedValue = "0";
-        MesajlariGetir(Convert.ToInt32(lbl_anahtar_id.Text));
+        MesajiOkunduYap(Convert.ToInt32(lbl_mesaj_id.Text));  // mesaj id
+        MesajlariGetir(Convert.ToInt32(lbl_anahtar_id.Text)); // gondericinin id
+    }
+
+    protected void MesajiOkunduYap(int mesaj_id)
+    {
+        string hareketSQL = "UPDATE mesaj SET okundu_mu='True' WHERE id=" + mesaj_id;
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(database_master);
+        SqlCommand cmd = new SqlCommand(hareketSQL, connection);
+
+        int updated = 0;
+        try
+        {
+            updated = cmd.ExecuteNonQuery();
+      
+        }
+        catch (Exception err)
+        {
+            lbl_mesaj.Text = "Error UPDATE . ";
+            lbl_mesaj.Text += err.Message;
+        }
+        finally
+        {
+            baglan.VeritabaniBaglantiyiKapat(connection);
+        }
+
+        if (updated > 0)
+        {
+            //
+        }
+
     }
 
     protected void MesajlariGetir(int alici_id)

@@ -24,8 +24,9 @@
                 <td class="style1">
                     Randevu Tarihi</td>
                 <td class="style3">
-                   <asp:TextBox ID="txt_randevu_tarihi" runat="server" AutoPostBack="True" 
-                        ontextchanged="txt_randevu_tarihi_TextChanged" Width="80px"></asp:TextBox>
+                   <asp:TextBox ID="txt_randevu_tarihi" runat="server" 
+                        ontextchanged="txt_randevu_tarihi_TextChanged" Width="80px" 
+                        AutoPostBack="True"></asp:TextBox>
                 <asp:CalendarExtender ID="txt_randevu_tarihi_CalendarExtender" runat="server"  Format="dd.MM.yyyy" 
                     Enabled="True" TargetControlID="txt_randevu_tarihi">
                 </asp:CalendarExtender>

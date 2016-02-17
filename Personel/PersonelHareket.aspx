@@ -28,6 +28,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
+    <p>Personel Hareketleri</p>
     <asp:Panel ID="pnl_cari_bilgi" runat="server" BorderStyle="Solid">
     <table style="width:100%;">
         <tr>

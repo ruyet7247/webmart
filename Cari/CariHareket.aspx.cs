@@ -12,7 +12,6 @@ using System.Threading;
 public partial class Cari_CariHareket : System.Web.UI.Page
 {
     
-    
     protected void Page_Load(object sender, EventArgs e)
     {
         SqlDataSource_odeme_sekli.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
@@ -52,7 +51,6 @@ public partial class Cari_CariHareket : System.Web.UI.Page
     {
         cariArama(txt_arama.Text);
     } 
-
 
     protected void cariArama(string unvan) //cari arama modal popup
     {
@@ -298,8 +296,8 @@ public partial class Cari_CariHareket : System.Web.UI.Page
             //  1. DURUM
             if (dd_odeme_sekli.SelectedValue == "nakit")
             {
-                if (dd_borc_or_alacak.SelectedValue == "borc") { islem_tipi = "tahsilat"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
-                if (dd_borc_or_alacak.SelectedValue == "alacak") { islem_tipi = "tediye"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
+                if (dd_borc_or_alacak.SelectedValue == "borc") { islem_tipi = "tediye"; }    //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
+                if (dd_borc_or_alacak.SelectedValue == "alacak") { islem_tipi = "tahsilat"; }      //işlem tipi manuel olarak veritabanına kayıt edilir ve islem tiipleri tabloda tutulur.
                 fis_id = "";
                 kasa_id = dd_bagli_hesap.SelectedValue;
                 pos_id = "";

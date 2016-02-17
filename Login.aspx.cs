@@ -24,7 +24,8 @@ public partial class Login : System.Web.UI.Page
     
    protected void Page_Load(object sender, EventArgs e)
     {
-        dtext = (TextBox)Pnl_login.FindControl("txt_dtext");
+       /* 
+       dtext = (TextBox)Pnl_login.FindControl("txt_dtext");
         //** doğrulama textbox ı üzerindeyken entere basılırsa Login butonunu clickle
         if (dtext != null)
         {
@@ -36,6 +37,7 @@ public partial class Login : System.Web.UI.Page
             Dogrulama();
             lbl_mesaj.Text = "";
         }
+        * */
     }
 
     private string createCode()
@@ -63,12 +65,13 @@ public partial class Login : System.Web.UI.Page
         string code = createCode();
         Session["code"] = code;
         _graph.DrawString(code, _font, Brushes.White, 5, 5);
-        _bitmap.Save(Server.MapPath("Images/img.Bmp"), ImageFormat.Bmp);
+        _bitmap.Save(Server.MapPath("Images/img.JPEG"), ImageFormat.Jpeg);
 
     }
 
     protected void Ibtn_login_Click(object sender, ImageClickEventArgs e)
     {
+        /*
         string dog_kodu = dtext.Text;
         string code = Session["code"].ToString();
 
@@ -86,7 +89,7 @@ public partial class Login : System.Web.UI.Page
                 {
                     if (KullaniciGirisKontrol(txt_kullanici_adi.Text, txt_sifre.Text))  // BAŞARILI MI???????
                     {
-                        /* LOGİN başarılı ise DEfault yönlendirilir. Tüm sayfalarda SESSION MASTERPAGE de bir seferde kontrol edilir. */
+                        //LOGİN başarılı ise DEfault yönlendirilir. Tüm sayfalarda SESSION MASTERPAGE de bir seferde kontrol edilir.
                         Response.Redirect("Default.aspx");
                     }
                 }
@@ -97,8 +100,23 @@ public partial class Login : System.Web.UI.Page
         {
             lbl_mesaj.Text = "Doğrulama Kodu Hatalı";
         }
+        */
 
-       
+        if (txt_kullanici_adi.Text == "" || txt_sifre.Text == "")
+        { }
+        else
+        {
+            YasakliKelimeKontrol yasak_kontrol = new YasakliKelimeKontrol();
+            bool yasak_kelime_kontrol = yasak_kontrol.YasakKelimeyiKontrolEt(txt_kullanici_adi.Text + " " + txt_sifre.Text);
+            if (yasak_kelime_kontrol)
+            {
+                if (KullaniciGirisKontrol(txt_kullanici_adi.Text, txt_sifre.Text))  // BAŞARILI MI???????
+                {
+                    //LOGİN başarılı ise DEfault yönlendirilir. Tüm sayfalarda SESSION MASTERPAGE de bir seferde kontrol edilir.
+                    Response.Redirect("Default.aspx");
+                }
+            }
+        } 
 
 
     }
@@ -129,6 +147,8 @@ public partial class Login : System.Web.UI.Page
                     Session["adi_soyadi"] = reader["adi_soyadi"].ToString();
                     Session["gsm"] = reader["connection_string_adi"].ToString();
                     Session["yetki"] = reader["yetki"].ToString();
+
+                    KullaniciYetkilendir(Convert.ToInt32(reader["yetki_grubu_id"].ToString()));
 
 
                     string firma_id = reader["firma_id"].ToString();
@@ -169,6 +189,48 @@ public partial class Login : System.Web.UI.Page
 
 
         return false;
+
+    }
+
+    protected void KullaniciYetkilendir(int yetki_id) // SESSİONLAR // burdaki yetkiler Site.master.cs dosyasında kontrol edliyor.
+    {
+
+        string queryString = "SELECT * FROM yetki_grubu WHERE yetki_id=" + yetki_id;
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan("WebMart_Master");
+        SqlCommand cmd = new SqlCommand(queryString, connection);
+        try
+        {
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+
+                    Session["SayfaGenel"] = reader["Genel"].ToString();
+                    Session["SayfaCari"] = reader["Cari"].ToString();
+                    Session["SayfaStok"] = reader["Stok"].ToString();
+                    Session["SayfaPersonel"] = reader["Personel"].ToString();
+                    Session["SayfaKasa"] = reader["Kasa"].ToString();
+                    Session["SayfaRandevu"] = reader["Randevu"].ToString();
+                    Session["SayfaMesaj"] = reader["Mesaj"].ToString();
+
+                }
+            }
+
+        }
+
+        catch (Exception err)
+        {
+            lbl_mesaj.Text = "Hata Yetkilendrme Alanında . ";
+            lbl_mesaj.Text += err.Message;
+        }
+        finally
+        {
+            baglan.VeritabaniBaglantiyiKapat(connection);
+        }
+
 
     }
   

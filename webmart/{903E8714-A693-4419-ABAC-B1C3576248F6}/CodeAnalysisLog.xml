@@ -1,0 +1,1536 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 10.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="10.0">
+ <Targets>
+  <Target Name="C:\Users\hamza\AppData\Local\Temp\tmp7975.tmp.cadir\bin\App_Web_0qyrkvdy.dll">
+   <Modules>
+    <Module Name="app_web_0qyrkvdy.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="Kasa_BankaHareket" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#BankaArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="BankaHareket.aspx.cs" Line="61">In method 'Kasa_BankaHareket.BankaArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="BankaHareket.aspx.cs" Line="68">In method 'Kasa_BankaHareket.BankaArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="BankaHareket.aspx.cs" Line="69">In method 'Kasa_BankaHareket.BankaArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="BankaHareket.aspx.cs" Line="61">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Kasa_BankaHareket.BankaArama(string)' could contain the following variables 'banka_adi'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#BankaBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="BankaHareket.aspx.cs" Line="108">In method 'Kasa_BankaHareket.BankaBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="BankaHareket.aspx.cs" Line="108">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Kasa_BankaHareket.BankaBilgileriniGetir(int)' could contain the following variables 'banka_id', 'banka_id', 'banka_id'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#BankaHareketGirisCikisKaydet(System.Int32,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="BankaHareket.aspx.cs" Line="215">In method 'Kasa_BankaHareket.BankaHareketGirisCikisKaydet(int, string, string, string, string, string, decimal, string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#BankaHareketListesiniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="BankaHareket.aspx.cs" Line="154">In method 'Kasa_BankaHareket.BankaHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="BankaHareket.aspx.cs" Line="161">In method 'Kasa_BankaHareket.BankaHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="BankaHareket.aspx.cs" Line="162">In method 'Kasa_BankaHareket.BankaHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="BankaHareket.aspx.cs" Line="255">In method 'Kasa_BankaHareket.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Kasa_KasaHareket" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="KasaHareket.aspx.cs" Line="255">In method 'Kasa_KasaHareket.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KasaArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="KasaHareket.aspx.cs" Line="70">In method 'Kasa_KasaHareket.KasaArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="KasaHareket.aspx.cs" Line="77">In method 'Kasa_KasaHareket.KasaArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="KasaHareket.aspx.cs" Line="78">In method 'Kasa_KasaHareket.KasaArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="KasaHareket.aspx.cs" Line="70">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Kasa_KasaHareket.KasaArama(string)' could contain the following variables 'kasa_adi'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KasaBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="KasaHareket.aspx.cs" Line="107">In method 'Kasa_KasaHareket.KasaBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KasaHareketGirisCikisKaydet(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="KasaHareket.aspx.cs" Line="216">In method 'Kasa_KasaHareket.KasaHareketGirisCikisKaydet(string, string, string, string, string, string, string, string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KasaHareketListesiniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="KasaHareket.aspx.cs" Line="153">In method 'Kasa_KasaHareket.KasaHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="KasaHareket.aspx.cs" Line="160">In method 'Kasa_KasaHareket.KasaHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="KasaHareket.aspx.cs" Line="161">In method 'Kasa_KasaHareket.KasaHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Kasa_PosHareket" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="PosHareket.aspx.cs" Line="256">In method 'Kasa_PosHareket.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PosArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="PosHareket.aspx.cs" Line="60">In method 'Kasa_PosHareket.PosArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="PosHareket.aspx.cs" Line="67">In method 'Kasa_PosHareket.PosArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="PosHareket.aspx.cs" Line="68">In method 'Kasa_PosHareket.PosArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="PosHareket.aspx.cs" Line="60">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Kasa_PosHareket.PosArama(string)' could contain the following variables 'pos_banka_adi'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PosBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="PosHareket.aspx.cs" Line="110">In method 'Kasa_PosHareket.PosBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="PosHareket.aspx.cs" Line="110">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Kasa_PosHareket.PosBilgileriniGetir(int)' could contain the following variables 'pos_id', 'pos_id', 'pos_id'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PosHareketGirisCikisKaydet(System.Int32,System.String,System.String,System.String,System.Decimal,System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="PosHareket.aspx.cs" Line="218">In method 'Kasa_PosHareket.PosHareketGirisCikisKaydet(int, string, string, string, decimal, string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PosHareketListesiniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="PosHareket.aspx.cs" Line="156">In method 'Kasa_PosHareket.PosHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="PosHareket.aspx.cs" Line="163">In method 'Kasa_PosHareket.PosHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Kasa" File="PosHareket.aspx.cs" Line="164">In method 'Kasa_PosHareket.PosHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\hamza\AppData\Local\Temp\tmp7975.tmp.cadir\bin\App_Web_1bual3by.dll">
+   <Modules>
+    <Module Name="app_web_1bual3by.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="Cari_AlisSatisIslemleri" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#cariArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="73">In method 'Cari_AlisSatisIslemleri.cariArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="80">In method 'Cari_AlisSatisIslemleri.cariArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="81">In method 'Cari_AlisSatisIslemleri.cariArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="73">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Cari_AlisSatisIslemleri.cariArama(string)' could contain the following variables 'unvan'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="122">In method 'Cari_AlisSatisIslemleri.CariBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariFaturaHareketListesiniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="172">In method 'Cari_AlisSatisIslemleri.CariFaturaHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="179">In method 'Cari_AlisSatisIslemleri.CariFaturaHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="180">In method 'Cari_AlisSatisIslemleri.CariFaturaHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#FaturaKaydet(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="273">In method 'Cari_AlisSatisIslemleri.FaturaKaydet(string, string, string, string, string, string, string, string, string, decimal, decimal, decimal, string, string, string, string, string, string, string, string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#FaturaTutarlariniHesapla(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="456">In method 'Cari_AlisSatisIslemleri.FaturaTutarlariniHesapla(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="456">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Cari_AlisSatisIslemleri.FaturaTutarlariniHesapla(string)' could contain the following variables 'cari_id'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="326">In method 'Cari_AlisSatisIslemleri.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#StokArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="362">In method 'Cari_AlisSatisIslemleri.StokArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="369">In method 'Cari_AlisSatisIslemleri.StokArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="370">In method 'Cari_AlisSatisIslemleri.StokArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="362">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Cari_AlisSatisIslemleri.StokArama(string)' could contain the following variables 'stok_adi'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#StokBilgisiniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="408">In method 'Cari_AlisSatisIslemleri.StokBilgisiniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#StokHareketKaydet()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="AlisSatisIslemleri.aspx.cs" Line="496">In method 'Cari_AlisSatisIslemleri.StokHareketKaydet()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Cari_CariHareket" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#cariArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="62">In method 'Cari_CariHareket.cariArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="69">In method 'Cari_CariHareket.cariArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="70">In method 'Cari_CariHareket.cariArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="62">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Cari_CariHareket.cariArama(string)' could contain the following variables 'unvan'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="108">In method 'Cari_CariHareket.CariBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariBorcAlacakBilgisiniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="195">In method 'Cari_CariHareket.CariBorcAlacakBilgisiniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariHareketBorcAlacakKaydet(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.String,System.String,System.String,System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="367">In method 'Cari_CariHareket.CariHareketBorcAlacakKaydet(string, string, string, string, string, string, string, string, decimal, decimal, string, string, string, string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariHareketListesiniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="158">In method 'Cari_CariHareket.CariHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="165">In method 'Cari_CariHareket.CariHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="166">In method 'Cari_CariHareket.CariHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#dd_odeme_sekli_SelectedIndexChanged(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="255">In method 'Cari_CariHareket.dd_odeme_sekli_SelectedIndexChanged(object, EventArgs)', call System.IDisposable.Dispose on object 'adapter' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="248">In method 'Cari_CariHareket.dd_odeme_sekli_SelectedIndexChanged(object, EventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="254">In method 'Cari_CariHareket.dd_odeme_sekli_SelectedIndexChanged(object, EventArgs)', call System.IDisposable.Dispose on object 'table' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariHareket.aspx.cs" Line="411">In method 'Cari_CariHareket.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Cari_CariKarti" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#cariArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariKarti.aspx.cs" Line="181">In method 'Cari_CariKarti.cariArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariKarti.aspx.cs" Line="188">In method 'Cari_CariKarti.cariArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariKarti.aspx.cs" Line="189">In method 'Cari_CariKarti.cariArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariKarti.aspx.cs" Line="181">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Cari_CariKarti.cariArama(string)' could contain the following variables 'unvan'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariKarti.aspx.cs" Line="228">In method 'Cari_CariKarti.CariBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariKarti.aspx.cs" Line="66">In method 'Cari_CariKarti.CariEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariKarti.aspx.cs" Line="117">In method 'Cari_CariKarti.CariGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariSil(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariKarti.aspx.cs" Line="311">In method 'Cari_CariKarti.CariSil(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\hamza\AppData\Local\Temp\tmp7975.tmp.cadir\bin\App_Web_2fj1nbdj.dll">
+   <Modules>
+    <Module Name="app_web_2fj1nbdj.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="Stok_StokHareket" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokHareket.aspx.cs" Line="293">In method 'Stok_StokHareket.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#StokArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokHareket.aspx.cs" Line="68">In method 'Stok_StokHareket.StokArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokHareket.aspx.cs" Line="75">In method 'Stok_StokHareket.StokArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokHareket.aspx.cs" Line="76">In method 'Stok_StokHareket.StokArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokHareket.aspx.cs" Line="68">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Stok_StokHareket.StokArama(string)' could contain the following variables 'stok_adi'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#StokBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokHareket.aspx.cs" Line="106">In method 'Stok_StokHareket.StokBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#StokHareketGirisCikisKaydet(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokHareket.aspx.cs" Line="255">In method 'Stok_StokHareket.StokHareketGirisCikisKaydet(string, string, string, string, string, string, string, string, string, string, string, string, string, string, string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#StokHareketListesiniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokHareket.aspx.cs" Line="150">In method 'Stok_StokHareket.StokHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokHareket.aspx.cs" Line="157">In method 'Stok_StokHareket.StokHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokHareket.aspx.cs" Line="158">In method 'Stok_StokHareket.StokHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Stok_StokKarti" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#stokArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokKarti.aspx.cs" Line="155">In method 'Stok_StokKarti.stokArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokKarti.aspx.cs" Line="162">In method 'Stok_StokKarti.stokArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokKarti.aspx.cs" Line="163">In method 'Stok_StokKarti.stokArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokKarti.aspx.cs" Line="155">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Stok_StokKarti.stokArama(string)' could contain the following variables 'stok_adi'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#stokBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokKarti.aspx.cs" Line="203">In method 'Stok_StokKarti.stokBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#stokEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokKarti.aspx.cs" Line="66">In method 'Stok_StokKarti.stokEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#stokGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokKarti.aspx.cs" Line="105">In method 'Stok_StokKarti.stokGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#StokSil(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Stok" File="StokKarti.aspx.cs" Line="264">In method 'Stok_StokKarti.StokSil(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\hamza\AppData\Local\Temp\tmp7975.tmp.cadir\bin\App_Web_5ly3d0yu.dll">
+   <Modules>
+    <Module Name="app_web_5ly3d0yu.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="Cari_CariGorusmeleri" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#CariBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariGorusmeleri.aspx.cs" Line="134">In method 'Cari_CariGorusmeleri.CariBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariGorusmeleriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariGorusmeleri.aspx.cs" Line="97">In method 'Cari_CariGorusmeleri.CariGorusmeleriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariGorusmeleri.aspx.cs" Line="104">In method 'Cari_CariGorusmeleri.CariGorusmeleriniGetir(int)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariGorusmeleri.aspx.cs" Line="105">In method 'Cari_CariGorusmeleri.CariGorusmeleriniGetir(int)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_arama_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariGorusmeleri.aspx.cs" Line="170">In method 'Cari_CariGorusmeleri.gv_arama_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#ibtn_cari_gorusme_kaydet_Click(System.Object,System.Web.UI.ImageClickEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="CariGorusmeleri.aspx.cs" Line="64">In method 'Cari_CariGorusmeleri.ibtn_cari_gorusme_kaydet_Click(object, ImageClickEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Cari_HastaKarti" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#cariArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="HastaKarti.aspx.cs" Line="180">In method 'Cari_HastaKarti.cariArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="HastaKarti.aspx.cs" Line="187">In method 'Cari_HastaKarti.cariArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="HastaKarti.aspx.cs" Line="188">In method 'Cari_HastaKarti.cariArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="HastaKarti.aspx.cs" Line="180">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Cari_HastaKarti.cariArama(string)' could contain the following variables 'adi'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="HastaKarti.aspx.cs" Line="227">In method 'Cari_HastaKarti.CariBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="HastaKarti.aspx.cs" Line="67">In method 'Cari_HastaKarti.CariEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="HastaKarti.aspx.cs" Line="119">In method 'Cari_HastaKarti.CariGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#CariSil(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Cari" File="HastaKarti.aspx.cs" Line="309">In method 'Cari_HastaKarti.CariSil(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\hamza\AppData\Local\Temp\tmp7975.tmp.cadir\bin\App_Web_aee3fac3.dll">
+   <Modules>
+    <Module Name="app_web_aee3fac3.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="Randevu_RandevuKarti" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#gv_arama_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Randevu" File="RandevuKarti.aspx.cs" Line="148">In method 'Randevu_RandevuKarti.gv_arama_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#ibtn_kaydet_Click(System.Object,System.Web.UI.ImageClickEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Randevu" File="RandevuKarti.aspx.cs" Line="108">In method 'Randevu_RandevuKarti.ibtn_kaydet_Click(object, ImageClickEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#RandevulistesiGetir()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Randevu" File="RandevuKarti.aspx.cs" Line="69">In method 'Randevu_RandevuKarti.RandevulistesiGetir()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Randevu" File="RandevuKarti.aspx.cs" Line="76">In method 'Randevu_RandevuKarti.RandevulistesiGetir()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Randevu" File="RandevuKarti.aspx.cs" Line="77">In method 'Randevu_RandevuKarti.RandevulistesiGetir()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Randevu" File="RandevuKarti.aspx.cs" Line="69">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Randevu_RandevuKarti.RandevulistesiGetir()' could contain the following variables 'tarih.ToString("yyyy-dd-MM")'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#RandevuyuStatusunuDegistir(System.Int32,System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Randevu" File="RandevuKarti.aspx.cs" Line="178">In method 'Randevu_RandevuKarti.RandevuyuStatusunuDegistir(int, bool)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\hamza\AppData\Local\Temp\tmp7975.tmp.cadir\bin\App_Web_bpdevhgc.dll">
+   <Modules>
+    <Module Name="app_web_bpdevhgc.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="GenelTanimlamar_BankaTanimlama" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#BankaEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaTanimlama.aspx.cs" Line="47">In method 'GenelTanimlamar_BankaTanimlama.BankaEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#BankaGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaTanimlama.aspx.cs" Line="83">In method 'GenelTanimlamar_BankaTanimlama.BankaGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#BankaListele()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaTanimlama.aspx.cs" Line="118">In method 'GenelTanimlamar_BankaTanimlama.BankaListele()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaTanimlama.aspx.cs" Line="125">In method 'GenelTanimlamar_BankaTanimlama.BankaListele()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaTanimlama.aspx.cs" Line="126">In method 'GenelTanimlamar_BankaTanimlama.BankaListele()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#BilgileriGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaTanimlama.aspx.cs" Line="171">In method 'GenelTanimlamar_BankaTanimlama.BilgileriGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaTanimlama.aspx.cs" Line="225">In method 'GenelTanimlamar_BankaTanimlama.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="GenelTanimlamar_KasaTanimi" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#gv_kasa_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="KasaTanimlama.aspx.cs" Line="211">In method 'GenelTanimlamar_KasaTanimi.gv_kasa_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KasaBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="KasaTanimlama.aspx.cs" Line="168">In method 'GenelTanimlamar_KasaTanimi.KasaBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KasaEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="KasaTanimlama.aspx.cs" Line="56">In method 'GenelTanimlamar_KasaTanimi.KasaEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KasaGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="KasaTanimlama.aspx.cs" Line="84">In method 'GenelTanimlamar_KasaTanimi.KasaGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KasaListele()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="KasaTanimlama.aspx.cs" Line="117">In method 'GenelTanimlamar_KasaTanimi.KasaListele()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="KasaTanimlama.aspx.cs" Line="124">In method 'GenelTanimlamar_KasaTanimi.KasaListele()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="KasaTanimlama.aspx.cs" Line="125">In method 'GenelTanimlamar_KasaTanimi.KasaListele()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\hamza\AppData\Local\Temp\tmp7975.tmp.cadir\bin\App_Web_gqvejw5o.dll">
+   <Modules>
+    <Module Name="app_web_gqvejw5o.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="Login" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dogrulama()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart" File="Login.aspx.cs" Line="59">In method 'Login.Dogrulama()', call System.IDisposable.Dispose on object '_bitmap' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart" File="Login.aspx.cs" Line="61">In method 'Login.Dogrulama()', call System.IDisposable.Dispose on object '_font' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KullaniciGirisKontrol(System.String,System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart" File="Login.aspx.cs" Line="113">In method 'Login.KullaniciGirisKontrol(string, string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\hamza\AppData\Local\Temp\tmp7975.tmp.cadir\bin\App_Web_kkwsvpj0.dll">
+   <Modules>
+    <Module Name="app_web_kkwsvpj0.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="Personel_PersonelHareket" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#dd_odeme_sekli_SelectedIndexChanged(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="256">In method 'Personel_PersonelHareket.dd_odeme_sekli_SelectedIndexChanged(object, EventArgs)', call System.IDisposable.Dispose on object 'adapter' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="250">In method 'Personel_PersonelHareket.dd_odeme_sekli_SelectedIndexChanged(object, EventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="255">In method 'Personel_PersonelHareket.dd_odeme_sekli_SelectedIndexChanged(object, EventArgs)', call System.IDisposable.Dispose on object 'table' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="396">In method 'Personel_PersonelHareket.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PersonelArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="67">In method 'Personel_PersonelHareket.PersonelArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="74">In method 'Personel_PersonelHareket.PersonelArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="75">In method 'Personel_PersonelHareket.PersonelArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="67">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Personel_PersonelHareket.PersonelArama(string)' could contain the following variables 'adi'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PersonelBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="115">In method 'Personel_PersonelHareket.PersonelBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PersonelBorcAlacakBilgisiniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="190">In method 'Personel_PersonelHareket.PersonelBorcAlacakBilgisiniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="190">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Personel_PersonelHareket.PersonelBorcAlacakBilgisiniGetir(int)' could contain the following variables 'Personel_id', 'Personel_id'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PersonelHareketBorcAlacakKaydet(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.String,System.String,System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="353">In method 'Personel_PersonelHareket.PersonelHareketBorcAlacakKaydet(string, string, string, string, string, string, string, string, string, decimal, string, string, string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PersonelHareketListesiniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="152">In method 'Personel_PersonelHareket.PersonelHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="159">In method 'Personel_PersonelHareket.PersonelHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelHareket.aspx.cs" Line="160">In method 'Personel_PersonelHareket.PersonelHareketListesiniGetir(int)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Personel_PersonelKarti" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#PersonelArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelKarti.aspx.cs" Line="182">In method 'Personel_PersonelKarti.PersonelArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelKarti.aspx.cs" Line="189">In method 'Personel_PersonelKarti.PersonelArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelKarti.aspx.cs" Line="190">In method 'Personel_PersonelKarti.PersonelArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelKarti.aspx.cs" Line="182">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Personel_PersonelKarti.PersonelArama(string)' could contain the following variables 'adi'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PersonelBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelKarti.aspx.cs" Line="230">In method 'Personel_PersonelKarti.PersonelBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PersonelEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelKarti.aspx.cs" Line="67">In method 'Personel_PersonelKarti.PersonelEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PersonelGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelKarti.aspx.cs" Line="117">In method 'Personel_PersonelKarti.PersonelGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PersonelSil(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Personel" File="PersonelKarti.aspx.cs" Line="306">In method 'Personel_PersonelKarti.PersonelSil(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\hamza\AppData\Local\Temp\tmp7975.tmp.cadir\bin\App_Web_q1mv4s32.dll">
+   <Modules>
+    <Module Name="app_web_q1mv4s32.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="GenelTanimlamar_BankaPosTanimlama" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#CariBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaPosTanimlama.aspx.cs" Line="164">In method 'GenelTanimlamar_BankaPosTanimlama.CariBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaPosTanimlama.aspx.cs" Line="208">In method 'GenelTanimlamar_BankaPosTanimlama.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaPosTanimlama.aspx.cs" Line="53">In method 'GenelTanimlamar_BankaPosTanimlama.VeriEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaPosTanimlama.aspx.cs" Line="81">In method 'GenelTanimlamar_BankaPosTanimlama.VeriGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriListele()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaPosTanimlama.aspx.cs" Line="113">In method 'GenelTanimlamar_BankaPosTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaPosTanimlama.aspx.cs" Line="120">In method 'GenelTanimlamar_BankaPosTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="BankaPosTanimlama.aspx.cs" Line="121">In method 'GenelTanimlamar_BankaPosTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="GenelTanimlamar_CariGrubuTanimlama" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#CariBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariGrubuTanimlama.aspx.cs" Line="158">In method 'GenelTanimlamar_CariGrubuTanimlama.CariBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariGrubuTanimlama.aspx.cs" Line="201">In method 'GenelTanimlamar_CariGrubuTanimlama.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariGrubuTanimlama.aspx.cs" Line="51">In method 'GenelTanimlamar_CariGrubuTanimlama.VeriEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariGrubuTanimlama.aspx.cs" Line="77">In method 'GenelTanimlamar_CariGrubuTanimlama.VeriGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriListele()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariGrubuTanimlama.aspx.cs" Line="107">In method 'GenelTanimlamar_CariGrubuTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariGrubuTanimlama.aspx.cs" Line="114">In method 'GenelTanimlamar_CariGrubuTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariGrubuTanimlama.aspx.cs" Line="115">In method 'GenelTanimlamar_CariGrubuTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="GenelTanimlamar_CariIslemTipiTanimlama" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#CariBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariIslemTipiTanimlama.aspx.cs" Line="161">In method 'GenelTanimlamar_CariIslemTipiTanimlama.CariBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariIslemTipiTanimlama.aspx.cs" Line="204">In method 'GenelTanimlamar_CariIslemTipiTanimlama.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariIslemTipiTanimlama.aspx.cs" Line="52">In method 'GenelTanimlamar_CariIslemTipiTanimlama.VeriEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariIslemTipiTanimlama.aspx.cs" Line="79">In method 'GenelTanimlamar_CariIslemTipiTanimlama.VeriGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriListele()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariIslemTipiTanimlama.aspx.cs" Line="110">In method 'GenelTanimlamar_CariIslemTipiTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariIslemTipiTanimlama.aspx.cs" Line="117">In method 'GenelTanimlamar_CariIslemTipiTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="CariIslemTipiTanimlama.aspx.cs" Line="118">In method 'GenelTanimlamar_CariIslemTipiTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="GenelTanimlamar_GKullaniciTanimlama" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#KullaniciEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="GKullaniciTanimlama.aspx.cs" Line="43">In method 'GenelTanimlamar_GKullaniciTanimlama.KullaniciEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KullaniciGuncelle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="GKullaniciTanimlama.aspx.cs" Line="73">In method 'GenelTanimlamar_GKullaniciTanimlama.KullaniciGuncelle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="GenelTanimlamar_KasaGelirGiderTanimlama" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GelirGiderBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="GGelirGiderTanimlama.aspx.cs" Line="157">In method 'GenelTanimlamar_KasaGelirGiderTanimlama.GelirGiderBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GelirGiderEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="GGelirGiderTanimlama.aspx.cs" Line="48">In method 'GenelTanimlamar_KasaGelirGiderTanimlama.GelirGiderEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GelirGiderGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="GGelirGiderTanimlama.aspx.cs" Line="76">In method 'GenelTanimlamar_KasaGelirGiderTanimlama.GelirGiderGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GelirGiderListele()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="GGelirGiderTanimlama.aspx.cs" Line="106">In method 'GenelTanimlamar_KasaGelirGiderTanimlama.GelirGiderListele()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="GGelirGiderTanimlama.aspx.cs" Line="113">In method 'GenelTanimlamar_KasaGelirGiderTanimlama.GelirGiderListele()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="GGelirGiderTanimlama.aspx.cs" Line="114">In method 'GenelTanimlamar_KasaGelirGiderTanimlama.GelirGiderListele()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_gelir_gider_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="GGelirGiderTanimlama.aspx.cs" Line="200">In method 'GenelTanimlamar_KasaGelirGiderTanimlama.gv_gelir_gider_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="GenelTanimlamar_Kullanici" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#KullaniciArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="Kullanici.aspx.cs" Line="155">In method 'GenelTanimlamar_Kullanici.KullaniciArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="Kullanici.aspx.cs" Line="162">In method 'GenelTanimlamar_Kullanici.KullaniciArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="Kullanici.aspx.cs" Line="163">In method 'GenelTanimlamar_Kullanici.KullaniciArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="Kullanici.aspx.cs" Line="155">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'GenelTanimlamar_Kullanici.KullaniciArama(string)' could contain the following variables 'Convert.ToInt32(this.Session["firma_id"].ToString())', 'adi_soyadi'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KullaniciBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="Kullanici.aspx.cs" Line="203">In method 'GenelTanimlamar_Kullanici.KullaniciBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="Kullanici.aspx.cs" Line="203">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'GenelTanimlamar_Kullanici.KullaniciBilgileriniGetir(int)' could contain the following variables 'Convert.ToInt32(this.Session["firma_id"].ToString())', 'kullanici_id'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KullaniciEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="Kullanici.aspx.cs" Line="69">In method 'GenelTanimlamar_Kullanici.KullaniciEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KullaniciGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="Kullanici.aspx.cs" Line="105">In method 'GenelTanimlamar_Kullanici.KullaniciGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KullaniciSil(System.Int32,System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="Kullanici.aspx.cs" Line="266">In method 'GenelTanimlamar_Kullanici.KullaniciSil(int, int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="Kullanici.aspx.cs" Line="266">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'GenelTanimlamar_Kullanici.KullaniciSil(int, int)' could contain the following variables 'silinecek_firma_id', 'silinecek_kullanici_id'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="GenelTanimlamar_ParaBirimiTanimlama" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="ParaBirimiTanimlama.aspx.cs" Line="203">In method 'GenelTanimlamar_ParaBirimiTanimlama.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#ParaBirimiBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="ParaBirimiTanimlama.aspx.cs" Line="160">In method 'GenelTanimlamar_ParaBirimiTanimlama.ParaBirimiBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="ParaBirimiTanimlama.aspx.cs" Line="51">In method 'GenelTanimlamar_ParaBirimiTanimlama.VeriEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="ParaBirimiTanimlama.aspx.cs" Line="78">In method 'GenelTanimlamar_ParaBirimiTanimlama.VeriGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriListele()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="ParaBirimiTanimlama.aspx.cs" Line="109">In method 'GenelTanimlamar_ParaBirimiTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="ParaBirimiTanimlama.aspx.cs" Line="116">In method 'GenelTanimlamar_ParaBirimiTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="ParaBirimiTanimlama.aspx.cs" Line="117">In method 'GenelTanimlamar_ParaBirimiTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="GenelTanimlamar_PersonelDepartmanTanimlama" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#CariBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelDepartmanTanimlama.aspx.cs" Line="163">In method 'GenelTanimlamar_PersonelDepartmanTanimlama.CariBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelDepartmanTanimlama.aspx.cs" Line="208">In method 'GenelTanimlamar_PersonelDepartmanTanimlama.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelDepartmanTanimlama.aspx.cs" Line="51">In method 'GenelTanimlamar_PersonelDepartmanTanimlama.VeriEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelDepartmanTanimlama.aspx.cs" Line="80">In method 'GenelTanimlamar_PersonelDepartmanTanimlama.VeriGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriListele()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelDepartmanTanimlama.aspx.cs" Line="111">In method 'GenelTanimlamar_PersonelDepartmanTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelDepartmanTanimlama.aspx.cs" Line="118">In method 'GenelTanimlamar_PersonelDepartmanTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelDepartmanTanimlama.aspx.cs" Line="119">In method 'GenelTanimlamar_PersonelDepartmanTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="GenelTanimlamar_PersonelIslemTipiTanimlama" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#CariBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelIslemTipiTanimlama.aspx.cs" Line="160">In method 'GenelTanimlamar_PersonelIslemTipiTanimlama.CariBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelIslemTipiTanimlama.aspx.cs" Line="203">In method 'GenelTanimlamar_PersonelIslemTipiTanimlama.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelIslemTipiTanimlama.aspx.cs" Line="51">In method 'GenelTanimlamar_PersonelIslemTipiTanimlama.VeriEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelIslemTipiTanimlama.aspx.cs" Line="78">In method 'GenelTanimlamar_PersonelIslemTipiTanimlama.VeriGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriListele()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelIslemTipiTanimlama.aspx.cs" Line="109">In method 'GenelTanimlamar_PersonelIslemTipiTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelIslemTipiTanimlama.aspx.cs" Line="116">In method 'GenelTanimlamar_PersonelIslemTipiTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="PersonelIslemTipiTanimlama.aspx.cs" Line="117">In method 'GenelTanimlamar_PersonelIslemTipiTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="GenelTanimlamar_StokGrubuTanimlama" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#CariBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokGrubuTanimlama.aspx.cs" Line="158">In method 'GenelTanimlamar_StokGrubuTanimlama.CariBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokGrubuTanimlama.aspx.cs" Line="201">In method 'GenelTanimlamar_StokGrubuTanimlama.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokGrubuTanimlama.aspx.cs" Line="51">In method 'GenelTanimlamar_StokGrubuTanimlama.VeriEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokGrubuTanimlama.aspx.cs" Line="77">In method 'GenelTanimlamar_StokGrubuTanimlama.VeriGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriListele()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokGrubuTanimlama.aspx.cs" Line="107">In method 'GenelTanimlamar_StokGrubuTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokGrubuTanimlama.aspx.cs" Line="114">In method 'GenelTanimlamar_StokGrubuTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokGrubuTanimlama.aspx.cs" Line="115">In method 'GenelTanimlamar_StokGrubuTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="GenelTanimlamar_StokIslemTipiTanimlama" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#CariBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokIslemTipiTanimlama.aspx.cs" Line="160">In method 'GenelTanimlamar_StokIslemTipiTanimlama.CariBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#gv_listele_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokIslemTipiTanimlama.aspx.cs" Line="203">In method 'GenelTanimlamar_StokIslemTipiTanimlama.gv_listele_RowDeleting(object, GridViewDeleteEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokIslemTipiTanimlama.aspx.cs" Line="51">In method 'GenelTanimlamar_StokIslemTipiTanimlama.VeriEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokIslemTipiTanimlama.aspx.cs" Line="78">In method 'GenelTanimlamar_StokIslemTipiTanimlama.VeriGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriListele()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokIslemTipiTanimlama.aspx.cs" Line="109">In method 'GenelTanimlamar_StokIslemTipiTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokIslemTipiTanimlama.aspx.cs" Line="116">In method 'GenelTanimlamar_StokIslemTipiTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="StokIslemTipiTanimlama.aspx.cs" Line="117">In method 'GenelTanimlamar_StokIslemTipiTanimlama.VeriListele()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="GFirmaTanimlama" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#FirmaBilgileriniGetir()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="GFirmaTanimlama.aspx.cs" Line="41">In method 'GFirmaTanimlama.FirmaBilgileriniGetir()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#FirmaBilgileriniGuncelle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\GenelTanimlamar" File="GFirmaTanimlama.aspx.cs" Line="101">In method 'GFirmaTanimlama.FirmaBilgileriniGuncelle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\hamza\AppData\Local\Temp\tmp7975.tmp.cadir\bin\App_Web_voxuwu14.dll">
+   <Modules>
+    <Module Name="app_web_voxuwu14.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="Firma_FirmaOlustur" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#FirmaBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="FirmaOlustur.aspx.cs" Line="152">In method 'Firma_FirmaOlustur.FirmaBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="FirmaOlustur.aspx.cs" Line="52">In method 'Firma_FirmaOlustur.VeriEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="FirmaOlustur.aspx.cs" Line="79">In method 'Firma_FirmaOlustur.VeriGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#VeriListele()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="FirmaOlustur.aspx.cs" Line="114">In method 'Firma_FirmaOlustur.VeriListele()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="FirmaOlustur.aspx.cs" Line="121">In method 'Firma_FirmaOlustur.VeriListele()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="FirmaOlustur.aspx.cs" Line="122">In method 'Firma_FirmaOlustur.VeriListele()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Yonetim_Kullanici" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#KullaniciArama(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Kullanici.aspx.cs" Line="155">In method 'Yonetim_Kullanici.KullaniciArama(string)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Kullanici.aspx.cs" Line="162">In method 'Yonetim_Kullanici.KullaniciArama(string)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Kullanici.aspx.cs" Line="163">In method 'Yonetim_Kullanici.KullaniciArama(string)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Kullanici.aspx.cs" Line="155">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Yonetim_Kullanici.KullaniciArama(string)' could contain the following variables 'adi_soyadi'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KullaniciBilgileriniGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Kullanici.aspx.cs" Line="203">In method 'Yonetim_Kullanici.KullaniciBilgileriniGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KullaniciEkle()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Kullanici.aspx.cs" Line="69">In method 'Yonetim_Kullanici.KullaniciEkle()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KullaniciGuncelle(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Kullanici.aspx.cs" Line="105">In method 'Yonetim_Kullanici.KullaniciGuncelle(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#KullaniciSil(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Kullanici.aspx.cs" Line="266">In method 'Yonetim_Kullanici.KullaniciSil(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Yonetim_Mesaj" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#ibtn_post_Click(System.Object,System.Web.UI.ImageClickEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Mesaj.aspx.cs" Line="54">In method 'Yonetim_Mesaj.ibtn_post_Click(object, ImageClickEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Mesaj.aspx.cs" Line="71">In method 'Yonetim_Mesaj.ibtn_post_Click(object, ImageClickEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#MesajlariGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Mesaj.aspx.cs" Line="162">In method 'Yonetim_Mesaj.MesajlariGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Mesaj.aspx.cs" Line="169">In method 'Yonetim_Mesaj.MesajlariGetir(int)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Mesaj.aspx.cs" Line="170">In method 'Yonetim_Mesaj.MesajlariGetir(int)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Mesaj.aspx.cs" Line="162">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Yonetim_Mesaj.MesajlariGetir(int)' could contain the following variables 'alici_id', 'alici_id', 'this.Session["kullanici_id"]', 'this.Session["kullanici_id"]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#OkunmamisMesajlariGetir()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Mesaj.aspx.cs" Line="108">In method 'Yonetim_Mesaj.OkunmamisMesajlariGetir()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Mesaj.aspx.cs" Line="115">In method 'Yonetim_Mesaj.OkunmamisMesajlariGetir()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Mesaj.aspx.cs" Line="116">In method 'Yonetim_Mesaj.OkunmamisMesajlariGetir()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Yonetim" File="Mesaj.aspx.cs" Line="108">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Yonetim_Mesaj.OkunmamisMesajlariGetir()' could contain the following variables 'this.Session["kullanici_id"]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\hamza\AppData\Local\Temp\tmp7975.tmp.cadir\bin\App_Web_yj1vc0bx.dll">
+   <Modules>
+    <Module Name="app_web_yj1vc0bx.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="Mesaj_Mesaj" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#ibtn_post_Click(System.Object,System.Web.UI.ImageClickEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Mesaj" File="Mesaj.aspx.cs" Line="54">In method 'Mesaj_Mesaj.ibtn_post_Click(object, ImageClickEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Mesaj" File="Mesaj.aspx.cs" Line="70">In method 'Mesaj_Mesaj.ibtn_post_Click(object, ImageClickEventArgs)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#MesajlariGetir(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Mesaj" File="Mesaj.aspx.cs" Line="161">In method 'Mesaj_Mesaj.MesajlariGetir(int)', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Mesaj" File="Mesaj.aspx.cs" Line="168">In method 'Mesaj_Mesaj.MesajlariGetir(int)', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Mesaj" File="Mesaj.aspx.cs" Line="169">In method 'Mesaj_Mesaj.MesajlariGetir(int)', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Mesaj" File="Mesaj.aspx.cs" Line="161">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Mesaj_Mesaj.MesajlariGetir(int)' could contain the following variables 'alici_id', 'alici_id', 'this.Session["kullanici_id"]', 'this.Session["kullanici_id"]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#OkunmamisMesajlariGetir()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Mesaj" File="Mesaj.aspx.cs" Line="107">In method 'Mesaj_Mesaj.OkunmamisMesajlariGetir()', call System.IDisposable.Dispose on object 'cmd' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Mesaj" File="Mesaj.aspx.cs" Line="114">In method 'Mesaj_Mesaj.OkunmamisMesajlariGetir()', call System.IDisposable.Dispose on object 'da' before all references to it are out of scope.</Issue>
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Mesaj" File="Mesaj.aspx.cs" Line="115">In method 'Mesaj_Mesaj.OkunmamisMesajlariGetir()', call System.IDisposable.Dispose on object 'ds_hareket' before all references to it are out of scope.</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-15 13:44:52Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\App\Github\webmart\Mesaj" File="Mesaj.aspx.cs" Line="107">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'Mesaj_Mesaj.OkunmamisMesajlariGetir()' could contain the following variables 'this.Session["kullanici_id"]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="Dispose objects before losing scope" Category="Microsoft.Reliability" CheckId="CA2000">
+   <Name>Dispose objects before losing scope</Name>
+   <Description>If a disposable object is not explicitly disposed before all references to it are out of scope, the object will be disposed at some indeterminate time when the garbage collector runs the finalizer of the object. Because an exceptional event might occur that will prevent the finalizer of the object from running, the object should be explicitly disposed instead.</Description>
+   <Resolution Name="NonExceptionEdge">In method {0}, call System.IDisposable.Dispose on object {1} before all references to it are out of scope.</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182289(VS.100).aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="10.0.0.0" />
+  </Rule>
+  <Rule TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100">
+   <Name>Review SQL queries for security vulnerabilities</Name>
+   <Description>A SQL command string built from user input is vulnerable to SQL injection attacks. Microsoft SQL Server and other database servers support stored procedures and parameterized SQL queries, which reduce the risk of injection attacks.</Description>
+   <Resolution Name="WithNonLiterals">The query string passed to {0} in {1} could contain the following variables {2}. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182310(VS.100).aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="10.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">Category</String>
+  <String Key="Certainty">Certainty</String>
+  <String Key="CollapseAll">Collapse All</String>
+  <String Key="CheckId">Check Id</String>
+  <String Key="Error">Error</String>
+  <String Key="Errors">error(s)</String>
+  <String Key="ExpandAll">Expand All</String>
+  <String Key="Help">Help</String>
+  <String Key="Line">Line</String>
+  <String Key="Messages">message(s)</String>
+  <String Key="LocationNotStoredInPdb">[Location not stored in Pdb]</String>
+  <String Key="Project">Project</String>
+  <String Key="Resolution">Resolution</String>
+  <String Key="Rule">Rule</String>
+  <String Key="RuleFile">Rule File</String>
+  <String Key="RuleDescription">Rule Description</String>
+  <String Key="Source">Source</String>
+  <String Key="Status">Status</String>
+  <String Key="Target">Target</String>
+  <String Key="Warning">Warning</String>
+  <String Key="Warnings">warning(s)</String>
+  <String Key="ReportTitle">Code Analysis Report</String>
+ </Localized>
+</FxCopReport>

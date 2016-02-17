@@ -24,8 +24,7 @@
     <table style="width:100%;">
         <tr>
             <td class="style1">
-                Kullanıcı 
-                veya Grup Seçiniz</td>
+                Kullanıcı </td>
             <td class="style2">
                 <asp:DropDownList ID="dd_kullanici_listele" runat="server" 
                     DataSourceID="SqlDataSource_kullanici" DataTextField="adi_soyadi" 
@@ -35,7 +34,8 @@
                 </asp:DropDownList>
                 <asp:DropDownList ID="dd_grup_listele" runat="server" 
                     DataSourceID="SqlDataSource_grup" DataTextField="yetki_adi" 
-                    DataValueField="yetki_id" ondatabound="dd_grup_listele_DataBound">
+                    DataValueField="yetki_id" ondatabound="dd_grup_listele_DataBound" 
+                    Visible="False">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource_grup" runat="server" 
                     ConnectionString="<%$ ConnectionStrings:WebMart_Master %>" 
@@ -79,7 +79,7 @@
                                 <asp:Label ID="Label1" runat="server" Text='<%# Eval("id") %>'></asp:Label>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("id") %>'></asp:Label>
+                                <asp:Label ID="lbl_id" runat="server" Text='<%# Bind("id") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="tarih" SortExpression="tarih">

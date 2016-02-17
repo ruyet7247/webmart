@@ -13,6 +13,7 @@ public partial class Yonetim_Kullanici : System.Web.UI.Page
 {
     /*
      Sistem Üzerinde Mutlaka firma_id = '-1' ve yetkisi 'master'olan bir kayıt eklenmesi gerekir.
+     * Bu Sayfada Firma Seçilebiliyor - Diğerinde Seçilmiyor ÖNEMLİ FARK
      */
 
     protected void Page_Load(object sender, EventArgs e)

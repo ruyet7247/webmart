@@ -37,8 +37,9 @@
                 <td class="style2" align="right">
                     &nbsp;</td>
                 <td class="style3">
-                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/img.Bmp" />
-                    <asp:TextBox ID="txt_dtext" runat="server"></asp:TextBox>
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/img.JPEG" 
+                        Visible="False" />
+                    <asp:TextBox ID="txt_dtext" runat="server" Visible="False"></asp:TextBox>
                    
                 </td>
             </tr>   

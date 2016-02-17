@@ -155,6 +155,13 @@
                     </ItemTemplate>
                 </asp:TemplateField>
 
+                <asp:TemplateField ShowHeader="False">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" 
+                            CommandName="Delete" Text="Delete"  OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');"></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
             </Columns>
         </asp:GridView>
     </asp:Panel>

@@ -17,3 +17,7 @@ Kullanıcı sorgulamada master durumu var ise Session["Master"] = "True"; olur.
  string database_master = "WebMart_Master"; // Bu sayfaya özel veriler Master Database e eklendiği için sabit yaptık
  
  4- 3 nolu maddeden aynısından mesaj.aspx dede vardır.
+ 
+ 5- MESAJ.ASPX dosyası Yonetim ve MESAJ alanında iki yerde vardır ve aynı kodlardır.
+ 
+ 6- Hastalar ile cari aynı tabloyu kullnamakta, hasta_mi alanı 'HASTA' olarak kaydedilmektedir.

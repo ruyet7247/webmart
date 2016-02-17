@@ -12,10 +12,11 @@ using System.Threading;
 public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
 {
     
-    int banka_hesap_id = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        SqlDataSource1.ConnectionString = WebConfigurationManager.ConnectionStrings[Session["ConnectionString"].ToString()].ConnectionString;
+        
         if (!IsPostBack)
         {
             lbl_banka_hesap_id.Text = "0";
@@ -38,13 +39,16 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
             BankaListele();
         }
     }
+    
     protected void BankaEkle()
     {
 
         string queryString = "INSERT INTO banka_kayit (banka_adi,hesap_sahibi,sube_kodu,hesap_no,iban,aktif_or_pasif,para_birimi_id) VALUES \n" +
                               "(@banka_adi,@hesap_sahibi,@sube_kodu,@hesap_no,@iban,@aktif_or_pasif,@para_birimi_id)";
 
-        ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
+        ConnVt baglan = new ConnVt();
+        SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
+        SqlCommand cmd = new SqlCommand(queryString, connection);
 
         try
         {
