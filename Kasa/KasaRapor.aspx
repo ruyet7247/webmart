@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="KasaRapor.aspx.cs" Inherits="Kasa_KasaRapor" %>
+
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
     <style type="text/css">
@@ -70,7 +71,6 @@
                 </td>
             <td class="style1">
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:WebMart0001 %>" 
                     SelectCommand="SELECT [kasa_id], [kasa_adi] FROM [kasa_kayit]">
                 </asp:SqlDataSource>
             </td>
@@ -115,7 +115,7 @@
             <td class="style1">
                 Bakiye</td>
             <td class="style1">
-                    <asp:TextBox ID="txt_stok_miktari" runat="server" CssClass="sagaDayaliFormat" 
+                    <asp:TextBox ID="txt_bakiye" runat="server" CssClass="sagaDayaliFormat" 
                         ReadOnly="True" Width="120px"></asp:TextBox>
                     </td>
             <td class="style1">

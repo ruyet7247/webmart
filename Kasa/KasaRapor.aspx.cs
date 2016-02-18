@@ -26,6 +26,7 @@ public partial class Kasa_KasaRapor : System.Web.UI.Page
         }
 
     }
+   
     protected void ibtn_raporla_Click(object sender, ImageClickEventArgs e)
     {
         KasaHareketListesiniGetir();
@@ -79,12 +80,11 @@ public partial class Kasa_KasaRapor : System.Web.UI.Page
         
         DateTime ilktarih = Convert.ToDateTime(txt_bas_tarih.Text);
         DateTime sontarih = Convert.ToDateTime(txt_son_tarih.Text);
-        int giren_toplam = 0;
-        int cikan_toplam = 0;
+        double giren_toplam = 0;
+        double cikan_toplam = 0;
         txt_giren.Text = "0"; txt_cikan.Text = "0";
 
-        string queryStringGiren = "SELECT SUM(tutar) AS giren FROM kasa_hareket WHERE giris_or_cikis='giris' and kasa_id=" + dd_kasa.SelectedValue + " and (kayit_tarihi BETWEEN '" + ilktarih + "' and '" + sontarih + "') ";
-        queryStringGiren += " ORDER BY kayit_tarihi DESC,kasa_hareket_id DESC";
+        string queryStringGiren = "SELECT sum(tutar) AS giren FROM kasa_hareket WHERE giris_or_cikis='giris' and kasa_id='" + dd_kasa.SelectedValue + "' and (kayit_tarihi BETWEEN '" + ilktarih + "' and '" + sontarih + "')";
         ConnVt baglan = new ConnVt(); SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString()); SqlCommand cmd = new SqlCommand(queryStringGiren, connection);
         try
         {
@@ -94,23 +94,21 @@ public partial class Kasa_KasaRapor : System.Web.UI.Page
                 while (reader.Read())
                 {
                     txt_giren.Text = reader["giren"].ToString();
-                    giren_toplam = Convert.ToInt32(reader["giren"].ToString());
+                    giren_toplam = Convert.ToDouble(reader["giren"].ToString());
                 }
             }
         }
         catch (Exception err)
         {
-            lbl_mesaj.Text = "Error Cari EXTRE LİSTELEME ";
+            lbl_mesaj.Text = "Error Kasa Hesaplama Giriş. ";
             lbl_mesaj.Text += err.Message;
         }
         finally
         {
             baglan.VeritabaniBaglantiyiKapat(connection);
         }
-
-        string queryStringCikan = "SELECT sum(miktar) AS cikan FROM stok_hareket WHERE giris_or_cikis='cikis' and (kayit_tarihi BETWEEN '" + ilktarih + "' and '" + sontarih + "')";
-        if (dd_islem_tipi.SelectedValue != "tum")
-        { queryStringCikan += " and islem_tipi='" + dd_islem_tipi.SelectedValue + "'"; }
+     
+        string queryStringCikan = "SELECT sum(tutar) AS cikan FROM kasa_hareket WHERE giris_or_cikis='cikis' and kasa_id='" + dd_kasa.SelectedValue + "' and (kayit_tarihi BETWEEN '" + ilktarih + "' and '" + sontarih + "')";
         ConnVt baglan2 = new ConnVt(); SqlConnection connection2 = baglan2.VeritabaninaBaglan(Session["ConnectionString"].ToString()); SqlCommand cmd2 = new SqlCommand(queryStringCikan, connection2);
         try
         {
@@ -120,33 +118,36 @@ public partial class Kasa_KasaRapor : System.Web.UI.Page
                 while (reader2.Read())
                 {
                     txt_cikan.Text = reader2["cikan"].ToString();
-                    cikan_toplam = Convert.ToInt32(reader2["cikan"].ToString());
+                    cikan_toplam = Convert.ToDouble(reader2["cikan"].ToString());
+                    
                 }
             }
         }
         catch (Exception err)
         {
-            lbl_mesaj.Text = "Error Cari EXTRE LİSTELEME ";
+            lbl_mesaj.Text = "Error Kasa Hesaplama Çıkış. ";
             lbl_mesaj.Text += err.Message;
         }
         finally
         {
-            baglan2.VeritabaniBaglantiyiKapat(connection);
+            baglan2.VeritabaniBaglantiyiKapat(connection2);
         }
+       
         ////////////////////////////////////////////////////////////////////////////////////////////
         try
         {
-            int stok_miktari = giren_toplam - cikan_toplam;
-            txt_stok_miktari.Text = stok_miktari.ToString();
-            if (dd_giris_or_cikis.SelectedValue == "giris") { txt_cikan.Text = ""; txt_stok_miktari.Text = ""; }
-            if (dd_giris_or_cikis.SelectedValue == "cikis") { txt_giren.Text = ""; txt_stok_miktari.Text = ""; }
+            double bakiye = giren_toplam - cikan_toplam;
+            txt_bakiye.Text = String.Format("{0:#,#.00}", bakiye);
+            if (dd_giris_or_cikis.SelectedValue == "giris") { txt_cikan.Text = ""; txt_bakiye.Text = ""; }
+            if (dd_giris_or_cikis.SelectedValue == "cikis") { txt_giren.Text = ""; txt_bakiye.Text = ""; }
         }
         catch (Exception err)
         {
-            lbl_mesaj.Text = "Error Stok StokGirisCikisToplaminiGetir2. ";
+            lbl_mesaj.Text = "Error Kasa GirisCikisToplaminiGetir. ";
             lbl_mesaj.Text += err.Message;
         }
-         * */
+       
+       
 
     }
 
@@ -156,4 +157,6 @@ public partial class Kasa_KasaRapor : System.Web.UI.Page
         KasaHareketListesiniGetir();
         KasaHareketToplamlariGetir();
     }
+
+
 }

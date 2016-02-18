@@ -133,7 +133,7 @@ public partial class Stok_RaporStokHareketleri : System.Web.UI.Page
         }
         finally
         {
-            baglan2.VeritabaniBaglantiyiKapat(connection);
+            baglan2.VeritabaniBaglantiyiKapat(connection2);
         }
         ////////////////////////////////////////////////////////////////////////////////////////////
         try

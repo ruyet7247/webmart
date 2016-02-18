@@ -45,103 +45,135 @@
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" 
                     EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem Text="Genel Tanımlamalar" 
-                            Value="Genel Tanımlamalar" ImageUrl="~/Icons/resized/genel_16x16.png">
+                        <asp:MenuItem Text=" Genel Tanımlamalar" 
+                            Value="Genel Tanımlamalar" ImageUrl="~/Icons/res1616/genel.png">
                             <asp:MenuItem Text=" Firma Bilgileri" Value="Firma Bilgileri" 
                                 NavigateUrl="~/GenelTanimlamalar/GFirmaTanimlama.aspx" 
-                                ImageUrl="~/Icons/resized/gfirma_16x16.png"></asp:MenuItem>
+                                ImageUrl="~/Icons/res1616/gfirma.png"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="~/GenelTanimlamalar/Kullanici.aspx" 
-                                Text="Kullanıcı Tanımlama" Value="Kullanıcı Tanımlama" 
-                                ImageUrl="~/Icons/resized/gkullanici_16x16.png"></asp:MenuItem>
+                                Text=" Kullanıcı Tanımlama" Value="Kullanıcı Tanımlama" 
+                                ImageUrl="~/Icons/res1616/gkullanici.png"></asp:MenuItem>
                             <asp:MenuItem Text=" Kasa Tanımlama" Value="Kasa Tanımlama" 
                                 NavigateUrl="~/GenelTanimlamalar/KasaTanimlama.aspx" 
-                                ImageUrl="~/Icons/resized/gkasa_16x16.png"></asp:MenuItem>
+                                ImageUrl="~/Icons/res1616/gkasa.png"></asp:MenuItem>
                             <asp:MenuItem Text=" Gelir-Gider Tanimlama" Value="Gelir-Gider Tanimlama" 
-                                NavigateUrl="~/GenelTanimlamalar/GGelirGiderTanimlama.aspx">
+                                NavigateUrl="~/GenelTanimlamalar/GGelirGiderTanimlama.aspx" 
+                                ImageUrl="~/Icons/res1616/ggelirgider.png">
                             </asp:MenuItem>
                             <asp:MenuItem Text=" Banka Tanımlama" Value="Banka Tanımlama" 
-                                NavigateUrl="~/GenelTanimlamalar/BankaTanimlama.aspx"></asp:MenuItem>
+                                NavigateUrl="~/GenelTanimlamalar/BankaTanimlama.aspx" 
+                                ImageUrl="~/Icons/res1616/gbanka.png"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="~/GenelTanimlamalar/BankaPosTanimlama.aspx" 
-                                Text="Banka POS Tanımlama" Value="Banka POS Tanımlama"></asp:MenuItem>
+                                Text=" Banka POS Tanımlama" Value="Banka POS Tanımlama" 
+                                ImageUrl="~/Icons/res1616/gpos.png"></asp:MenuItem>
                             <asp:MenuItem Text=" Cari Grubu Tanımlama" Value="Cari Grubu Tanımlama" 
-                                NavigateUrl="~/GenelTanimlamalar/CariGrubuTanimlama.aspx">
+                                NavigateUrl="~/GenelTanimlamalar/CariGrubuTanimlama.aspx" 
+                                ImageUrl="~/Icons/res1616/gcari.png">
                             </asp:MenuItem>
                             <asp:MenuItem Text=" Stok Grubu Tanımlama" Value="Stok Grubu Tanımlama" 
-                                NavigateUrl="~/GenelTanimlamalar/StokGrubuTanimlama.aspx">
+                                NavigateUrl="~/GenelTanimlamalar/StokGrubuTanimlama.aspx" 
+                                ImageUrl="~/Icons/res1616/gstok.png">
                             </asp:MenuItem>
                             <asp:MenuItem Text=" Personel Departman Tanımlama" 
                                 Value="Personel Departman Tanımlama" 
-                                NavigateUrl="~/GenelTanimlamalar/PersonelDepartmanTanimlama.aspx"></asp:MenuItem>
+                                NavigateUrl="~/GenelTanimlamalar/PersonelDepartmanTanimlama.aspx" 
+                                ImageUrl="~/Icons/res1616/gpersonel.png"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="~/GenelTanimlamalar/ParaBirimiTanimlama.aspx" 
-                                Text="Para Birimi Tanımlama" Value="Para Birimi Tanımlama"></asp:MenuItem>
+                                Text=" Para Birimi Tanımlama" Value="Para Birimi Tanımlama" 
+                                ImageUrl="~/Icons/res1616/gpara.png"></asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem Text=" Cari Modülü" Value="FirmaIslemleri">
-                            <asp:MenuItem Text="Cari Kartı" Value="Cari Kartı" 
-                                NavigateUrl="~/Cari/CariKarti.aspx"></asp:MenuItem>
-<asp:MenuItem Text="Hasta Kartı" Value="Hasta Kartı" NavigateUrl="~/Cari/HastaKarti.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text=" Cari Modülü" Value="FirmaIslemleri" 
+                            ImageUrl="~/Icons/res1616/gcari.png">
+                            <asp:MenuItem Text=" Cari Kartı" Value="Cari Kartı" 
+                                NavigateUrl="~/Cari/CariKarti.aspx" 
+                                ImageUrl="~/Icons/res1616/carikarti.png"></asp:MenuItem>
+<asp:MenuItem Text=" Hasta Kartı" Value="Hasta Kartı" NavigateUrl="~/Cari/HastaKarti.aspx" 
+                                ImageUrl="~/Icons/res1616/gcari.png"></asp:MenuItem>
                             <asp:MenuItem Text=" Cari/Hasta Hareketleri" Value="Cari Hareketleri" 
-                                NavigateUrl="~/Cari/CariHareket.aspx"></asp:MenuItem>
+                                NavigateUrl="~/Cari/CariHareket.aspx" 
+                                ImageUrl="~/Icons/res1616/carihareket.png"></asp:MenuItem>
                             <asp:MenuItem Text=" Alış / Satış İşlemleri" Value="Alış-Satış Fişi" 
-                                NavigateUrl="~/Cari/AlisSatisIslemleri.aspx">
+                                NavigateUrl="~/Cari/AlisSatisIslemleri.aspx" 
+                                ImageUrl="~/Icons/res1616/carialissatis.png">
                             </asp:MenuItem>
-                            <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar">
+                            <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar" 
+                                ImageUrl="~/Icons/res1616/raporlar.png">
                                 <asp:MenuItem Text=" Cari Hesap Extresi" Value=" Cari Hesap Extresi" 
-                                    NavigateUrl="~/Cari/CariExtre.aspx"></asp:MenuItem>
+                                    NavigateUrl="~/Cari/CariExtre.aspx" 
+                                    ImageUrl="~/Icons/res1616/carikarti.png"></asp:MenuItem>
                                 <asp:MenuItem Text=" Cari Hareketler Raporu" Value="Cari Hareketler Raporu" 
-                                    NavigateUrl="~/Cari/CariHareketlerRaporu.aspx">
+                                    NavigateUrl="~/Cari/CariHareketlerRaporu.aspx" 
+                                    ImageUrl="~/Icons/res1616/carihareket.png">
                                 </asp:MenuItem>
                                 <asp:MenuItem Text=" Borç/Alacak Durum Raporu" Value="Borç/Alacak Durum Raporu" 
-                                    NavigateUrl="~/Cari/CariDurumRaporu.aspx">
+                                    NavigateUrl="~/Cari/CariDurumRaporu.aspx" 
+                                    ImageUrl="~/Icons/res1616/carialissatis.png">
                                 </asp:MenuItem>
                             </asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem Text=" Stok Modülü" Value="Stok Modülü">
+                        <asp:MenuItem Text=" Stok Modülü" Value="Stok Modülü" 
+                            ImageUrl="~/Icons/res1616/stok.png">
                             <asp:MenuItem Text=" Stok Kartı" Value="Stok Kartı" 
-                                NavigateUrl="~/Stok/StokKarti.aspx"></asp:MenuItem>
+                                NavigateUrl="~/Stok/StokKarti.aspx" 
+                                ImageUrl="~/Icons/res1616/stokkarti.png"></asp:MenuItem>
                             <asp:MenuItem Text=" Stok Hareketleri" Value="Stok Hareketleri" 
-                                NavigateUrl="~/Stok/StokHareket.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar &gt;">
+                                NavigateUrl="~/Stok/StokHareket.aspx" 
+                                ImageUrl="~/Icons/res1616/stokhareket.png"></asp:MenuItem>
+                            <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar &gt;" 
+                                ImageUrl="~/Icons/res1616/stokraporlar.png">
                                 <asp:MenuItem Text=" Stok Kartı Raporu" Value="Stok Kartı Raporu" 
-                                    NavigateUrl="~/Stok/RaporStokKarti.aspx"></asp:MenuItem>
+                                    NavigateUrl="~/Stok/RaporStokKarti.aspx" 
+                                    ImageUrl="~/Icons/res1616/stokkarti.png"></asp:MenuItem>
                                 <asp:MenuItem Text=" Stok Hareketleri Raporu" Value="Stok Hareketleri Raporu" 
-                                    NavigateUrl="~/Stok/RaporStokHareketleri.aspx">
+                                    NavigateUrl="~/Stok/RaporStokHareketleri.aspx" 
+                                    ImageUrl="~/Icons/res1616/stokhareket.png">
                                 </asp:MenuItem>
                                 <asp:MenuItem Text=" Stok Durum Raporu" Value="Stok Durum Raporu" 
-                                    NavigateUrl="~/Stok/RaporStokDurum.aspx"></asp:MenuItem>
+                                    NavigateUrl="~/Stok/RaporStokDurum.aspx" 
+                                    ImageUrl="~/Icons/res1616/stokraporlar.png"></asp:MenuItem>
                             </asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem Text=" Personel-Maaş Modülü" Value="Personel-Maaş Modülü">
+                        <asp:MenuItem Text=" Personel-Maaş Modülü" Value="Personel-Maaş Modülü" 
+                            ImageUrl="~/Icons/res1616/personelkarti.png">
                             <asp:MenuItem Text=" Personel Karti" Value="Maaş Tahkk" 
-                                NavigateUrl="~/Personel/PersonelKarti.aspx"></asp:MenuItem>
+                                NavigateUrl="~/Personel/PersonelKarti.aspx" 
+                                ImageUrl="~/Icons/res1616/personelkarti.png"></asp:MenuItem>
                             <asp:MenuItem Text=" Personel İşlem Hareketleri" 
                                 Value="Personel İşlem Hareketleri" 
-                                NavigateUrl="~/Personel/PersonelHareket.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar &gt;">
+                                NavigateUrl="~/Personel/PersonelHareket.aspx" 
+                                ImageUrl="~/Icons/res1616/personelhareket.png"></asp:MenuItem>
+                            <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar &gt;" 
+                                ImageUrl="~/Icons/res1616/personelraporlar.png">
                                 <asp:MenuItem Text=" Personel Listesi" Value="Personel Listesi"></asp:MenuItem>
                                 <asp:MenuItem Text=" Personel Bordro Al" Value="Personel Bordro Al">
                                 </asp:MenuItem>
                             </asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem Text=" Kasa / Banka" Value="KasaBanka">
+                        <asp:MenuItem Text=" Kasa / Banka" Value="KasaBanka" 
+                            ImageUrl="~/Icons/res1616/kasa.png">
                             <asp:MenuItem Text=" Kasa Giriş / Çıkış" Value="kasa_giris_cikis" 
-                                NavigateUrl="~/Kasa/KasaHareket.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Banka Giriş / Çıkış" Value="Banka Giriş / Çıkış" 
-                                NavigateUrl="~/Kasa/BankaHareket.aspx">
+                                NavigateUrl="~/Kasa/KasaHareket.aspx" ImageUrl="~/Icons/res1616/gkasa.png"></asp:MenuItem>
+                            <asp:MenuItem Text=" Banka Giriş / Çıkış" Value="Banka Giriş / Çıkış" 
+                                NavigateUrl="~/Kasa/BankaHareket.aspx" 
+                                ImageUrl="~/Icons/res1616/gbanka.png">
                             </asp:MenuItem>
-                            <asp:MenuItem Text="Pos Giriş / Çıkış" Value="Pos Giriş / Çıkış" 
-                                NavigateUrl="~/Kasa/PosHareket.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Raporlar" Value="Raporlar">
-                                <asp:MenuItem Text="Kasa Raporlar" Value="kasa_raporlar" 
-                                    NavigateUrl="~/Kasa/KasaRapor.aspx"></asp:MenuItem>
-                                <asp:MenuItem Text="Banka Raporlar" Value="Banka Raporlar" 
-                                    NavigateUrl="~/Kasa/BankaRapor.aspx"></asp:MenuItem>
-                                <asp:MenuItem Text="Pos Raporlar" Value="Pos Raporlar" 
-                                    NavigateUrl="~/Kasa/PosRapor.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text=" Pos Giriş / Çıkış" Value="Pos Giriş / Çıkış" 
+                                NavigateUrl="~/Kasa/PosHareket.aspx" ImageUrl="~/Icons/res1616/gpos.png"></asp:MenuItem>
+                            <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar" 
+                                ImageUrl="~/Icons/res1616/kasa.png">
+                                <asp:MenuItem Text=" Kasa Raporlar" Value="kasa_raporlar" 
+                                    NavigateUrl="~/Kasa/KasaRapor.aspx" ImageUrl="~/Icons/res1616/gkasa.png"></asp:MenuItem>
+                                <asp:MenuItem Text=" Banka Raporlar" Value="Banka Raporlar" 
+                                    NavigateUrl="~/Kasa/BankaRapor.aspx" ImageUrl="~/Icons/res1616/gbanka.png"></asp:MenuItem>
+                                <asp:MenuItem Text=" Pos Raporlar" Value="Pos Raporlar" 
+                                    NavigateUrl="~/Kasa/PosRapor.aspx" ImageUrl="~/Icons/res1616/gpos.png"></asp:MenuItem>
                             </asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Randevu Modülü" Value="Randevu Modülü" 
-                            NavigateUrl="~/Randevu/RandevuKarti.aspx"></asp:MenuItem>
-                        <asp:MenuItem Text=" Mesaj" Value="Mesaj" NavigateUrl="~/Mesaj/Mesaj.aspx"></asp:MenuItem>
+                            NavigateUrl="~/Randevu/RandevuKarti.aspx" 
+                            ImageUrl="~/Icons/res1616/randevu.png"></asp:MenuItem>
+                        <asp:MenuItem Text=" Mesaj" Value="Mesaj" NavigateUrl="~/Mesaj/Mesaj.aspx" 
+                            ImageUrl="~/Icons/res1616/mesaj.png"></asp:MenuItem>
                     </Items>
                 </asp:Menu>
             </div>
