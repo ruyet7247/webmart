@@ -251,24 +251,59 @@ public partial class GenelTanimlamar_BankaTanimlama : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            TableCell statusCell = e.Row.Cells[7];
-            if (e.Row.Cells[4].Text=="2261")
-            {
-                e.Row.Cells[7].Text = "Aktif";
-            }
-            else
-                if (e.Row.Cells[3].Text== "22")
-                {
-                    e.Row.Cells[7].Text = "Pasif";
-                }
+            //e.Row.Cells[6].BackColor = System.Drawing.Color.LightYellow;
+            // e.Row.Cells[7].BackColor = System.Drawing.Color.LightYellow;
+            // e.Row.Cells[8].BackColor = System.Drawing.Color.LightYellow;
+            //e.Row.Cells[9].BackColor = System.Drawing.Color.LightYellow;
+            /*
+            Image buttonCommandField = e.Row.Cells[1].Controls[0] as Image;
+            buttonCommandField.Attributes["onClick"] =
+                   string.Format("return confirm('Silme İşleminden Emin misiniz? ')");
+             * */
 
-         
+            // loop all data rows
+            foreach (DataControlFieldCell cell in e.Row.Cells)
+            {
+                // check all cells in one row
+                foreach (Control control in cell.Controls)
+                {
+                    // Must use LinkButton here instead of ImageButton
+                    // if you are having Links (not images) as the command button.
+                    ImageButton button = control as ImageButton;
+                    if (button != null && button.CommandName == "Delete")
+                        // Add delete confirmation
+                        button.OnClientClick = "if (!confirm('Silme Onayı " +
+                               "Silmek istediğinizden emin misiniz?')) return;";
+                }
+            }
 
         }
       
 
     }
 
+    protected void gv_listele_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            if (e.Row.RowState == DataControlRowState.Alternate)
+            {
+                e.Row.Attributes.Add("onmouseover", "this.style.backgroundColor='#FFFF99';");
+                e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='#f7fff8';");
+            }
+            else
+            {
+                e.Row.Attributes.Add("onmouseover", "this.style.backgroundColor='#FFFF99';");
+                e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='#eefef0';");
+            }
+        }
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
 
-   
+            for (int i = 0; i < e.Row.Cells.Count; i++)
+            {
+                Response.Write(e.Row.Cells[i].Text);
+            }
+        }
+    }
 }

@@ -283,5 +283,33 @@ public partial class GenelTanimlamar_Kullanici : System.Web.UI.Page
         }
     }
 
-   
+
+    protected void gv_arama_listele_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+
+    }
+    protected void gv_arama_listele_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            if (e.Row.RowState == DataControlRowState.Alternate)
+            {
+                e.Row.Attributes.Add("onmouseover", "this.style.backgroundColor='#FFFF99';");
+                e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='#f7fff8';");
+            }
+            else
+            {
+                e.Row.Attributes.Add("onmouseover", "this.style.backgroundColor='#FFFF99';");
+                e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='#eefef0';");
+            }
+        }
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+
+            for (int i = 0; i < e.Row.Cells.Count; i++)
+            {
+                Response.Write(e.Row.Cells[i].Text);
+            }
+        }
+    }
 }

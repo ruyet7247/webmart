@@ -12,11 +12,16 @@
         {
             width: 30%;
         }
+        .style3
+        {
+            height: 78px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
+  <asp:Panel ID="Panel1" runat="server" BorderStyle="Solid">
     <table style="width:100%;">
         <tr>
             <td class="style1">
@@ -58,7 +63,7 @@
             <td class="style1">
                 Tam Unvanı</td>
             <td class="style2">
-                <asp:TextBox ID="txt_tam_unvani" runat="server" Width="90%"></asp:TextBox>
+                <asp:TextBox ID="txt_tam_unvani" runat="server" Width="70%"></asp:TextBox>
             </td>
             <td class="style1">
                 &nbsp;</td>
@@ -182,47 +187,26 @@
             <td class="style2">
                 &nbsp;</td>
         </tr>
-        <tr>
-            <td class="style1">
-                &nbsp;</td>
-            <td class="style2">
-                &nbsp;</td>
-            <td class="style1">
-                &nbsp;</td>
-            <td class="style2">
-                &nbsp;</td>
-        </tr>
     </table>
     <table style="width:100%;">
         <tr>
             <td width="20%">
-                &nbsp;</td>
+                </td>
+            <td width="20%" valign="bottom">
+                <asp:ImageButton ID="ibtn_guncelle" runat="server" 
+                    onclick="ibtn_guncelle_Click" ImageUrl="~/icons/res3232/arti.png" />
+            &nbsp;Güncelle</td>
             <td width="20%">
-                <asp:ImageButton ID="ibtn_guncelle" runat="server" Height="30px" 
-                    onclick="ibtn_guncelle_Click" Width="120px" />
+                </td>
+            <td width="20%">
+                </td>
+            <td width="20%">
             </td>
-            <td width="20%">
-                &nbsp;</td>
-            <td width="20%">
-                &nbsp;</td>
-            <td width="20%">
-            &nbsp;</td>
-        </tr>
-        <tr>
-            <td width="20%">
-                &nbsp;</td>
-            <td width="20%">
-                &nbsp;</td>
-            <td width="20%">
-                &nbsp;</td>
-            <td width="20%">
-                &nbsp;</td>
-            <td width="20%">
-            &nbsp;</td>
         </tr>
     </table>
      <p>
         <asp:Label ID="lbl_mesaj" runat="server"></asp:Label>
     </p>
+    </asp:Panel>
 </asp:Content>
 

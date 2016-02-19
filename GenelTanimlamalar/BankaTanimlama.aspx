@@ -24,7 +24,7 @@
     <table style="width:100%;">
         <tr>
             <td class="style3">
-                <asp:Label ID="lbl_banka_hesap_id" runat="server" Text="Label"></asp:Label>
+                <asp:Label ID="lbl_banka_hesap_id" runat="server" Visible="False">0</asp:Label>
             </td>
             <td class="style4">
                 </td>
@@ -98,9 +98,9 @@
             <td class="style3">
                 &nbsp;</td>
             <td class="style4">
-                <asp:ImageButton ID="ibtn_post" runat="server" Height="25px" 
-                    onclick="ibtn_post_Click" Width="71px" />
-            </td>
+                <asp:ImageButton ID="ibtn_post" runat="server" 
+                    onclick="ibtn_post_Click" ImageUrl="~/icons/res3232/arti.png" />
+                &nbsp;Ekle / Güncelle</td>
         </tr>
 </table>
 </asp:Panel>
@@ -112,10 +112,12 @@
             DataKeyNames="banka_hesap_id" Width="100%" 
             onselectedindexchanged="gv_listele_SelectedIndexChanged"
             onrowdeleting="gv_listele_RowDeleting" 
-            onrowdatabound="gv_listele_RowDataBound">
+            onrowdatabound="gv_listele_RowDataBound" BorderStyle="Solid" 
+            onrowcreated="gv_listele_RowCreated">
             <Columns>
                
-                <asp:TemplateField HeaderText="B id" SortExpression="banka_hesap_id">
+                <asp:TemplateField HeaderText="B id" SortExpression="banka_hesap_id" 
+                    Visible="False">
                     <EditItemTemplate>
                         <asp:TextBox ID="txt_banka_hesap_id" runat="server" Text='<%# Bind("banka_hesap_id") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -170,7 +172,8 @@
                     </ItemTemplate>
                     <ItemStyle Width="40%" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Para Birimi" SortExpression="para_birimi_id">
+                <asp:TemplateField HeaderText="Para Birimi" SortExpression="para_birimi_id" 
+                    Visible="False">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("para_birimi_id") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -184,22 +187,19 @@
                         <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("aktif_or_pasif")  %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label7" runat="server" Text='<%# Bind("aktif_or_pasif")  %>'></asp:Label>
+                        <asp:Label ID="Label7" runat="server" Text='<%#Eval("aktif_or_pasif").ToString().Equals("True") ? "Aktif" : "Pasif" %>'></asp:Label>
+                        <!--<img src='../icons/res3232/<%# Eval("aktif_or_pasif") %>.png' />-->
                     </ItemTemplate>
                     <ItemStyle Width="5%" />
                 </asp:TemplateField>
-                <asp:TemplateField ShowHeader="False">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
-                            CommandName="Select" Text="Select"></asp:LinkButton>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField ShowHeader="False">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" 
-                            CommandName="Delete" Text="Delete"  OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');"></asp:LinkButton>
-                    </ItemTemplate>
-                </asp:TemplateField>
+                <asp:CommandField ButtonType="Image" 
+                    DeleteImageUrl="~/icons/res3232/iptal2.png" ShowDeleteButton="True">
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="20px" />
+                </asp:CommandField>
+                <asp:CommandField ButtonType="Image" SelectImageUrl="~/icons/res3232/sagok.png" 
+                    ShowSelectButton="True">
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="20px" />
+                </asp:CommandField>
 
             </Columns>
         </asp:GridView>

@@ -214,7 +214,7 @@
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="lblStatus" runat="server" Text='<%#Eval("geldi_mi").ToString().Equals("True") ? "" : "" %>'></asp:Label>
-                            <a href='RandevuKarti.aspx?Status=<%# Eval("geldi_mi") %>&RandevuID=<%# Eval("randevu_id") %>'><img src='../Images/<%# Eval("geldi_mi") %>.png' /></a>
+                            <a href='RandevuKarti.aspx?Status=<%# Eval("geldi_mi") %>&RandevuID=<%# Eval("randevu_id") %>'><img src='../icons/res3232/<%# Eval("geldi_mi") %>.png' /></a>
                             
                     </ItemTemplate>
                 </asp:TemplateField>
