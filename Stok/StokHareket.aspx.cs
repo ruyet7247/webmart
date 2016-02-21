@@ -62,7 +62,7 @@ public partial class Stok_StokHareket : System.Web.UI.Page
 
     protected void StokArama(string stok_adi) //Stok arama modal popup
     {
-        string hareketSQL = "SELECT stok_id,stok_adi,birimi,giren,cikan,alis_fiyati,satis_fiyati FROM stok_kayit WHERE stok_adi LIKE '%" + stok_adi + "%'";
+        string hareketSQL = "SELECT TOP(20) stok_id,stok_kod_no,stok_barkod_no,stok_uretici_no,stok_adi,birimi,kdv,alis_fiyati,satis_fiyati FROM stok_kayit WHERE stok_adi LIKE '%" + stok_adi + "%'";
         ConnVt baglan = new ConnVt();
         SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(hareketSQL, connection);
@@ -100,8 +100,6 @@ public partial class Stok_StokHareket : System.Web.UI.Page
     protected void StokBilgileriniGetir(int stok_id)
     {
 
-
-        
         string queryString = "SELECT stok_id,stok_adi,grubu_id,giren,cikan FROM stok_kayit WHERE stok_id=" + stok_id;
         ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
         try
@@ -316,6 +314,126 @@ public partial class Stok_StokHareket : System.Web.UI.Page
 
     }
 
+    protected void gv_arama_listele_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridViewRow row = this.gv_arama_listele.SelectedRow;
+        Label lbl_stok_id = (Label)row.FindControl("lbl_stok_id");
+        ibtn_stok_bul_ModalPopupExtender.Hide();
+        Response.Redirect("StokHareket.aspx?StokID=" + lbl_stok_id.Text);
 
-   
+    }
+
+    protected void gv_listele_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            if (e.Row.RowState == DataControlRowState.Alternate)
+            {
+                e.Row.Attributes.Add("onmouseover", "this.style.backgroundColor='#FFFF99';");
+                e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='#f7fff8';");
+            }
+            else
+            {
+                e.Row.Attributes.Add("onmouseover", "this.style.backgroundColor='#FFFF99';");
+                e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='#eefef0';");
+            }
+        }
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+
+            for (int i = 0; i < e.Row.Cells.Count; i++)
+            {
+                Response.Write(e.Row.Cells[i].Text);
+            }
+        }
+    }
+    protected void gv_listele_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            //e.Row.Cells[6].BackColor = System.Drawing.Color.LightYellow;
+            // e.Row.Cells[7].BackColor = System.Drawing.Color.LightYellow;
+            // e.Row.Cells[8].BackColor = System.Drawing.Color.LightYellow;
+            //e.Row.Cells[9].BackColor = System.Drawing.Color.LightYellow;
+            /*
+            Image buttonCommandField = e.Row.Cells[1].Controls[0] as Image;
+            buttonCommandField.Attributes["onClick"] =
+                   string.Format("return confirm('Silme İşleminden Emin misiniz? ')");
+             * */
+
+            // loop all data rows
+            foreach (DataControlFieldCell cell in e.Row.Cells)
+            {
+                // check all cells in one row
+                foreach (Control control in cell.Controls)
+                {
+                    // Must use LinkButton here instead of ImageButton
+                    // if you are having Links (not images) as the command button.
+                    ImageButton button = control as ImageButton;
+                    if (button != null && button.CommandName == "Delete")
+                        // Add delete confirmation
+                        button.OnClientClick = "if (!confirm('Are you sure " +
+                               "you want to delete this record?')) return;";
+                }
+            }
+
+        }
+    }
+    protected void gv_arama_listele_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            if (e.Row.RowState == DataControlRowState.Alternate)
+            {
+                e.Row.Attributes.Add("onmouseover", "this.style.backgroundColor='#FFFF99';");
+                e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='#f7fff8';");
+            }
+            else
+            {
+                e.Row.Attributes.Add("onmouseover", "this.style.backgroundColor='#FFFF99';");
+                e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='#eefef0';");
+            }
+        }
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+
+            for (int i = 0; i < e.Row.Cells.Count; i++)
+            {
+                Response.Write(e.Row.Cells[i].Text);
+            }
+        }
+    }
+    protected void gv_arama_listele_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            //e.Row.Cells[6].BackColor = System.Drawing.Color.LightYellow;
+            // e.Row.Cells[7].BackColor = System.Drawing.Color.LightYellow;
+            // e.Row.Cells[8].BackColor = System.Drawing.Color.LightYellow;
+            //e.Row.Cells[9].BackColor = System.Drawing.Color.LightYellow;
+            /*
+            Image buttonCommandField = e.Row.Cells[1].Controls[0] as Image;
+            buttonCommandField.Attributes["onClick"] =
+                   string.Format("return confirm('Silme İşleminden Emin misiniz? ')");
+             * */
+
+            // loop all data rows
+            foreach (DataControlFieldCell cell in e.Row.Cells)
+            {
+                // check all cells in one row
+                foreach (Control control in cell.Controls)
+                {
+                    // Must use LinkButton here instead of ImageButton
+                    // if you are having Links (not images) as the command button.
+                    ImageButton button = control as ImageButton;
+                    if (button != null && button.CommandName == "Delete")
+                        // Add delete confirmation
+                        button.OnClientClick = "if (!confirm('Are you sure " +
+                               "you want to delete this record?')) return;";
+                }
+            }
+
+        }
+    }
+    
 }

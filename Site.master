@@ -21,13 +21,14 @@
                 <h1>
                 <asp:Image ID="Image1" runat="server" Height="32px" ImageUrl="~/Images/logo1.png" 
                         Width="32px" />
-                     &nbsp;Web Otomasyon
+                     &nbsp;<% Response.Write(Session["firma_adi"].ToString()); %>
                 </h1>
             </div>
             <div class="loginDisplay"> 
                 <asp:Label ID="lbl_KullaniciBilgileri" runat="server" 
                     Text="Kullanıcı Bilgileri "></asp:Label>
-                <asp:ImageButton ID="ibtn_exit" runat="server" onclick="ibtn_exit_Click" />
+                <asp:ImageButton ID="ibtn_exit" runat="server" onclick="ibtn_exit_Click" 
+                    ImageUrl="~/Icons/res3232/kapat.png" />
               <!--
                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
 
@@ -143,7 +144,7 @@
                                 NavigateUrl="~/Personel/PersonelHareket.aspx" 
                                 ImageUrl="~/Icons/res1616/personelhareket.png"></asp:MenuItem>
                             <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar &gt;" 
-                                ImageUrl="~/Icons/res1616/personelraporlar.png">
+                                ImageUrl="~/Icons/res1616/personelraporlar.png" Enabled="False">
                                 <asp:MenuItem Text=" Personel Listesi" Value="Personel Listesi"></asp:MenuItem>
                                 <asp:MenuItem Text=" Personel Bordro Al" Value="Personel Bordro Al">
                                 </asp:MenuItem>

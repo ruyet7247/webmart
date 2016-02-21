@@ -28,7 +28,8 @@
             <div class="loginDisplay"> 
                 <asp:Label ID="lbl_KullaniciBilgileri" runat="server" 
                     Text="Kullanıcı Bilgileri "></asp:Label>
-                <asp:ImageButton ID="ibtn_exit" runat="server" onclick="ibtn_exit_Click" />
+                <asp:ImageButton ID="ibtn_exit" runat="server" onclick="ibtn_exit_Click" 
+                    ImageUrl="~/Icons/res3232/kapat.png" />
               <!--
                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
 
@@ -46,23 +47,30 @@
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" 
                     EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem Text="Firma Modülü" 
-                            Value="Firma Modülü">
-                            <asp:MenuItem Text="Firma Yönetim" Value="Firma Yönetim" 
-                                NavigateUrl="~/Yonetim/FirmaOlustur.aspx"></asp:MenuItem>
-                            <asp:MenuItem NavigateUrl="~/Yonetim/Kullanici.aspx" Text="Kullanıcı Yönetim" 
-                                Value="Kullanıcı Yönetim"></asp:MenuItem>
+                        <asp:MenuItem Text=" Firma Modülü" 
+                            Value="Firma Modülü" ImageUrl="~/Icons/res1616/gfirma.png">
+                            <asp:MenuItem Text=" Firma Yönetim" Value="Firma Yönetim" 
+                                NavigateUrl="~/Yonetim/FirmaOlustur.aspx" 
+                                ImageUrl="~/Icons/res1616/gfirma.png"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Yonetim/Kullanici.aspx" Text=" Kullanıcı Yönetim" 
+                                Value="Kullanıcı Yönetim" ImageUrl="~/Icons/res1616/gkullanici.png"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="~/Yonetim/YetkiGruplari.aspx" 
-                                Text="Yetki Grubları Tanımla" Value="Yetki Grubları Tanımla"></asp:MenuItem>
+                                Text=" Yetki Grubları Tanımla" Value="Yetki Grubları Tanımla" 
+                                ImageUrl="~/Icons/res1616/gkullanici.png"></asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem Text="Stok Modülü" Value="Stok Modülü">
-                            <asp:MenuItem Text="Stok Transfer" Value="Stok Transfer"></asp:MenuItem>
-<asp:MenuItem Text="Stok Listesi" Value="Stok Listesi"></asp:MenuItem>
+                        <asp:MenuItem Text=" Stok Modülü" Value="Stok Modülü" 
+                            ImageUrl="~/Icons/res1616/gstok.png">
+                            <asp:MenuItem Text=" Stok Transfer" Value="Stok Transfer" 
+                                ImageUrl="~/Icons/res1616/stokhareket.png"></asp:MenuItem>
+<asp:MenuItem Text=" Stok Listesi" Value="Stok Listesi" ImageUrl="~/Icons/res1616/stokraporlar.png"></asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem Text="Kasa Modülü" Value="Kasa Modülü">
-                            <asp:MenuItem Text="Kasa Listesi" Value="Kasa Listesi"></asp:MenuItem>
+                        <asp:MenuItem Text=" Kasa Modülü" Value="Kasa Modülü" 
+                            ImageUrl="~/Icons/res1616/gkasa.png">
+                            <asp:MenuItem Text=" Kasa Listesi" Value="Kasa Listesi" 
+                                ImageUrl="~/Icons/res1616/gpara.png"></asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem Text=" Mesaj" Value="Mesaj" NavigateUrl="~/Yonetim/Mesaj.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text=" Mesaj" Value="Mesaj" NavigateUrl="~/Yonetim/Mesaj.aspx" 
+                            ImageUrl="~/Icons/res1616/mesaj.png"></asp:MenuItem>
                     </Items>
                 </asp:Menu>
             </div>

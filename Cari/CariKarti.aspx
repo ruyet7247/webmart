@@ -41,11 +41,12 @@
         <tr>
             <td colspan="5" width="20%">
                 <asp:ImageButton ID="ibtn_yeni_cari" runat="server" 
-                    onclick="ibtn_yeni_cari_Click" AlternateText="Yeni Kayıt" />
+                    onclick="ibtn_yeni_cari_Click" AlternateText="Yeni Kayıt" 
+                    ImageUrl="~/Icons/res3232/arti.png" />
                 <asp:ImageButton ID="ibtn_cari_sil" runat="server"
                     onclick="ibtn_cari_sil_Click"  
                     OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');" 
-                    AlternateText="Cari Sil" />
+                    AlternateText="Cari Sil" ImageUrl="~/Icons/res3232/sil.png" />
             </td>
             
         </tr>
@@ -54,7 +55,7 @@
     <table style="width:100%;">
         <tr>
             <td class="style1">
-                <asp:Label ID="lbl_cari_id" runat="server">0</asp:Label>
+                <asp:Label ID="lbl_cari_id" runat="server" Visible="False">0</asp:Label>
             </td>
             <td class="style2">
                 &nbsp;</td>
@@ -68,8 +69,8 @@
                 Unvan</td>
             <td class="style2">
                 <asp:TextBox ID="txt_unvan" runat="server" Width="70%"></asp:TextBox>
-                <asp:ImageButton ID="ibtn_cari_bul" runat="server" Height="30px" Width="50px" 
-                    AlternateText="CariBul" />
+                <asp:ImageButton ID="ibtn_cari_bul" runat="server" 
+                    AlternateText="CariBul" ImageUrl="~/Icons/res3232/arama2.png" />
                 <asp:ModalPopupExtender ID="ibtn_cari_bul_ModalPopupExtender" runat="server" 
                     DynamicServicePath="" Enabled="True" 
                     PopupControlID="pnl_cari_arama" TargetControlID="ibtn_cari_bul" 
@@ -272,8 +273,8 @@
             <td width="20%">
                 &nbsp;</td>
             <td width="20%">
-                <asp:ImageButton ID="ibtn_post" runat="server" Height="30px" 
-                    onclick="ibtn_post_Click" Width="120px" />
+                <asp:ImageButton ID="ibtn_post" runat="server" 
+                    onclick="ibtn_post_Click" ImageUrl="~/Icons/res3232/arti.png" />
             </td>
             <td width="20%">
                 &nbsp;</td>
@@ -301,7 +302,8 @@
     </p>
      </asp:Panel>
     <!-- ARAMA PANELİ-->
-    <asp:Panel ID="pnl_cari_arama" runat="server" BackColor="#B6B7BC" Width="60%" Height="500px" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
+    <asp:Panel ID="pnl_cari_arama" runat="server" BackColor="#B6B7BC" Width="700px" 
+        Height="500px" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
      <table width="100%"> 
             <tr>
             <td class="style3">
@@ -323,10 +325,11 @@
                     <td class="style3">
                         Unvan Adı</td>
                     <td width="20%">
-                        <asp:TextBox ID="txt_arama" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txt_arama" runat="server" Width="150px"></asp:TextBox>
                     </td>
                     <td width="20%">
-                        <asp:ImageButton ID="ibtn_arama" runat="server" onclick="ibtn_arama_Click"/>
+                        <asp:ImageButton ID="ibtn_arama" runat="server" onclick="ibtn_arama_Click" 
+                            ImageUrl="~/Icons/res3232/arama2.png"/>
                     </td>
                     <td width="20%">
                         &nbsp;</td>
@@ -342,8 +345,10 @@
              <ContentTemplate>
      
                  <asp:GridView ID="gv_arama_listele" runat="server" AutoGenerateColumns="False" 
-                     DataKeyNames="cari_id" Width="100%" BackColor="#CCFFFF" 
-                     onselectedindexchanged="gv_arama_listele_SelectedIndexChanged">
+                     DataKeyNames="cari_id" BackColor="#CCFFFF" 
+                     onselectedindexchanged="gv_arama_listele_SelectedIndexChanged" 
+                     onrowcreated="gv_arama_listele_RowCreated" 
+                     onrowdatabound="gv_arama_listele_RowDataBound" CssClass="GridViewClass">
                      <Columns>
                          <asp:TemplateField HeaderText="Cari id" InsertVisible="False" 
                              SortExpression="cari_id">
@@ -353,6 +358,7 @@
                              <ItemTemplate>
                                  <asp:Label ID="lbl_cari_id" runat="server" Text='<%# Bind("cari_id") %>'></asp:Label>
                              </ItemTemplate>
+                             <ItemStyle Width="20px" />
                          </asp:TemplateField>
                          <asp:TemplateField HeaderText="Unvan" SortExpression="unvan">
                              <EditItemTemplate>
@@ -361,6 +367,7 @@
                              <ItemTemplate>
                                  <asp:Label ID="Label2" runat="server" Text='<%# Bind("unvan") %>'></asp:Label>
                              </ItemTemplate>
+                             <ItemStyle Width="200px" />
                          </asp:TemplateField>
                          <asp:TemplateField HeaderText="Gsm" SortExpression="adi">
                              <EditItemTemplate>
@@ -369,6 +376,7 @@
                              <ItemTemplate>
                                  <asp:Label ID="Label3" runat="server" Text='<%# Bind("gsm1") %>'></asp:Label>
                              </ItemTemplate>
+                             <ItemStyle Width="200px" />
                          </asp:TemplateField>
                          <asp:TemplateField HeaderText="Borç Bakiye" SortExpression="borc_bakiye">
                              <EditItemTemplate>
@@ -377,6 +385,7 @@
                              <ItemTemplate>
                                  <asp:Label ID="Label5" runat="server" Text='<%# Bind("borc_bakiye") %>'></asp:Label>
                              </ItemTemplate>
+                             <ItemStyle Width="100px" />
                          </asp:TemplateField>
                          <asp:TemplateField HeaderText="Alacak Bakiye" SortExpression="alacak_bakiye">
                              <EditItemTemplate>
@@ -385,6 +394,7 @@
                              <ItemTemplate>
                                  <asp:Label ID="Label6" runat="server" Text='<%# Bind("alacak_bakiye") %>'></asp:Label>
                              </ItemTemplate>
+                             <ItemStyle Width="100px" />
                          </asp:TemplateField>
                          <asp:TemplateField HeaderText="Bakiye" SortExpression="bakiye">
                              <EditItemTemplate>
@@ -393,13 +403,12 @@
                              <ItemTemplate>
                                  <asp:Label ID="Label7" runat="server" Text='<%# Bind("bakiye") %>'></asp:Label>
                              </ItemTemplate>
+                             <ItemStyle Width="100px" />
                          </asp:TemplateField>
-                         <asp:TemplateField ShowHeader="False">
-                             <ItemTemplate>
-                                 <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
-                                     CommandName="Select" Text="Select"></asp:LinkButton>
-                             </ItemTemplate>
-                         </asp:TemplateField>
+                        <asp:CommandField ButtonType="Image" SelectImageUrl="~/icons/res3232/sagok.png" 
+                            ShowSelectButton="True">
+                        <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                        </asp:CommandField>
                      </Columns>
                  </asp:GridView>
              </ContentTemplate>

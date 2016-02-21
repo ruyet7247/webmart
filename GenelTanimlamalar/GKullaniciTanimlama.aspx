@@ -97,8 +97,8 @@
             <td width="20%">
                 &nbsp;</td>
             <td width="20%">
-                <asp:ImageButton ID="ibtn_ekle" runat="server" Height="30px" Width="120px" 
-                    onclick="ibtn_ekle_Click" />
+                <asp:ImageButton ID="ibtn_ekle" runat="server" 
+                    onclick="ibtn_ekle_Click" ImageUrl="~/Icons/res3232/arti.png" />
             </td>
             <td width="20%">
                 &nbsp;</td>

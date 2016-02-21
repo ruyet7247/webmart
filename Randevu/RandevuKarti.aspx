@@ -31,12 +31,13 @@
                     Enabled="True" TargetControlID="txt_randevu_tarihi">
                 </asp:CalendarExtender>
                     <asp:ImageButton ID="ibtn_randevu_listele" runat="server" 
-                        onclick="ibtn_randevu_listele_Click" />
+                        onclick="ibtn_randevu_listele_Click" 
+                        ImageUrl="~/Icons/res3232/randevu.png" />
                 </td>
                 <td class="style1">
                     
                     <asp:ImageButton ID="ibtn_kaydet" runat="server" AlternateText="Randevu Kaydet" 
-                        onclick="ibtn_kaydet_Click" />
+                        onclick="ibtn_kaydet_Click" ImageUrl="~/Icons/res3232/save2.png" />
                     
                 </td>
                 <td>
@@ -115,10 +116,12 @@
         <asp:GridView ID="gv_arama_listele" runat="server" AutoGenerateColumns="False" 
             DataKeyNames="randevu_id" Width="100%" 
             onrowdeleting="gv_arama_listele_RowDeleting" 
-            onselectedindexchanged="gv_arama_listele_SelectedIndexChanged">
+            onselectedindexchanged="gv_arama_listele_SelectedIndexChanged" 
+            CssClass="GridViewClass" onrowcreated="gv_arama_listele_RowCreated" 
+            onrowdatabound="gv_arama_listele_RowDataBound">
             <Columns>
                 <asp:TemplateField HeaderText="randevu_id" InsertVisible="False" 
-                    SortExpression="randevu_id">
+                    SortExpression="randevu_id" Visible="False">
                     <EditItemTemplate>
                         <asp:Label ID="Label1" runat="server" Text='<%# Eval("randevu_id") %>'></asp:Label>
                     </EditItemTemplate>
@@ -126,15 +129,16 @@
                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("randevu_id") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="kayit_tarihi" SortExpression="kayit_tarihi">
+                <asp:TemplateField HeaderText="Kayıt Tarihi" SortExpression="kayit_tarihi">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("kayit_tarihi") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("kayit_tarihi") %>'></asp:Label>
+                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("kayit_tarihi", "{0:dd/MM/yyyy}") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle Width="70px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="doktor_adi_soyadi" 
+                <asp:TemplateField HeaderText="Doktor Adı Soyadı" 
                     SortExpression="doktor_adi_soyadi">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox10" runat="server" 
@@ -143,71 +147,75 @@
                     <ItemTemplate>
                         <asp:Label ID="Label11" runat="server" Text='<%# Bind("doktor_adi_soyadi") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle Width="100px" />
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Randevu Tarihi" SortExpression="randevu_tarihi">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("randevu_tarihi") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("randevu_tarihi") %>'></asp:Label>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("randevu_tarihi", "{0:dd/MM/yyyy}") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" Width="70px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="randevu_saati" SortExpression="randevu_saati">
+                <asp:TemplateField HeaderText="Randevu Saati" SortExpression="randevu_saati">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("randevu_saati") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label4" runat="server" Text='<%# Bind("randevu_saati") %>'></asp:Label>
                     </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                    <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="50px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="randevu_dakika" SortExpression="randevu_dakika">
+                <asp:TemplateField HeaderText="Randevu Dakika" SortExpression="randevu_dakika">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("randevu_dakika") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label5" runat="server" Text='<%# Bind("randevu_dakika") %>'></asp:Label>
                     </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                    <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="50px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="adi_soyadi" SortExpression="adi_soyadi">
+                <asp:TemplateField HeaderText="Adı ve Soyadı" SortExpression="adi_soyadi">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("adi_soyadi") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label6" runat="server" Text='<%# Bind("adi_soyadi") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle Width="100px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="gsm" SortExpression="gsm">
+                <asp:TemplateField HeaderText="Gsm" SortExpression="gsm">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("gsm") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label7" runat="server" Text='<%# Bind("gsm") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle Width="100px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="tel" SortExpression="tel">
+                <asp:TemplateField HeaderText="Tel" SortExpression="tel">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("tel") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label8" runat="server" Text='<%# Bind("tel") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle Width="100px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="randevu_notu" SortExpression="randevu_notu">
+                <asp:TemplateField HeaderText="Randevu Not" SortExpression="randevu_notu">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("randevu_notu") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label9" runat="server" Text='<%# Bind("randevu_notu") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle Width="200px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Sil" ShowHeader="False">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
-                            CommandName="Delete" Text="Delete"></asp:LinkButton>
-                    </ItemTemplate>
-                </asp:TemplateField>
+				<asp:CommandField ButtonType="Image" 
+                    DeleteImageUrl="~/icons/res3232/iptal2.png" ShowDeleteButton="True">
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="20px" />
+                </asp:CommandField>
                   <asp:TemplateField HeaderText="geldi_mi" SortExpression="geldi_mi">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtStatus" runat="server" Text='<%# Bind("geldi_mi") %>'></asp:TextBox>
@@ -217,6 +225,7 @@
                             <a href='RandevuKarti.aspx?Status=<%# Eval("geldi_mi") %>&RandevuID=<%# Eval("randevu_id") %>'><img src='../icons/res3232/<%# Eval("geldi_mi") %>.png' /></a>
                             
                     </ItemTemplate>
+                      <ItemStyle Width="30px" />
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>

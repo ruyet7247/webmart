@@ -90,7 +90,7 @@
                     &nbsp;</td>
                 <td>
                     <asp:ImageButton ID="ibtn_raporla" runat="server" 
-                        onclick="ibtn_raporla_Click" />
+                        onclick="ibtn_raporla_Click" ImageUrl="~/Icons/res3232/guncelle.png" />
                 </td>
             </tr>
             <tr>
@@ -124,23 +124,38 @@
         <asp:GridView ID="gv_listele" runat="server" Width="100%" 
             AutoGenerateColumns="False" DataKeyNames="cari_id" 
             AllowPaging="True" onpageindexchanging="gv_listele_PageIndexChanging" 
-            PageSize="20">
+            PageSize="20" CssClass="GridViewClass" 
+            onrowcreated="gv_listele_RowCreated" onrowdatabound="gv_listele_RowDataBound">
             <Columns>
                 <asp:BoundField DataField="cari_id" HeaderText="cari_id" InsertVisible="False" 
-                    ReadOnly="True" SortExpression="cari_id" />
-                <asp:BoundField DataField="unvan" HeaderText="unvan" SortExpression="unvan" />
-                <asp:BoundField DataField="adi" HeaderText="adi" SortExpression="adi" />
-                <asp:BoundField DataField="soyadi" HeaderText="soyadi" 
-                    SortExpression="soyadi" />
+                    ReadOnly="True" SortExpression="cari_id" Visible="False" />
+                <asp:BoundField DataField="unvan" HeaderText="Unvan" SortExpression="unvan" >
+                <ItemStyle Width="100px" />
+                </asp:BoundField>
+                <asp:BoundField DataField="adi" HeaderText="Adı" SortExpression="adi" >
+                <ItemStyle Width="100px" />
+                </asp:BoundField>
+                <asp:BoundField DataField="soyadi" HeaderText="Soyadı" 
+                    SortExpression="soyadi" >
+                <ItemStyle Width="100px" />
+                </asp:BoundField>
                 <asp:BoundField DataField="grup_id" HeaderText="grup_id" 
-                    SortExpression="grup_id" />
-                <asp:BoundField DataField="borc_bakiye" HeaderText="borc_bakiye" 
-                    SortExpression="borc_bakiye" />
-                <asp:BoundField DataField="alacak_bakiye" HeaderText="alacak_bakiye" 
-                    SortExpression="alacak_bakiye" />
-                <asp:BoundField DataField="bakiye" HeaderText="bakiye" 
-                    SortExpression="bakiye" />
-                <asp:BoundField DataField="gsm1" HeaderText="gsm1" SortExpression="gsm1" />
+                    SortExpression="grup_id" Visible="False" />
+                <asp:BoundField DataField="gsm1" HeaderText="Gsm" SortExpression="gsm1">
+                <ItemStyle Width="80px" />
+                </asp:BoundField>
+                <asp:BoundField DataField="borc_bakiye" HeaderText="Borç Bakiye" 
+                    SortExpression="borc_bakiye" >
+                <ItemStyle HorizontalAlign="Right" Width="80px" />
+                </asp:BoundField>
+                <asp:BoundField DataField="alacak_bakiye" HeaderText="Alacak Bakiye" 
+                    SortExpression="alacak_bakiye" >
+                <ItemStyle HorizontalAlign="Right" Width="80px" />
+                </asp:BoundField>
+                <asp:BoundField DataField="bakiye" HeaderText="Bakiye" 
+                    SortExpression="bakiye" >
+                <ItemStyle HorizontalAlign="Right" Width="80px" />
+                </asp:BoundField>
             </Columns>
         </asp:GridView>
     </asp:Panel>

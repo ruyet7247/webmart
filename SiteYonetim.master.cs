@@ -9,7 +9,7 @@ public partial class SiteYonetim : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        Session["ConnectionString"] = "WebMart_Master";
         if (Session["GirisVar"] != null)
         {
             if (Session["GirisVar"] != "True" && Session["Master"] != "True")  // True değilse ve MASTER değilse
@@ -24,6 +24,7 @@ public partial class SiteYonetim : System.Web.UI.MasterPage
             {
                 NavigationMenu.Visible = true;
                 lbl_KullaniciBilgileri.Visible = true;
+                lbl_KullaniciBilgileri.Text = Session["adi_soyadi"].ToString();
                 ibtn_exit.Visible = true;
             }
         }

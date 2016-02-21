@@ -37,7 +37,7 @@
     <table style="width:100%;">
         <tr>
             <td class="style3">
-                <asp:Label ID="lbl_gelir_gider_id" runat="server" Text="Label"></asp:Label>
+                <asp:Label ID="lbl_gelir_gider_id" runat="server" Text="0" Visible="False"></asp:Label>
             </td>
             <td class="style4">
                 </td>
@@ -69,8 +69,8 @@
             <td class="style3">
                 &nbsp;</td>
             <td class="style4">
-                <asp:ImageButton ID="ibtn_post" runat="server" Height="25px" 
-                    onclick="ibtn_post_Click" Width="71px" />
+                <asp:ImageButton ID="ibtn_post" runat="server" 
+                    onclick="ibtn_post_Click" ImageUrl="~/Icons/res3232/arti.png" />
             </td>
         </tr>
 </table>
@@ -80,12 +80,15 @@
     </p>
     <asp:Panel ID="Panel1" runat="server">
         <asp:GridView ID="gv_gelir_gider_listele" runat="server" AutoGenerateColumns="False" 
-            DataKeyNames="gelir_gider_id" Width="60%" 
+            DataKeyNames="gelir_gider_id" 
             onselectedindexchanged="gv_gelir_gider_listele_SelectedIndexChanged"
-            onrowdeleting="gv_gelir_gider_listele_RowDeleting">
+            onrowdeleting="gv_gelir_gider_listele_RowDeleting" 
+            onrowcreated="gv_gelir_gider_listele_RowCreated" 
+            onrowdatabound="gv_gelir_gider_listele_RowDataBound">
             <Columns>
                
-                <asp:TemplateField HeaderText="GG id" SortExpression="gelir_gider_id">
+                <asp:TemplateField HeaderText="GG id" SortExpression="gelir_gider_id" 
+                    Visible="False">
                     <EditItemTemplate>
                         <asp:TextBox ID="txt_gelir_gider_id" runat="server" Text='<%# Bind("gelir_gider_id") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -103,7 +106,7 @@
                     <ItemTemplate>
                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("gelir_gider_adi") %>'></asp:Label>
                     </ItemTemplate>
-                    <ItemStyle Width="30%" />
+                    <ItemStyle Width="200px" />
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Gelir / Gider" SortExpression="gelir_or_gider">
                     <EditItemTemplate>
@@ -112,20 +115,17 @@
                     <ItemTemplate>
                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("gelir_or_gider") %>'></asp:Label>
                     </ItemTemplate>
-                    <ItemStyle Width="20%" />
+                    <ItemStyle Width="200px" />
                 </asp:TemplateField>
-                <asp:TemplateField ShowHeader="False">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
-                            CommandName="Select" Text="Select"></asp:LinkButton>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField ShowHeader="False">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" 
-                            CommandName="Delete" Text="Delete"  OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');"></asp:LinkButton>
-                    </ItemTemplate>
-                </asp:TemplateField>
+               <asp:CommandField ButtonType="Image" 
+                    DeleteImageUrl="~/icons/res3232/iptal2.png" ShowDeleteButton="True">
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                </asp:CommandField>
+
+                <asp:CommandField ButtonType="Image" SelectImageUrl="~/icons/res3232/sagok.png" 
+                    ShowSelectButton="True">
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                </asp:CommandField>
 
             </Columns>
         </asp:GridView>

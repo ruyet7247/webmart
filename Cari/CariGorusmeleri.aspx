@@ -18,10 +18,10 @@
     </asp:ToolkitScriptManager>
 
      
-  <table width="100%"> 
+        HASTA GÖRÜŞME NOTLARI<table width="100%"> 
             <tr>
             <td class="style3">
-                <asp:Label ID="lbl_cari_hasta_id" runat="server" Text="0"></asp:Label>
+                <asp:Label ID="lbl_cari_hasta_id" runat="server" Text="0" Visible="False"></asp:Label>
                     </td>
             <td width="20%">
                 &nbsp;</td>
@@ -41,7 +41,8 @@
                     </td>
                     <td width="20%">
                         <asp:ImageButton ID="ibtn_cari_gorusme_kaydet" runat="server" 
-                            onclick="ibtn_cari_gorusme_kaydet_Click" style="width: 14px" />
+                            onclick="ibtn_cari_gorusme_kaydet_Click" 
+                            ImageUrl="~/Icons/res3232/save2.png" />
                     </td>
                     <td width="20%">
                         &nbsp;</td>
@@ -86,29 +87,37 @@
                  <asp:GridView ID="gv_arama_listele" runat="server" AutoGenerateColumns="False" 
                      DataKeyNames="cari_gorusmeleri_id" Width="100%" BackColor="#CCFFFF" 
                      onselectedindexchanged="gv_arama_listele_SelectedIndexChanged" 
-                     onrowdeleting="gv_arama_listele_RowDeleting">
+                     onrowdeleting="gv_arama_listele_RowDeleting" 
+                     onrowcreated="gv_arama_listele_RowCreated" 
+                     onrowdatabound="gv_arama_listele_RowDataBound" CssClass="GridViewClass">
                      <Columns>
                          <asp:BoundField DataField="cari_gorusmeleri_id" 
                              HeaderText="cari_gorusmeleri_id" InsertVisible="False" ReadOnly="True" 
-                             SortExpression="cari_gorusmeleri_id" />
+                             SortExpression="cari_gorusmeleri_id" Visible="False" />
                          <asp:BoundField DataField="cari_id" HeaderText="cari_id" 
-                             SortExpression="cari_id" />
-                         <asp:BoundField DataField="cari_adi" HeaderText="cari_adi" 
-                             SortExpression="cari_adi" />
-                         <asp:BoundField DataField="personel_adi" HeaderText="personel_adi" 
-                             SortExpression="personel_adi" />
+                             SortExpression="cari_id" Visible="False" />
+                         <asp:BoundField DataField="cari_adi" HeaderText="HASTA ADI" 
+                             SortExpression="cari_adi" >
+                         <ItemStyle Width="200px" />
+                         </asp:BoundField>
+                         <asp:BoundField DataField="personel_adi" HeaderText="Personel Adı" 
+                             SortExpression="personel_adi" >
+                         <ItemStyle Width="100px" />
+                         </asp:BoundField>
                          <asp:BoundField DataField="gorusme_tarihi_saati" 
-                             HeaderText="gorusme_tarihi_saati" SortExpression="gorusme_tarihi_saati" />
-                         <asp:BoundField DataField="icerik" HeaderText="icerik" 
-                             SortExpression="icerik" />
+                             HeaderText="GÖRÜŞME TARİHİ SAATİ" SortExpression="gorusme_tarihi_saati" >
+                         <ItemStyle Width="150px" />
+                         </asp:BoundField>
+                         <asp:BoundField DataField="icerik" HeaderText="NOT" 
+                             SortExpression="icerik" >
+                         <ItemStyle Width="300px" />
+                         </asp:BoundField>
                          <asp:BoundField DataField="firma_adi" HeaderText="firma_adi" 
-                             SortExpression="firma_adi" />
-                         <asp:TemplateField ShowHeader="False">
-                             <ItemTemplate>
-                                 <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
-                                     CommandName="Delete" Text="Delete" OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');"></asp:LinkButton>
-                             </ItemTemplate>
-                         </asp:TemplateField>
+                             SortExpression="firma_adi" Visible="False" />
+                         <asp:CommandField ButtonType="Image" 
+                            DeleteImageUrl="~/icons/res3232/iptal2.png" ShowDeleteButton="True">
+                        <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="20px" />
+                        </asp:CommandField>
                      </Columns>
                  </asp:GridView>
                    </ContentTemplate>

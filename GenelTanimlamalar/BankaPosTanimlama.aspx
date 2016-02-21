@@ -77,7 +77,7 @@
     </p>
     <asp:Panel ID="Panel1" runat="server">
         <asp:GridView ID="gv_listele" runat="server" AutoGenerateColumns="False" 
-            DataKeyNames="pos_id" Width="60%" 
+            DataKeyNames="pos_id" 
             onselectedindexchanged="gv_listele_SelectedIndexChanged"
             onrowdeleting="gv_listele_RowDeleting" 
             onrowcreated="gv_listele_RowCreated" 
@@ -128,11 +128,11 @@
                 </asp:TemplateField>
                 <asp:CommandField ButtonType="Image" 
                     DeleteImageUrl="~/icons/res3232/iptal2.png" ShowDeleteButton="True">
-                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="20px" />
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
                 </asp:CommandField>
                 <asp:CommandField ButtonType="Image" SelectImageUrl="~/icons/res3232/sagok.png" 
                     ShowSelectButton="True">
-                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="20px" />
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
                 </asp:CommandField>
             </Columns>
         </asp:GridView>

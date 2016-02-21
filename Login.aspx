@@ -47,9 +47,9 @@
                 <td class="style2">
                     &nbsp;</td>
                 <td align="left" class="style3">
-                    <asp:ImageButton ID="ibtn_login" runat="server" Height="34px" 
-                        ImageUrl="~/Images/btn_giris.png" onclick="Ibtn_login_Click" 
-                        Width="38px" />
+                    <asp:ImageButton ID="ibtn_login" runat="server" Height="40px" 
+                        ImageUrl="~/Icons/sagok.png" onclick="Ibtn_login_Click" 
+                        Width="51px" />
                 </td>
             </tr>
         </table>

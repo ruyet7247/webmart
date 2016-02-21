@@ -312,3 +312,7 @@ div.accountInfo
  {
          text-align: right;
  }
+ .GridViewClass td,th
+{
+     padding-left:5px;
+}

@@ -33,6 +33,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
                     {
                         NavigationMenu.Visible = true;
                         lbl_KullaniciBilgileri.Visible = true;
+                        lbl_KullaniciBilgileri.Text = Session["adi_soyadi"].ToString();
                         ibtn_exit.Visible = true;
                     }
                     else

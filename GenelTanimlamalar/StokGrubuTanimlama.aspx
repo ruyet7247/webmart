@@ -25,7 +25,7 @@
     <table style="width:100%;">
         <tr>
             <td class="style3">
-                <asp:Label ID="lbl_stok_grubu_id" runat="server" Text="Label"></asp:Label>
+                <asp:Label ID="lbl_stok_grubu_id" runat="server" Text="0" Visible="False"></asp:Label>
             </td>
             <td class="style4">
                 </td>
@@ -47,8 +47,8 @@
             <td class="style3">
                 &nbsp;</td>
             <td class="style4">
-                <asp:ImageButton ID="ibtn_post" runat="server" Height="25px" 
-                    onclick="ibtn_post_Click" Width="71px" />
+                <asp:ImageButton ID="ibtn_post" runat="server" 
+                    onclick="ibtn_post_Click" ImageUrl="~/Icons/res3232/arti.png" />
             </td>
         </tr>
 </table>
@@ -58,12 +58,14 @@
     </p>
     <asp:Panel ID="Panel1" runat="server">
         <asp:GridView ID="gv_listele" runat="server" AutoGenerateColumns="False" 
-            DataKeyNames="stok_grubu_id" Width="60%" 
+            DataKeyNames="stok_grubu_id" 
             onselectedindexchanged="gv_listele_SelectedIndexChanged"
-            onrowdeleting="gv_listele_RowDeleting">
+            onrowdeleting="gv_listele_RowDeleting" 
+            onrowcreated="gv_listele_RowCreated" onrowdatabound="gv_listele_RowDataBound">
             <Columns>
                
-                <asp:TemplateField HeaderText="SG id" SortExpression="stok_grubu_id">
+                <asp:TemplateField HeaderText="SG id" SortExpression="stok_grubu_id" 
+                    Visible="False">
                     <EditItemTemplate>
                         <asp:TextBox ID="txt_stok_grubu_id" runat="server" Text='<%# Bind("stok_grubu_id") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -80,22 +82,17 @@
                     <ItemTemplate>
                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("stok_grubu_adi") %>'></asp:Label>
                     </ItemTemplate>
-                    <ItemStyle Width="60%" />
+                    <ItemStyle Width="300px" />
                 </asp:TemplateField>
-                <asp:TemplateField ShowHeader="False">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
-                            CommandName="Select" Text="Select"></asp:LinkButton>
-                    </ItemTemplate>
-                    <ItemStyle Width="10%" />
-                </asp:TemplateField>
-                <asp:TemplateField ShowHeader="False">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" 
-                            CommandName="Delete" Text="Delete"  OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');"></asp:LinkButton>
-                    </ItemTemplate>
-                    <ItemStyle Width="10%" />
-                </asp:TemplateField>
+              <asp:CommandField ButtonType="Image" 
+                    DeleteImageUrl="~/icons/res3232/iptal2.png" ShowDeleteButton="True">
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="20px" />
+                </asp:CommandField>
+
+                <asp:CommandField ButtonType="Image" SelectImageUrl="~/icons/res3232/sagok.png" 
+                    ShowSelectButton="True">
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="20px" />
+                </asp:CommandField>
 
             </Columns>
         </asp:GridView>

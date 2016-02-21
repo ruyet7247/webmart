@@ -18,7 +18,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
-    <asp:Label ID="lbl_firma_id" runat="server" Text="0"></asp:Label>
+    <asp:Label ID="lbl_firma_id" runat="server" Text="0" Visible="False"></asp:Label>
     <table style="width:100%;">
         <tr>
             <td class="style1">
@@ -31,7 +31,10 @@
               
             </td>
            <td class="style1">
-                &nbsp;</td>
+                <asp:ImageButton ID="ibtn_sil" runat="server" 
+                    ImageUrl="~/Icons/res3232/sil.png" onclick="ibtn_sil_Click" 
+                    Visible="False" />
+            </td>
             <td class="style2">
                 &nbsp;</td>
         </tr>
@@ -110,11 +113,13 @@
     <asp:Panel ID="pnl_liste" runat="server">
     <asp:GridView ID="gv_listele" runat="server" AutoGenerateColumns="False" 
             DataKeyNames="firma_id" Width="60%" 
-            onselectedindexchanged="gv_listele_SelectedIndexChanged">
+            onselectedindexchanged="gv_listele_SelectedIndexChanged" 
+            onrowdeleting="gv_listele_RowDeleting" 
+            onrowcreated="gv_listele_RowCreated" onrowdatabound="gv_listele_RowDataBound">
             <Columns>
                
                 <asp:TemplateField HeaderText="firma_id" InsertVisible="False" 
-                    SortExpression="firma_id">
+                    SortExpression="firma_id" Visible="False">
                     <EditItemTemplate>
                         <asp:Label ID="Label1" runat="server" Text='<%# Eval("firma_id") %>'></asp:Label>
                     </EditItemTemplate>
@@ -122,45 +127,54 @@
                         <asp:Label ID="lbl_firma_id" runat="server" Text='<%# Bind("firma_id") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="kayit_tarihi" SortExpression="kayit_tarihi">
+                <asp:TemplateField HeaderText="Kayıt Tarihi" SortExpression="kayit_tarihi">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("kayit_tarihi") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("kayit_tarihi") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle Width="80px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="firma_adi" SortExpression="firma_adi">
+                <asp:TemplateField HeaderText="Firma Adı" SortExpression="firma_adi">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("firma_adi") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label3" runat="server" Text='<%# Bind("firma_adi") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle Width="150px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="veritabani_adi" SortExpression="veritabani_adi">
+                <asp:TemplateField HeaderText="Veritabanı Adı" SortExpression="veritabani_adi">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("veritabani_adi") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("veritabani_adi") %>'></asp:Label>
+                        <asp:Label ID="lbl_veritabani_adi" runat="server" Text='<%# Bind("veritabani_adi") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle Width="80px" />
                 </asp:TemplateField>
-                <asp:BoundField DataField="connection_string_adi" 
-                    HeaderText="connection_string_adi" SortExpression="connection_string_adi" />
-                <asp:TemplateField ShowHeader="False">
+                <asp:TemplateField HeaderText="Bağlantı Adı" 
+                    SortExpression="connection_string_adi">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox4" runat="server" 
+                            Text='<%# Bind("connection_string_adi") %>'></asp:TextBox>
+                    </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
-                            CommandName="Select" Text="Select"></asp:LinkButton>
+                        <asp:Label ID="lbl_connection_string_adi" runat="server" 
+                            Text='<%# Bind("connection_string_adi") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle Width="80px" />
                 </asp:TemplateField>
+				<asp:CommandField ButtonType="Image" 
+                    DeleteImageUrl="~/icons/res3232/iptal2.png" ShowDeleteButton="True">
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="20px" />
+                </asp:CommandField>
 
-                <asp:TemplateField ShowHeader="False">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" 
-                            CommandName="Delete" Text="Delete"  OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');"></asp:LinkButton>
-                    </ItemTemplate>
-                </asp:TemplateField>
+                <asp:CommandField ButtonType="Image" SelectImageUrl="~/icons/res3232/sagok.png" 
+                    ShowSelectButton="True">
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="20px" />
+                </asp:CommandField>
 
             </Columns>
         </asp:GridView>

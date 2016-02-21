@@ -33,7 +33,7 @@
     <table style="width:100%;">
         <tr>
             <td class="style3">
-                <asp:Label ID="lbl_personel_id" runat="server" Text="0"></asp:Label>
+                <asp:Label ID="lbl_personel_id" runat="server" Text="0" Visible="False"></asp:Label>
             </td>
             <td class="style4">
                 </td>
@@ -49,7 +49,7 @@ PERSONEL BORÇLANDIR / ALACAKLANDIR
                                <table style="width:100%;"><tr>
 <td class="style3">
                                 
-<asp:Label ID="lbl_maas_hareket_id" runat="server" Text="0"></asp:Label>
+<asp:Label ID="lbl_maas_hareket_id" runat="server" Text="0" Visible="False"></asp:Label>
                                 
                             </td>
                             
@@ -77,7 +77,8 @@ PERSONEL BORÇLANDIR / ALACAKLANDIR
                             </td>
                             
    <td>
-   <asp:ImageButton ID="ibtn_yeni_borc_alacak" runat="server" AlternateText="Yeni" />
+   <asp:ImageButton ID="ibtn_yeni_borc_alacak" runat="server" AlternateText="Yeni" 
+           ImageUrl="~/Icons/res3232/arti.png" />
                             </td></tr>
                             
  <tr><td class="style3">
@@ -99,7 +100,8 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
  </td><td>
                                     
   <asp:ImageButton ID="ibtn_kaydet" runat="server" AlternateText="Kaydet" 
-                                        onclick="ibtn_kaydet_Click" style="width: 14px; height: 16px" />
+                                        onclick="ibtn_kaydet_Click" 
+             ImageUrl="~/Icons/res3232/save2.png" />
                                 </td></tr><tr>
  <td class="style3">Ödeme Şekli</td>
                                 
@@ -278,8 +280,8 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
             <td class="style4">
                 <asp:TextBox ID="txt_adi" runat="server" Width="250px" ReadOnly="True" 
                     Font-Size="16pt" Height="30px"></asp:TextBox>
-                <asp:ImageButton ID="ibtn_personel_bul" runat="server" Height="30px" Width="50px" 
-                    AlternateText="Personel Bul" />
+                <asp:ImageButton ID="ibtn_personel_bul" runat="server" 
+                    AlternateText="Personel Bul" ImageUrl="~/Icons/res3232/arama2.png" />
                 <asp:ModalPopupExtender ID="ibtn_personel_bul_ModalPopupExtender" runat="server" 
                     DynamicServicePath="" Enabled="True" 
                     PopupControlID="pnl_personel_arama" TargetControlID="ibtn_personel_bul" 
@@ -361,11 +363,12 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
         BorderWidth="1px">
         <asp:GridView ID="gv_listele" runat="server" Width="100%" 
             AutoGenerateColumns="False" DataKeyNames="maas_hareket_id" 
-            onrowdeleting="gv_listele_RowDeleting">
+            onrowdeleting="gv_listele_RowDeleting" CssClass="GridViewClass" 
+            onrowcreated="gv_listele_RowCreated" onrowdatabound="gv_listele_RowDataBound">
 
             <Columns>
                 <asp:TemplateField HeaderText="maas_hareket_id" InsertVisible="False" 
-                    SortExpression="maas_hareket_id">
+                    SortExpression="maas_hareket_id" Visible="False">
                     <EditItemTemplate>
                         <asp:Label ID="Label1" runat="server" Text='<%# Eval("maas_hareket_id") %>'></asp:Label>
                     </EditItemTemplate>
@@ -373,7 +376,8 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("maas_hareket_id") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="personel_id" SortExpression="personel_id">
+                <asp:TemplateField HeaderText="personel_id" SortExpression="personel_id" 
+                    Visible="False">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("personel_id") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -381,15 +385,15 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("personel_id") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="kayit_tarihi" SortExpression="kayit_tarihi">
+                <asp:TemplateField HeaderText="Tarih" SortExpression="kayit_tarihi">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("kayit_tarihi") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("kayit_tarihi") %>'></asp:Label>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("kayit_tarihi", "{0:dd/MM/yyyy}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="borc_or_alacak" SortExpression="borc_or_alacak">
+                <asp:TemplateField HeaderText="Borç / Alacak" SortExpression="borc_or_alacak">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("borc_or_alacak") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -397,7 +401,7 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                         <asp:Label ID="Label4" runat="server" Text='<%# Bind("borc_or_alacak") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="islem_tipi" SortExpression="islem_tipi">
+                <asp:TemplateField HeaderText="İşlem Tipi" SortExpression="islem_tipi">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("islem_tipi") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -405,7 +409,7 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                         <asp:Label ID="Label5" runat="server" Text='<%# Bind("islem_tipi") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="odeme_sekli" SortExpression="odeme_sekli">
+                <asp:TemplateField HeaderText="Ödeme Şekli" SortExpression="odeme_sekli">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox12" runat="server" Text='<%# Bind("odeme_sekli") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -413,7 +417,7 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                         <asp:Label ID="Label13" runat="server" Text='<%# Bind("odeme_sekli") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="belge_no" SortExpression="belge_no">
+                <asp:TemplateField HeaderText="Belge No" SortExpression="belge_no">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("belge_no") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -421,23 +425,25 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                         <asp:Label ID="Label6" runat="server" Text='<%# Bind("belge_no") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="maas_donem_ay" SortExpression="maas_donem_ay">
+                <asp:TemplateField HeaderText="Maaş Dönemi Ay" SortExpression="maas_donem_ay">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("maas_donem_ay") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label7" runat="server" Text='<%# Bind("maas_donem_ay") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="maas_donem_yil" SortExpression="maas_donem_yil">
+                <asp:TemplateField HeaderText="Maaş Dönemi Yıl" SortExpression="maas_donem_yil">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("maas_donem_yil") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label8" runat="server" Text='<%# Bind("maas_donem_yil") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="aciklama1" SortExpression="aciklama1">
+                <asp:TemplateField HeaderText="Açıklama" SortExpression="aciklama1">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("aciklama1") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -445,15 +451,17 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                         <asp:Label ID="Label9" runat="server" Text='<%# Bind("aciklama1") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="tutar" SortExpression="tutar">
+                <asp:TemplateField HeaderText="Tutar" SortExpression="tutar">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox9" runat="server" Text='<%# Bind("tutar") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label10" runat="server" Text='<%# Bind("tutar") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Right" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="kasa_id" SortExpression="kasa_id">
+                <asp:TemplateField HeaderText="kasa_id" SortExpression="kasa_id" 
+                    Visible="False">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox10" runat="server" Text='<%# Bind("kasa_id") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -461,7 +469,8 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                         <asp:Label ID="Label11" runat="server" Text='<%# Bind("kasa_id") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="banka_hesap_id" SortExpression="banka_id">
+                <asp:TemplateField HeaderText="banka_hesap_id" SortExpression="banka_id" 
+                    Visible="False">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox11" runat="server" Text='<%# Bind("banka_hesap_id") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -469,12 +478,10 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                         <asp:Label ID="Label12" runat="server" Text='<%# Bind("banka_hesap_id") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField ShowHeader="False">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
-                            CommandName="Delete" Text="Delete" OnClientClick="return confirm ('SİLME İşlemi Gerçekleşecek Eminmisiniz!!!');"></asp:LinkButton>
-                    </ItemTemplate>
-                </asp:TemplateField>
+				<asp:CommandField ButtonType="Image" 
+                    DeleteImageUrl="~/icons/res3232/iptal2.png" ShowDeleteButton="True">
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="20px" />
+                </asp:CommandField>
             </Columns>
 
         </asp:GridView>
@@ -507,7 +514,8 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                         <asp:TextBox ID="txt_arama" runat="server"></asp:TextBox>
                     </td>
                     <td width="20%">
-                        <asp:ImageButton ID="ibtn_arama" runat="server" onclick="ibtn_arama_Click"/>
+                        <asp:ImageButton ID="ibtn_arama" runat="server" onclick="ibtn_arama_Click" 
+                            ImageUrl="~/Icons/res3232/arama2.png"/>
                     </td>
                     <td width="20%">
                         </td>
@@ -525,10 +533,12 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
      
                  <asp:GridView ID="gv_arama_listele" runat="server" AutoGenerateColumns="False" 
                      DataKeyNames="personel_id" Width="100%" BackColor="#CCFFFF" 
-                     onselectedindexchanged="gv_arama_listele_SelectedIndexChanged">
+                     onselectedindexchanged="gv_arama_listele_SelectedIndexChanged" 
+                     onrowcreated="gv_arama_listele_RowCreated" 
+                     onrowdatabound="gv_arama_listele_RowDataBound" CssClass="GridViewClass">
                      <Columns>
                          <asp:TemplateField HeaderText="personel_id" InsertVisible="False" 
-                             SortExpression="personel_id">
+                             SortExpression="personel_id" Visible="False">
                              <EditItemTemplate>
                                  <asp:Label ID="lbl_personel_id" runat="server" Text='<%# Eval("personel_id") %>'></asp:Label>
                              </EditItemTemplate>
@@ -536,39 +546,43 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                                  <asp:Label ID="lbl_personel_id" runat="server" Text='<%# Bind("personel_id") %>'></asp:Label>
                              </ItemTemplate>
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="tc" SortExpression="tc">
+                         <asp:TemplateField HeaderText="TC No" SortExpression="tc">
                              <EditItemTemplate>
                                  <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("tc") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
                                  <asp:Label ID="Label2" runat="server" Text='<%# Bind("tc") %>'></asp:Label>
                              </ItemTemplate>
+                             <ItemStyle Width="100px" />
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="adi" SortExpression="adi">
+                         <asp:TemplateField HeaderText="Adı" SortExpression="adi">
                              <EditItemTemplate>
                                  <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("adi") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
                                  <asp:Label ID="Label3" runat="server" Text='<%# Bind("adi") %>'></asp:Label>
                              </ItemTemplate>
+                             <ItemStyle Width="150px" />
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="soyadi" SortExpression="soyadi">
+                         <asp:TemplateField HeaderText="Soyadı" SortExpression="soyadi">
                              <EditItemTemplate>
                                  <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("soyadi") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
                                  <asp:Label ID="Label4" runat="server" Text='<%# Bind("soyadi") %>'></asp:Label>
                              </ItemTemplate>
+                             <ItemStyle Width="150px" />
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="kullanici_adi" SortExpression="kullanici_adi">
+                         <asp:TemplateField HeaderText="Kullanıcı Adı" SortExpression="kullanici_adi">
                              <EditItemTemplate>
                                  <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("kullanici_adi") %>'></asp:TextBox>
                              </EditItemTemplate>
                              <ItemTemplate>
                                  <asp:Label ID="Label5" runat="server" Text='<%# Bind("kullanici_adi") %>'></asp:Label>
                              </ItemTemplate>
+                             <ItemStyle Width="100px" />
                          </asp:TemplateField>
-                         <asp:TemplateField HeaderText="gsm" 
+                         <asp:TemplateField HeaderText="Gsm" 
                              SortExpression="gsm">
                              <EditItemTemplate>
                                  <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("gsm") %>'></asp:TextBox>
@@ -576,13 +590,12 @@ Belge No<asp:TextBox ID="txt_belge_no" runat="server"></asp:TextBox>
                              <ItemTemplate>
                                  <asp:Label ID="Label6" runat="server" Text='<%# Bind("gsm") %>'></asp:Label>
                              </ItemTemplate>
+                             <ItemStyle Width="100px" />
                          </asp:TemplateField>
-                         <asp:TemplateField ShowHeader="False">
-                             <ItemTemplate>
-                                 <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
-                                     CommandName="Select" Text="Select"></asp:LinkButton>
-                             </ItemTemplate>
-                         </asp:TemplateField>
+                        <asp:CommandField ButtonType="Image" SelectImageUrl="~/icons/res3232/sagok.png" 
+                            ShowSelectButton="True">
+                        <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="20px" />
+                        </asp:CommandField>
                      </Columns>
                  </asp:GridView>
              </ContentTemplate>

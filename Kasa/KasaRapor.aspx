@@ -39,7 +39,7 @@
                 Giriş/Çıkış</td>
             <td class="style1">
                 <asp:ImageButton ID="ibtn_raporla" runat="server" onclick="ibtn_raporla_Click" 
-                    style="width: 14px" />
+                    CssClass="GridViewClass" ImageUrl="~/Icons/res3232/arama2.png" />
             </td>
             <td class="style1">
                 &nbsp;</td>
@@ -131,36 +131,57 @@
     <asp:Panel ID="pnl_listele" runat="server">
         <asp:GridView ID="gv_listele" runat="server" AutoGenerateColumns="False" 
             DataKeyNames="kasa_hareket_id" AllowPaging="True" 
-            onpageindexchanging="GridView1_PageIndexChanging" PageSize="20">
+            onpageindexchanging="GridView1_PageIndexChanging" PageSize="20" 
+            CssClass="GridViewClass" onrowcreated="gv_listele_RowCreated" 
+            onrowdatabound="gv_listele_RowDataBound">
             <Columns>
                 <asp:BoundField DataField="kasa_hareket_id" HeaderText="kasa_hareket_id" 
-                    InsertVisible="False" ReadOnly="True" SortExpression="kasa_hareket_id" />
+                    InsertVisible="False" ReadOnly="True" SortExpression="kasa_hareket_id" 
+                    Visible="False" />
                 <asp:BoundField DataField="kasa_id" HeaderText="kasa_id" 
-                    SortExpression="kasa_id" />
-                <asp:BoundField DataField="kayit_tarihi" HeaderText="kayit_tarihi" 
-                    SortExpression="kayit_tarihi" />
-                <asp:BoundField DataField="evrak_no" HeaderText="evrak_no" 
-                    SortExpression="evrak_no" />
-                <asp:BoundField DataField="islem_tipi" HeaderText="islem_tipi" 
-                    SortExpression="islem_tipi" />
-                <asp:BoundField DataField="giris_or_cikis" HeaderText="giris_or_cikis" 
-                    SortExpression="giris_or_cikis" />
-                <asp:BoundField DataField="aciklama1" HeaderText="aciklama1" 
-                    SortExpression="aciklama1" />
-                <asp:BoundField DataField="tutar" HeaderText="tutar" SortExpression="tutar" />
-                <asp:BoundField DataField="cari_id" HeaderText="cari_id" 
-                    SortExpression="cari_id" />
-                <asp:BoundField DataField="fis_id" HeaderText="fis_id" 
-                    SortExpression="fis_id" />
-                <asp:BoundField DataField="banka_id" HeaderText="banka_id" 
-                    SortExpression="banka_id" />
+                    SortExpression="kasa_id" Visible="False" />
+                <asp:TemplateField HeaderText="Tarih" SortExpression="kayit_tarihi">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("kayit_tarihi") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("kayit_tarihi", "{0:dd/MM/yyyy}") %>'></asp:Label>
+                    </ItemTemplate>
+                    <ItemStyle Width="70px" />
+                </asp:TemplateField>
+                <asp:BoundField DataField="evrak_no" HeaderText="Evrak No" 
+                    SortExpression="evrak_no" >
+                <ItemStyle Width="70px" />
+                </asp:BoundField>
+                <asp:BoundField DataField="islem_tipi" HeaderText="İşlem Tipi" 
+                    SortExpression="islem_tipi" >
+                <ItemStyle Width="70px" />
+                </asp:BoundField>
+                <asp:BoundField DataField="giris_or_cikis" HeaderText="Giriş / Çıkış" 
+                    SortExpression="giris_or_cikis" >
+                <ItemStyle Width="50px" />
+                </asp:BoundField>
+                <asp:BoundField DataField="aciklama1" HeaderText="Açıklama" 
+                    SortExpression="aciklama1" >
+                <ItemStyle Width="150px" />
+                </asp:BoundField>
                 <asp:BoundField DataField="personel" HeaderText="personel" 
                     SortExpression="personel" />
+                <asp:BoundField DataField="tutar" HeaderText="Tutar" 
+                    SortExpression="tutar" >
+                <ItemStyle HorizontalAlign="Right" Width="80px" />
+                </asp:BoundField>
+                <asp:BoundField DataField="cari_id" HeaderText="cari_id" 
+                    SortExpression="cari_id" Visible="False" />
+                <asp:BoundField DataField="fis_id" HeaderText="fis_id" 
+                    SortExpression="fis_id" Visible="False" />
+                <asp:BoundField DataField="banka_id" HeaderText="banka_id" 
+                    SortExpression="banka_id" Visible="False" />
                 <asp:BoundField DataField="cari_hareket_id" HeaderText="cari_hareket_id" 
-                    SortExpression="cari_hareket_id" />
+                    SortExpression="cari_hareket_id" Visible="False" />
                 <asp:BoundField DataField="personel_cari_maas_hareket_id" 
                     HeaderText="personel_cari_maas_hareket_id" 
-                    SortExpression="personel_cari_maas_hareket_id" />
+                    SortExpression="personel_cari_maas_hareket_id" Visible="False" />
             </Columns>
         </asp:GridView>
     </asp:Panel>

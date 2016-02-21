@@ -4,6 +4,7 @@
     <style type="text/css">
         .style1
         {
+            width: 10%;
         }
         .style2
         {
@@ -71,9 +72,13 @@
                 <asp:GridView ID="gv_okunmamis_mesajlar" runat="server" AutoGenerateColumns="False" 
                     DataKeyNames="id" Width="100%" AllowPaging="True" BorderStyle="Solid" 
                     onpageindexchanging="gv_okunmamis_mesajlar_PageIndexChanging" PageSize="5" 
-                    onselectedindexchanged="gv_okunmamis_mesajlar_SelectedIndexChanged">
+                    onselectedindexchanged="gv_okunmamis_mesajlar_SelectedIndexChanged" 
+                    onrowcreated="gv_okunmamis_mesajlar_RowCreated" 
+                    onrowdatabound="gv_okunmamis_mesajlar_RowDataBound" 
+                    CssClass="GridViewClass">
                     <Columns>
-                        <asp:TemplateField HeaderText="id" InsertVisible="False" SortExpression="id">
+                        <asp:TemplateField HeaderText="id" InsertVisible="False" SortExpression="id" 
+                            Visible="False">
                             <EditItemTemplate>
                                 <asp:Label ID="Label1" runat="server" Text='<%# Eval("id") %>'></asp:Label>
                             </EditItemTemplate>
@@ -81,15 +86,17 @@
                                 <asp:Label ID="lbl_id" runat="server" Text='<%# Bind("id") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="tarih" SortExpression="tarih">
+                        <asp:TemplateField HeaderText="Tarih" SortExpression="tarih">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("tarih") %>'></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("tarih") %>'></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle Width="140px" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="gonderici_id" SortExpression="gonderici_id">
+                        <asp:TemplateField HeaderText="gonderici_id" SortExpression="gonderici_id" 
+                            Visible="False">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("gonderici_id") %>'></asp:TextBox>
                             </EditItemTemplate>
@@ -97,7 +104,7 @@
                                 <asp:Label ID="lbl_gonderici_id" runat="server" Text='<%# Bind("gonderici_id") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="gonderici_adi_soyadi" 
+                        <asp:TemplateField HeaderText="Gönderen" 
                             SortExpression="gonderici_adi_soyadi">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox3" runat="server" 
@@ -108,20 +115,19 @@
                                     Text='<%# Bind("gonderici_adi_soyadi") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="mesaj" SortExpression="mesaj" Visible="False">
+                        <asp:TemplateField HeaderText="Mesaj" SortExpression="mesaj" Visible="False">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("mesaj") %>'></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label5" runat="server" Text='<%# Bind("mesaj") %>'></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle Width="200px" />
                         </asp:TemplateField>
-                        <asp:TemplateField ShowHeader="False">
-                            <ItemTemplate>
-                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
-                                    CommandName="Select" Text="Select"></asp:LinkButton>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                        <asp:CommandField ButtonType="Image" SelectImageUrl="~/icons/res3232/sagok.png" 
+                            ShowSelectButton="True">
+                        <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="20px" />
+                        </asp:CommandField>
                     </Columns>
                 </asp:GridView>
             </td>
@@ -130,8 +136,8 @@
             <td class="style1">
                 &nbsp;</td>
             <td class="style2" align="right">
-                <asp:ImageButton ID="ibtn_post" runat="server" Height="21px" Width="48px" 
-                    onclick="ibtn_post_Click" />
+                <asp:ImageButton ID="ibtn_post" runat="server" 
+                    onclick="ibtn_post_Click" ImageUrl="~/Icons/res3232/save2.png" />
             </td>
             <td class="style3">
                 &nbsp;</td>
@@ -141,12 +147,15 @@
     </table>
     <asp:Panel ID="Panel1" runat="server">
     <p>
-        <asp:Label ID="lbl_baslik" runat="server"></asp:Label></p>
+        <asp:Label ID="lbl_baslik" runat="server" Visible="False"></asp:Label></p>
         <asp:GridView ID="gv_listele" runat="server" AutoGenerateColumns="False" 
             DataKeyNames="id" Width="100%" 
-            onselectedindexchanged="gv_listele_SelectedIndexChanged">
+            onselectedindexchanged="gv_listele_SelectedIndexChanged" 
+            onrowcreated="gv_listele_RowCreated" 
+            onrowdatabound="gv_listele_RowDataBound" CssClass="GridViewClass">
             <Columns>
-                <asp:TemplateField HeaderText="id" InsertVisible="False" SortExpression="id">
+                <asp:TemplateField HeaderText="id" InsertVisible="False" SortExpression="id" 
+                    Visible="False">
                     <EditItemTemplate>
                         <asp:Label ID="Label1" runat="server" Text='<%# Eval("id") %>'></asp:Label>
                     </EditItemTemplate>
@@ -154,7 +163,8 @@
                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("id") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="grubu_id" SortExpression="grubu_id">
+                <asp:TemplateField HeaderText="grubu_id" SortExpression="grubu_id" 
+                    Visible="False">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("grubu_id") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -162,15 +172,17 @@
                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("grubu_id") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="tarih" SortExpression="tarih">
+                <asp:TemplateField HeaderText="Tarih" SortExpression="tarih">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("tarih") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label3" runat="server" Text='<%# Bind("tarih") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle Width="120px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="gonderici_id" SortExpression="gonderici_id">
+                <asp:TemplateField HeaderText="gonderici_id" SortExpression="gonderici_id" 
+                    Visible="False">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("gonderici_id") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -178,7 +190,7 @@
                         <asp:Label ID="Label4" runat="server" Text='<%# Bind("gonderici_id") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="gonderici_adi_soyadi" 
+                <asp:TemplateField HeaderText="Gönderen Adı Soyadı" 
                     SortExpression="gonderici_adi_soyadi">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox4" runat="server" 
@@ -188,8 +200,10 @@
                         <asp:Label ID="Label5" runat="server" 
                             Text='<%# Bind("gonderici_adi_soyadi") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle Width="150px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="alici_id" SortExpression="alici_id">
+                <asp:TemplateField HeaderText="alici_id" SortExpression="alici_id" 
+                    Visible="False">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("alici_id") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -197,15 +211,17 @@
                         <asp:Label ID="Label6" runat="server" Text='<%# Bind("alici_id") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="mesaj" SortExpression="mesaj">
+                <asp:TemplateField HeaderText="Mesaj" SortExpression="mesaj">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("mesaj") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label7" runat="server" Text='<%# Bind("mesaj") %>'></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle Width="400px" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="okundu_mu" SortExpression="okundu_mu">
+                <asp:TemplateField HeaderText="okundu_mu" SortExpression="okundu_mu" 
+                    Visible="False">
                     <EditItemTemplate>
                         <asp:CheckBox ID="CheckBox1" runat="server" 
                             Checked='<%# Bind("okundu_mu") %>' />
