@@ -72,8 +72,7 @@
                     DataSourceID="SqlDataSource_firma" DataTextField="firma_adi" 
                     DataValueField="firma_id" Enabled="False">
                 </asp:DropDownList>
-                <asp:SqlDataSource ID="SqlDataSource_firma" runat="server" 
-                    SelectCommand="SELECT [firma_id], [firma_adi] FROM [firma_kayit]">
+                <asp:SqlDataSource ID="SqlDataSource_firma" runat="server">
                 </asp:SqlDataSource>
                 <asp:ImageButton ID="ibtn_kullanici_bul" runat="server" 
                     AlternateText="kullaniciBul" ImageUrl="~/icons/res3232/arama2.png" />

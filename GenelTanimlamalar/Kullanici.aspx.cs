@@ -18,6 +18,7 @@ public partial class GenelTanimlamar_Kullanici : System.Web.UI.Page
         
         SqlDataSource_departman.ConnectionString = WebConfigurationManager.ConnectionStrings[database_master].ConnectionString;
         SqlDataSource_firma.ConnectionString = WebConfigurationManager.ConnectionStrings[database_master].ConnectionString;
+        SqlDataSource_firma.SelectCommand = "SELECT [firma_id], [firma_adi] FROM [firma_kayit] WHERE firma_id=" + Session["firma_id"].ToString();
 
 
         if (Request.QueryString["KullaniciID"] != null)

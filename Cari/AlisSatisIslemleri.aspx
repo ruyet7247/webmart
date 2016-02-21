@@ -19,6 +19,7 @@
           var kdv_tutari = kdvsiz_tutar * kdv / 100;
           var tutar = kdv_tutari + kdvsiz_tutar;
 
+
           document.getElementById('<%=txt_kdvsiz_tutar.ClientID %>').value = kdvsiz_tutar;
           document.getElementById('<%=txt_stok_kdv_tutar.ClientID %>').value = kdv_tutari;
           document.getElementById('<%=txt_tutar.ClientID %>').value = tutar;

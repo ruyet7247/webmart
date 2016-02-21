@@ -498,6 +498,10 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
         int insert_sql = 0;
         try
         {
+            txt_satis_fiyati.Text = txt_satis_fiyati.Text.Replace(".", ",");
+            txt_stok_kdv_tutar.Text = txt_stok_kdv_tutar.Text.Replace(".", ",");
+            txt_tutar.Text = txt_tutar.Text.Replace(".", ",");
+
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@stok_id", SqlDbType.Int).Value = Convert.ToInt32(lbl_stok_id.Text);
             cmd.Parameters.Add("@cari_id", SqlDbType.Int).Value = Convert.ToInt32(lbl_cari_id.Text);
