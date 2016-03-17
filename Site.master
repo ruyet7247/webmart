@@ -173,8 +173,13 @@
                         <asp:MenuItem Text=" Randevu Modülü" Value="Randevu Modülü" 
                             NavigateUrl="~/Randevu/RandevuKarti.aspx" 
                             ImageUrl="~/Icons/res1616/randevu.png"></asp:MenuItem>
-                        <asp:MenuItem Text=" Mesaj" Value="Mesaj" NavigateUrl="~/Mesaj/Mesaj.aspx" 
-                            ImageUrl="~/Icons/res1616/mesaj.png"></asp:MenuItem>
+                        <asp:MenuItem Text=" Mesaj" Value="Mesaj">
+                            <asp:MenuItem ImageUrl="~/Icons/mesaj.png" NavigateUrl="~/Mesaj/Dashboard.aspx" 
+                                Text="DashBoard" Value="DashBoard"></asp:MenuItem>
+                            <asp:MenuItem ImageUrl="~/Icons/res1616/mesaj.png" 
+                                NavigateUrl="~/Mesaj/Mesaj.aspx" Text="Özel Mesaj" Value="Özel Mesaj">
+                            </asp:MenuItem>
+                        </asp:MenuItem>
                     </Items>
                 </asp:Menu>
             </div>
