@@ -147,6 +147,7 @@ public partial class Login : System.Web.UI.Page
                     Session["adi_soyadi"] = reader["adi_soyadi"].ToString();
                     Session["gsm"] = reader["connection_string_adi"].ToString();
                     Session["yetki"] = reader["yetki"].ToString();
+                    Session["Aralik"] = "0";
 
                     KullaniciYetkilendir(Convert.ToInt32(reader["yetki_grubu_id"].ToString()));
 

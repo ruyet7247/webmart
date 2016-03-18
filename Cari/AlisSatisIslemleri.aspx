@@ -5,7 +5,7 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
-  <script type="text/javascript">
+    <script type="text/javascript">
       function Changed(text1) {
 
           var miktar = document.getElementById('<%=txt_miktar.ClientID %>').value;
