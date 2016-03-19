@@ -21,6 +21,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
+    <asp:Label ID="lbl_mesaj" runat="server" Text=""></asp:Label>
     <table style="width:100%;">
         <tr>
             <td class="style1" align="right" valign="top">
@@ -54,17 +55,17 @@
     <asp:Panel ID="Panel1" runat="server">
     <p>
         <asp:Label ID="lbl_baslik" runat="server"></asp:Label></p>
-        <asp:Panel ID="Panel2" runat="server">
             
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 
                 <ContentTemplate>
                
   <asp:GridView ID="gv_mesaj_listele" runat="server" AutoGenerateColumns="False" 
-                     DataKeyNames="id" Width="100%" BackColor="#CCFFFF" 
+                     DataKeyNames="id" Width="100%" BackColor="#F7FFF8" 
                      onselectedindexchanged="gv_mesaj_listele_SelectedIndexChanged" 
                      onrowcreated="gv_mesaj_listele_RowCreated" 
-                     onrowdatabound="gv_mesaj_listele_RowDataBound" CssClass="GridViewClass">
+                     onrowdatabound="gv_mesaj_listele_RowDataBound" 
+                CssClass="GridViewClass">
                      <Columns>
                          <asp:TemplateField HeaderText="id" InsertVisible="False" SortExpression="id" 
                              Visible="False">
@@ -115,25 +116,22 @@
                          </asp:TemplateField>
                      </Columns>
                  </asp:GridView>
-             </ContentTemplate>
+                </ContentTemplate>
              <Triggers>
                  <asp:AsyncPostBackTrigger ControlID="ibtn_post" EventName="Click" />
              </Triggers>
                 
             </asp:UpdatePanel>
             
-        </asp:Panel>
 
 
+            
     <div id='bodyContent' class='bodyContent'>
-         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id ipsum odio. Integer non nisl nisl. Integer id adipiscing diam. Maecenas ipsum mauris, auctor hendrerit porttitor vitae, hendrerit eu orci. Aliquam erat volutpat. Morbi dignissim arcu id lorem semper viverra. Donec libero elit, semper et ullamcorper id, dapibus tempus neque. Nullam id dui a quam elementum sagittis non sit amet mi. Cras sed quam eget erat pretium porttitor. Curabitur tincidunt ultricies rutrum. Donec et arcu in risus condimentum laoreet. Curabitur ut diam urna, at venenatis magna. Phasellus tincidunt sapien quis felis ultrices ultricies. Suspendisse vitae nibh id diam imperdiet aliquet ut nec ante. Phasellus ac arcu quis nibh mollis mattis.
-    <br/>Nulla tristique vestibulum lacinia. Donec bibendum urn
     </div>
     <!-- <div id="loadButton" class="loadButton">Icerik EKLE</div> -->
 
 
-        <p><asp:Label ID="lbl_mesaj" runat="server" Text=""></asp:Label>
-        </p>
+        <p>&nbsp;</p>
         
     </asp:Panel>
 </asp:Content>

@@ -23,9 +23,9 @@ public partial class Mesaj_Dashboard : System.Web.UI.Page
         }
 
         // dashboard deger
-       
-      
 
+
+        Session["Aralik"] = "0";
         lbl_mesaj.Text = "";
         MesajlariGetir();
 
@@ -75,7 +75,7 @@ public partial class Mesaj_Dashboard : System.Web.UI.Page
 
     protected void MesajlariGetir()
     {
-        string hareketSQL = "SELECT * FROM dashboard ORDER BY id DESC,tarih DESC";
+        string hareketSQL = "SELECT TOP 25 * FROM dashboard ORDER BY id DESC,tarih DESC";
         ConnVt baglan = new ConnVt();
         SqlConnection connection = baglan.VeritabaninaBaglan(database_master);
         SqlCommand cmd = new SqlCommand(hareketSQL, connection);
