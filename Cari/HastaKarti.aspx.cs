@@ -384,4 +384,12 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
 
         }
     }
+
+
+
+    protected void btn_fotoyukle_kapat_Click(object sender, EventArgs e)
+    {
+        ibtn_fotoyukle_ModalPopupExtender.Hide();
+        img_foto.ImageUrl = "~/WebcamCaptures/a.png";
+    }
 }

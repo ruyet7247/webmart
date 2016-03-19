@@ -17,6 +17,10 @@
         {
             width: 11%;
         }
+        .style4
+        {
+            width: 25%;
+        }
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
@@ -77,14 +81,35 @@
     <table style="width:100%;">
         <tr>
             <td class="style1">
+                &nbsp;</td>
+            <td class="style2">
+                &nbsp;</td>
+           <td class="style1" align="left">
+                &nbsp;</td>
+            <td class="style4" align="left" valign="top">
+                &nbsp;</td>
+            <td align="left" class="style2" valign="top">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style1">
                 <asp:Label ID="lbl_cari_id" runat="server" Visible="False">0</asp:Label>
             </td>
             <td class="style2">
                 &nbsp;</td>
-           <td class="style1">
+            <td align="left" class="style1">
                 &nbsp;</td>
-            <td class="style2">
+            <td align="left" class="style4" valign="top">
                 &nbsp;</td>
+            <td align="left" class="style2" valign="top">
+                Foto Yükle<asp:ImageButton ID="ibtn_fotoyukle" runat="server" 
+                    ImageUrl="~/Icons/res1616/sagok.png" />
+                <asp:ModalPopupExtender ID="ibtn_fotoyukle_ModalPopupExtender" runat="server" 
+                    BackgroundCssClass="popupPanel" 
+                    DynamicServicePath="" Enabled="True" PopupControlID="pnl_fotoyukle" 
+                    TargetControlID="ibtn_fotoyukle">
+                </asp:ModalPopupExtender>
+            </td>
         </tr>
         <tr>
             <td class="style1">
@@ -101,9 +126,21 @@
             </td>
            <td class="style1">
                 Mail Adres</td>
-            <td class="style2">
+            <td class="style4">
                 <asp:TextBox ID="txt_mail" runat="server"></asp:TextBox>
             </td>
+            <td align="left" class="style2" rowspan="5" valign="top">
+              <asp:Panel ID="Panel1" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                            <asp:Image ID="img_foto" runat="server" Height="120px" Width="100px" />
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="btn_fotoyukle_kapat" EventName="Click" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+                </asp:Panel>
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
@@ -113,7 +150,7 @@
             </td>
             <td class="style1">
                 Kimlik Seri No</td>
-            <td class="style2">
+            <td class="style4">
                 <asp:TextBox ID="txt_kimlik_seri_no" runat="server"></asp:TextBox>
             </td>
         </tr>
@@ -128,7 +165,7 @@
             </td>
             <td class="style1">
                 Baba Adı</td>
-            <td class="style2">
+            <td class="style4">
                 <asp:TextBox ID="txt_baba_adi" runat="server"></asp:TextBox>
             </td>
         </tr>
@@ -143,7 +180,7 @@
             </td>
             <td class="style1">
                 Anne Adı</td>
-            <td class="style2">
+            <td class="style4">
                 <asp:TextBox ID="txt_anne_adi" runat="server"></asp:TextBox>
             </td>
         </tr>
@@ -155,7 +192,7 @@
             </td>
             <td class="style1">
                 Adres1.Satır</td>
-            <td class="style2">
+            <td class="style4">
                 <asp:TextBox ID="txt_adres1" runat="server"></asp:TextBox>
             </td>
         </tr>
@@ -167,8 +204,11 @@
             </td>
             <td class="style1">
                 Adres2.Satır</td>
-            <td class="style2">
+            <td class="style4">
                 <asp:TextBox ID="txt_adres2" runat="server"></asp:TextBox>
+            </td>
+            <td class="style2">
+              
             </td>
         </tr>
         <tr>
@@ -179,9 +219,11 @@
             </td>
             <td class="style1">
                 Posta Kodu</td>
-            <td class="style2">
+            <td class="style4">
                 <asp:TextBox ID="txt_posta_kodu" runat="server"></asp:TextBox>
             </td>
+            <td class="style2">
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
@@ -194,9 +236,11 @@
             </td>
             <td class="style1">
                 İlçe</td>
-            <td class="style2">
+            <td class="style4">
                 <asp:TextBox ID="txt_ilce" runat="server"></asp:TextBox>
             </td>
+            <td class="style2">
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
@@ -206,9 +250,11 @@
             </td>
             <td class="style1">
                 Şehir</td>
-            <td class="style2">
+            <td class="style4">
                 <asp:TextBox ID="txt_sehir" runat="server"></asp:TextBox>
             </td>
+            <td class="style2">
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
@@ -218,9 +264,11 @@
             </td>
             <td class="style1">
                 Ülke</td>
-            <td class="style2">
+            <td class="style4">
                 <asp:TextBox ID="txt_ulke" runat="server"></asp:TextBox>
             </td>
+            <td class="style2">
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
@@ -230,10 +278,12 @@
             </td>
             <td class="style1">
                 Borç Bakiye</td>
-            <td class="style2">
+            <td class="style4">
                 <asp:TextBox ID="txt_borc_bakiye" runat="server" CssClass="sagaDayaliFormat" 
                     ReadOnly="True"></asp:TextBox>
             </td>
+            <td class="style2">
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
@@ -243,10 +293,12 @@
             </td>
             <td class="style1">
                 Alacak Bakiye</td>
-            <td class="style2">
+            <td class="style4">
                 <asp:TextBox ID="txt_alacak_bakiye" runat="server" CssClass="sagaDayaliFormat" 
                     ReadOnly="True"></asp:TextBox>
             </td>
+            <td class="style2">
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
@@ -256,9 +308,11 @@
             </td>
             <td class="style1">
                 Bakiye</td>
-            <td class="style2">
+            <td class="style4">
                 <asp:TextBox ID="txt_bakiye" runat="server" ReadOnly="True" CssClass="sagaDayaliFormat" ></asp:TextBox>
             </td>
+            <td class="style2">
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="style1">
@@ -266,6 +320,8 @@
             <td class="style2">
                 &nbsp;</td>
             <td class="style1">
+                &nbsp;</td>
+            <td class="style4">
                 &nbsp;</td>
             <td class="style2">
                 &nbsp;</td>
@@ -452,6 +508,27 @@
        
 
     <!-- ARAMA PANELİ son-->
+    <asp:Panel ID="pnl_fotoyukle" runat="server" BackColor="#B6B7BC" Width="60%" 
+        Height="500px" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
+      <table width="100%"> 
+            <tr>
+           <td width="20%">
+                &nbsp;</td>
+            <td width="20%">
+                &nbsp;</td>
+            <td width="20%">
+                &nbsp;</td>
+            <td width="20%">
+                &nbsp;</td>
+            <td width="20%" align="right" valign="middle">
+                <asp:Button ID="btn_fotoyukle_kapat" runat="server" Height="20px"
+                 Text="X" Width="20px" onclick="btn_fotoyukle_kapat_Click" />
+                    </td>
+        </tr> 
+       </table>     
+          <iframe style=" width: 99%; height: 90%;" id="Iframe1"  src="FotoYukle.aspx" runat="server"></iframe>  
+   
+    </asp:Panel>
 
 </asp:Content>
 
