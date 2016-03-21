@@ -177,9 +177,13 @@
                                 NavigateUrl="~/Personel/PersonelHareket.aspx" 
                                 ImageUrl="~/Icons/res1616/personelhareket.png"></asp:MenuItem>
                             <asp:MenuItem Text=" Raporlar &gt;" Value="Raporlar &gt;" 
-                                ImageUrl="~/Icons/res1616/personelraporlar.png" Enabled="False">
-                                <asp:MenuItem Text=" Personel Listesi" Value="Personel Listesi"></asp:MenuItem>
-                                <asp:MenuItem Text=" Personel Bordro Al" Value="Personel Bordro Al">
+                                ImageUrl="~/Icons/res1616/personelraporlar.png">
+                                <asp:MenuItem Text=" Personel Listesi" Value="Personel Listesi" 
+                                    ImageUrl="~/Icons/res1616/carikarti.png" 
+                                    NavigateUrl="~/Personel/PersonelKartiRaporla.aspx"></asp:MenuItem>
+                                <asp:MenuItem Text=" Personel Hareket-Bordro" Value="Personel Bordro Al" 
+                                    ImageUrl="~/Icons/res1616/carialissatis.png" 
+                                    NavigateUrl="~/Personel/PersonelHareketRaporla.aspx">
                                 </asp:MenuItem>
                             </asp:MenuItem>
                         </asp:MenuItem>
@@ -206,8 +210,10 @@
                         <asp:MenuItem Text=" Randevu Modülü" Value="Randevu Modülü" 
                             NavigateUrl="~/Randevu/RandevuKarti.aspx" 
                             ImageUrl="~/Icons/res1616/randevu.png"></asp:MenuItem>
-                        <asp:MenuItem Text=" Mesaj" Value="Mesaj" ImageUrl="~/Icons/res1616/mesaj.png">
-                            <asp:MenuItem ImageUrl="~/Icons/res1616/mesaj.png" NavigateUrl="~/Mesaj/Dashboard.aspx" Text=" DashBoard" Value="DashBoard"></asp:MenuItem>
+                        <asp:MenuItem Text=" Mesaj" Value="Mesaj" 
+                            ImageUrl="~/Icons/res1616/gkullanici.png">
+                            <asp:MenuItem ImageUrl="~/Icons/res1616/raporlar.png" 
+                                NavigateUrl="~/Mesaj/Dashboard.aspx" Text=" DashBoard" Value="DashBoard"></asp:MenuItem>
                             <asp:MenuItem ImageUrl="~/Icons/res1616/mesaj.png" NavigateUrl="~/Mesaj/Mesaj.aspx" Text=" Özel Mesaj" Value="Özel Mesaj"></asp:MenuItem>
                         </asp:MenuItem>
                     </Items>

@@ -52,13 +52,11 @@
         <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td align="center">
-                        <u>Live Camera</u>
-                    </td>
+                        Kamera</td>
                     <td>
                     </td>
                     <td align="center">
-                        <u>Captured Picture</u>
-                    </td>
+                        Seçilen Görüntü</td>
                 </tr>
                 <tr>
                     <td>
@@ -75,7 +73,8 @@
                 </tr>
             </table>
             <br />
-            <asp:Button ID="btnCapture" Text="Capture" runat="server" OnClientClick="return Capture();" />
+            <asp:Button ID="btnCapture" Text="Görüntü Seç" runat="server" 
+            OnClientClick="return Capture();" />
             <br />
             <span id="camStatus"></span>
     </form>

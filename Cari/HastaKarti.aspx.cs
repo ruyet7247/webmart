@@ -8,6 +8,7 @@ using System.Data; // veritabanı
 using System.Web.Configuration;
 using System.Data.SqlClient;
 using System.Threading;
+using System.IO;
 
 public partial class Cari_HastaKarti : System.Web.UI.Page
 {
@@ -20,6 +21,7 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
             try
             {
                 lbl_cari_id.Text = Request.QueryString["HastaID"];
+                Session["HastaID"]=lbl_cari_id.Text;
             }
             catch
             {
@@ -268,10 +270,13 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
                     txt_alacak_bakiye.Text = reader["alacak_bakiye"].ToString();
                     txt_bakiye.Text = reader["bakiye"].ToString();
 
+                    resimGetir(lbl_cari_id.Text, dd_cinsiyet.SelectedValue);
+                    
 
 
 
                 }
+
             }
 
 
@@ -327,7 +332,31 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
         }
     }
 
+    protected void resimGetir(string imageName,string cinsiyet)
+    {
+        string resumeFile = Server.MapPath("~/WebcamCaptures/"+imageName+".png");
+      
+        if (File.Exists(resumeFile))
+        {
+            img_foto.ImageUrl = string.Format("~/WebcamCaptures/{0}.png", imageName);
+        }
+        else
+        {
+            if (cinsiyet == "BAY")
+            {
+                img_foto.ImageUrl = string.Format("~/WebcamCaptures/bay.png");
+            }
+            if (cinsiyet == "BAYAN")
+            {
+                img_foto.ImageUrl = string.Format("~/WebcamCaptures/bayan.png");
+            }
+        }
 
+
+        
+
+    }
+    
     protected void gv_arama_listele_RowCreated(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
@@ -352,6 +381,7 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
             }
         }
     }
+  
     protected void gv_arama_listele_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
@@ -385,11 +415,14 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
         }
     }
 
-
-
     protected void btn_fotoyukle_kapat_Click(object sender, EventArgs e)
     {
         ibtn_fotoyukle_ModalPopupExtender.Hide();
-        img_foto.ImageUrl = "~/WebcamCaptures/a.png";
+        string imageName = HttpContext.Current.Session["HastaID"].ToString();
+        HttpContext.Current.Session["HastaID"] = null;
+        img_foto.ImageUrl = string.Format("~/WebcamCaptures/{0}.png", imageName);
     }
+
+
+
 }

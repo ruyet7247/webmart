@@ -11,6 +11,24 @@ public partial class Cari_FotoYukle : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        string hasta_resim_adi = "";
+        if (Session["HastaID"] != null)
+        {
+            try
+            {
+                hasta_resim_adi = Session["HastaID"].ToString();
+
+            }
+            catch
+            {
+                // deal with it
+            }
+        }
+        else
+        {
+            Session["HastaID"] = "0";
+        }
+
         if (!this.IsPostBack)
         {
             if (Request.InputStream.Length > 0)
@@ -18,13 +36,16 @@ public partial class Cari_FotoYukle : System.Web.UI.Page
                 using (StreamReader reader = new StreamReader(Request.InputStream))
                 {
                     string hexString = Server.UrlEncode(reader.ReadToEnd());
-                    string imageName = DateTime.Now.ToString("dd-MM-yy hh-mm-ss");
+                    string imageName = hasta_resim_adi;  //string imageName = DateTime.Now.ToString("dd-MM-yy hh-mm-ss");
                     string imagePath = string.Format("~/WebcamCaptures/{0}.png", imageName);
                     File.WriteAllBytes(Server.MapPath(imagePath), ConvertHexToBytes(hexString));
                     Session["CapturedImage"] = ResolveUrl(imagePath);
                 }
             }
         }
+
+
+
     }
 
     private static byte[] ConvertHexToBytes(string hex)
@@ -44,6 +65,10 @@ public partial class Cari_FotoYukle : System.Web.UI.Page
         HttpContext.Current.Session["CapturedImage"] = null;
         return url;
     }
+
+
+   
+
 
 
 }

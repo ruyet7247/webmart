@@ -526,7 +526,7 @@
                     </td>
         </tr> 
        </table>     
-          <iframe style=" width: 99%; height: 90%;" id="Iframe1"  src="FotoYukle.aspx" runat="server"></iframe>  
+          <iframe style=" width: 99%; height: 90%;" id="Iframe1"  src="FotoYukle.aspx?HastaID=<%=lbl_cari_id.Text %>" runat="server"></iframe>  
    
     </asp:Panel>
 
