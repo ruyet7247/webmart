@@ -6,6 +6,39 @@
     <title>WebMart Application</title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <!-- <script src="js/jquery-2.2.0.min.js"></script> -->
+    <!-- iki script dashboard içindir.-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js?ver=1.6.1"></script>
+     <script src="js/jquery-2.2.0.min.js"></script> 
+     <script type="text/javascript">
+         $(document).ready(function () {
+             $.ajaxSetup({ cache: false }); // disabling cache, omit if u dont need
+             var defaultBtnText = "Daha fazla Icerik Yukle";
+             var buttonLoadingText = "<img src='images/loader.gif' alt='' /> Yukleniyor..";
+             $(document).scroll(function () {
+                 if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+
+                     loadMore();
+                 }
+             });
+
+             $("#loadButton").click(function () {
+                 loadMore();
+             });
+
+             function loadMore() {
+                 $("#loadButton").html(buttonLoadingText);
+                 $.ajax({
+                     url: 'AjaxProcessor.aspx',
+                     method: 'get',
+                     success: function (data) {
+                         $("#bodyContent").append(data);
+                         $("#loadButton").html(defaultBtnText);
+                     }
+                 });
+             }
+
+         });
+     </script>
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
@@ -60,17 +93,22 @@
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Stok Modülü" Value="Stok Modülü" 
                             ImageUrl="~/Icons/res1616/gstok.png">
+<asp:MenuItem Text=" Stok Listesi" Value="Stok Listesi" ImageUrl="~/Icons/res1616/stokraporlar.png" 
+                                NavigateUrl="~/Yonetim/StokListesi.aspx"></asp:MenuItem>
                             <asp:MenuItem Text=" Stok Transfer" Value="Stok Transfer" 
                                 ImageUrl="~/Icons/res1616/stokhareket.png"></asp:MenuItem>
-<asp:MenuItem Text=" Stok Listesi" Value="Stok Listesi" ImageUrl="~/Icons/res1616/stokraporlar.png"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Kasa Modülü" Value="Kasa Modülü" 
                             ImageUrl="~/Icons/res1616/gkasa.png">
                             <asp:MenuItem Text=" Kasa Listesi" Value="Kasa Listesi" 
                                 ImageUrl="~/Icons/res1616/gpara.png"></asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem Text=" Mesaj" Value="Mesaj" NavigateUrl="~/Yonetim/Mesaj.aspx" 
-                            ImageUrl="~/Icons/res1616/mesaj.png"></asp:MenuItem>
+                        <asp:MenuItem Text=" Mesaj" Value="Mesaj" 
+                            ImageUrl="~/Icons/res1616/gkullanici.png">
+                            <asp:MenuItem ImageUrl="~/Icons/res1616/raporlar.png" 
+                                NavigateUrl="~/Yonetim/Dashboard.aspx" Text=" DashBoard" Value="DashBoard"></asp:MenuItem>
+                            <asp:MenuItem ImageUrl="~/Icons/res1616/mesaj.png" NavigateUrl="~/Yonetim/Mesaj.aspx" Text=" Özel Mesaj" Value="Özel Mesaj"></asp:MenuItem>
+                        </asp:MenuItem>
                     </Items>
                 </asp:Menu>
             </div>

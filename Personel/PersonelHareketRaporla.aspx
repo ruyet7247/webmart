@@ -190,7 +190,8 @@
             AutoGenerateColumns="False" DataKeyNames="maas_hareket_id" 
             AllowPaging="True" onpageindexchanging="gv_listele_PageIndexChanging" 
             CssClass="GridViewClass" onrowcreated="gv_listele_RowCreated" 
-            onrowdatabound="gv_listele_RowDataBound" PageSize="25" BorderStyle="Solid">
+            onrowdatabound="gv_listele_RowDataBound" PageSize="25" BorderStyle="Solid" 
+            ShowFooter="True">
             <Columns>
                 <asp:TemplateField HeaderText="maas_hareket_id" InsertVisible="False" 
                     SortExpression="maas_hareket_id" Visible="False">
@@ -320,8 +321,8 @@
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
-             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" 
-                BorderStyle="Solid" />
+             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" HorizontalAlign="Right" VerticalAlign="Bottom" 
+                BorderStyle="Solid" CssClass="FooterStyle" />
             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
             <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
             <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />

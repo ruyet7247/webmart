@@ -32,7 +32,7 @@ public partial class Cari_CariKarti : System.Web.UI.Page
 
         if (!IsPostBack)  // tıklama ile sayfa gelmemiş ise
         {
-         
+  
             if (lbl_cari_id.Text != "0")
             {
                 CariBilgileriniGetir(Convert.ToInt32(lbl_cari_id.Text));
@@ -329,7 +329,6 @@ public partial class Cari_CariKarti : System.Web.UI.Page
         }
     }
 
-
     protected void gv_arama_listele_RowCreated(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
@@ -354,6 +353,7 @@ public partial class Cari_CariKarti : System.Web.UI.Page
             }
         }
     }
+    
     protected void gv_arama_listele_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
@@ -386,4 +386,7 @@ public partial class Cari_CariKarti : System.Web.UI.Page
 
         }
     }
+  
+
+
 }

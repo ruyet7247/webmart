@@ -87,8 +87,8 @@
             <td width="20%">
                 &nbsp;</td>
             <td width="20%">
-                <asp:ImageButton ID="ibtn_kaydet" runat="server" Height="30px" 
-                    onclick="ibtn_guncelle_Click" Width="120px" />
+                <asp:ImageButton ID="ibtn_kaydet" runat="server" 
+                    onclick="ibtn_guncelle_Click" ImageUrl="~/Icons/create.png" />
             </td>
             <td width="20%">
                 &nbsp;</td>

@@ -17,6 +17,8 @@
             width: 11%;
         }
         </style>
+
+      
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
@@ -68,7 +70,7 @@
             <td class="style1">
                 Unvan</td>
             <td class="style2">
-                <asp:TextBox ID="txt_unvan" runat="server" Width="70%"></asp:TextBox>
+                <asp:TextBox ID="txt_unvan" onkeydown="return handleEnter('ibtn_cari_bul', event)"  runat="server" Width="70%"></asp:TextBox>
                 <asp:ImageButton ID="ibtn_cari_bul" runat="server" 
                     AlternateText="CariBul" ImageUrl="~/Icons/res3232/arama2.png" />
                 <asp:ModalPopupExtender ID="ibtn_cari_bul_ModalPopupExtender" runat="server" 
@@ -325,7 +327,7 @@
                     <td class="style3">
                         Unvan Adı</td>
                     <td width="20%">
-                        <asp:TextBox ID="txt_arama" runat="server" Width="150px"></asp:TextBox>
+                        <asp:TextBox ID="txt_arama" onkeydown="return handleEnter('ibtn_arama', event)"  runat="server" Width="150px"></asp:TextBox>
                     </td>
                     <td width="20%">
                         <asp:ImageButton ID="ibtn_arama" runat="server" onclick="ibtn_arama_Click" 
