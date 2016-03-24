@@ -101,7 +101,8 @@
                         <asp:MenuItem Text=" Kasa Modülü" Value="Kasa Modülü" 
                             ImageUrl="~/Icons/res1616/gkasa.png">
                             <asp:MenuItem Text=" Kasa Listesi" Value="Kasa Listesi" 
-                                ImageUrl="~/Icons/res1616/gpara.png"></asp:MenuItem>
+                                ImageUrl="~/Icons/res1616/gpara.png" 
+                                NavigateUrl="~/Yonetim/KasaListesi.aspx"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Mesaj" Value="Mesaj" 
                             ImageUrl="~/Icons/res1616/gkullanici.png">
