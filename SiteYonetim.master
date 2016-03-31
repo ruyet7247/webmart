@@ -95,8 +95,6 @@
                             ImageUrl="~/Icons/res1616/gstok.png">
 <asp:MenuItem Text=" Stok Listesi" Value="Stok Listesi" ImageUrl="~/Icons/res1616/stokraporlar.png" 
                                 NavigateUrl="~/Yonetim/StokListesi.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text=" Stok Transfer" Value="Stok Transfer" 
-                                ImageUrl="~/Icons/res1616/stokhareket.png"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text=" Kasa Modülü" Value="Kasa Modülü" 
                             ImageUrl="~/Icons/res1616/gkasa.png">

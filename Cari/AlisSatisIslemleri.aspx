@@ -23,10 +23,32 @@
           document.getElementById('<%=txt_kdvsiz_tutar.ClientID %>').value = kdvsiz_tutar;
           document.getElementById('<%=txt_stok_kdv_tutar.ClientID %>').value = kdv_tutari;
           document.getElementById('<%=txt_tutar.ClientID %>').value = tutar;
-          
+
 
       }
         </script>
+
+    <SCRIPT type=text/javascript>
+            function doClick(buttonName, e) {
+                //the purpose of this function is to allow the enter key to 
+                //point to the correct button to click.
+                var key;
+
+                if (window.event)
+                    key = window.event.keyCode;     //IE
+                else
+                    key = e.which;     //firefox
+
+                if (key == 13) {
+                    //Get the button the user wants to have clicked
+                    var btn = document.getElementById(buttonName);
+                    if (btn != null) { //If we find the button click it
+                        btn.click();
+                        event.keyCode = 0
+                    }
+                }
+            }
+    </SCRIPT>
     <style type="text/css">
         
         .style3
@@ -248,19 +270,21 @@
             </tr>
         </table>
     </asp:Panel>
-    <asp:Panel ID="pnl_butonlar" runat="server" BorderStyle="Solid">
+    <asp:Panel ID="pnl_butonlar" runat="server" BorderStyle="Solid"  DefaultButton ="ibtn_barkod_arama" >
         <table style="width:100%;">
             <tr>
                 <td rowspan="2">
                     <asp:Label ID="lbl_stok_id" runat="server" Text="0" Visible="False"></asp:Label>
                     <asp:ImageButton ID="ibtn_stok_arama_ac" runat="server" Height="24px" 
-                        ImageUrl="~/Icons/res3232/arama2.png" Width="24px" />
+                        ImageUrl="~/Icons/res3232/arama2.png" Width="24px"/>
                     <asp:ModalPopupExtender ID="ibtn_stok_arama_ac_ModalPopupExtender" 
                         runat="server" BackgroundCssClass="popupPanel" 
                         CancelControlID="btn_stok_arama_kapat" DynamicServicePath="" Enabled="True" 
                         PopupControlID="pnl_stok_arama" TargetControlID="ibtn_stok_arama_ac">
                     </asp:ModalPopupExtender>
                 </td>
+                <td>
+                    Stok Barkod</td>
                 <td>
                     Stok Kodu</td>
                 <td>
@@ -288,6 +312,11 @@
                 </td>
             </tr>
             <tr>
+                <td>
+                    <asp:TextBox ID="txt_stok_barkod" runat="server"></asp:TextBox>
+                    <asp:ImageButton ID="ibtn_barkod_arama" runat="server" 
+                        onclick="ibtn_barkod_arama_Click" />
+                </td>
                 <td>
                     <asp:TextBox ID="txt_stok_kodu" runat="server"></asp:TextBox>
                 </td>
@@ -500,7 +529,7 @@
         
     </asp:Panel>
         <!-- ARAMA PANELİ-->
-    <asp:Panel ID="pnl_cari_arama" runat="server" BackColor="#B6B7BC" Width="60%" Height="500px" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
+    <asp:Panel ID="pnl_cari_arama" runat="server" BackColor="#B6B7BC" Width="60%" Height="500px" DefaultButton ="ibtn_arama" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
      <table width="100%"> 
             <tr>
             <td class="style3">
@@ -635,7 +664,7 @@
 
     <!-- cari/HASTA ARAMA PANELİ son-->
     <!-- STOK ARAMA PANELİ BAŞ-->
-    <asp:Panel ID="pnl_stok_arama" runat="server" runat="server" 
+    <asp:Panel ID="pnl_stok_arama" runat="server" runat="server" DefaultButton="ibtn_stok_arama" 
         BackColor="#B6B7BC" Width="60%" Height="500px" >
      <table width="100%"> 
             <tr>

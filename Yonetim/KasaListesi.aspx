@@ -82,11 +82,11 @@
                    
                     </td>
             <td class="style4">
-                &nbsp;</td>
-            <td class="style1">
                 <asp:ImageButton ID="ibtn_raporla" runat="server" onclick="ibtn_raporla_Click" 
                     CssClass="GridViewClass" ImageUrl="~/Icons/res3232/arama2.png" />
             </td>
+            <td class="style1">
+                &nbsp;</td>
             <td class="style1">
                 <asp:SqlDataSource ID="SqlDataSource_firmalar" runat="server" 
                     ConnectionString="<%$ ConnectionStrings:WebMart_Master %>" 
@@ -98,45 +98,17 @@
         </tr>
           <tr>
             <td class="style1">
-                Toplam Giriş</td>
-            <td class="style1">
-                    <asp:TextBox ID="txt_giren" runat="server" CssClass="sagaDayaliFormat" 
-                        ReadOnly="True" Width="120px"></asp:TextBox>
+                <asp:TextBox ID="txt_giren" runat="server" CssClass="sagaDayaliFormat" 
+                        ReadOnly="True" Width="120px" Visible="False"></asp:TextBox>
                     </td>
             <td class="style1">
-                &nbsp;</td>
-            <td class="style1">
-                &nbsp;</td>
-            <td class="style1">
-                &nbsp;</td>
-            <td class="style1">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Toplam Çıkış</td>
-            <td class="style1">
-                    <asp:TextBox ID="txt_cikan" runat="server" CssClass="sagaDayaliFormat" 
-                        ReadOnly="True" Width="120px"></asp:TextBox>
+                <asp:TextBox ID="txt_cikan" runat="server" CssClass="sagaDayaliFormat" 
+                        ReadOnly="True" Width="120px" Visible="False"></asp:TextBox>
                     </td>
             <td class="style1">
-                &nbsp;</td>
-            <td class="style1">
-                &nbsp;</td>
-            <td class="style1">
-                &nbsp;</td>
-            <td class="style1">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="style1">
-                Bakiye</td>
-            <td class="style1">
-                    <asp:TextBox ID="txt_bakiye" runat="server" CssClass="sagaDayaliFormat" 
-                        ReadOnly="True" Width="120px"></asp:TextBox>
+                <asp:TextBox ID="txt_bakiye" runat="server" CssClass="sagaDayaliFormat" 
+                        ReadOnly="True" Width="120px" Visible="False"></asp:TextBox>
                     </td>
-            <td class="style1">
-                &nbsp;</td>
             <td class="style1">
                 &nbsp;</td>
             <td class="style1">
@@ -151,7 +123,7 @@
             </asp:Table>
     </asp:Panel>
     <p>
-        <asp:Label ID="lbl_mesaj" runat="server"></asp:Label>
+        <asp:Label ID="lbl_mesaj" runat="server" Visible="False"></asp:Label>
     </p>
 </asp:Content>
 

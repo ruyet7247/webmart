@@ -48,7 +48,7 @@ public partial class Yonetim_KasaListesi : System.Web.UI.Page
             {
                 while (reader.Read())
                 {
-                    KasaHareketToplamlariGetir(dd_firma.SelectedItem.Text,dd_firma.SelectedValue,reader["kasa_id"].ToString());
+                    KasaHareketToplamlariGetir(reader["kasa"].ToString(), dd_firma.SelectedValue, reader["kasa_id"].ToString());
                     
                 }
             }
@@ -77,10 +77,10 @@ public partial class Yonetim_KasaListesi : System.Web.UI.Page
 
         // Create new row and add it to the table.
             TableRow tRow = new TableRow();
-            Table1.Rows.Add(tRow); TableCell tCell = new TableCell(); tCell.Text = "Kasa Adı "; tCell.Width = 200; tRow.Cells.Add(tCell);
-            Table1.Rows.Add(tRow); tCell = new TableCell(); tCell.Text = "Giriş Bakiye "; tCell.Width = 200; tRow.Cells.Add(tCell);
-            Table1.Rows.Add(tRow); tCell = new TableCell(); tCell.Text = "Çıkış Bakiye "; tCell.Width = 200; tRow.Cells.Add(tCell);
-            Table1.Rows.Add(tRow); tCell = new TableCell(); tCell.Text = "Bakiye "; tCell.Width = 200; tRow.Cells.Add(tCell);
+            Table1.Rows.Add(tRow); TableCell tCell = new TableCell(); tCell.Text = "Kasa Adı "; tCell.Width = 150; tRow.Cells.Add(tCell); tCell.HorizontalAlign = HorizontalAlign.Center; tCell.BackColor = System.Drawing.Color.LightYellow;
+            Table1.Rows.Add(tRow); tCell = new TableCell(); tCell.Text = "Giriş Bakiye "; tCell.Width = 150; tRow.Cells.Add(tCell); tCell.HorizontalAlign = HorizontalAlign.Center; tCell.BackColor = System.Drawing.Color.LightYellow;
+            Table1.Rows.Add(tRow); tCell = new TableCell(); tCell.Text = "Çıkış Bakiye "; tCell.Width = 150; tRow.Cells.Add(tCell); tCell.HorizontalAlign = HorizontalAlign.Center; tCell.BackColor = System.Drawing.Color.LightYellow;
+            Table1.Rows.Add(tRow); tCell = new TableCell(); tCell.Text = "Bakiye "; tCell.Width = 150; tRow.Cells.Add(tCell); tCell.HorizontalAlign = HorizontalAlign.Center; tCell.BackColor = System.Drawing.Color.LightYellow;
 
         /*
         rowCnt = 1;
@@ -100,7 +100,6 @@ public partial class Yonetim_KasaListesi : System.Web.UI.Page
         }
         */
     }
-
    
     protected void KasaHareketToplamlariGetir(string kasa_adi,string ConnStr,string kasa_id)
     {
@@ -112,9 +111,8 @@ public partial class Yonetim_KasaListesi : System.Web.UI.Page
         double bakiye = 0;
         txt_giren.Text = "0"; txt_cikan.Text = "0";
 
-        TableRow tRow = new TableRow();
-        TableCell tCell;
-        Table1.Rows.Add(tRow); tCell = new TableCell(); tCell.Text = kasa_adi + " "; tCell.Width = 200; tRow.Cells.Add(tCell);
+       
+        
 
         string queryStringGiren = "SELECT sum(tutar) AS giren FROM kasa_hareket WHERE giris_or_cikis='giris' and kasa_id='" + kasa_id + "' and (kayit_tarihi BETWEEN '" + ilktarih + "' and '" + sontarih + "')";
         ConnVt baglan = new ConnVt(); SqlConnection connection = baglan.VeritabaninaBaglan(ConnStr); SqlCommand cmd = new SqlCommand(queryStringGiren, connection);
@@ -127,7 +125,7 @@ public partial class Yonetim_KasaListesi : System.Web.UI.Page
                 {
                         txt_giren.Text = reader["giren"].ToString();
                         giren_toplam = Convert.ToDouble(reader["giren"].ToString());
-                        Table1.Rows.Add(tRow); tCell = new TableCell(); tCell.Text = String.Format("{0:#,#.00}", giren_toplam) + " "; tCell.Width = 200; tRow.Cells.Add(tCell);
+                        
        
                 }
               
@@ -155,7 +153,7 @@ public partial class Yonetim_KasaListesi : System.Web.UI.Page
                 {
                         txt_cikan.Text = reader2["cikan"].ToString();
                         cikan_toplam = Convert.ToDouble(reader2["cikan"].ToString());
-                        Table1.Rows.Add(tRow); tCell = new TableCell(); tCell.Text = String.Format("{0:#,#.00}", cikan_toplam) + " "; tCell.Width = 200; tRow.Cells.Add(tCell);
+                        
                 }
 
             }
@@ -176,7 +174,7 @@ public partial class Yonetim_KasaListesi : System.Web.UI.Page
         {
             bakiye = giren_toplam - cikan_toplam;
             txt_bakiye.Text = String.Format("{0:#,#.00}", bakiye);
-            Table1.Rows.Add(tRow);  tCell = new TableCell(); tCell.Text = String.Format("{0:#,#.00}", bakiye)+" "; tCell.Width = 200; tRow.Cells.Add(tCell);
+            
             
             
         }
@@ -186,10 +184,14 @@ public partial class Yonetim_KasaListesi : System.Web.UI.Page
             lbl_mesaj.Text += err.Message;
         }
 
-
+        TableRow tRow = new TableRow();
+        TableCell tCell;
+        Table1.Rows.Add(tRow); tCell = new TableCell(); tCell.Text = kasa_adi + " "; tCell.Width = 200; tRow.Cells.Add(tCell); 
+        Table1.Rows.Add(tRow); tCell = new TableCell(); tCell.Text = String.Format("{0:#,#.00}", giren_toplam) + " "; tCell.Width = 200; tRow.Cells.Add(tCell); tCell.HorizontalAlign = HorizontalAlign.Right;
+        Table1.Rows.Add(tRow); tCell = new TableCell(); tCell.Text = String.Format("{0:#,#.00}", cikan_toplam) + " "; tCell.Width = 200; tRow.Cells.Add(tCell); tCell.HorizontalAlign = HorizontalAlign.Right;
+        Table1.Rows.Add(tRow); tCell = new TableCell(); tCell.Text = String.Format("{0:#,#.00}", bakiye) + " "; tCell.Width = 200; tRow.Cells.Add(tCell); tCell.HorizontalAlign = HorizontalAlign.Right;
 
     }
-    
 
     protected void dd_firma_DataBound(object sender, EventArgs e)
     {

@@ -54,9 +54,13 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
 
                 StokBilgisiniGetir(Convert.ToInt32(lbl_stok_id.Text));  // fatura_kayit tablosu
             }
+
+             txt_stok_arama.Attributes.Add("onKeyPress","doClick('" + ibtn_stok_arama.ClientID + "',event)");
+             txt_stok_barkod.Attributes.Add("onKeyPress", "doClick('" + ibtn_barkod_arama.ClientID + "',event)");
+
         }
 
-    
+       
 
     }
 
@@ -404,7 +408,7 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
     protected void StokBilgisiniGetir(int stok_id)
     {
 
-        string queryString = "SELECT stok_id,stok_kod_no,stok_adi,birimi,kdv,satis_fiyati FROM stok_kayit WHERE stok_id=" + stok_id;
+        string queryString = "SELECT stok_id,stok_barkod_no,stok_kod_no,stok_adi,birimi,kdv,satis_fiyati FROM stok_kayit WHERE stok_id=" + stok_id;
 
         ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
@@ -419,6 +423,53 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
                 while (reader.Read())
                 {
 
+                    txt_stok_barkod.Text = reader["stok_barkod_no"].ToString();
+                    txt_stok_kodu.Text = reader["stok_kod_no"].ToString();
+                    txt_stok_adi.Text = reader["stok_adi"].ToString();
+                    txt_birimi.Text = reader["birimi"].ToString();
+                    txt_kdv.Text = reader["kdv"].ToString();
+                    txt_satis_fiyati.Text = reader["satis_fiyati"].ToString();
+                }
+            }
+
+
+        }
+
+        catch (Exception err)
+        {
+            lbl_mesaj.Text = "Error Stok Bilgileri Getir. ";
+            lbl_mesaj.Text += err.Message;
+        }
+        finally
+        {
+            baglan.VeritabaniBaglantiyiKapat(connection);
+        }
+
+    }
+
+    protected void ibtn_barkod_arama_Click(object sender, ImageClickEventArgs e)
+    {
+        StokBilgisiniBarkodOkuyarakGetir(txt_stok_barkod.Text);
+    }
+
+    protected void StokBilgisiniBarkodOkuyarakGetir(string stok_barkodu)
+    {
+
+        string queryString = "SELECT stok_id,stok_barkod_no,stok_kod_no,stok_adi,birimi,kdv,satis_fiyati FROM stok_kayit WHERE stok_barkod_no='" + stok_barkodu + "'";
+
+        ConnVt baglan = new ConnVt(); SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString()); SqlCommand cmd = new SqlCommand(queryString, connection);
+
+        try
+        {
+
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    txt_stok_barkod.Text = reader["stok_barkod_no"].ToString();
                     txt_stok_kodu.Text = reader["stok_kod_no"].ToString();
                     txt_stok_adi.Text = reader["stok_adi"].ToString();
                     txt_birimi.Text = reader["birimi"].ToString();
@@ -705,4 +756,6 @@ public partial class Cari_AlisSatisIslemleri : System.Web.UI.Page
 
         }
     }
+
+   
 }
