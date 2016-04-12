@@ -4,14 +4,21 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Configuration;
+
 using System.Data; // veritabanı
 using System.Web.Configuration;
-using System.Data.SqlClient;
 using System.Threading;
 
 
+/*
+    Bu sayfa ile beraber AjaxProcessor.php sayfasınıda düzelt.
+ */
+
 public partial class Mesaj_Dashboard : System.Web.UI.Page
 {
+    public string deneme="";
     string database_master = "WebMart_Master"; // Bu sayfaya özel veriler Master Database e eklendiği için sabit yaptık
   
     protected void Page_Load(object sender, EventArgs e)
@@ -33,6 +40,11 @@ public partial class Mesaj_Dashboard : System.Web.UI.Page
 
     protected void ibtn_post_Click(object sender, ImageClickEventArgs e)
     {
+        MesajKaydet();
+    }
+
+    protected void MesajKaydet()
+    {
         string queryString;
         string kayit_tarihi = DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss");
 
@@ -41,20 +53,16 @@ public partial class Mesaj_Dashboard : System.Web.UI.Page
 
         try
         {
-         
 
-                queryString = "INSERT INTO dashboard (tarih,gonderici_id,gonderici_adi_soyadi,mesaj) VALUES \n" +
-                                 "(@tarih,@gonderici_id,@gonderici_adi_soyadi,@mesaj)";
-                SqlCommand cmd = new SqlCommand(queryString, connection);
-                cmd.Parameters.Add("@tarih", SqlDbType.DateTime).Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                cmd.Parameters.Add("@gonderici_id", SqlDbType.Int).Value = Session["kullanici_id"].ToString();
-                cmd.Parameters.Add("@gonderici_adi_soyadi", SqlDbType.NVarChar).Value = Session["adi_soyadi"].ToString();
-                cmd.Parameters.Add("@mesaj", SqlDbType.NVarChar).Value = txt_mesaj.Text;
-                cmd.ExecuteNonQuery();
-
-           
-
-
+            queryString = "INSERT INTO dashboard (tarih,gonderici_id,gonderici_adi_soyadi,mesaj,resim_adi) VALUES \n" +
+                             "(@tarih,@gonderici_id,@gonderici_adi_soyadi,@mesaj,@resim_adi)";
+            SqlCommand cmd = new SqlCommand(queryString, connection);
+            cmd.Parameters.Add("@tarih", SqlDbType.DateTime).Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            cmd.Parameters.Add("@gonderici_id", SqlDbType.Int).Value = Session["kullanici_id"].ToString();
+            cmd.Parameters.Add("@gonderici_adi_soyadi", SqlDbType.NVarChar).Value = Session["adi_soyadi"].ToString();
+            cmd.Parameters.Add("@mesaj", SqlDbType.NVarChar).Value = txt_mesaj.Text;
+            cmd.Parameters.Add("@resim_adi", SqlDbType.NVarChar).Value = lbl_resim_adi.Text;
+            cmd.ExecuteNonQuery();
 
         }//end TRY
         catch (Exception err)
@@ -66,11 +74,8 @@ public partial class Mesaj_Dashboard : System.Web.UI.Page
         {
             baglan.VeritabaniBaglantiyiKapat(connection);
             MesajlariGetir();
+
         }
-
-    
-
-
     }
 
     protected void MesajlariGetir()
@@ -178,11 +183,56 @@ public partial class Mesaj_Dashboard : System.Web.UI.Page
 
     }
 
-   
+    protected void Button1_Click(object sender, EventArgs e)  // Resim Yükleme
+    {
+       
+        if (FileUpload1.HasFile)
+            try
+            {
 
-   
+                string strFileExtension = System.IO.Path.GetExtension(FileUpload1.PostedFile.FileName);
+                string tarih_saat_uzanti = DateTime.Now.ToString("ddMMyyyyhhmmss") + strFileExtension;
+                FileUpload1.SaveAs(Server.MapPath("~/Uploads/" + tarih_saat_uzanti));
+                /*
+                 * Label1.Text = "Dosya Adı: " +
+                    FileUpload1.PostedFile.FileName +
+                    "<br />Dosya Boyutu: " +
+                    FileUpload1.PostedFile.ContentLength +
+                    "<br />Dosya Türü: " +
+                    FileUpload1.PostedFile.ContentType;
+                lbl_resim.Text = FileUpload1.PostedFile.FileName;
+                 */
+                lbl_resim_adi.Text = tarih_saat_uzanti;
+                img_resim.ImageUrl = "~/Uploads/" + tarih_saat_uzanti;
+                
+                
+            }
+            catch (Exception ex)
+            {
+                lbl_mesaj.Text = "Hata Oluştu: " + ex.Message.ToString();
+            }
+        else
+        {
+            lbl_mesaj.Text = "Dosya Seçin ve Yükleyin";
+        }
 
+    }
 
+    protected string GetResimGetir(String resim_adi)
+    {
+
+        string a = "";
+        if (String.IsNullOrEmpty(resim_adi))
+        {
+            a = "Resim Yok";
+        }
+        else
+        {
+            a = "Resim var "+resim_adi.ToString();
+        }
+        return a;
+        
+    }
 
 
 
