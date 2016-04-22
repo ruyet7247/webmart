@@ -41,6 +41,7 @@ public partial class Mesaj_Dashboard : System.Web.UI.Page
     protected void ibtn_post_Click(object sender, ImageClickEventArgs e)
     {
         MesajKaydet();
+        
     }
 
     protected void MesajKaydet()
@@ -63,6 +64,8 @@ public partial class Mesaj_Dashboard : System.Web.UI.Page
             cmd.Parameters.Add("@mesaj", SqlDbType.NVarChar).Value = txt_mesaj.Text;
             cmd.Parameters.Add("@resim_adi", SqlDbType.NVarChar).Value = lbl_resim_adi.Text;
             cmd.ExecuteNonQuery();
+
+            img_resim.ImageUrl = "";
 
         }//end TRY
         catch (Exception err)
@@ -206,6 +209,7 @@ public partial class Mesaj_Dashboard : System.Web.UI.Page
                 img_resim.ImageUrl = "~/Uploads/" + tarih_saat_uzanti;
                 
                 
+                
             }
             catch (Exception ex)
             {
@@ -224,11 +228,15 @@ public partial class Mesaj_Dashboard : System.Web.UI.Page
         string a = "";
         if (String.IsNullOrEmpty(resim_adi))
         {
-            a = "Resim Yok";
+            a = "";
         }
         else
         {
-            a = "Resim var "+resim_adi.ToString();
+            // a = "Resim var "+resim_adi.ToString();
+            // a = "<img src='../Uploads/" + resim_adi.ToString() + "' alt='' width='80' height='80'>";
+            // a = "<a href='../Uploads/" + resim_adi.ToString() + "' data-lightbox='example-set' data-title='Click anywhere outside the image or the X to the right to close.'><img src='../Uploads/" + resim_adi.ToString() + "' alt='' width='80' height='80' /></a>";
+            a = "<a href='../Uploads/" + resim_adi.ToString() + "' target='_blank' ><img src='../Uploads/" + resim_adi.ToString() + "' alt='' width='80' height='80' /></a>";
+
         }
         return a;
         

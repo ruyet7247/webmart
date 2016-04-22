@@ -17,12 +17,15 @@
             width: 40%;
         }
         </style>
+   
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+   
+
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
-    <asp:Label ID="lbl_mesaj" runat="server" Text=""></asp:Label>
+    <asp:Label ID="lbl_mesaj" runat="server" Visible="False"></asp:Label>
     <table style="width:100%;">
         <tr>
             <td class="style1" align="right" valign="top">
@@ -42,7 +45,7 @@
         <tr>
             <td class="style1" align="right" valign="top">
                 Mesajınız</td>
-            <td class="style2">
+            <td class="style2" align="left" valign="top">
                 <asp:TextBox ID="txt_mesaj" runat="server" Rows="5" 
                     TextMode="MultiLine" Width="50%"></asp:TextBox>
                  <asp:Image ID="img_resim" runat="server" Height="80px" Width="80px" />
@@ -60,8 +63,7 @@
             <td class="style1">
                 &nbsp;</td>
             <td class="style2" align="left">
-                <asp:Label ID="lbl_resim_adi2" runat="server"></asp:Label>
-            </td>
+                &nbsp;</td>
         </tr>
     </table>
     <asp:Panel ID="Panel1" runat="server">
@@ -128,7 +130,9 @@
                                                      <asp:Label ID="lbl_adi_soyadi" runat="server"  ForeColor="#336699" Text='<%# Bind("tarih") %>'></asp:Label> <% =" - " %>
                                                      <asp:Label ID="lbl_tarih" runat="server"  ForeColor="#000099" Font-Bold="true" Text='<%# Bind("gonderici_adi_soyadi") %>'></asp:Label><br><br>
                                                      <asp:Label ID="lbl_mesaj" runat="server" Text='<%# Bind("mesaj") %>'></asp:Label><br><br>
-                                                     <asp:Label ID="lbl_resimadi" runat="server" Text='<%# GetResimGetir((String)Eval("resim_adi")) %>'></asp:Label><br><br>
+                                                    
+                                                     <%# GetResimGetir((String)Eval("resim_adi")) %>
+
                                                  </ItemTemplate>
                                              </asp:TemplateField>
                                              <asp:TemplateField HeaderText="Resim Adı" SortExpression="resim_adi" 

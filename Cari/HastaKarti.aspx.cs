@@ -271,8 +271,8 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
                     txt_bakiye.Text = reader["bakiye"].ToString();
 
                     resimGetir(lbl_cari_id.Text, dd_cinsiyet.SelectedValue);
-                    
 
+                   
 
 
                 }
@@ -423,6 +423,52 @@ public partial class Cari_HastaKarti : System.Web.UI.Page
         img_foto.ImageUrl = string.Format("~/WebcamCaptures/{0}.png", imageName);
     }
 
+    protected void ibtn_hareketleri_ac_Click(object sender, ImageClickEventArgs e)
+    {
+        if (lbl_cari_id.Text != "0")
+        {
+            Response.Redirect("CariHareket.aspx?CariID=" + lbl_cari_id.Text);
+        }
+    }
+
+    protected void ibtn_dosya_yukle_Click(object sender, ImageClickEventArgs e)
+    {
+
+        if (FileUpload1.HasFile)
+            try
+            {
+
+                string strFileExtension = System.IO.Path.GetExtension(FileUpload1.PostedFile.FileName);
+                string tarih_saat_uzanti = DateTime.Now.ToString("ddMMyyyyhhmmss") + strFileExtension;
+                FileUpload1.SaveAs(Server.MapPath(string.Format("~/WebcamCaptures/{0}.png", lbl_cari_id.Text)));
+                
+                /*
+                 * Label1.Text = "Dosya Adı: " +
+                    FileUpload1.PostedFile.FileName +
+                    "<br />Dosya Boyutu: " +
+                    FileUpload1.PostedFile.ContentLength +
+                    "<br />Dosya Türü: " +
+                    FileUpload1.PostedFile.ContentType;
+                lbl_resim.Text = FileUpload1.PostedFile.FileName;
+                 */
+                img_foto.ImageUrl = "~/WebcamCaptures/" + lbl_cari_id.Text+".png";
+
+            
 
 
+
+            }
+            catch (Exception ex)
+            {
+                lbl_mesaj.Text = "Hata Oluştu: " + ex.Message.ToString();
+            }
+        else
+        {
+            lbl_mesaj.Text = "Dosya Seçin ve Yükleyin";
+        }
+    }
+
+
+
+   
 }

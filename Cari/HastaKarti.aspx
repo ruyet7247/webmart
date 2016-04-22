@@ -73,6 +73,8 @@
                     CancelControlID="ibtn_cari_gorusme_kapat" 
                     PopupControlID="pnl_cari_gorusmeleri">
                 </asp:ModalPopupExtender>
+                <asp:ImageButton ID="ibtn_hareketleri_ac" runat="server" 
+                    ImageUrl="~/Icons/res3232/gpersonel.png" onclick="ibtn_hareketleri_ac_Click" />
             </td>
             
         </tr>
@@ -102,7 +104,7 @@
             <td align="left" class="style4" valign="top">
                 &nbsp;</td>
             <td align="left" class="style2" valign="top">
-                Foto Yükle<asp:ImageButton ID="ibtn_fotoyukle" runat="server" 
+                Webcam Foto Yükle<asp:ImageButton ID="ibtn_fotoyukle" runat="server" 
                     ImageUrl="~/Icons/res1616/sagok.png" />
                 <asp:ModalPopupExtender ID="ibtn_fotoyukle_ModalPopupExtender" runat="server" 
                     BackgroundCssClass="popupPanel" 
@@ -140,6 +142,7 @@
                         </Triggers>
                     </asp:UpdatePanel>
                 </asp:Panel>
+                <asp:FileUpload ID="FileUpload1" runat="server" />
                 &nbsp;</td>
         </tr>
         <tr>
@@ -209,6 +212,8 @@
             </td>
             <td class="style2">
               
+                <asp:ImageButton ID="ibtn_dosya_yukle" runat="server" 
+                    ImageUrl="~/Icons/res1616/sagok.png" onclick="ibtn_dosya_yukle_Click" />
             </td>
         </tr>
         <tr>
@@ -485,7 +490,8 @@
       </asp:UpdatePanel> 
     </asp:Panel>
     
-    <asp:Panel ID="pnl_cari_gorusmeleri" runat="server" BackColor="#B6B7BC" Width="60%" Height="500px" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
+    <asp:Panel ID="pnl_cari_gorusmeleri" runat="server" BackColor="#B6B7BC" 
+        Width="60%" Height="80%" > <!-- CssClass="Popup" align="center" style = "display:none"  -->
       <table width="100%"> 
             <tr>
            <td width="20%">

@@ -8,6 +8,7 @@ using System.Data; // veritabanı
 using System.Web.Configuration;
 using System.Data.SqlClient;
 using System.Threading;
+using System.IO;
 
 public partial class Cari_CariGorusmeleri : System.Web.UI.Page
 {
@@ -44,10 +45,11 @@ public partial class Cari_CariGorusmeleri : System.Web.UI.Page
             DateTime dt = DateTime.Now;
             txt_gorusme_tarihi_saati.Text = String.Format("{0:dd/MM/yyyy HH:mm:ss}", dt);
             CariGorusmeleriniGetir(Convert.ToInt32(lbl_cari_hasta_id.Text));
+           
 
         }
     }
-   
+       
     protected void gv_arama_listele_SelectedIndexChanged(object sender, EventArgs e)
     {
 
@@ -58,8 +60,8 @@ public partial class Cari_CariGorusmeleri : System.Web.UI.Page
     {
         if (lbl_cari_hasta_id.Text != "0")
         {
-            string queryString = "INSERT INTO cari_gorusmeleri (cari_id,cari_adi,personel_adi,gorusme_tarihi_saati,icerik,firma_adi) VALUES \n" +
-                                  "(@cari_id,@cari_adi,@personel_adi,@gorusme_tarihi_saati,@icerik,@firma_adi)";
+            string queryString = "INSERT INTO cari_gorusmeleri (cari_id,cari_adi,personel_adi,gorusme_tarihi_saati,icerik,firma_adi,resim_adi) VALUES \n" +
+                                  "(@cari_id,@cari_adi,@personel_adi,@gorusme_tarihi_saati,@icerik,@firma_adi,@resim_adi)";
 
             ConnVt baglan = new ConnVt();SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());SqlCommand cmd = new SqlCommand(queryString, connection);
 
@@ -71,6 +73,7 @@ public partial class Cari_CariGorusmeleri : System.Web.UI.Page
                 cmd.Parameters.Add("@gorusme_tarihi_saati", SqlDbType.DateTime).Value = Convert.ToDateTime(txt_gorusme_tarihi_saati.Text);
                 cmd.Parameters.Add("@icerik", SqlDbType.NVarChar).Value = txt_not.Text;
                 cmd.Parameters.Add("@firma_adi", SqlDbType.NVarChar).Value = "";
+                cmd.Parameters.Add("@resim_adi", SqlDbType.NVarChar).Value = lbl_resim_adi.Text;
 
                 
                 cmd.ExecuteNonQuery();
@@ -91,7 +94,7 @@ public partial class Cari_CariGorusmeleri : System.Web.UI.Page
 
     protected void CariGorusmeleriniGetir(int cari_id) //cari arama modal popup
     {
-        string hareketSQL = "SELECT * FROM cari_gorusmeleri WHERE  cari_id="+cari_id+" ORDER BY gorusme_tarihi_saati DESC";
+        string hareketSQL = "SELECT * FROM cari_gorusmeleri WHERE  cari_id="+cari_id+" ORDER BY gorusme_tarihi_saati DESC,cari_gorusmeleri_id DESC";
         ConnVt baglan = new ConnVt();
         SqlConnection connection = baglan.VeritabaninaBaglan(Session["ConnectionString"].ToString());
         SqlCommand cmd = new SqlCommand(hareketSQL, connection);
@@ -246,5 +249,75 @@ public partial class Cari_CariGorusmeleri : System.Web.UI.Page
             }
 
         }
+    }
+    
+    protected void ibtn_dosya_yukle_Click(object sender, ImageClickEventArgs e)
+    {
+        if (FileUpload1.HasFile)
+            try
+            {
+
+                string strFileExtension = System.IO.Path.GetExtension(FileUpload1.PostedFile.FileName);
+                string tarih_saat_uzanti = DateTime.Now.ToString("ddMMyyyyhhmmss") + strFileExtension;
+                string hasta_id = lbl_cari_hasta_id.Text + "-" + tarih_saat_uzanti;
+                FileUpload1.SaveAs(Server.MapPath(string.Format("~/WebcamCaptures/{0}", hasta_id)));
+
+                /*
+                 * Label1.Text = "Dosya Adı: " +
+                    FileUpload1.PostedFile.FileName +
+                    "<br />Dosya Boyutu: " +
+                    FileUpload1.PostedFile.ContentLength +
+                    "<br />Dosya Türü: " +
+                    FileUpload1.PostedFile.ContentType;
+                lbl_resim.Text = FileUpload1.PostedFile.FileName;
+                 */
+                lbl_resim_adi.Text = hasta_id;
+                img_foto.ImageUrl = "~/WebcamCaptures/" + hasta_id;
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                //lbl_mesaj.Text = "Hata Oluştu: " + ex.Message.ToString();
+            }
+        else
+        {
+            //lbl_mesaj.Text = "Dosya Seçin ve Yükleyin";
+        }
+
+
+        CariGorusmeleriniGetir(Convert.ToInt32(lbl_cari_hasta_id.Text));
+
+    }
+
+
+    protected string GetResimGetir(String resim_adi)
+    {
+
+        string a = "";
+        if (String.IsNullOrEmpty(resim_adi))
+        {
+            a = "";
+        }
+        else
+        {
+            // a = "Resim var "+resim_adi.ToString();
+            // a = "<img src='../Uploads/" + resim_adi.ToString() + "' alt='' width='80' height='80'>";
+            // a = "<a href='../Uploads/" + resim_adi.ToString() + "' data-lightbox='example-set' data-title='Click anywhere outside the image or the X to the right to close.'><img src='../Uploads/" + resim_adi.ToString() + "' alt='' width='80' height='80' /></a>";
+            a = "<a href='../WebcamCaptures/" + resim_adi.ToString() + "' target='_blank' ><img src='../WebcamCaptures/" + resim_adi.ToString() + "' alt='' width='80' height='80' /></a>";
+
+        }
+        return a;
+
+    }
+
+
+    protected void ibtn_resim_sil_Click(object sender, ImageClickEventArgs e)
+    {
+        img_foto.ImageUrl = "~/WebcamCaptures/bos.png";
+        lbl_resim_adi.Text = null;
     }
 }

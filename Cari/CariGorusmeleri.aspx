@@ -8,6 +8,12 @@
 <head id="Head1" runat="server">
     <title></title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .style1
+        {
+            width: 2%;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -27,7 +33,7 @@
                 &nbsp;</td>
             <td width="20%">
                 &nbsp;</td>
-            <td width="20%">
+            <td class="style1">
                 &nbsp;</td>
             <td width="20%" align="right" valign="middle">
                 &nbsp;</td>
@@ -44,10 +50,11 @@
                             onclick="ibtn_cari_gorusme_kaydet_Click" 
                             ImageUrl="~/Icons/res3232/save2.png" />
                     </td>
-                    <td width="20%">
+                    <td align="left" class="style1" valign="top">
                         &nbsp;</td>
-                    <td align="right" valign="middle" width="20%">
-                        &nbsp;</td>
+                    <td align="left" valign="top" width="20%">
+                        <asp:Label ID="lbl_resim_adi" runat="server" Visible="False"></asp:Label>
+                    </td>
             </tr>
       
                 <tr>
@@ -66,18 +73,24 @@
                     </td>
                     <td width="20%">
                         &nbsp;</td>
-                    <td width="20%">
+                    <td class="style1">
                         &nbsp;</td>
                     <td width="20%">
-                        &nbsp;</td>
+                        <asp:FileUpload ID="FileUpload1" runat="server" />
+                        <asp:ImageButton ID="ibtn_dosya_yukle" runat="server" Height="23px" 
+                            ImageUrl="~/Icons/res1616/sagok.png" onclick="ibtn_dosya_yukle_Click" />
+                    </td>
                 </tr>
       
             <tr>
                 <td class="style3">
                     Not:</td>
-                <td colspan="4">
-                    <asp:TextBox ID="txt_not" runat="server" Height="50px" TextMode="MultiLine" 
-                        Width="80%"></asp:TextBox>
+                <td colspan="4" align="left" valign="top">
+                    <asp:TextBox ID="txt_not" runat="server" Height="100px" TextMode="MultiLine" 
+                        Width="70%"></asp:TextBox>
+                            <asp:Image ID="img_foto" runat="server" Height="120px" Width="100px" />
+                        <asp:ImageButton ID="ibtn_resim_sil" runat="server" 
+                        ImageUrl="~/Icons/res3232/sil.png" onclick="ibtn_resim_sil_Click" />
                 </td>
             </tr>
       
@@ -112,6 +125,12 @@
                              SortExpression="icerik" >
                          <ItemStyle Width="300px" />
                          </asp:BoundField>
+                         <asp:TemplateField HeaderText="Resim" SortExpression="resim_adi">
+                            <ItemTemplate>
+                                <%# GetResimGetir((String)Eval("resim_adi")) %>
+                            </ItemTemplate>
+                             <ItemStyle Width="90px" />
+                        </asp:TemplateField>
                          <asp:BoundField DataField="firma_adi" HeaderText="firma_adi" 
                              SortExpression="firma_adi" Visible="False" />
                          <asp:CommandField ButtonType="Image" 
@@ -126,7 +145,7 @@
                  <asp:AsyncPostBackTrigger ControlID="ibtn_cari_gorusme_kaydet" EventName="Click" />
              </Triggers>
       </asp:UpdatePanel> 
-          <p><asp:Label ID="lbl_mesaj1" runat="server"></asp:Label></p>
+          <p><asp:Label ID="lbl_mesaj1" runat="server" Visible="False"></asp:Label></p>
 </div>
     </form>
 </body>

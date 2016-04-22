@@ -16,7 +16,7 @@ public partial class Mesaj_AjaxProcessor : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         
-
+    
         if (Session["Aralik"] != null)
         {
             try
@@ -35,6 +35,7 @@ public partial class Mesaj_AjaxProcessor : System.Web.UI.Page
         else {
             Session["Aralik"] = "0";
         }
+        
 
        
     }
@@ -43,23 +44,26 @@ public partial class Mesaj_AjaxProcessor : System.Web.UI.Page
     {
         string hareketSQL = "SELECT TOP 25 * FROM dashboard  WHERE id  NOT IN (SELECT TOP " + aralik_degeri + " id FROM dashboard ORDER BY tarih DESC) ORDER BY tarih DESC";
         //string hareketSQL = "SELECT  * FROM dashboard   ORDER BY tarih DESC";
+
         ConnVt baglan = new ConnVt();
         SqlConnection connection = baglan.VeritabaninaBaglan(database_master);
         SqlCommand cmd = new SqlCommand(hareketSQL, connection);
-
-        int updated = 0;
+        
         try
         {
 
-            updated = cmd.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataSet ds_hareket = new DataSet();
-            da.Fill(ds_hareket);
+            cmd.ExecuteNonQuery();
+            string sorgulama = cmd.ExecuteScalar().ToString();
+            if (sorgulama != null)
+            {
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds_hareket = new DataSet();
+                da.Fill(ds_hareket);
 
-            
-            gv_mesaj_listele.DataSource = ds_hareket;
-            gv_mesaj_listele.DataBind();
 
+                gv_mesaj_listele.DataSource = ds_hareket;
+                gv_mesaj_listele.DataBind();
+            }
             //lblResults.Text = updated.ToString() + " record updated.";
         }
         catch (Exception err)
@@ -72,10 +76,7 @@ public partial class Mesaj_AjaxProcessor : System.Web.UI.Page
             baglan.VeritabaniBaglantiyiKapat(connection);
         }
 
-        if (updated > 0)
-        {
-            //
-        }
+       
 
     }
 
@@ -143,6 +144,27 @@ public partial class Mesaj_AjaxProcessor : System.Web.UI.Page
         Label lbl_mesaj_id = (Label)row.FindControl("lbl_mesaj_id");
 
 
+
+    }
+
+    protected string GetResimGetir(String resim_adi)
+    {
+
+        string a = "";
+        if (String.IsNullOrEmpty(resim_adi))
+        {
+            string bos_dosya_adi = "bos.png";
+            a = "<img src='../Uploads/" + bos_dosya_adi + "' alt='' width='100%' height='1' />";
+        }
+        else
+        {
+            // a = resim_adi.ToString();
+            // a = "<img src='../Uploads/" + resim_adi.ToString() + "' alt='' width='80' height='80'>";
+            // a = "<a href='../Uploads/" + resim_adi.ToString() + "' data-lightbox='example-set' data-title='Click anywhere outside the image or the X to the right to close.'><img src='../Uploads/" + resim_adi.ToString() + "' alt='' width='80' height='80' /></a>";
+            a = "<a href='../Uploads/" + resim_adi.ToString() + "' target='_blank' ><img src='../Uploads/" + resim_adi.ToString() + "' alt='' width='80' height='80' /></a>";
+
+        }
+        return a;
 
     }
 

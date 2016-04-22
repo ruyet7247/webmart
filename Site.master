@@ -6,10 +6,15 @@
     <title>WebMart Application</title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
    
+   <!-- iki css ve js dashboard daki lihgtbox içindir.-->
+	<link rel="stylesheet" href="../Styles/lightbox.css">
+    <script src="../js/jquery-1.11.0.min.js"></script>
+	<script src="../js/lightbox.js"></script>
+
     <!-- iki script dashboard içindir.-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js?ver=1.6.1"></script>
-     <script src="js/jquery-2.2.0.min.js"></script> 
-     <script type="text/javascript">
+   
+    <script src="../js/jquery-2.2.0.min.js"></script> 
+    <script type="text/javascript">
           $(document).ready(function () {
               $.ajaxSetup({ cache: false }); // disabling cache, omit if u dont need
               var defaultBtnText = "Daha fazla Icerik Yukle";
@@ -133,8 +138,14 @@
                                 Text=" Para Birimi Tanımlama" Value="Para Birimi Tanımlama" 
                                 ImageUrl="~/Icons/res1616/gpara.png"></asp:MenuItem>
                         </asp:MenuItem>
+                        <asp:MenuItem ImageUrl="~/Icons/res1616/gcari.png" 
+                            NavigateUrl="~/Cari/HastaKarti.aspx" Text=" Hasta Takip" Value=" Hasta Takip">
+                        </asp:MenuItem>
                         <asp:MenuItem Text=" Cari Modülü" Value="FirmaIslemleri" 
                             ImageUrl="~/Icons/res1616/gcari.png">
+                            <asp:MenuItem ImageUrl="~/Icons/res1616/kasa.png" 
+                                NavigateUrl="~/Cari/HizliSatis.aspx" Text=" Hızlı Satış İşlemi" 
+                                Value="Hızlı Satış İşlemi"></asp:MenuItem>
                             <asp:MenuItem Text=" Cari Kartı" Value="Cari Kartı" 
                                 NavigateUrl="~/Cari/CariKarti.aspx" 
                                 ImageUrl="~/Icons/res1616/carikarti.png"></asp:MenuItem>
